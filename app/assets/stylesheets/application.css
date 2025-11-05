@@ -7,6 +7,6 @@
  * depending on specificity.
  *
  * Consider organizing styles into separate files for maintainability.
+ *
+ * Note: Tailwind CSS is included directly in the layout via stylesheet_link_tag
  */
-
-@import "../tailwind/application.css";
