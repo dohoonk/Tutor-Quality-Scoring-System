@@ -6,7 +6,7 @@ export default defineConfig({
   plugins: [
     RubyPlugin(),
     react({
-      jsxRuntime: 'automatic',
+      jsxRuntime: 'classic',
     }),
   ],
 })
