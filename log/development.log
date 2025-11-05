@@ -8035,3 +8035,161 @@ bin/rails:4:in `<main>'
   [1m[36mTutorDailyAggregate Destroy (0.1ms)[0m  [1m[31mDELETE FROM "tutor_daily_aggregates" WHERE "tutor_daily_aggregates"."id" = 35 /*application='TutorInsights'*/[0m
   [1m[36mTutor Destroy (1.3ms)[0m  [1m[31mDELETE FROM "tutors" WHERE "tutors"."id" = 19 /*application='TutorInsights'*/[0m
   [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mCOMMIT /*application='TutorInsights'*/[0m
+Started GET "/tutor/1" for ::1 at 2025-11-05 10:16:16 -0600
+Processing by TutorsController#show as HTML
+  Parameters: {"id"=>"1"}
+  Rendering layout layouts/application.html.erb
+  Rendering tutors/show.html.erb within layouts/application
+  Rendered tutors/show.html.erb within layouts/application (Duration: 0.1ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 1.8ms | GC: 0.1ms)
+Completed 200 OK in 18ms (Views: 2.4ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.1ms)
+
+
+Started GET "/.well-known/appspecific/com.chrome.devtools.json" for ::1 at 2025-11-05 10:16:16 -0600
+  
+ActionController::RoutingError (No route matches [GET] "/.well-known/appspecific/com.chrome.devtools.json"):
+  
+Started GET "/api/tutor/1/fsrs_latest" for ::1 at 2025-11-05 10:16:16 -0600
+Started GET "/api/tutor/1/fsrs_history" for ::1 at 2025-11-05 10:16:16 -0600
+Started GET "/api/tutor/1/session_list" for ::1 at 2025-11-05 10:16:16 -0600
+Processing by Api::Tutor::TutorsController#fsrs_latest as */*
+Processing by Api::Tutor::TutorsController#session_list as */*
+  Parameters: {"id"=>"1"}
+  Parameters: {"id"=>"1"}
+Processing by Api::Tutor::TutorsController#fsrs_history as */*
+  Parameters: {"id"=>"1"}
+  [1m[36mTutor Load (0.7ms)[0m  [1m[34mSELECT "tutors".* FROM "tutors" WHERE "tutors"."id" = 1 LIMIT 1 /*action='fsrs_latest',application='TutorInsights',controller='tutors'*/[0m
+  [1m[36mTutor Load (0.5ms)[0m  [1m[34mSELECT "tutors".* FROM "tutors" WHERE "tutors"."id" = 1 LIMIT 1 /*action='session_list',application='TutorInsights',controller='tutors'*/[0m
+  ↳ app/controllers/api/tutor/tutors_controller.rb:5:in `fsrs_latest'
+  ↳ app/controllers/api/tutor/tutors_controller.rb:57:in `session_list'
+  [1m[36mScore Load (1.2ms)[0m  [1m[34mSELECT "scores".* FROM "scores" WHERE "scores"."tutor_id" = 1 AND "scores"."score_type" = 'fsrs' ORDER BY "scores"."computed_at" DESC LIMIT 1 /*action='fsrs_latest',application='TutorInsights',controller='tutors'*/[0m
+  ↳ app/controllers/api/tutor/tutors_controller.rb:10:in `fsrs_latest'
+Completed 200 OK in 103ms (Views: 0.1ms | ActiveRecord: 4.5ms (2 queries, 0 cached) | GC: 2.5ms)
+
+
+  [1m[36mSession Load (1.8ms)[0m  [1m[34mSELECT "sessions".* FROM "sessions" WHERE "sessions"."tutor_id" = 1 AND "sessions"."status" = 'completed' ORDER BY "sessions"."scheduled_start_at" DESC LIMIT 20 /*action='session_list',application='TutorInsights',controller='tutors'*/[0m
+  ↳ app/controllers/api/tutor/tutors_controller.rb:65:in `map'
+  [1m[36mStudent Load (0.8ms)[0m  [1m[34mSELECT "students".* FROM "students" WHERE "students"."id" IN (4, 21, 1, 17, 16, 22, 23, 24, 19, 25, 5, 3, 6, 8, 18, 14) /*action='session_list',application='TutorInsights',controller='tutors'*/[0m
+  ↳ app/controllers/api/tutor/tutors_controller.rb:65:in `map'
+  [1m[36mScore Load (1.1ms)[0m  [1m[34mSELECT "scores".* FROM "scores" WHERE "scores"."session_id" IN (149, 299, 298, 7, 154, 300, 301, 302, 171, 303, 176, 192, 57, 69, 237, 245, 101, 105, 272, 121) /*action='session_list',application='TutorInsights',controller='tutors'*/[0m
+  ↳ app/controllers/api/tutor/tutors_controller.rb:65:in `map'
+Completed 200 OK in 124ms (Views: 0.5ms | ActiveRecord: 7.2ms (4 queries, 0 cached) | GC: 15.5ms)
+
+
+  [1m[36mTutor Load (33.5ms)[0m  [1m[34mSELECT "tutors".* FROM "tutors" WHERE "tutors"."id" = 1 LIMIT 1 /*action='fsrs_history',application='TutorInsights',controller='tutors'*/[0m
+  ↳ app/controllers/api/tutor/tutors_controller.rb:23:in `fsrs_history'
+  [1m[36mScore Load (0.5ms)[0m  [1m[34mSELECT "scores".* FROM "scores" WHERE "scores"."tutor_id" = 1 AND "scores"."score_type" = 'fsrs' ORDER BY "scores"."computed_at" DESC LIMIT 5 /*action='fsrs_history',application='TutorInsights',controller='tutors'*/[0m
+  ↳ app/controllers/api/tutor/tutors_controller.rb:31:in `map'
+  [1m[36mSession Load (0.3ms)[0m  [1m[34mSELECT "sessions".* FROM "sessions" WHERE "sessions"."id" IN (303, 302, 301, 300) /*action='fsrs_history',application='TutorInsights',controller='tutors'*/[0m
+  ↳ app/controllers/api/tutor/tutors_controller.rb:31:in `map'
+  [1m[36mStudent Load (0.1ms)[0m  [1m[34mSELECT "students".* FROM "students" WHERE "students"."id" = 25 LIMIT 1 /*action='fsrs_history',application='TutorInsights',controller='tutors'*/[0m
+  ↳ app/controllers/api/tutor/tutors_controller.rb:35:in `block in fsrs_history'
+  [1m[36mStudent Load (0.1ms)[0m  [1m[34mSELECT "students".* FROM "students" WHERE "students"."id" = 24 LIMIT 1 /*action='fsrs_history',application='TutorInsights',controller='tutors'*/[0m
+  ↳ app/controllers/api/tutor/tutors_controller.rb:35:in `block in fsrs_history'
+  [1m[36mStudent Load (0.2ms)[0m  [1m[34mSELECT "students".* FROM "students" WHERE "students"."id" = 23 LIMIT 1 /*action='fsrs_history',application='TutorInsights',controller='tutors'*/[0m
+  ↳ app/controllers/api/tutor/tutors_controller.rb:35:in `block in fsrs_history'
+  [1m[36mStudent Load (0.2ms)[0m  [1m[34mSELECT "students".* FROM "students" WHERE "students"."id" = 22 LIMIT 1 /*action='fsrs_history',application='TutorInsights',controller='tutors'*/[0m
+  ↳ app/controllers/api/tutor/tutors_controller.rb:35:in `block in fsrs_history'
+Completed 200 OK in 137ms (Views: 0.2ms | ActiveRecord: 45.4ms (7 queries, 0 cached) | GC: 19.8ms)
+
+
+Started GET "/api/tutor/1/performance_summary" for ::1 at 2025-11-05 10:16:17 -0600
+Processing by Api::Tutor::TutorsController#performance_summary as */*
+  Parameters: {"id"=>"1"}
+  [1m[36mTutor Load (0.4ms)[0m  [1m[34mSELECT "tutors".* FROM "tutors" WHERE "tutors"."id" = 1 LIMIT 1 /*action='performance_summary',application='TutorInsights',controller='tutors'*/[0m
+  ↳ app/controllers/api/tutor/tutors_controller.rb:46:in `performance_summary'
+  [1m[36mScore Pluck (0.3ms)[0m  [1m[34mSELECT "scores"."value" FROM "scores" WHERE "scores"."tutor_id" = 1 AND "scores"."score_type" = 'sqs' ORDER BY "scores"."computed_at" DESC LIMIT 10 /*action='performance_summary',application='TutorInsights',controller='tutors'*/[0m
+  ↳ app/services/performance_summary_service.rb:34:in `fetch_recent_sqs_scores'
+Completed 200 OK in 17ms (Views: 0.1ms | ActiveRecord: 0.7ms (2 queries, 0 cached) | GC: 0.2ms)
+
+
+✓ Sidekiq schedule configuration loaded: session_scoring, alert_evaluation
+  [1m[36mActiveRecord::SchemaMigration Load (1.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='TutorInsights'*/[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.9ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = 'environment' ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1 /*application='TutorInsights'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='TutorInsights'*/[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.1ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = 'environment' ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1 /*application='TutorInsights'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='TutorInsights'*/[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.1ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = 'environment' ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1 /*application='TutorInsights'*/[0m
+  [1m[35mSQL (0.0ms)[0m  [1m[35mSET search_path TO public /*application='TutorInsights'*/[0m
+  [1m[35m (95.5ms)[0m  [1m[35mDROP DATABASE IF EXISTS "tutor_insights_test" /*application='TutorInsights'*/[0m
+  [1m[35m (48.6ms)[0m  [1m[35mCREATE DATABASE "tutor_insights_test" ENCODING = 'unicode' /*application='TutorInsights'*/[0m
+  [1m[35mSQL (12.8ms)[0m  [1m[35mCREATE EXTENSION IF NOT EXISTS "plpgsql" SCHEMA pg_catalog /*application='TutorInsights'*/[0m
+  [1m[35m (0.0ms)[0m  [1m[35mDROP TABLE IF EXISTS "alerts" CASCADE /*application='TutorInsights'*/[0m
+  [1m[35m (1.6ms)[0m  [1m[35mCREATE TABLE "alerts" ("id" bigserial primary key, "tutor_id" bigint NOT NULL, "alert_type" character varying NOT NULL, "severity" character varying NOT NULL, "status" character varying DEFAULT 'open' NOT NULL, "triggered_at" timestamp(6) NOT NULL, "resolved_at" timestamp(6), "metadata" jsonb DEFAULT '{}', "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL) /*application='TutorInsights'*/[0m
+  [1m[35m (0.5ms)[0m  [1m[35mCREATE INDEX "index_alerts_on_tutor_id" ON "alerts" ("tutor_id") /*application='TutorInsights'*/[0m
+  [1m[35m (0.0ms)[0m  [1m[35mDROP TABLE IF EXISTS "scores" CASCADE /*application='TutorInsights'*/[0m
+  [1m[35m (0.8ms)[0m  [1m[35mCREATE TABLE "scores" ("id" bigserial primary key, "session_id" bigint, "tutor_id" bigint NOT NULL, "score_type" character varying NOT NULL, "value" decimal(10,2) NOT NULL, "components" jsonb DEFAULT '{}', "computed_at" timestamp(6) NOT NULL, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL) /*application='TutorInsights'*/[0m
+  [1m[35m (0.4ms)[0m  [1m[35mCREATE INDEX "index_scores_on_session_id" ON "scores" ("session_id") /*application='TutorInsights'*/[0m
+  [1m[35m (0.4ms)[0m  [1m[35mCREATE INDEX "index_scores_on_tutor_id_and_score_type" ON "scores" ("tutor_id", "score_type") /*application='TutorInsights'*/[0m
+  [1m[35m (0.3ms)[0m  [1m[35mCREATE INDEX "index_scores_on_tutor_id" ON "scores" ("tutor_id") /*application='TutorInsights'*/[0m
+  [1m[35m (0.0ms)[0m  [1m[35mDROP TABLE IF EXISTS "session_transcripts" CASCADE /*application='TutorInsights'*/[0m
+  [1m[35m (0.9ms)[0m  [1m[35mCREATE TABLE "session_transcripts" ("id" bigserial primary key, "session_id" bigint NOT NULL, "payload" jsonb, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL) /*application='TutorInsights'*/[0m
+  [1m[35m (0.7ms)[0m  [1m[35mCREATE INDEX "index_session_transcripts_on_session_id" ON "session_transcripts" ("session_id") /*application='TutorInsights'*/[0m
+  [1m[35m (0.0ms)[0m  [1m[35mDROP TABLE IF EXISTS "sessions" CASCADE /*application='TutorInsights'*/[0m
+  [1m[35m (0.9ms)[0m  [1m[35mCREATE TABLE "sessions" ("id" bigserial primary key, "tutor_id" bigint NOT NULL, "student_id" bigint NOT NULL, "scheduled_start_at" timestamp(6), "actual_start_at" timestamp(6), "scheduled_end_at" timestamp(6), "actual_end_at" timestamp(6), "status" character varying, "reschedule_initiator" character varying, "tech_issue" boolean, "first_session_for_student" boolean, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL) /*application='TutorInsights'*/[0m
+  [1m[35m (0.6ms)[0m  [1m[35mCREATE INDEX "index_sessions_on_student_id" ON "sessions" ("student_id") /*application='TutorInsights'*/[0m
+  [1m[35m (0.3ms)[0m  [1m[35mCREATE INDEX "index_sessions_on_tutor_id_and_student_id" ON "sessions" ("tutor_id", "student_id") /*application='TutorInsights'*/[0m
+  [1m[35m (0.5ms)[0m  [1m[35mCREATE INDEX "index_sessions_on_tutor_id" ON "sessions" ("tutor_id") /*application='TutorInsights'*/[0m
+  [1m[35m (0.0ms)[0m  [1m[35mDROP TABLE IF EXISTS "students" CASCADE /*application='TutorInsights'*/[0m
+  [1m[35m (0.9ms)[0m  [1m[35mCREATE TABLE "students" ("id" bigserial primary key, "name" character varying, "email" character varying, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL) /*application='TutorInsights'*/[0m
+  [1m[35m (0.1ms)[0m  [1m[35mDROP TABLE IF EXISTS "tutor_churn_scores" CASCADE /*application='TutorInsights'*/[0m
+  [1m[35m (0.8ms)[0m  [1m[35mCREATE TABLE "tutor_churn_scores" ("id" bigserial primary key, "tutor_id" bigint NOT NULL, "tcrs_value" decimal(5,2) NOT NULL, "computed_at" timestamp(6) NOT NULL, "components" jsonb DEFAULT '{}', "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL) /*application='TutorInsights'*/[0m
+  [1m[35m (0.5ms)[0m  [1m[35mCREATE INDEX "index_tutor_churn_scores_on_tutor_id" ON "tutor_churn_scores" ("tutor_id") /*application='TutorInsights'*/[0m
+  [1m[35m (0.0ms)[0m  [1m[35mDROP TABLE IF EXISTS "tutor_daily_aggregates" CASCADE /*application='TutorInsights'*/[0m
+  [1m[35m (0.8ms)[0m  [1m[35mCREATE TABLE "tutor_daily_aggregates" ("id" bigserial primary key, "tutor_id" bigint NOT NULL, "date" date NOT NULL, "sessions_completed" integer DEFAULT 0, "reschedules_tutor_initiated" integer DEFAULT 0, "no_shows" integer DEFAULT 0, "avg_lateness_min" decimal(10,2) DEFAULT 0.0, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL) /*application='TutorInsights'*/[0m
+  [1m[35m (0.6ms)[0m  [1m[35mCREATE UNIQUE INDEX "index_tutor_daily_aggregates_on_tutor_id_and_date" ON "tutor_daily_aggregates" ("tutor_id", "date") /*application='TutorInsights'*/[0m
+  [1m[35m (0.3ms)[0m  [1m[35mCREATE INDEX "index_tutor_daily_aggregates_on_tutor_id" ON "tutor_daily_aggregates" ("tutor_id") /*application='TutorInsights'*/[0m
+  [1m[35m (0.1ms)[0m  [1m[35mDROP TABLE IF EXISTS "tutors" CASCADE /*application='TutorInsights'*/[0m
+  [1m[35m (1.0ms)[0m  [1m[35mCREATE TABLE "tutors" ("id" bigserial primary key, "name" character varying, "email" character varying, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL) /*application='TutorInsights'*/[0m
+  [1m[35m (0.8ms)[0m  [1m[35mALTER TABLE "alerts" ADD CONSTRAINT "fk_rails_358027856a"
+FOREIGN KEY ("tutor_id")
+  REFERENCES "tutors" ("id")
+ /*application='TutorInsights'*/[0m
+  [1m[35m (0.3ms)[0m  [1m[35mALTER TABLE "scores" ADD CONSTRAINT "fk_rails_ec879015fd"
+FOREIGN KEY ("session_id")
+  REFERENCES "sessions" ("id")
+ /*application='TutorInsights'*/[0m
+  [1m[35m (0.2ms)[0m  [1m[35mALTER TABLE "scores" ADD CONSTRAINT "fk_rails_9ed4a6cf46"
+FOREIGN KEY ("tutor_id")
+  REFERENCES "tutors" ("id")
+ /*application='TutorInsights'*/[0m
+  [1m[35m (0.2ms)[0m  [1m[35mALTER TABLE "session_transcripts" ADD CONSTRAINT "fk_rails_23858c6baf"
+FOREIGN KEY ("session_id")
+  REFERENCES "sessions" ("id")
+ /*application='TutorInsights'*/[0m
+  [1m[35m (0.4ms)[0m  [1m[35mALTER TABLE "sessions" ADD CONSTRAINT "fk_rails_925087b242"
+FOREIGN KEY ("student_id")
+  REFERENCES "students" ("id")
+ /*application='TutorInsights'*/[0m
+  [1m[35m (0.2ms)[0m  [1m[35mALTER TABLE "sessions" ADD CONSTRAINT "fk_rails_dc91b3d7ea"
+FOREIGN KEY ("tutor_id")
+  REFERENCES "tutors" ("id")
+ /*application='TutorInsights'*/[0m
+  [1m[35m (0.2ms)[0m  [1m[35mALTER TABLE "tutor_churn_scores" ADD CONSTRAINT "fk_rails_5eea4ab50b"
+FOREIGN KEY ("tutor_id")
+  REFERENCES "tutors" ("id")
+ /*application='TutorInsights'*/[0m
+  [1m[35m (0.3ms)[0m  [1m[35mALTER TABLE "tutor_daily_aggregates" ADD CONSTRAINT "fk_rails_3fb4c3577f"
+FOREIGN KEY ("tutor_id")
+  REFERENCES "tutors" ("id")
+ /*application='TutorInsights'*/[0m
+  [1m[35m (0.9ms)[0m  [1m[35mCREATE TABLE "schema_migrations" ("version" character varying NOT NULL PRIMARY KEY) /*application='TutorInsights'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='TutorInsights'*/[0m
+  [1m[35m (0.1ms)[0m  [1m[32mINSERT INTO "schema_migrations" (version) VALUES (20251105072137) /*application='TutorInsights'*/[0m
+  [1m[35m (0.1ms)[0m  [1m[32mINSERT INTO "schema_migrations" (version) VALUES
+(20251105071858),
+(20251105071730),
+(20251105071651),
+(20251105071613),
+(20251105071523),
+(20251105071159),
+(20251105071010),
+(20251105070729),
+(20251105070618); /*application='TutorInsights'*/[0m
+  [1m[35m (0.7ms)[0m  [1m[35mCREATE TABLE "ar_internal_metadata" ("key" character varying NOT NULL PRIMARY KEY, "value" character varying, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL) /*application='TutorInsights'*/[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.2ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = 'environment' ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1 /*application='TutorInsights'*/[0m
+  [1m[36mActiveRecord::InternalMetadata Create (0.1ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES ('environment', 'development', '2025-11-05 16:24:43.461814', '2025-11-05 16:24:43.461815') RETURNING "key" /*application='TutorInsights'*/[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.0ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = 'environment' ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1 /*application='TutorInsights'*/[0m
+  [1m[36mActiveRecord::InternalMetadata Update (0.1ms)[0m  [1m[33mUPDATE "ar_internal_metadata" SET "value" = 'test', "updated_at" = '2025-11-05 16:24:43.462552' WHERE "ar_internal_metadata"."key" = 'environment' /*application='TutorInsights'*/[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.0ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = 'schema_sha1' ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1 /*application='TutorInsights'*/[0m
+  [1m[36mActiveRecord::InternalMetadata Create (0.1ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES ('schema_sha1', 'c766d5a9c3e99c032ed4843e3b79a4f9e7958731', '2025-11-05 16:24:43.463106', '2025-11-05 16:24:43.463106') RETURNING "key" /*application='TutorInsights'*/[0m
