@@ -8,7 +8,7 @@ RSpec.describe AlertMailer, type: :mailer do
     let(:alert) do
       Alert.create!(
         tutor: tutor,
-        alert_type: 'poor_first_session',
+        alert_type: 'low_first_session_quality',
         severity: 'high',
         status: 'open',
         triggered_at: Time.current,

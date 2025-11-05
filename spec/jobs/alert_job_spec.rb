@@ -11,7 +11,7 @@ RSpec.describe AlertJob, type: :job do
         Score.create!(
           tutor: tutor,
           session: nil,
-          score_type: 'fsrs',
+          score_type: 'fsqs',
           value: 55.0,
           computed_at: Time.current
         )
@@ -20,18 +20,18 @@ RSpec.describe AlertJob, type: :job do
       it 'creates a poor_first_session alert' do
         expect {
           AlertJob.new.perform
-        }.to change { Alert.where(alert_type: 'poor_first_session').count }.by(1)
+        }.to change { Alert.where(alert_type: 'low_first_session_quality').count }.by(1)
       end
 
       it 'sets alert severity to high' do
         AlertJob.new.perform
-        alert = Alert.find_by(tutor: tutor, alert_type: 'poor_first_session')
+        alert = Alert.find_by(tutor: tutor, alert_type: 'low_first_session_quality')
         expect(alert.severity).to eq('high')
       end
 
       it 'sets alert status to open' do
         AlertJob.new.perform
-        alert = Alert.find_by(tutor: tutor, alert_type: 'poor_first_session')
+        alert = Alert.find_by(tutor: tutor, alert_type: 'low_first_session_quality')
         expect(alert.status).to eq('open')
       end
     end
@@ -77,7 +77,7 @@ RSpec.describe AlertJob, type: :job do
         Score.create!(
           tutor: tutor,
           session: nil,
-          score_type: 'fsrs',
+          score_type: 'fsqs',
           value: 55.0,
           computed_at: Time.current
         )
@@ -85,7 +85,7 @@ RSpec.describe AlertJob, type: :job do
         # Create existing open alert
         Alert.create!(
           tutor: tutor,
-          alert_type: 'poor_first_session',
+          alert_type: 'low_first_session_quality',
           severity: 'high',
           status: 'open',
           triggered_at: 1.hour.ago
@@ -95,7 +95,7 @@ RSpec.describe AlertJob, type: :job do
       it 'does not create duplicate alerts' do
         expect {
           AlertJob.new.perform
-        }.not_to change { Alert.where(alert_type: 'poor_first_session').count }
+        }.not_to change { Alert.where(alert_type: 'low_first_session_quality').count }
       end
     end
 
@@ -103,7 +103,7 @@ RSpec.describe AlertJob, type: :job do
       let!(:alert) do
         Alert.create!(
           tutor: tutor,
-          alert_type: 'poor_first_session',
+          alert_type: 'low_first_session_quality',
           severity: 'high',
           status: 'open',
           triggered_at: 1.hour.ago
@@ -115,7 +115,7 @@ RSpec.describe AlertJob, type: :job do
         Score.create!(
           tutor: tutor,
           session: nil,
-          score_type: 'fsrs',
+          score_type: 'fsqs',
           value: 20.0, # Below 50 threshold
           computed_at: Time.current
         )
@@ -187,7 +187,7 @@ RSpec.describe AlertJob, type: :job do
 
     context 'with no risk conditions' do
       before do
-        Score.create!(tutor: tutor, session: nil, score_type: 'fsrs', value: 20.0, computed_at: Time.current)
+        Score.create!(tutor: tutor, session: nil, score_type: 'fsqs', value: 20.0, computed_at: Time.current)
         Score.create!(tutor: tutor, session: nil, score_type: 'ths', value: 80.0, computed_at: Time.current)
         Score.create!(tutor: tutor, session: nil, score_type: 'tcrs', value: 0.2, computed_at: Time.current)
       end

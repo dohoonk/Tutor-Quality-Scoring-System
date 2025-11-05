@@ -94,13 +94,13 @@ RSpec.describe SessionScoringJob, type: :job do
       it 'creates FSRS score for first sessions with transcripts' do
         expect {
           SessionScoringJob.new.perform
-        }.to change { Score.where(score_type: 'fsrs').count }.by(1)
+        }.to change { Score.where(score_type: 'fsqs').count }.by(1)
       end
 
       it 'calculates FSRS based on transcript content' do
         SessionScoringJob.new.perform
 
-        fsrs_score = Score.find_by(session: first_session, score_type: 'fsrs')
+        fsrs_score = Score.find_by(session: first_session, score_type: 'fsqs')
         expect(fsrs_score).to be_present
         expect(fsrs_score.value).to be > 0 # Should detect issues in transcript
       end
@@ -108,7 +108,7 @@ RSpec.describe SessionScoringJob, type: :job do
       it 'stores FSRS breakdown in components' do
         SessionScoringJob.new.perform
 
-        fsrs_score = Score.find_by(session: first_session, score_type: 'fsrs')
+        fsrs_score = Score.find_by(session: first_session, score_type: 'fsqs')
         expect(fsrs_score.components).to include('confusion_phrases')
         expect(fsrs_score.components).to include('negative_phrasing')
       end

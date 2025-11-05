@@ -13,7 +13,7 @@ RSpec.describe 'Admin API', type: :request do
       Score.create!(
         tutor: tutor1,
         session: nil,
-        score_type: 'fsrs',
+        score_type: 'fsqs',
         value: 55.0, # High risk
         computed_at: 1.day.ago
       )
@@ -21,7 +21,7 @@ RSpec.describe 'Admin API', type: :request do
       Score.create!(
         tutor: tutor2,
         session: nil,
-        score_type: 'fsrs',
+        score_type: 'fsqs',
         value: 20.0, # Good
         computed_at: 1.day.ago
       )
@@ -76,7 +76,7 @@ RSpec.describe 'Admin API', type: :request do
       tutor1_data = json.find { |t| t['id'] == tutor1.id }
       expect(tutor1_data).to include(
         'name' => 'Alice Smith',
-        'fsrs' => 55.0,
+        'fsqs' => 55.0,
         'ths' => 45.0,
         'tcrs' => 0.7
       )
@@ -85,7 +85,7 @@ RSpec.describe 'Admin API', type: :request do
       tutor2_data = json.find { |t| t['id'] == tutor2.id }
       expect(tutor2_data).to include(
         'name' => 'Bob Jones',
-        'fsrs' => 20.0,
+        'fsqs' => 20.0,
         'ths' => 80.0,
         'tcrs' => 0.2
       )
@@ -94,7 +94,7 @@ RSpec.describe 'Admin API', type: :request do
       tutor3_data = json.find { |t| t['id'] == tutor3.id }
       expect(tutor3_data).to include(
         'name' => 'Charlie Brown',
-        'fsrs' => nil,
+        'fsqs' => nil,
         'ths' => nil,
         'tcrs' => nil
       )
@@ -116,7 +116,7 @@ RSpec.describe 'Admin API', type: :request do
 
     it 'includes alert count for each tutor' do
       # Create alerts for tutor1
-      Alert.create!(tutor: tutor1, alert_type: 'poor_first_session', severity: 'high', status: 'open', triggered_at: Time.current)
+      Alert.create!(tutor: tutor1, alert_type: 'low_first_session_quality', severity: 'high', status: 'open', triggered_at: Time.current)
       Alert.create!(tutor: tutor1, alert_type: 'high_reliability_risk', severity: 'high', status: 'open', triggered_at: Time.current)
 
       get '/api/admin/tutors/risk_list'
@@ -135,7 +135,7 @@ RSpec.describe 'Admin API', type: :request do
       Score.create!(
         tutor: tutor4,
         session: nil,
-        score_type: 'fsrs',
+        score_type: 'fsqs',
         value: 40.0,
         computed_at: 1.day.ago
       )
@@ -148,7 +148,7 @@ RSpec.describe 'Admin API', type: :request do
       tutor4_data = json.find { |t| t['id'] == tutor4.id }
       
       expect(tutor4_data).to include(
-        'fsrs' => 40.0,
+        'fsqs' => 40.0,
         'ths' => nil,
         'tcrs' => nil
       )
@@ -166,12 +166,12 @@ RSpec.describe 'Admin API', type: :request do
     end
   end
 
-  describe 'GET /api/admin/tutor/:id/fsrs_history' do
+  describe 'GET /api/admin/tutor/:id/fsqs_history' do
     let!(:tutor) { Tutor.create!(name: 'Alice Smith', email: 'alice@example.com') }
     
     it 'returns FSRS history for a tutor' do
       # TODO: Will implement after defining FSRS history structure
-      get "/api/admin/tutor/#{tutor.id}/fsrs_history"
+      get "/api/admin/tutor/#{tutor.id}/fsqs_history"
       
       expect(response).to have_http_status(:ok)
     end
@@ -190,7 +190,7 @@ RSpec.describe 'Admin API', type: :request do
 
   describe 'POST /api/admin/alerts/:id/update_status' do
     let!(:tutor) { Tutor.create!(name: 'Alice Smith', email: 'alice@example.com') }
-    let!(:alert) { Alert.create!(tutor: tutor, alert_type: 'poor_first_session', severity: 'high', status: 'open', triggered_at: Time.current) }
+    let!(:alert) { Alert.create!(tutor: tutor, alert_type: 'low_first_session_quality', severity: 'high', status: 'open', triggered_at: Time.current) }
     
     it 'updates alert status' do
       # TODO: Will implement after defining alert update structure

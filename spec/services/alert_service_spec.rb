@@ -10,7 +10,7 @@ RSpec.describe AlertService, type: :service do
         Score.create!(
           session: nil,
           tutor: tutor,
-          score_type: 'fsrs',
+          score_type: 'fsqs',
           value: 55,
           components: { score: 55 },
           computed_at: Time.current
@@ -18,7 +18,7 @@ RSpec.describe AlertService, type: :service do
 
         described_class.new.evaluate_and_create_alerts(tutor)
 
-        alert = Alert.find_by(tutor: tutor, alert_type: 'poor_first_session')
+        alert = Alert.find_by(tutor: tutor, alert_type: 'low_first_session_quality')
         expect(alert).to be_present
         expect(alert.severity).to eq('high')
         expect(alert.status).to eq('open')
@@ -73,7 +73,7 @@ RSpec.describe AlertService, type: :service do
         Score.create!(
           session: nil,
           tutor: tutor,
-          score_type: 'fsrs',
+          score_type: 'fsqs',
           value: 55,
           components: { score: 55 },
           computed_at: Time.current
@@ -91,7 +91,7 @@ RSpec.describe AlertService, type: :service do
 
         alerts = Alert.where(tutor: tutor)
         expect(alerts.count).to eq(2)
-        expect(alerts.pluck(:alert_type)).to contain_exactly('poor_first_session', 'high_reliability_risk')
+        expect(alerts.pluck(:alert_type)).to contain_exactly('low_first_session_quality', 'high_reliability_risk')
       end
     end
 
@@ -100,7 +100,7 @@ RSpec.describe AlertService, type: :service do
         Score.create!(
           session: nil,
           tutor: tutor,
-          score_type: 'fsrs',
+          score_type: 'fsqs',
           value: 40, # Below threshold
           components: { score: 40 },
           computed_at: Time.current
@@ -126,7 +126,7 @@ RSpec.describe AlertService, type: :service do
         # Create existing alert
         existing_alert = Alert.create!(
           tutor: tutor,
-          alert_type: 'poor_first_session',
+          alert_type: 'low_first_session_quality',
           severity: 'medium',
           status: 'open',
           triggered_at: 1.hour.ago
@@ -136,7 +136,7 @@ RSpec.describe AlertService, type: :service do
         Score.create!(
           session: nil,
           tutor: tutor,
-          score_type: 'fsrs',
+          score_type: 'fsqs',
           value: 55,
           components: { score: 55 },
           computed_at: Time.current
@@ -144,7 +144,7 @@ RSpec.describe AlertService, type: :service do
 
         described_class.new.evaluate_and_create_alerts(tutor)
 
-        alerts = Alert.where(tutor: tutor, alert_type: 'poor_first_session', status: 'open')
+        alerts = Alert.where(tutor: tutor, alert_type: 'low_first_session_quality', status: 'open')
         expect(alerts.count).to eq(1)
         expect(alerts.first.id).to eq(existing_alert.id)
         expect(alerts.first.resolved_at).to be_nil
@@ -156,7 +156,7 @@ RSpec.describe AlertService, type: :service do
         # Create existing alert
         alert = Alert.create!(
           tutor: tutor,
-          alert_type: 'poor_first_session',
+          alert_type: 'low_first_session_quality',
           severity: 'medium',
           status: 'open',
           triggered_at: 1.hour.ago
@@ -166,7 +166,7 @@ RSpec.describe AlertService, type: :service do
         Score.create!(
           session: nil,
           tutor: tutor,
-          score_type: 'fsrs',
+          score_type: 'fsqs',
           value: 40, # Below threshold now
           components: { score: 40 },
           computed_at: Time.current
@@ -198,7 +198,7 @@ RSpec.describe AlertService, type: :service do
       Score.create!(
         session: nil,
         tutor: tutor1,
-        score_type: 'fsrs',
+        score_type: 'fsqs',
         value: 55,
         components: { score: 55 },
         computed_at: Time.current

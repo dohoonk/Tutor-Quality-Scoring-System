@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe FirstSessionRiskScoreService, type: :service do
+RSpec.describe FirstSessionQualityScoreService, type: :service do
   let(:tutor) { Tutor.create!(name: 'Test Tutor', email: 'tutor@example.com') }
   let(:student) { Student.create!(name: 'Test Student', email: 'student@example.com') }
 
@@ -397,7 +397,7 @@ RSpec.describe FirstSessionRiskScoreService, type: :service do
       result = service.calculate
       service.save_score(result) if result
 
-      score = Score.find_by(session: session, score_type: 'fsrs')
+      score = Score.find_by(session: session, score_type: 'fsqs')
       expect(score).to be_present
       expect(score.value).to be >= 0
       expect(score.tutor_id).to eq(tutor.id)

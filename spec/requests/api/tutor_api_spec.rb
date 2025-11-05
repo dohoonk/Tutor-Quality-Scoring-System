@@ -4,7 +4,7 @@ RSpec.describe 'Tutor API', type: :request do
   let(:tutor) { Tutor.create!(name: 'Test Tutor', email: 'tutor@example.com') }
   let(:student) { Student.create!(name: 'Test Student', email: 'student@example.com') }
 
-  describe 'GET /api/tutor/:id/fsrs_latest' do
+  describe 'GET /api/tutor/:id/fsqs_latest' do
     context 'when tutor has FSRS scores' do
       it 'returns the most recent FSRS with feedback' do
         session = Session.create!(
@@ -32,7 +32,7 @@ RSpec.describe 'Tutor API', type: :request do
         fsrs_score = Score.create!(
           session: session,
           tutor: tutor,
-          score_type: 'fsrs',
+          score_type: 'fsqs',
           value: 15,
           components: {
             score: 15,
@@ -51,7 +51,7 @@ RSpec.describe 'Tutor API', type: :request do
           computed_at: Time.current
         )
 
-        get "/api/tutor/#{tutor.id}/fsrs_latest"
+        get "/api/tutor/#{tutor.id}/fsqs_latest"
 
         expect(response).to have_http_status(:success)
         json = JSON.parse(response.body)
@@ -65,7 +65,7 @@ RSpec.describe 'Tutor API', type: :request do
 
     context 'when tutor has no FSRS scores' do
       it 'returns 404' do
-        get "/api/tutor/#{tutor.id}/fsrs_latest"
+        get "/api/tutor/#{tutor.id}/fsqs_latest"
 
         expect(response).to have_http_status(:not_found)
       end
@@ -73,14 +73,14 @@ RSpec.describe 'Tutor API', type: :request do
 
     context 'when tutor does not exist' do
       it 'returns 404' do
-        get "/api/tutor/99999/fsrs_latest"
+        get "/api/tutor/99999/fsqs_latest"
 
         expect(response).to have_http_status(:not_found)
       end
     end
   end
 
-  describe 'GET /api/tutor/:id/fsrs_history' do
+  describe 'GET /api/tutor/:id/fsqs_history' do
     it 'returns last 5 first-sessions with FSRS' do
       # Create multiple sessions with FSRS scores
       6.times do |i|
@@ -99,14 +99,14 @@ RSpec.describe 'Tutor API', type: :request do
         Score.create!(
           session: session,
           tutor: tutor,
-          score_type: 'fsrs',
+          score_type: 'fsqs',
           value: 10 + i,
           components: { score: 10 + i },
           computed_at: i.days.ago
         )
       end
 
-      get "/api/tutor/#{tutor.id}/fsrs_history"
+      get "/api/tutor/#{tutor.id}/fsqs_history"
 
       expect(response).to have_http_status(:success)
       json = JSON.parse(response.body)
@@ -117,7 +117,7 @@ RSpec.describe 'Tutor API', type: :request do
     end
 
     it 'returns empty array when no FSRS scores exist' do
-      get "/api/tutor/#{tutor.id}/fsrs_history"
+      get "/api/tutor/#{tutor.id}/fsqs_history"
 
       expect(response).to have_http_status(:success)
       json = JSON.parse(response.body)
