@@ -58,13 +58,13 @@
 
 ## EPIC 4 — Scoring Services (TDD Approach)
 ### SQS (Session Quality Score)
-- [ ] Write SQS service tests (TDD: write test → see fail → build service → see pass)
-- [ ] Compute lateness penalty: `min(20, 2 * lateness_min)`
-- [ ] Compute duration shortfall penalty: `min(10, 1 * end_shortfall_min)`
-- [ ] Compute tech disruption penalty: `10 if tech_issue else 0`
-- [ ] Calculate final SQS: `clamp(0, 100, base - penalties)`
-- [ ] Apply label thresholds (risk <60, warn 60-75, ok >75)
-- [ ] Write score to `scores` table with components breakdown
+- [x] Write SQS service tests (TDD: write test → see fail → build service → see pass)
+- [x] Compute lateness penalty: `min(20, 2 * lateness_min)`
+- [x] Compute duration shortfall penalty: `min(10, 1 * end_shortfall_min)`
+- [x] Compute tech disruption penalty: `10 if tech_issue else 0`
+- [x] Calculate final SQS: `clamp(0, 100, base - penalties)`
+- [x] Apply label thresholds (risk <60, warn 60-75, ok >75)
+- [x] Write score to `scores` table with components breakdown
 
 ### FSRS (First Session Risk Score)
 - [ ] Write FSRS service tests (TDD: write test → see fail → build service → see pass)
