@@ -68,9 +68,9 @@ const BarChart = ({
   // Calculate bar dimensions
   const barCount = data.length
   // Use a more reasonable bar width: smaller percentage for fewer bars, cap at max width
-  const maxBarWidth = 80 // Maximum bar width for desktop
+  const maxBarWidth = 160 // Maximum bar width for desktop (increased for better visibility)
   const minBarWidth = 20 // Minimum bar width for mobile
-  const calculatedWidth = (innerWidth / barCount) * 0.4 // 40% of available space per bar
+  const calculatedWidth = (innerWidth / barCount) * 0.65 // 65% of available space per bar (increased from 50%)
   const barWidth = Math.max(minBarWidth, Math.min(maxBarWidth, calculatedWidth))
   const barSpacing = (innerWidth - (barWidth * barCount)) / (barCount + 1)
 
