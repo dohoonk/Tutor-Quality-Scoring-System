@@ -213,13 +213,13 @@
 - [ ] Schedule: every 5 minutes (will do in Job Scheduling Configuration)
 
 ### Job Scheduling Configuration
-- [ ] Configure sidekiq-scheduler
-- [ ] Set up recurring jobs:
-  - [ ] SessionScoringJob: every 5 min
-  - [ ] AlertJob: every 10 min
-  - [ ] TutorDailyAggregationJob: every 10 min (deferred - requires materialized views)
-  - [ ] TutorHealthScoreJob: every 10 min (deferred - requires tutor_stats_7d view)
-  - [ ] TutorChurnRiskScoreJob: every 10 min (deferred - requires tutor_stats_14d view)
+- [x] Configure sidekiq-scheduler
+- [x] Set up recurring jobs:
+  - [x] SessionScoringJob: every 5 min
+  - [x] AlertJob: every 10 min
+  - [ ] TutorDailyAggregationJob: every 10 min (POST-MVP - requires materialized views)
+  - [ ] TutorHealthScoreJob: every 10 min (POST-MVP - requires tutor_stats_7d view)
+  - [ ] TutorChurnRiskScoreJob: every 10 min (POST-MVP - requires tutor_stats_14d view)
 
 ---
 
