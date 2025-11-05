@@ -607,7 +607,7 @@ const TutorDashboard = ({ tutorId }) => {
 
             {/* Actionable Items Section */}
             {sqsActionableFeedback && (
-              <div className="mt-6">
+              <div className="mt-4">
                 <h3 className="text-lg font-semibold mb-4">Actionable Items</h3>
                 {sqsActionableFeedback.perfect ? (
                   <div className="bg-gradient-to-r from-green-50 to-emerald-50 rounded-lg p-6 md:p-8 border-l-4 border-green-500">
