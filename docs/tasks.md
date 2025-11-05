@@ -204,13 +204,13 @@
 - [ ] Schedule: every 10 minutes (after aggregation)
 
 ### Scoring Job
-- [ ] Write SessionScoringJob tests (TDD: write test → see fail → build job → see pass)
-- [ ] Create SessionScoringJob
-- [ ] Poll for new/updated sessions (DB polling every 5 min)
-- [ ] Compute SQS for all completed sessions
-- [ ] Compute FSRS for first_session_for_student = true (if transcript available)
-- [ ] Write scores to scores table
-- [ ] Schedule: every 5 minutes
+- [x] Write SessionScoringJob tests (TDD: write test → see fail → build job → see pass)
+- [x] Create SessionScoringJob
+- [x] Poll for new/updated sessions (DB polling every 5 min)
+- [x] Compute SQS for all completed sessions
+- [x] Compute FSRS for first_session_for_student = true (if transcript available)
+- [x] Write scores to scores table
+- [ ] Schedule: every 5 minutes (will do in Job Scheduling Configuration)
 
 ### Job Scheduling Configuration
 - [ ] Configure sidekiq-scheduler
