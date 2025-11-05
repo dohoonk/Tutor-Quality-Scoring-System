@@ -110,28 +110,28 @@
 - [x] `GET /api/tutor/:id/session_list` - Recent sessions with SQS values
 
 ### FSRS Feedback Section (top)
-- [ ] Fetch most recent FSRS via `/api/tutor/:id/fsrs_latest`
-- [ ] Display "First Session Quality Feedback" card:
-  - [ ] SQS + FSRS indicators (visually separated)
-  - [ ] "What went well" section
-  - [ ] "One improvement idea" section
-- [ ] FSRS Trend component:
-  - [ ] Fetch FSRS history via `/api/tutor/:id/fsrs_history`
-  - [ ] Display sparkline chart (last 5 first-sessions)
-  - [ ] Show average FSRS score
-  - [ ] Highlight improvement direction (e.g., +12% vs previous period)
-- [ ] "View Past First Sessions" link → side panel:
-  - [ ] List of previous FSRS summary entries
-  - [ ] Each entry expandable with transcript-based explanation snippets
+- [x] Fetch most recent FSRS via `/api/tutor/:id/fsrs_latest`
+- [x] Display "First Session Quality Feedback" card:
+  - [x] SQS + FSRS indicators (visually separated)
+  - [x] "What went well" section
+  - [x] "One improvement idea" section
+- [x] FSRS Trend component:
+  - [x] Fetch FSRS history via `/api/tutor/:id/fsrs_history`
+  - [x] Display sparkline chart (last 5 first-sessions)
+  - [x] Show average FSRS score
+  - [x] Highlight improvement direction (e.g., +12% vs previous period)
+- [x] "View Past First Sessions" link → side panel:
+  - [x] List of previous FSRS summary entries
+  - [x] Each entry expandable with transcript-based explanation snippets
 
 ### Performance Summary Section (second)
-- [ ] Fetch summary via `/api/tutor/:id/performance_summary`
-- [ ] Display AI-generated text in UI
-- [ ] Show SQS trend visualization
+- [x] Fetch summary via `/api/tutor/:id/performance_summary`
+- [x] Display AI-generated text in UI
+- [x] Show SQS trend visualization
 
 ### Recent Sessions Table
-- [ ] Fetch sessions via `/api/tutor/:id/session_list`
-- [ ] Display table with: Date, Student, SQS, FSRS Tag, Notes
+- [x] Fetch sessions via `/api/tutor/:id/session_list`
+- [x] Display table with: Date, Student, SQS, FSRS Tag, Notes
 
 ---
 
