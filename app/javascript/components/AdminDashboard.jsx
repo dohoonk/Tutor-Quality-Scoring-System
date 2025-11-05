@@ -457,17 +457,38 @@ const AdminDashboard = ({ adminId }) => {
                 {tutorMetrics.sqs_history && tutorMetrics.sqs_history.length > 0 && (
                   <div className="bg-white rounded-lg shadow-md p-4 md:p-6 mb-6 hover-lift">
                     <h3 className="text-lg font-semibold mb-4">Session Quality Trend</h3>
+                    
+                    {/* Color Legend */}
+                    <div className="flex flex-wrap items-center gap-4 mb-4 text-sm">
+                      <div className="flex items-center gap-2">
+                        <div className="w-4 h-4 bg-red-500 rounded"></div>
+                        <span className="text-gray-700">Low Quality (&lt; 60)</span>
+                      </div>
+                      <div className="flex items-center gap-2">
+                        <div className="w-4 h-4 bg-yellow-500 rounded"></div>
+                        <span className="text-gray-700">Fair (60-75)</span>
+                      </div>
+                      <div className="flex items-center gap-2">
+                        <div className="w-4 h-4 bg-green-500 rounded"></div>
+                        <span className="text-gray-700">Good (&gt; 75)</span>
+                      </div>
+                    </div>
+                    
                     <div className="flex items-end gap-1 md:gap-2 h-32">
                       {tutorMetrics.sqs_history.map((item, index) => {
                         const maxScore = Math.max(...tutorMetrics.sqs_history.map(s => s.value), 100)
-                        const height = (item.value / maxScore) * 100
+                        // Calculate height percentage
+                        const heightPercent = (item.value / maxScore) * 100
+                        // Container height is 128px (h-32), so calculate pixel height with minimum 4px for visibility
+                        const containerHeight = 128 // h-32 = 128px
+                        const pixelHeight = Math.max((heightPercent / 100) * containerHeight, 4)
                         const color = item.value < 60 ? 'bg-red-500' : 
                                       item.value <= 75 ? 'bg-yellow-500' : 'bg-green-500'
                         return (
                           <div key={index} className="flex-1 flex flex-col items-center group">
                             <div
                               className={`w-full ${color} rounded-t transition-all hover:opacity-80`}
-                              style={{ height: `${height}%` }}
+                              style={{ height: `${pixelHeight}px` }}
                               title={`SQS: ${item.value}`}
                               aria-label={`Session ${index + 1}: SQS ${item.value}`}
                             />
