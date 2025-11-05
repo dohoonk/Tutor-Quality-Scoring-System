@@ -208,3 +208,154 @@ FOREIGN KEY ("tutor_id")
   [1m[36mStudent Create (0.1ms)[0m  [1m[32mINSERT INTO "students" ("name", "email", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", "Jane Smith"], ["email", "[FILTERED]"], ["created_at", "2025-11-05 07:10:59.745634"], ["updated_at", "2025-11-05 07:10:59.745634"]]
   [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
   [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.3ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "schema_sha1"]]
+  [1m[36mActiveRecord::SchemaMigration Load (0.3ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.3ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "schema_sha1"]]
+  [1m[36mActiveRecord::SchemaMigration Load (0.7ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.4ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "environment"]]
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.1ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "environment"]]
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.1ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "environment"]]
+  [1m[35mSQL (0.0ms)[0m  [1m[35mSET search_path TO public[0m
+  [1m[35m (39.5ms)[0m  [1m[35mDROP DATABASE IF EXISTS "tutor_insights_test"[0m
+  [1m[35m (39.1ms)[0m  [1m[35mCREATE DATABASE "tutor_insights_test" ENCODING = 'unicode'[0m
+  [1m[35mSQL (13.6ms)[0m  [1m[35mCREATE EXTENSION IF NOT EXISTS "plpgsql" SCHEMA pg_catalog[0m
+  [1m[35m (0.0ms)[0m  [1m[35mDROP TABLE IF EXISTS "session_transcripts" CASCADE[0m
+  [1m[35m (1.3ms)[0m  [1m[35mCREATE TABLE "session_transcripts" ("id" bigserial primary key, "session_id" bigint NOT NULL, "payload" jsonb, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[35m (0.4ms)[0m  [1m[35mCREATE INDEX "index_session_transcripts_on_session_id" ON "session_transcripts" ("session_id")[0m
+  [1m[35m (0.1ms)[0m  [1m[35mDROP TABLE IF EXISTS "sessions" CASCADE[0m
+  [1m[35m (1.0ms)[0m  [1m[35mCREATE TABLE "sessions" ("id" bigserial primary key, "tutor_id" bigint NOT NULL, "student_id" bigint NOT NULL, "scheduled_start_at" timestamp(6), "actual_start_at" timestamp(6), "scheduled_end_at" timestamp(6), "actual_end_at" timestamp(6), "status" character varying, "reschedule_initiator" character varying, "tech_issue" boolean, "first_session_for_student" boolean, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[35m (0.3ms)[0m  [1m[35mCREATE INDEX "index_sessions_on_student_id" ON "sessions" ("student_id")[0m
+  [1m[35m (0.3ms)[0m  [1m[35mCREATE INDEX "index_sessions_on_tutor_id_and_student_id" ON "sessions" ("tutor_id", "student_id")[0m
+  [1m[35m (0.3ms)[0m  [1m[35mCREATE INDEX "index_sessions_on_tutor_id" ON "sessions" ("tutor_id")[0m
+  [1m[35m (0.0ms)[0m  [1m[35mDROP TABLE IF EXISTS "students" CASCADE[0m
+  [1m[35m (0.7ms)[0m  [1m[35mCREATE TABLE "students" ("id" bigserial primary key, "name" character varying, "email" character varying, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[35m (0.1ms)[0m  [1m[35mDROP TABLE IF EXISTS "tutors" CASCADE[0m
+  [1m[35m (0.7ms)[0m  [1m[35mCREATE TABLE "tutors" ("id" bigserial primary key, "name" character varying, "email" character varying, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[35m (0.8ms)[0m  [1m[35mALTER TABLE "session_transcripts" ADD CONSTRAINT "fk_rails_23858c6baf"
+FOREIGN KEY ("session_id")
+  REFERENCES "sessions" ("id")
+[0m
+  [1m[35m (0.2ms)[0m  [1m[35mALTER TABLE "sessions" ADD CONSTRAINT "fk_rails_925087b242"
+FOREIGN KEY ("student_id")
+  REFERENCES "students" ("id")
+[0m
+  [1m[35m (0.2ms)[0m  [1m[35mALTER TABLE "sessions" ADD CONSTRAINT "fk_rails_dc91b3d7ea"
+FOREIGN KEY ("tutor_id")
+  REFERENCES "tutors" ("id")
+[0m
+  [1m[35m (0.5ms)[0m  [1m[35mCREATE TABLE "schema_migrations" ("version" character varying NOT NULL PRIMARY KEY)[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.1ms)[0m  [1m[32mINSERT INTO "schema_migrations" (version) VALUES (20251105071159)[0m
+  [1m[35m (0.1ms)[0m  [1m[32mINSERT INTO "schema_migrations" (version) VALUES
+(20251105071010),
+(20251105070729),
+(20251105070618);[0m
+  [1m[35m (0.6ms)[0m  [1m[35mCREATE TABLE "ar_internal_metadata" ("key" character varying NOT NULL PRIMARY KEY, "value" character varying, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.2ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "environment"]]
+  [1m[36mActiveRecord::InternalMetadata Create (0.2ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES ('environment', 'test', '2025-11-05 07:12:21.010016', '2025-11-05 07:12:21.010017') RETURNING "key"[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.1ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "environment"]]
+  [1m[36mActiveRecord::InternalMetadata Load (0.0ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "schema_sha1"]]
+  [1m[36mActiveRecord::InternalMetadata Create (0.1ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES ('schema_sha1', '495cca61ca4e64ffab626b1f3f8fcce6a515c0fe', '2025-11-05 07:12:21.010704', '2025-11-05 07:12:21.010705') RETURNING "key"[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+[dotenv] Saved a snapshot of [32mENV[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTutor Create (0.5ms)[0m  [1m[32mINSERT INTO "tutors" ("name", "email", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", "John Doe"], ["email", "[FILTERED]"], ["created_at", "2025-11-05 07:12:21.062564"], ["updated_at", "2025-11-05 07:12:21.062564"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mStudent Create (0.4ms)[0m  [1m[32mINSERT INTO "students" ("name", "email", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", "Jane Smith"], ["email", "[FILTERED]"], ["created_at", "2025-11-05 07:12:21.072122"], ["updated_at", "2025-11-05 07:12:21.072122"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mSession Create (0.8ms)[0m  [1m[32mINSERT INTO "sessions" ("tutor_id", "student_id", "scheduled_start_at", "actual_start_at", "scheduled_end_at", "actual_end_at", "status", "reschedule_initiator", "tech_issue", "first_session_for_student", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12) RETURNING "id"[0m  [["tutor_id", 1], ["student_id", 1], ["scheduled_start_at", "2025-11-05 06:12:21.074116"], ["actual_start_at", "2025-11-05 06:12:21.074125"], ["scheduled_end_at", "2025-11-05 07:12:21.074127"], ["actual_end_at", "2025-11-05 07:12:21.074127"], ["status", "completed"], ["reschedule_initiator", nil], ["tech_issue", nil], ["first_session_for_student", nil], ["created_at", "2025-11-05 07:12:21.090708"], ["updated_at", "2025-11-05 07:12:21.090708"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTutor Create (0.2ms)[0m  [1m[32mINSERT INTO "tutors" ("name", "email", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", "John Doe"], ["email", "[FILTERED]"], ["created_at", "2025-11-05 07:12:21.105181"], ["updated_at", "2025-11-05 07:12:21.105181"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mStudent Create (0.2ms)[0m  [1m[32mINSERT INTO "students" ("name", "email", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", "Jane Smith"], ["email", "[FILTERED]"], ["created_at", "2025-11-05 07:12:21.105734"], ["updated_at", "2025-11-05 07:12:21.105734"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mSession Create (0.1ms)[0m  [1m[32mINSERT INTO "sessions" ("tutor_id", "student_id", "scheduled_start_at", "actual_start_at", "scheduled_end_at", "actual_end_at", "status", "reschedule_initiator", "tech_issue", "first_session_for_student", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12) RETURNING "id"[0m  [["tutor_id", 2], ["student_id", 2], ["scheduled_start_at", "2025-11-05 06:12:21.106101"], ["actual_start_at", "2025-11-05 06:12:21.106107"], ["scheduled_end_at", "2025-11-05 07:12:21.106108"], ["actual_end_at", "2025-11-05 07:12:21.106109"], ["status", "completed"], ["reschedule_initiator", nil], ["tech_issue", nil], ["first_session_for_student", nil], ["created_at", "2025-11-05 07:12:21.106229"], ["updated_at", "2025-11-05 07:12:21.106229"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTutor Create (0.1ms)[0m  [1m[32mINSERT INTO "tutors" ("name", "email", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", "John Doe"], ["email", "[FILTERED]"], ["created_at", "2025-11-05 07:12:21.107725"], ["updated_at", "2025-11-05 07:12:21.107725"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mStudent Create (0.1ms)[0m  [1m[32mINSERT INTO "students" ("name", "email", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", "Jane Smith"], ["email", "[FILTERED]"], ["created_at", "2025-11-05 07:12:21.108058"], ["updated_at", "2025-11-05 07:12:21.108058"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mSession Create (0.1ms)[0m  [1m[32mINSERT INTO "sessions" ("tutor_id", "student_id", "scheduled_start_at", "actual_start_at", "scheduled_end_at", "actual_end_at", "status", "reschedule_initiator", "tech_issue", "first_session_for_student", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12) RETURNING "id"[0m  [["tutor_id", 3], ["student_id", 3], ["scheduled_start_at", "2025-11-05 06:12:21.108320"], ["actual_start_at", "2025-11-05 06:12:21.108324"], ["scheduled_end_at", "2025-11-05 07:12:21.108325"], ["actual_end_at", "2025-11-05 07:12:21.108325"], ["status", "completed"], ["reschedule_initiator", nil], ["tech_issue", nil], ["first_session_for_student", nil], ["created_at", "2025-11-05 07:12:21.108400"], ["updated_at", "2025-11-05 07:12:21.108400"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTutor Create (0.2ms)[0m  [1m[32mINSERT INTO "tutors" ("name", "email", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", "John Doe"], ["email", "[FILTERED]"], ["created_at", "2025-11-05 07:12:21.120961"], ["updated_at", "2025-11-05 07:12:21.120961"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mStudent Create (0.1ms)[0m  [1m[32mINSERT INTO "students" ("name", "email", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", "Jane Smith"], ["email", "[FILTERED]"], ["created_at", "2025-11-05 07:12:21.121548"], ["updated_at", "2025-11-05 07:12:21.121548"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mSession Create (0.2ms)[0m  [1m[32mINSERT INTO "sessions" ("tutor_id", "student_id", "scheduled_start_at", "actual_start_at", "scheduled_end_at", "actual_end_at", "status", "reschedule_initiator", "tech_issue", "first_session_for_student", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12) RETURNING "id"[0m  [["tutor_id", 4], ["student_id", 4], ["scheduled_start_at", "2025-11-05 06:12:21.121854"], ["actual_start_at", "2025-11-05 06:12:21.121860"], ["scheduled_end_at", "2025-11-05 07:12:21.121862"], ["actual_end_at", "2025-11-05 07:12:21.121863"], ["status", "completed"], ["reschedule_initiator", nil], ["tech_issue", nil], ["first_session_for_student", nil], ["created_at", "2025-11-05 07:12:21.122003"], ["updated_at", "2025-11-05 07:12:21.122003"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.3ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "schema_sha1"]]
+  [1m[36mActiveRecord::SchemaMigration Load (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+[dotenv] Saved a snapshot of [32mENV[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTutor Create (0.5ms)[0m  [1m[32mINSERT INTO "tutors" ("name", "email", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", "John Doe"], ["email", "[FILTERED]"], ["created_at", "2025-11-05 07:12:39.804421"], ["updated_at", "2025-11-05 07:12:39.804421"]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mStudent Create (0.4ms)[0m  [1m[32mINSERT INTO "students" ("name", "email", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", "Jane Smith"], ["email", "[FILTERED]"], ["created_at", "2025-11-05 07:12:39.808651"], ["updated_at", "2025-11-05 07:12:39.808651"]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mSession Create (1.1ms)[0m  [1m[32mINSERT INTO "sessions" ("tutor_id", "student_id", "scheduled_start_at", "actual_start_at", "scheduled_end_at", "actual_end_at", "status", "reschedule_initiator", "tech_issue", "first_session_for_student", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12) RETURNING "id"[0m  [["tutor_id", 5], ["student_id", 5], ["scheduled_start_at", "2025-11-05 06:12:39.809352"], ["actual_start_at", "2025-11-05 06:12:39.809359"], ["scheduled_end_at", "2025-11-05 07:12:39.809361"], ["actual_end_at", "2025-11-05 07:12:39.809361"], ["status", "completed"], ["reschedule_initiator", nil], ["tech_issue", nil], ["first_session_for_student", nil], ["created_at", "2025-11-05 07:12:39.815177"], ["updated_at", "2025-11-05 07:12:39.815177"]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTutor Create (0.3ms)[0m  [1m[32mINSERT INTO "tutors" ("name", "email", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", "John Doe"], ["email", "[FILTERED]"], ["created_at", "2025-11-05 07:12:39.826636"], ["updated_at", "2025-11-05 07:12:39.826636"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mStudent Create (0.2ms)[0m  [1m[32mINSERT INTO "students" ("name", "email", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", "Jane Smith"], ["email", "[FILTERED]"], ["created_at", "2025-11-05 07:12:39.827310"], ["updated_at", "2025-11-05 07:12:39.827310"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mSession Create (0.3ms)[0m  [1m[32mINSERT INTO "sessions" ("tutor_id", "student_id", "scheduled_start_at", "actual_start_at", "scheduled_end_at", "actual_end_at", "status", "reschedule_initiator", "tech_issue", "first_session_for_student", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12) RETURNING "id"[0m  [["tutor_id", 6], ["student_id", 6], ["scheduled_start_at", "2025-11-05 06:12:39.827723"], ["actual_start_at", "2025-11-05 06:12:39.827730"], ["scheduled_end_at", "2025-11-05 07:12:39.827731"], ["actual_end_at", "2025-11-05 07:12:39.827732"], ["status", "completed"], ["reschedule_initiator", nil], ["tech_issue", nil], ["first_session_for_student", nil], ["created_at", "2025-11-05 07:12:39.827878"], ["updated_at", "2025-11-05 07:12:39.827878"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTutor Create (0.2ms)[0m  [1m[32mINSERT INTO "tutors" ("name", "email", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", "John Doe"], ["email", "[FILTERED]"], ["created_at", "2025-11-05 07:12:39.829808"], ["updated_at", "2025-11-05 07:12:39.829808"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mStudent Create (0.1ms)[0m  [1m[32mINSERT INTO "students" ("name", "email", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", "Jane Smith"], ["email", "[FILTERED]"], ["created_at", "2025-11-05 07:12:39.830220"], ["updated_at", "2025-11-05 07:12:39.830220"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mSession Create (0.3ms)[0m  [1m[32mINSERT INTO "sessions" ("tutor_id", "student_id", "scheduled_start_at", "actual_start_at", "scheduled_end_at", "actual_end_at", "status", "reschedule_initiator", "tech_issue", "first_session_for_student", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12) RETURNING "id"[0m  [["tutor_id", 7], ["student_id", 7], ["scheduled_start_at", "2025-11-05 06:12:39.830569"], ["actual_start_at", "2025-11-05 06:12:39.830573"], ["scheduled_end_at", "2025-11-05 07:12:39.830575"], ["actual_end_at", "2025-11-05 07:12:39.830575"], ["status", "completed"], ["reschedule_initiator", nil], ["tech_issue", nil], ["first_session_for_student", nil], ["created_at", "2025-11-05 07:12:39.830660"], ["updated_at", "2025-11-05 07:12:39.830660"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTutor Create (0.2ms)[0m  [1m[32mINSERT INTO "tutors" ("name", "email", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", "John Doe"], ["email", "[FILTERED]"], ["created_at", "2025-11-05 07:12:39.831845"], ["updated_at", "2025-11-05 07:12:39.831845"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mStudent Create (0.1ms)[0m  [1m[32mINSERT INTO "students" ("name", "email", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", "Jane Smith"], ["email", "[FILTERED]"], ["created_at", "2025-11-05 07:12:39.832228"], ["updated_at", "2025-11-05 07:12:39.832228"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mSession Create (0.3ms)[0m  [1m[32mINSERT INTO "sessions" ("tutor_id", "student_id", "scheduled_start_at", "actual_start_at", "scheduled_end_at", "actual_end_at", "status", "reschedule_initiator", "tech_issue", "first_session_for_student", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12) RETURNING "id"[0m  [["tutor_id", 8], ["student_id", 8], ["scheduled_start_at", "2025-11-05 06:12:39.832544"], ["actual_start_at", "2025-11-05 06:12:39.832548"], ["scheduled_end_at", "2025-11-05 07:12:39.832549"], ["actual_end_at", "2025-11-05 07:12:39.832550"], ["status", "completed"], ["reschedule_initiator", nil], ["tech_issue", nil], ["first_session_for_student", nil], ["created_at", "2025-11-05 07:12:39.832626"], ["updated_at", "2025-11-05 07:12:39.832626"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mROLLBACK[0m

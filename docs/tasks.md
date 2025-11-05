@@ -30,7 +30,7 @@
   - [x] first_session_for_student
 - [x] Add indexes for tutor_id + student_id
 
-- [ ] Create SessionTranscript model (TDD: write test → see fail → build model → see pass) (session_id, payload:jsonb)
+- [x] Create SessionTranscript model (TDD: write test → see fail → build model → see pass) (session_id, payload:jsonb)
 
 - [ ] Create tables (TDD: write migration tests → see fail → create migrations → see pass):
   - [ ] scores (session_id, score_type, value, components:jsonb, computed_at)

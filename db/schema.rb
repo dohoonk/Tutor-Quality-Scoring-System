@@ -10,9 +10,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_11_05_071010) do
+ActiveRecord::Schema[8.0].define(version: 2025_11_05_071159) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
+
+  create_table "session_transcripts", force: :cascade do |t|
+    t.bigint "session_id", null: false
+    t.jsonb "payload"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["session_id"], name: "index_session_transcripts_on_session_id"
+  end
 
   create_table "sessions", force: :cascade do |t|
     t.bigint "tutor_id", null: false
@@ -46,6 +54,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_11_05_071010) do
     t.datetime "updated_at", null: false
   end
 
+  add_foreign_key "session_transcripts", "sessions"
   add_foreign_key "sessions", "students"
   add_foreign_key "sessions", "tutors"
 end
