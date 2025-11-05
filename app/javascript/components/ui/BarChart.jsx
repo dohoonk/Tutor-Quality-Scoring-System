@@ -30,7 +30,6 @@ const BarChart = ({
   maxValue = null,
   minValue = 0
 }) => {
-  const [hoveredIndex, setHoveredIndex] = useState(null)
 
   if (!data || data.length === 0) {
     return (
@@ -133,7 +132,6 @@ const BarChart = ({
         preserveAspectRatio="none"
         className="w-full h-full"
         style={{ height: `${height}px` }}
-        onMouseLeave={() => setHoveredIndex(null)}
       >
         {/* Threshold zones */}
         {thresholdZones.map((zone, idx) => (
@@ -174,20 +172,8 @@ const BarChart = ({
 
         {/* Bars */}
         {bars.map((bar, idx) => {
-          const isHovered = hoveredIndex === idx
           return (
             <g key={idx}>
-              {/* Hover area (larger for easier interaction) */}
-              <rect
-                x={bar.x - 5}
-                y={padding.top}
-                width={bar.width + 10}
-                height={innerHeight}
-                fill="transparent"
-                onMouseEnter={() => setHoveredIndex(idx)}
-                className="cursor-pointer"
-              />
-              
               {/* Bar */}
               <rect
                 x={bar.x}
@@ -196,12 +182,6 @@ const BarChart = ({
                 height={bar.height}
                 fill={bar.color}
                 rx="4"
-                className="transition-all"
-                style={{
-                  opacity: isHovered ? 0.9 : 1,
-                  transform: isHovered ? 'scale(1.05)' : 'scale(1)',
-                  transformOrigin: `${bar.x + bar.width / 2} ${bar.y + bar.height}`
-                }}
               />
               
               {/* Value label on bar (if space permits) */}
@@ -216,49 +196,6 @@ const BarChart = ({
                 >
                   {formatValue(bar.value)}
                 </text>
-              )}
-
-              {/* Hover tooltip */}
-              {showTooltip && isHovered && (
-                <g>
-                  {/* Tooltip background */}
-                  <rect
-                    x={bar.x + bar.width / 2 - (isLargeChart ? 50 : 40)}
-                    y={bar.y - (isLargeChart ? 45 : 35)}
-                    width={isLargeChart ? "100" : "80"}
-                    height={isLargeChart ? "30" : "25"}
-                    rx="4"
-                    fill="rgba(0, 0, 0, 0.8)"
-                  />
-                  {/* Tooltip text */}
-                  <text
-                    x={bar.x + bar.width / 2}
-                    y={bar.y - 20}
-                    textAnchor="middle"
-                    fontSize={fontSize.tooltip}
-                    fill="white"
-                    fontWeight="bold"
-                  >
-                    {formatValue(bar.value)}
-                  </text>
-                  {/* Tooltip label */}
-                  {bar.label && (
-                    <text
-                      x={bar.x + bar.width / 2}
-                      y={bar.y - 8}
-                      textAnchor="middle"
-                      fontSize={fontSize.tooltipLabel}
-                      fill="#d1d5db"
-                    >
-                      {bar.label}
-                    </text>
-                  )}
-                  {/* Tooltip arrow */}
-                  <polygon
-                    points={`${bar.x + bar.width / 2 - 5},${bar.y - 10} ${bar.x + bar.width / 2 + 5},${bar.y - 10} ${bar.x + bar.width / 2},${bar.y - 5}`}
-                    fill="rgba(0, 0, 0, 0.8)"
-                  />
-                </g>
               )}
 
               {/* X-axis label */}
