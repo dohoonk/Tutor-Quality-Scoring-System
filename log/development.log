@@ -221,3 +221,82 @@ FOREIGN KEY ("tutor_id")
   [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mCOMMIT /*application='TutorInsights'*/[0m
   [1m[35m (0.1ms)[0m  [1m[34mSELECT pg_advisory_unlock(5566294069690052160) /*application='TutorInsights'*/[0m
   [1m[36mActiveRecord::SchemaMigration Load (0.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='TutorInsights'*/[0m
+  [1m[35m (0.0ms)[0m  [1m[34mSELECT pg_try_advisory_lock(5566294069690052160) /*application='TutorInsights'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='TutorInsights'*/[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.2ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = 'environment' ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1 /*application='TutorInsights'*/[0m
+Migrating to CreateMaterializedViews (20251105071858)
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mBEGIN /*application='TutorInsights'*/[0m
+  [1m[35m (1.2ms)[0m  [1m[35mCREATE TABLE "materialized_views" ("id" bigserial primary key, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL) /*application='TutorInsights'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.1ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20251105071858') RETURNING "version" /*application='TutorInsights'*/[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mCOMMIT /*application='TutorInsights'*/[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT pg_advisory_unlock(5566294069690052160) /*application='TutorInsights'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='TutorInsights'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='TutorInsights'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='TutorInsights'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='TutorInsights'*/[0m
+  [1m[35m (0.0ms)[0m  [1m[34mSELECT pg_try_advisory_lock(5566294069690052160) /*application='TutorInsights'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='TutorInsights'*/[0m
+Reverting CreateMaterializedViews (20251105071858)
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mBEGIN /*application='TutorInsights'*/[0m
+  [1m[35m (0.8ms)[0m  [1m[35mDROP TABLE "materialized_views" /*application='TutorInsights'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Destroy (0.2ms)[0m  [1m[31mDELETE FROM "schema_migrations" WHERE "schema_migrations"."version" = '20251105071858' /*application='TutorInsights'*/[0m
+  [1m[36mTRANSACTION (0.6ms)[0m  [1m[35mCOMMIT /*application='TutorInsights'*/[0m
+  [1m[35m (0.0ms)[0m  [1m[34mSELECT pg_advisory_unlock(5566294069690052160) /*application='TutorInsights'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='TutorInsights'*/[0m
+  [1m[35m (0.0ms)[0m  [1m[34mSELECT pg_try_advisory_lock(5566294069690052160) /*application='TutorInsights'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='TutorInsights'*/[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.2ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = 'environment' ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1 /*application='TutorInsights'*/[0m
+Migrating to CreateMaterializedViews (20251105071858)
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mBEGIN /*application='TutorInsights'*/[0m
+  [1m[35m (2.4ms)[0m  [1m[35m      CREATE MATERIALIZED VIEW tutor_stats_7d AS
+      SELECT
+        tutor_id,
+        SUM(sessions_completed) AS sessions_completed_7d,
+        SUM(reschedules_tutor_initiated) AS reschedules_tutor_initiated_7d,
+        SUM(no_shows) AS no_shows_7d,
+        COALESCE(AVG(avg_lateness_min), 0) AS avg_lateness_min_7d
+      FROM tutor_daily_aggregates
+      WHERE date >= CURRENT_DATE - INTERVAL '7 days'
+      GROUP BY tutor_id;
+ /*application='TutorInsights'*/[0m
+  [1m[35m (0.4ms)[0m  [1m[35mCREATE UNIQUE INDEX "index_tutor_stats_7d_on_tutor_id" ON "tutor_stats_7d" ("tutor_id") /*application='TutorInsights'*/[0m
+  [1m[35m (1.2ms)[0m  [1m[35m      CREATE MATERIALIZED VIEW tutor_stats_14d AS
+      SELECT
+        tda.tutor_id,
+        SUM(tda.sessions_completed) AS sessions_completed_14d,
+        COUNT(DISTINCT tda.date) AS availability_14d,
+        COALESCE(
+          (SELECT COUNT(DISTINCT s.student_id)::decimal / NULLIF(COUNT(DISTINCT s.id), 0)
+           FROM sessions s
+           WHERE s.tutor_id = tda.tutor_id
+             AND s.status = 'completed'
+             AND s.actual_start_at >= CURRENT_DATE - INTERVAL '14 days'),
+          0
+        ) AS repeat_student_rate_14d
+      FROM tutor_daily_aggregates tda
+      WHERE tda.date >= CURRENT_DATE - INTERVAL '14 days'
+      GROUP BY tda.tutor_id;
+ /*application='TutorInsights'*/[0m
+  [1m[35m (0.3ms)[0m  [1m[35mCREATE UNIQUE INDEX "index_tutor_stats_14d_on_tutor_id" ON "tutor_stats_14d" ("tutor_id") /*application='TutorInsights'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.1ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20251105071858') RETURNING "version" /*application='TutorInsights'*/[0m
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mCOMMIT /*application='TutorInsights'*/[0m
+  [1m[35m (0.0ms)[0m  [1m[34mSELECT pg_advisory_unlock(5566294069690052160) /*application='TutorInsights'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='TutorInsights'*/[0m
+  [1m[35m (36.4ms)[0m  [1m[34mSELECT matviewname FROM pg_matviews WHERE matviewname IN ('tutor_stats_7d', 'tutor_stats_14d') /*application='TutorInsights'*/[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT pg_try_advisory_lock(5566294069690052160) /*application='TutorInsights'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='TutorInsights'*/[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.2ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = 'environment' ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1 /*application='TutorInsights'*/[0m
+Migrating to AddRefreshFunctionsForMaterializedViews (20251105072137)
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mBEGIN /*application='TutorInsights'*/[0m
+  [1m[35m (6.7ms)[0m  [1m[35m      CREATE OR REPLACE FUNCTION refresh_tutor_stats()
+      RETURNS void AS $$
+      BEGIN
+        REFRESH MATERIALIZED VIEW CONCURRENTLY tutor_stats_7d;
+        REFRESH MATERIALIZED VIEW CONCURRENTLY tutor_stats_14d;
+      END;
+      $$ LANGUAGE plpgsql;
+ /*application='TutorInsights'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.1ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20251105072137') RETURNING "version" /*application='TutorInsights'*/[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mCOMMIT /*application='TutorInsights'*/[0m
+  [1m[35m (0.0ms)[0m  [1m[34mSELECT pg_advisory_unlock(5566294069690052160) /*application='TutorInsights'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='TutorInsights'*/[0m

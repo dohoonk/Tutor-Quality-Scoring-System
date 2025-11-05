@@ -38,10 +38,10 @@
   - [x] tutor_daily_aggregates (tutor_id, date, sessions_completed, reschedules_tutor_initiated, no_shows, avg_lateness_min, etc.)
   - [x] tutor_churn_scores (tutor_id, tcrs_value, computed_at, components:jsonb) - optional table for caching
 
-- [ ] Create materialized views:
-  - [ ] tutor_stats_7d (rolling 7-day window for THS)
-  - [ ] tutor_stats_14d (rolling 14-day window for TCRS)
-- [ ] Add refresh functions for materialized views
+- [x] Create materialized views:
+  - [x] tutor_stats_7d (rolling 7-day window for THS)
+  - [x] tutor_stats_14d (rolling 14-day window for TCRS)
+- [x] Add refresh functions for materialized views
 
 ---
 
