@@ -10,6 +10,23 @@ import {
   BarChart
 } from './ui'
 
+// Hook to detect if screen is desktop size (md breakpoint: 768px+)
+const useIsDesktop = () => {
+  const [isDesktop, setIsDesktop] = useState(false)
+
+  useEffect(() => {
+    const checkIsDesktop = () => {
+      setIsDesktop(window.innerWidth >= 768) // md breakpoint
+    }
+
+    checkIsDesktop()
+    window.addEventListener('resize', checkIsDesktop)
+    return () => window.removeEventListener('resize', checkIsDesktop)
+  }, [])
+
+  return isDesktop
+}
+
 // Tooltip Component with improved accessibility
 const Tooltip = ({ text }) => {
   const [show, setShow] = useState(false)
@@ -40,6 +57,7 @@ const Tooltip = ({ text }) => {
 }
 
 const TutorDashboard = ({ tutorId }) => {
+  const isDesktop = useIsDesktop()
   const [fsqsLatest, setFsqsLatest] = useState(null)
   const [fsqsHistory, setFsqsHistory] = useState([])
   const [performanceSummary, setPerformanceSummary] = useState(null)
@@ -279,7 +297,7 @@ const TutorDashboard = ({ tutorId }) => {
                     label: item.student_name || `Session ${index + 1}`,
                     date: item.date ? formatDate(item.date) : null
                   }))}
-                  height={280}
+                  height={isDesktop ? 360 : 280}
                   showGrid={true}
                   showThresholds={true}
                   thresholds={[
