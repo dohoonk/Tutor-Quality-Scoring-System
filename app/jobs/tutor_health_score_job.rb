@@ -24,7 +24,7 @@ class TutorHealthScoreJob < ApplicationJob
                  .where(tutor_id: tutor_id)
                  .where('date >= ?', 30.days.ago.to_date)
                  .order(date: :desc)
-                 .take(7) # Take only the 7 most recent days (using take instead of limit to load records)
+                 .limit(7) # Take only the 7 most recent days
     
     return if aggregates.empty?
 
@@ -111,17 +111,22 @@ class TutorHealthScoreJob < ApplicationJob
         computed_at: Time.current
       )
     end
+  rescue StandardError => e
+    Rails.logger.error "THS: Failed for tutor #{tutor_id}: #{e.message}"
+    Rails.logger.error e.backtrace.first(3).join("\n")
+    raise
   end
 
   def calculate_weighted_lateness(aggregates)
-    # Give more weight to recent days (last 3 days = 60%, older 4 days = 40%)
-    recent_aggregates = aggregates.first(3)
-    older_aggregates = aggregates[3..-1] || []
+    # Convert to array and give more weight to recent days (last 3 days = 60%, older 4 days = 40%)
+    agg_array = aggregates.to_a
+    recent_aggregates = agg_array.first(3)
+    older_aggregates = agg_array[3..-1] || []
 
-    recent_lateness = recent_aggregates.sum(:avg_lateness_min)
+    recent_lateness = recent_aggregates.map(&:avg_lateness_min).sum
     recent_days = [recent_aggregates.count, 1].max
 
-    older_lateness = older_aggregates.sum(:avg_lateness_min)
+    older_lateness = older_aggregates.map(&:avg_lateness_min).sum
     older_days = [older_aggregates.count, 1].max
 
     # Weighted average: 60% recent, 40% older
