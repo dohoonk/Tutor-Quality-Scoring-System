@@ -1,16 +1,38 @@
 class SessionQualityScoreService
-  BASE_SCORE = 80
+  include TranscriptAnalysis
+
+  MAX_SCORE = 100
 
   def initialize(session)
     @session = session
   end
 
   def calculate
+    # Skip if transcript is missing (user requirement: skip session if no transcript)
+    return nil unless transcript_present?
+    return nil unless speaker_diarization_present?
+
+    # Operational penalties (from timing/metadata)
     lateness_penalty = calculate_lateness_penalty
     shortfall_penalty = calculate_shortfall_penalty
     tech_penalty = calculate_tech_penalty
 
-    raw_score = BASE_SCORE - lateness_penalty - shortfall_penalty - tech_penalty
+    # Transcript-based penalties (same as FSQS metrics)
+    confusion_penalty = detect_confusion_phrases
+    word_share_penalty = detect_word_share_imbalance
+    goal_setting_penalty = detect_missing_goal_setting
+    encouragement_penalty = detect_missing_encouragement
+    closing_summary_penalty = detect_missing_closing_summary
+    negative_phrasing_penalty = detect_negative_phrasing
+
+    # Calculate total penalties
+    operational_penalties = lateness_penalty + shortfall_penalty + tech_penalty
+    transcript_penalties = confusion_penalty + word_share_penalty + goal_setting_penalty + 
+                          encouragement_penalty + closing_summary_penalty + negative_phrasing_penalty
+    total_penalties = operational_penalties + transcript_penalties
+
+    # SQS: Start at 100 (perfect) and subtract penalties (higher is better)
+    raw_score = MAX_SCORE - total_penalties
     final_score = [[raw_score, 0].max, 100].min # Clamp between 0 and 100
 
     label = determine_label(final_score)
@@ -19,10 +41,17 @@ class SessionQualityScoreService
       score: final_score,
       label: label,
       components: {
-        base: BASE_SCORE,
+        # Operational components
         lateness_penalty: lateness_penalty,
         shortfall_penalty: shortfall_penalty,
-        tech_penalty: tech_penalty
+        tech_penalty: tech_penalty,
+        # Transcript components
+        confusion_phrases: confusion_penalty,
+        word_share_imbalance: word_share_penalty,
+        missing_goal_setting: goal_setting_penalty,
+        missing_encouragement: encouragement_penalty,
+        missing_closing_summary: closing_summary_penalty,
+        negative_phrasing: negative_phrasing_penalty
       }
     }
   end
