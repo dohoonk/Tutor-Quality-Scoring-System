@@ -6,7 +6,7 @@
 - [x] Add dotenv-rails for env mgmt
 
 - [x] Add Vite + React (`bundle add vite_rails && rails vite:install`)
-- [ ] Confirm React mounts to `/tutor/:id` and `/admin/:id`
+- [x] Confirm React mounts to `/tutor/:id` and `/admin/:id`
 
 - [ ] Add Sidekiq + Redis
 - [ ] Set `queue_adapter = :sidekiq`
