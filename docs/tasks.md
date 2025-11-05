@@ -242,13 +242,13 @@
 ---
 
 ## EPIC 9 — Demo Polish
-- [ ] Create narrative data profiles:
-  - [ ] Strong tutor (high SQS, low FSRS, stable THS/TCRS)
-  - [ ] Improving tutor (positive trend)
-  - [ ] Slipping tutor (declining metrics)
-  - [ ] Churn-risk tutor (high TCRS, low engagement)
-- [ ] Prepare demo walk-through steps
-- [ ] Document demo scenarios
+- [x] Create narrative data profiles:
+  - [x] Strong tutor (high SQS, low FSRS, stable THS/TCRS) - Sarah Excellence
+  - [x] Improving tutor (positive trend) - James Improving
+  - [x] Slipping tutor (declining metrics) - Maria Declining
+  - [x] Churn-risk tutor (high TCRS, low engagement) - Alex ChurnRisk
+- [x] Prepare demo walk-through steps (3 scenarios documented)
+- [x] Document demo scenarios (comprehensive DEMO_GUIDE.md created)
 
 ---
 
