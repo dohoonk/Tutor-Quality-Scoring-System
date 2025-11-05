@@ -253,25 +253,6 @@ const TutorDashboard = ({ tutorId }) => {
               </div>
             </div>
 
-            {/* What Went Well */}
-            {fsqsLatest.feedback?.what_went_well && (
-              <div className="mb-4 p-4 bg-green-50 rounded-lg border-l-4 border-green-500">
-                <h3 className="text-lg font-semibold text-green-700 mb-2 flex items-center gap-2">
-                  <span>✓</span> What Went Well
-                </h3>
-                <p className="text-gray-700">{fsqsLatest.feedback.what_went_well}</p>
-              </div>
-            )}
-
-            {/* One Improvement Idea */}
-            {fsqsLatest.feedback?.improvement_idea && (
-              <div className="p-4 bg-blue-50 rounded-lg border-l-4 border-blue-500">
-                <h3 className="text-lg font-semibold text-blue-700 mb-2 flex items-center gap-2">
-                  <span>💡</span> One Improvement Idea
-                </h3>
-                <p className="text-gray-700">{fsqsLatest.feedback.improvement_idea}</p>
-              </div>
-            )}
           </div>
 
           {/* FSQS Trend Visualization */}
@@ -289,7 +270,7 @@ const TutorDashboard = ({ tutorId }) => {
                 </AccessibleButton>
               </div>
               
-              {/* Desktop: Side-by-side layout (Chart left, Info right) */}
+              {/* Desktop: Side-by-side layout (Chart left, Feedback/Info right) */}
               <div className="md:grid md:grid-cols-2 md:gap-6">
                 {/* Left: Bar Chart - Last 5 First Sessions */}
                 <div className="mb-4 md:mb-0">
@@ -321,9 +302,29 @@ const TutorDashboard = ({ tutorId }) => {
                   </div>
                 </div>
 
-                {/* Right: Educational Content (Desktop only) */}
+                {/* Right: Feedback & Educational Content (Desktop only) */}
                 <div className="hidden md:block">
                   <div className="flex flex-col space-y-4" style={{ paddingTop: isDesktop ? '30px' : '0' }}>
+                    {/* What Went Well - Feedback */}
+                    {fsqsLatest.feedback?.what_went_well && (
+                      <div className="bg-green-50 rounded-lg p-4 border-l-4 border-green-500">
+                        <h4 className="text-lg font-semibold text-green-700 mb-2 flex items-center gap-2">
+                          <span>✓</span> What Went Well
+                        </h4>
+                        <p className="text-gray-700 text-sm leading-relaxed">{fsqsLatest.feedback.what_went_well}</p>
+                      </div>
+                    )}
+
+                    {/* One Improvement Idea - Feedback */}
+                    {fsqsLatest.feedback?.improvement_idea && (
+                      <div className="bg-blue-50 rounded-lg p-4 border-l-4 border-blue-500">
+                        <h4 className="text-lg font-semibold text-blue-700 mb-2 flex items-center gap-2">
+                          <span>💡</span> One Improvement Idea
+                        </h4>
+                        <p className="text-gray-700 text-sm leading-relaxed">{fsqsLatest.feedback.improvement_idea}</p>
+                      </div>
+                    )}
+
                     {/* Why FSQS Matters */}
                     <div className="bg-blue-50 rounded-lg p-4 border-l-4 border-blue-500">
                       <h4 className="text-lg font-semibold text-blue-900 mb-2 flex items-center gap-2">
@@ -369,6 +370,29 @@ const TutorDashboard = ({ tutorId }) => {
               </div>
             </div>
           )}
+
+          {/* Mobile: Feedback sections (shown below chart on mobile) */}
+          <div className="md:hidden space-y-4 mb-4">
+            {/* What Went Well */}
+            {fsqsLatest.feedback?.what_went_well && (
+              <div className="p-4 bg-green-50 rounded-lg border-l-4 border-green-500">
+                <h3 className="text-lg font-semibold text-green-700 mb-2 flex items-center gap-2">
+                  <span>✓</span> What Went Well
+                </h3>
+                <p className="text-gray-700">{fsqsLatest.feedback.what_went_well}</p>
+              </div>
+            )}
+
+            {/* One Improvement Idea */}
+            {fsqsLatest.feedback?.improvement_idea && (
+              <div className="p-4 bg-blue-50 rounded-lg border-l-4 border-blue-500">
+                <h3 className="text-lg font-semibold text-blue-700 mb-2 flex items-center gap-2">
+                  <span>💡</span> One Improvement Idea
+                </h3>
+                <p className="text-gray-700">{fsqsLatest.feedback.improvement_idea}</p>
+              </div>
+            )}
+          </div>
 
           {/* Past First Sessions Side Panel */}
           {showPastSessions && (
