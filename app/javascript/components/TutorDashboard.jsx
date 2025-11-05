@@ -7,7 +7,7 @@ import {
   ErrorState,
   AccessibleButton,
   MobileTable,
-  LineChart
+  BarChart
 } from './ui'
 
 // Tooltip Component with improved accessibility
@@ -271,10 +271,10 @@ const TutorDashboard = ({ tutorId }) => {
                 </AccessibleButton>
               </div>
               
-              {/* Line Chart */}
+              {/* Bar Chart - Last 5 First Sessions */}
               <div className="mb-4">
-                <LineChart
-                  data={fsqsHistory.map((item, index) => ({
+                <BarChart
+                  data={fsqsHistory.slice(0, 5).map((item, index) => ({
                     value: item.score || 0,
                     label: item.student_name || `Session ${index + 1}`,
                     date: item.date ? formatDate(item.date) : null
@@ -286,8 +286,6 @@ const TutorDashboard = ({ tutorId }) => {
                     { value: 50, color: 'red' },
                     { value: 70, color: 'yellow' }
                   ]}
-                  color={improvement && improvement > 0 ? '#10B981' : '#DC2626'}
-                  showPoints={true}
                   showTooltip={true}
                   formatValue={(v) => Math.round(v)}
                   maxValue={100}

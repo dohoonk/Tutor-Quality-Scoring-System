@@ -16367,3 +16367,772 @@ Completed 200 OK in 33ms (Views: 0.1ms | ActiveRecord: 0.6ms (2 queries, 0 cache
 Completed 200 OK in 59ms (Views: 0.1ms | ActiveRecord: 7.4ms (57 queries, 0 cached) | GC: 2.4ms)
 
 
+Started GET "/tutor/1" for ::1 at 2025-11-05 12:11:06 -0600
+Processing by TutorsController#show as HTML
+  Parameters: {"id"=>"1"}
+Started GET "/admin/1" for ::1 at 2025-11-05 12:11:06 -0600
+  Rendering layout layouts/application.html.erb
+  Rendering tutors/show.html.erb within layouts/application
+  Rendered tutors/show.html.erb within layouts/application (Duration: 0.1ms | GC: 0.0ms)
+Processing by AdminsController#show as HTML
+  Parameters: {"id"=>"1"}
+  Rendered layout layouts/application.html.erb (Duration: 1.5ms | GC: 0.0ms)
+Completed 200 OK in 35ms (Views: 1.7ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 1.0ms)
+
+
+  Rendering layout layouts/application.html.erb
+  Rendering admins/show.html.erb within layouts/application
+  Rendered admins/show.html.erb within layouts/application (Duration: 0.4ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 1.2ms | GC: 0.0ms)
+Completed 200 OK in 34ms (Views: 1.4ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 1.2ms)
+
+
+Started GET "/.well-known/appspecific/com.chrome.devtools.json" for ::1 at 2025-11-05 12:11:06 -0600
+  
+ActionController::RoutingError (No route matches [GET] "/.well-known/appspecific/com.chrome.devtools.json"):
+  
+Started GET "/api/tutor/1/performance_summary" for ::1 at 2025-11-05 12:11:06 -0600
+Started GET "/api/tutor/1/session_list" for ::1 at 2025-11-05 12:11:06 -0600
+Processing by Api::Tutor::TutorsController#session_list as */*
+  Parameters: {"id"=>"1"}
+Processing by Api::Tutor::TutorsController#performance_summary as */*
+  Parameters: {"id"=>"1"}
+Started GET "/api/tutor/1/fsqs_history" for ::1 at 2025-11-05 12:11:06 -0600
+  [1m[36mTutor Load (0.7ms)[0m  [1m[34mSELECT "tutors".* FROM "tutors" WHERE "tutors"."id" = 1 LIMIT 1 /*action='session_list',application='TutorInsights',controller='tutors'*/[0m
+  ↳ app/controllers/api/tutor/tutors_controller.rb:57:in `session_list'
+  [1m[36mTutor Load (1.0ms)[0m  [1m[34mSELECT "tutors".* FROM "tutors" WHERE "tutors"."id" = 1 LIMIT 1 /*action='performance_summary',application='TutorInsights',controller='tutors'*/[0m
+  ↳ app/controllers/api/tutor/tutors_controller.rb:46:in `performance_summary'
+Completed 200 OK in 58ms (Views: 0.1ms | ActiveRecord: 1.0ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+  [1m[36mSession Load (1.5ms)[0m  [1m[34mSELECT "sessions".* FROM "sessions" WHERE "sessions"."tutor_id" = 1 AND "sessions"."status" = 'completed' ORDER BY "sessions"."scheduled_start_at" DESC LIMIT 20 /*action='session_list',application='TutorInsights',controller='tutors'*/[0m
+  ↳ app/controllers/api/tutor/tutors_controller.rb:65:in `map'
+  [1m[36mStudent Load (0.4ms)[0m  [1m[34mSELECT "students".* FROM "students" WHERE "students"."id" IN (4, 21, 1, 17, 16, 22, 23, 24, 19, 25, 5, 3, 6, 8, 18, 14) /*action='session_list',application='TutorInsights',controller='tutors'*/[0m
+  ↳ app/controllers/api/tutor/tutors_controller.rb:65:in `map'
+  [1m[36mScore Load (0.6ms)[0m  [1m[34mSELECT "scores".* FROM "scores" WHERE "scores"."session_id" IN (149, 299, 298, 7, 154, 300, 301, 302, 171, 303, 176, 192, 57, 69, 237, 245, 101, 105, 272, 121) /*action='session_list',application='TutorInsights',controller='tutors'*/[0m
+  ↳ app/controllers/api/tutor/tutors_controller.rb:65:in `map'
+Completed 200 OK in 63ms (Views: 0.2ms | ActiveRecord: 3.2ms (4 queries, 0 cached) | GC: 0.5ms)
+
+
+Processing by Api::Tutor::TutorsController#fsqs_history as */*
+  Parameters: {"id"=>"1"}
+Started GET "/api/tutor/1/fsqs_latest" for ::1 at 2025-11-05 12:11:06 -0600
+  [1m[36mTutor Load (0.4ms)[0m  [1m[34mSELECT "tutors".* FROM "tutors" WHERE "tutors"."id" = 1 LIMIT 1 /*action='fsqs_history',application='TutorInsights',controller='tutors'*/[0m
+  ↳ app/controllers/api/tutor/tutors_controller.rb:23:in `fsqs_history'
+  [1m[36mScore Load (0.4ms)[0m  [1m[34mSELECT "scores".* FROM "scores" WHERE "scores"."tutor_id" = 1 AND "scores"."score_type" = 'fsqs' ORDER BY "scores"."computed_at" DESC LIMIT 5 /*action='fsqs_history',application='TutorInsights',controller='tutors'*/[0m
+  ↳ app/controllers/api/tutor/tutors_controller.rb:31:in `map'
+  [1m[36mSession Load (0.3ms)[0m  [1m[34mSELECT "sessions".* FROM "sessions" WHERE "sessions"."id" IN (57, 303, 302, 301) /*action='fsqs_history',application='TutorInsights',controller='tutors'*/[0m
+  ↳ app/controllers/api/tutor/tutors_controller.rb:31:in `map'
+  [1m[36mStudent Load (0.3ms)[0m  [1m[34mSELECT "students".* FROM "students" WHERE "students"."id" = 6 LIMIT 1 /*action='fsqs_history',application='TutorInsights',controller='tutors'*/[0m
+  ↳ app/controllers/api/tutor/tutors_controller.rb:35:in `block in fsqs_history'
+  [1m[36mStudent Load (0.3ms)[0m  [1m[34mSELECT "students".* FROM "students" WHERE "students"."id" = 25 LIMIT 1 /*action='fsqs_history',application='TutorInsights',controller='tutors'*/[0m
+  ↳ app/controllers/api/tutor/tutors_controller.rb:35:in `block in fsqs_history'
+  [1m[36mStudent Load (0.2ms)[0m  [1m[34mSELECT "students".* FROM "students" WHERE "students"."id" = 24 LIMIT 1 /*action='fsqs_history',application='TutorInsights',controller='tutors'*/[0m
+  ↳ app/controllers/api/tutor/tutors_controller.rb:35:in `block in fsqs_history'
+  [1m[36mStudent Load (0.4ms)[0m  [1m[34mSELECT "students".* FROM "students" WHERE "students"."id" = 23 LIMIT 1 /*action='fsqs_history',application='TutorInsights',controller='tutors'*/[0m
+  ↳ app/controllers/api/tutor/tutors_controller.rb:35:in `block in fsqs_history'
+Completed 200 OK in 56ms (Views: 0.1ms | ActiveRecord: 2.3ms (7 queries, 0 cached) | GC: 1.1ms)
+
+
+Processing by Api::Tutor::TutorsController#fsqs_latest as */*
+  Parameters: {"id"=>"1"}
+Started GET "/api/admin/tutors/risk_list" for ::1 at 2025-11-05 12:11:06 -0600
+Processing by Api::Admin::Tutors::TutorsController#risk_list as */*
+  [1m[36mTutor Load (0.4ms)[0m  [1m[34mSELECT "tutors".* FROM "tutors" WHERE "tutors"."id" = 1 LIMIT 1 /*action='fsqs_latest',application='TutorInsights',controller='tutors'*/[0m
+  ↳ app/controllers/api/tutor/tutors_controller.rb:5:in `fsqs_latest'
+  [1m[36mScore Load (0.3ms)[0m  [1m[34mSELECT "scores".* FROM "scores" WHERE "scores"."tutor_id" = 1 AND "scores"."score_type" = 'fsqs' ORDER BY "scores"."computed_at" DESC LIMIT 1 /*action='fsqs_latest',application='TutorInsights',controller='tutors'*/[0m
+  ↳ app/controllers/api/tutor/tutors_controller.rb:10:in `fsqs_latest'
+Completed 200 OK in 35ms (Views: 0.1ms | ActiveRecord: 0.7ms (2 queries, 0 cached) | GC: 0.0ms)
+
+
+  [1m[36mTutor Load (0.2ms)[0m  [1m[34mSELECT "tutors".* FROM "tutors" /*action='risk_list',application='TutorInsights',controller='tutors'*/[0m
+  ↳ app/controllers/api/admin/tutors/tutors_controller.rb:8:in `map'
+  [1m[36mScore Load (0.2ms)[0m  [1m[34mSELECT "scores".* FROM "scores" WHERE "scores"."tutor_id" = 1 AND "scores"."score_type" = 'fsqs' ORDER BY "scores"."computed_at" DESC LIMIT 1 /*action='risk_list',application='TutorInsights',controller='tutors'*/[0m
+  ↳ app/controllers/api/admin/tutors/tutors_controller.rb:10:in `block in risk_list'
+  [1m[36mScore Load (0.2ms)[0m  [1m[34mSELECT "scores".* FROM "scores" WHERE "scores"."tutor_id" = 1 AND "scores"."score_type" = 'ths' ORDER BY "scores"."computed_at" DESC LIMIT 1 /*action='risk_list',application='TutorInsights',controller='tutors'*/[0m
+  ↳ app/controllers/api/admin/tutors/tutors_controller.rb:11:in `block in risk_list'
+  [1m[36mScore Load (0.1ms)[0m  [1m[34mSELECT "scores".* FROM "scores" WHERE "scores"."tutor_id" = 1 AND "scores"."score_type" = 'tcrs' ORDER BY "scores"."computed_at" DESC LIMIT 1 /*action='risk_list',application='TutorInsights',controller='tutors'*/[0m
+  ↳ app/controllers/api/admin/tutors/tutors_controller.rb:12:in `block in risk_list'
+  [1m[36mAlert Count (0.2ms)[0m  [1m[34mSELECT COUNT(*) FROM "alerts" WHERE "alerts"."tutor_id" = 1 AND "alerts"."status" = 'open' /*action='risk_list',application='TutorInsights',controller='tutors'*/[0m
+  ↳ app/controllers/api/admin/tutors/tutors_controller.rb:15:in `block in risk_list'
+  [1m[36mScore Load (0.2ms)[0m  [1m[34mSELECT "scores".* FROM "scores" WHERE "scores"."tutor_id" = 2 AND "scores"."score_type" = 'fsqs' ORDER BY "scores"."computed_at" DESC LIMIT 1 /*action='risk_list',application='TutorInsights',controller='tutors'*/[0m
+  ↳ app/controllers/api/admin/tutors/tutors_controller.rb:10:in `block in risk_list'
+  [1m[36mScore Load (0.1ms)[0m  [1m[34mSELECT "scores".* FROM "scores" WHERE "scores"."tutor_id" = 2 AND "scores"."score_type" = 'ths' ORDER BY "scores"."computed_at" DESC LIMIT 1 /*action='risk_list',application='TutorInsights',controller='tutors'*/[0m
+  ↳ app/controllers/api/admin/tutors/tutors_controller.rb:11:in `block in risk_list'
+  [1m[36mScore Load (0.1ms)[0m  [1m[34mSELECT "scores".* FROM "scores" WHERE "scores"."tutor_id" = 2 AND "scores"."score_type" = 'tcrs' ORDER BY "scores"."computed_at" DESC LIMIT 1 /*action='risk_list',application='TutorInsights',controller='tutors'*/[0m
+  ↳ app/controllers/api/admin/tutors/tutors_controller.rb:12:in `block in risk_list'
+  [1m[36mAlert Count (0.2ms)[0m  [1m[34mSELECT COUNT(*) FROM "alerts" WHERE "alerts"."tutor_id" = 2 AND "alerts"."status" = 'open' /*action='risk_list',application='TutorInsights',controller='tutors'*/[0m
+  ↳ app/controllers/api/admin/tutors/tutors_controller.rb:15:in `block in risk_list'
+  [1m[36mScore Load (0.2ms)[0m  [1m[34mSELECT "scores".* FROM "scores" WHERE "scores"."tutor_id" = 3 AND "scores"."score_type" = 'fsqs' ORDER BY "scores"."computed_at" DESC LIMIT 1 /*action='risk_list',application='TutorInsights',controller='tutors'*/[0m
+  ↳ app/controllers/api/admin/tutors/tutors_controller.rb:10:in `block in risk_list'
+  [1m[36mScore Load (0.2ms)[0m  [1m[34mSELECT "scores".* FROM "scores" WHERE "scores"."tutor_id" = 3 AND "scores"."score_type" = 'ths' ORDER BY "scores"."computed_at" DESC LIMIT 1 /*action='risk_list',application='TutorInsights',controller='tutors'*/[0m
+  ↳ app/controllers/api/admin/tutors/tutors_controller.rb:11:in `block in risk_list'
+  [1m[36mScore Load (0.2ms)[0m  [1m[34mSELECT "scores".* FROM "scores" WHERE "scores"."tutor_id" = 3 AND "scores"."score_type" = 'tcrs' ORDER BY "scores"."computed_at" DESC LIMIT 1 /*action='risk_list',application='TutorInsights',controller='tutors'*/[0m
+  ↳ app/controllers/api/admin/tutors/tutors_controller.rb:12:in `block in risk_list'
+  [1m[36mAlert Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "alerts" WHERE "alerts"."tutor_id" = 3 AND "alerts"."status" = 'open' /*action='risk_list',application='TutorInsights',controller='tutors'*/[0m
+  ↳ app/controllers/api/admin/tutors/tutors_controller.rb:15:in `block in risk_list'
+  [1m[36mScore Load (0.2ms)[0m  [1m[34mSELECT "scores".* FROM "scores" WHERE "scores"."tutor_id" = 4 AND "scores"."score_type" = 'fsqs' ORDER BY "scores"."computed_at" DESC LIMIT 1 /*action='risk_list',application='TutorInsights',controller='tutors'*/[0m
+  ↳ app/controllers/api/admin/tutors/tutors_controller.rb:10:in `block in risk_list'
+  [1m[36mScore Load (0.1ms)[0m  [1m[34mSELECT "scores".* FROM "scores" WHERE "scores"."tutor_id" = 4 AND "scores"."score_type" = 'ths' ORDER BY "scores"."computed_at" DESC LIMIT 1 /*action='risk_list',application='TutorInsights',controller='tutors'*/[0m
+  ↳ app/controllers/api/admin/tutors/tutors_controller.rb:11:in `block in risk_list'
+  [1m[36mScore Load (0.2ms)[0m  [1m[34mSELECT "scores".* FROM "scores" WHERE "scores"."tutor_id" = 4 AND "scores"."score_type" = 'tcrs' ORDER BY "scores"."computed_at" DESC LIMIT 1 /*action='risk_list',application='TutorInsights',controller='tutors'*/[0m
+  ↳ app/controllers/api/admin/tutors/tutors_controller.rb:12:in `block in risk_list'
+  [1m[36mAlert Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "alerts" WHERE "alerts"."tutor_id" = 4 AND "alerts"."status" = 'open' /*action='risk_list',application='TutorInsights',controller='tutors'*/[0m
+  ↳ app/controllers/api/admin/tutors/tutors_controller.rb:15:in `block in risk_list'
+  [1m[36mScore Load (0.2ms)[0m  [1m[34mSELECT "scores".* FROM "scores" WHERE "scores"."tutor_id" = 5 AND "scores"."score_type" = 'fsqs' ORDER BY "scores"."computed_at" DESC LIMIT 1 /*action='risk_list',application='TutorInsights',controller='tutors'*/[0m
+  ↳ app/controllers/api/admin/tutors/tutors_controller.rb:10:in `block in risk_list'
+  [1m[36mScore Load (0.2ms)[0m  [1m[34mSELECT "scores".* FROM "scores" WHERE "scores"."tutor_id" = 5 AND "scores"."score_type" = 'ths' ORDER BY "scores"."computed_at" DESC LIMIT 1 /*action='risk_list',application='TutorInsights',controller='tutors'*/[0m
+  ↳ app/controllers/api/admin/tutors/tutors_controller.rb:11:in `block in risk_list'
+  [1m[36mScore Load (0.2ms)[0m  [1m[34mSELECT "scores".* FROM "scores" WHERE "scores"."tutor_id" = 5 AND "scores"."score_type" = 'tcrs' ORDER BY "scores"."computed_at" DESC LIMIT 1 /*action='risk_list',application='TutorInsights',controller='tutors'*/[0m
+  ↳ app/controllers/api/admin/tutors/tutors_controller.rb:12:in `block in risk_list'
+  [1m[36mAlert Count (0.2ms)[0m  [1m[34mSELECT COUNT(*) FROM "alerts" WHERE "alerts"."tutor_id" = 5 AND "alerts"."status" = 'open' /*action='risk_list',application='TutorInsights',controller='tutors'*/[0m
+  ↳ app/controllers/api/admin/tutors/tutors_controller.rb:15:in `block in risk_list'
+  [1m[36mScore Load (0.1ms)[0m  [1m[34mSELECT "scores".* FROM "scores" WHERE "scores"."tutor_id" = 6 AND "scores"."score_type" = 'fsqs' ORDER BY "scores"."computed_at" DESC LIMIT 1 /*action='risk_list',application='TutorInsights',controller='tutors'*/[0m
+  ↳ app/controllers/api/admin/tutors/tutors_controller.rb:10:in `block in risk_list'
+  [1m[36mScore Load (0.1ms)[0m  [1m[34mSELECT "scores".* FROM "scores" WHERE "scores"."tutor_id" = 6 AND "scores"."score_type" = 'ths' ORDER BY "scores"."computed_at" DESC LIMIT 1 /*action='risk_list',application='TutorInsights',controller='tutors'*/[0m
+  ↳ app/controllers/api/admin/tutors/tutors_controller.rb:11:in `block in risk_list'
+  [1m[36mScore Load (0.1ms)[0m  [1m[34mSELECT "scores".* FROM "scores" WHERE "scores"."tutor_id" = 6 AND "scores"."score_type" = 'tcrs' ORDER BY "scores"."computed_at" DESC LIMIT 1 /*action='risk_list',application='TutorInsights',controller='tutors'*/[0m
+  ↳ app/controllers/api/admin/tutors/tutors_controller.rb:12:in `block in risk_list'
+  [1m[36mAlert Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "alerts" WHERE "alerts"."tutor_id" = 6 AND "alerts"."status" = 'open' /*action='risk_list',application='TutorInsights',controller='tutors'*/[0m
+  ↳ app/controllers/api/admin/tutors/tutors_controller.rb:15:in `block in risk_list'
+  [1m[36mScore Load (0.2ms)[0m  [1m[34mSELECT "scores".* FROM "scores" WHERE "scores"."tutor_id" = 7 AND "scores"."score_type" = 'fsqs' ORDER BY "scores"."computed_at" DESC LIMIT 1 /*action='risk_list',application='TutorInsights',controller='tutors'*/[0m
+  ↳ app/controllers/api/admin/tutors/tutors_controller.rb:10:in `block in risk_list'
+  [1m[36mScore Load (0.2ms)[0m  [1m[34mSELECT "scores".* FROM "scores" WHERE "scores"."tutor_id" = 7 AND "scores"."score_type" = 'ths' ORDER BY "scores"."computed_at" DESC LIMIT 1 /*action='risk_list',application='TutorInsights',controller='tutors'*/[0m
+  ↳ app/controllers/api/admin/tutors/tutors_controller.rb:11:in `block in risk_list'
+  [1m[36mScore Load (0.2ms)[0m  [1m[34mSELECT "scores".* FROM "scores" WHERE "scores"."tutor_id" = 7 AND "scores"."score_type" = 'tcrs' ORDER BY "scores"."computed_at" DESC LIMIT 1 /*action='risk_list',application='TutorInsights',controller='tutors'*/[0m
+  ↳ app/controllers/api/admin/tutors/tutors_controller.rb:12:in `block in risk_list'
+  [1m[36mAlert Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "alerts" WHERE "alerts"."tutor_id" = 7 AND "alerts"."status" = 'open' /*action='risk_list',application='TutorInsights',controller='tutors'*/[0m
+  ↳ app/controllers/api/admin/tutors/tutors_controller.rb:15:in `block in risk_list'
+  [1m[36mScore Load (0.2ms)[0m  [1m[34mSELECT "scores".* FROM "scores" WHERE "scores"."tutor_id" = 8 AND "scores"."score_type" = 'fsqs' ORDER BY "scores"."computed_at" DESC LIMIT 1 /*action='risk_list',application='TutorInsights',controller='tutors'*/[0m
+  ↳ app/controllers/api/admin/tutors/tutors_controller.rb:10:in `block in risk_list'
+  [1m[36mScore Load (0.1ms)[0m  [1m[34mSELECT "scores".* FROM "scores" WHERE "scores"."tutor_id" = 8 AND "scores"."score_type" = 'ths' ORDER BY "scores"."computed_at" DESC LIMIT 1 /*action='risk_list',application='TutorInsights',controller='tutors'*/[0m
+  ↳ app/controllers/api/admin/tutors/tutors_controller.rb:11:in `block in risk_list'
+  [1m[36mScore Load (0.2ms)[0m  [1m[34mSELECT "scores".* FROM "scores" WHERE "scores"."tutor_id" = 8 AND "scores"."score_type" = 'tcrs' ORDER BY "scores"."computed_at" DESC LIMIT 1 /*action='risk_list',application='TutorInsights',controller='tutors'*/[0m
+  ↳ app/controllers/api/admin/tutors/tutors_controller.rb:12:in `block in risk_list'
+  [1m[36mAlert Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "alerts" WHERE "alerts"."tutor_id" = 8 AND "alerts"."status" = 'open' /*action='risk_list',application='TutorInsights',controller='tutors'*/[0m
+  ↳ app/controllers/api/admin/tutors/tutors_controller.rb:15:in `block in risk_list'
+  [1m[36mScore Load (0.2ms)[0m  [1m[34mSELECT "scores".* FROM "scores" WHERE "scores"."tutor_id" = 9 AND "scores"."score_type" = 'fsqs' ORDER BY "scores"."computed_at" DESC LIMIT 1 /*action='risk_list',application='TutorInsights',controller='tutors'*/[0m
+  ↳ app/controllers/api/admin/tutors/tutors_controller.rb:10:in `block in risk_list'
+  [1m[36mScore Load (0.2ms)[0m  [1m[34mSELECT "scores".* FROM "scores" WHERE "scores"."tutor_id" = 9 AND "scores"."score_type" = 'ths' ORDER BY "scores"."computed_at" DESC LIMIT 1 /*action='risk_list',application='TutorInsights',controller='tutors'*/[0m
+  ↳ app/controllers/api/admin/tutors/tutors_controller.rb:11:in `block in risk_list'
+  [1m[36mScore Load (0.1ms)[0m  [1m[34mSELECT "scores".* FROM "scores" WHERE "scores"."tutor_id" = 9 AND "scores"."score_type" = 'tcrs' ORDER BY "scores"."computed_at" DESC LIMIT 1 /*action='risk_list',application='TutorInsights',controller='tutors'*/[0m
+  ↳ app/controllers/api/admin/tutors/tutors_controller.rb:12:in `block in risk_list'
+  [1m[36mAlert Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "alerts" WHERE "alerts"."tutor_id" = 9 AND "alerts"."status" = 'open' /*action='risk_list',application='TutorInsights',controller='tutors'*/[0m
+  ↳ app/controllers/api/admin/tutors/tutors_controller.rb:15:in `block in risk_list'
+  [1m[36mScore Load (0.1ms)[0m  [1m[34mSELECT "scores".* FROM "scores" WHERE "scores"."tutor_id" = 10 AND "scores"."score_type" = 'fsqs' ORDER BY "scores"."computed_at" DESC LIMIT 1 /*action='risk_list',application='TutorInsights',controller='tutors'*/[0m
+  ↳ app/controllers/api/admin/tutors/tutors_controller.rb:10:in `block in risk_list'
+  [1m[36mScore Load (0.1ms)[0m  [1m[34mSELECT "scores".* FROM "scores" WHERE "scores"."tutor_id" = 10 AND "scores"."score_type" = 'ths' ORDER BY "scores"."computed_at" DESC LIMIT 1 /*action='risk_list',application='TutorInsights',controller='tutors'*/[0m
+  ↳ app/controllers/api/admin/tutors/tutors_controller.rb:11:in `block in risk_list'
+  [1m[36mScore Load (0.2ms)[0m  [1m[34mSELECT "scores".* FROM "scores" WHERE "scores"."tutor_id" = 10 AND "scores"."score_type" = 'tcrs' ORDER BY "scores"."computed_at" DESC LIMIT 1 /*action='risk_list',application='TutorInsights',controller='tutors'*/[0m
+  ↳ app/controllers/api/admin/tutors/tutors_controller.rb:12:in `block in risk_list'
+  [1m[36mAlert Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "alerts" WHERE "alerts"."tutor_id" = 10 AND "alerts"."status" = 'open' /*action='risk_list',application='TutorInsights',controller='tutors'*/[0m
+  ↳ app/controllers/api/admin/tutors/tutors_controller.rb:15:in `block in risk_list'
+  [1m[36mScore Load (0.2ms)[0m  [1m[34mSELECT "scores".* FROM "scores" WHERE "scores"."tutor_id" = 11 AND "scores"."score_type" = 'fsqs' ORDER BY "scores"."computed_at" DESC LIMIT 1 /*action='risk_list',application='TutorInsights',controller='tutors'*/[0m
+  ↳ app/controllers/api/admin/tutors/tutors_controller.rb:10:in `block in risk_list'
+  [1m[36mScore Load (0.2ms)[0m  [1m[34mSELECT "scores".* FROM "scores" WHERE "scores"."tutor_id" = 11 AND "scores"."score_type" = 'ths' ORDER BY "scores"."computed_at" DESC LIMIT 1 /*action='risk_list',application='TutorInsights',controller='tutors'*/[0m
+  ↳ app/controllers/api/admin/tutors/tutors_controller.rb:11:in `block in risk_list'
+  [1m[36mScore Load (0.2ms)[0m  [1m[34mSELECT "scores".* FROM "scores" WHERE "scores"."tutor_id" = 11 AND "scores"."score_type" = 'tcrs' ORDER BY "scores"."computed_at" DESC LIMIT 1 /*action='risk_list',application='TutorInsights',controller='tutors'*/[0m
+  ↳ app/controllers/api/admin/tutors/tutors_controller.rb:12:in `block in risk_list'
+  [1m[36mAlert Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "alerts" WHERE "alerts"."tutor_id" = 11 AND "alerts"."status" = 'open' /*action='risk_list',application='TutorInsights',controller='tutors'*/[0m
+  ↳ app/controllers/api/admin/tutors/tutors_controller.rb:15:in `block in risk_list'
+  [1m[36mScore Load (0.2ms)[0m  [1m[34mSELECT "scores".* FROM "scores" WHERE "scores"."tutor_id" = 12 AND "scores"."score_type" = 'fsqs' ORDER BY "scores"."computed_at" DESC LIMIT 1 /*action='risk_list',application='TutorInsights',controller='tutors'*/[0m
+  ↳ app/controllers/api/admin/tutors/tutors_controller.rb:10:in `block in risk_list'
+  [1m[36mScore Load (0.2ms)[0m  [1m[34mSELECT "scores".* FROM "scores" WHERE "scores"."tutor_id" = 12 AND "scores"."score_type" = 'ths' ORDER BY "scores"."computed_at" DESC LIMIT 1 /*action='risk_list',application='TutorInsights',controller='tutors'*/[0m
+  ↳ app/controllers/api/admin/tutors/tutors_controller.rb:11:in `block in risk_list'
+  [1m[36mScore Load (0.2ms)[0m  [1m[34mSELECT "scores".* FROM "scores" WHERE "scores"."tutor_id" = 12 AND "scores"."score_type" = 'tcrs' ORDER BY "scores"."computed_at" DESC LIMIT 1 /*action='risk_list',application='TutorInsights',controller='tutors'*/[0m
+  ↳ app/controllers/api/admin/tutors/tutors_controller.rb:12:in `block in risk_list'
+  [1m[36mAlert Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "alerts" WHERE "alerts"."tutor_id" = 12 AND "alerts"."status" = 'open' /*action='risk_list',application='TutorInsights',controller='tutors'*/[0m
+  ↳ app/controllers/api/admin/tutors/tutors_controller.rb:15:in `block in risk_list'
+  [1m[36mScore Load (0.2ms)[0m  [1m[34mSELECT "scores".* FROM "scores" WHERE "scores"."tutor_id" = 13 AND "scores"."score_type" = 'fsqs' ORDER BY "scores"."computed_at" DESC LIMIT 1 /*action='risk_list',application='TutorInsights',controller='tutors'*/[0m
+  ↳ app/controllers/api/admin/tutors/tutors_controller.rb:10:in `block in risk_list'
+  [1m[36mScore Load (0.2ms)[0m  [1m[34mSELECT "scores".* FROM "scores" WHERE "scores"."tutor_id" = 13 AND "scores"."score_type" = 'ths' ORDER BY "scores"."computed_at" DESC LIMIT 1 /*action='risk_list',application='TutorInsights',controller='tutors'*/[0m
+  ↳ app/controllers/api/admin/tutors/tutors_controller.rb:11:in `block in risk_list'
+  [1m[36mScore Load (0.2ms)[0m  [1m[34mSELECT "scores".* FROM "scores" WHERE "scores"."tutor_id" = 13 AND "scores"."score_type" = 'tcrs' ORDER BY "scores"."computed_at" DESC LIMIT 1 /*action='risk_list',application='TutorInsights',controller='tutors'*/[0m
+  ↳ app/controllers/api/admin/tutors/tutors_controller.rb:12:in `block in risk_list'
+  [1m[36mAlert Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "alerts" WHERE "alerts"."tutor_id" = 13 AND "alerts"."status" = 'open' /*action='risk_list',application='TutorInsights',controller='tutors'*/[0m
+  ↳ app/controllers/api/admin/tutors/tutors_controller.rb:15:in `block in risk_list'
+  [1m[36mScore Load (0.2ms)[0m  [1m[34mSELECT "scores".* FROM "scores" WHERE "scores"."tutor_id" = 14 AND "scores"."score_type" = 'fsqs' ORDER BY "scores"."computed_at" DESC LIMIT 1 /*action='risk_list',application='TutorInsights',controller='tutors'*/[0m
+  ↳ app/controllers/api/admin/tutors/tutors_controller.rb:10:in `block in risk_list'
+  [1m[36mScore Load (0.2ms)[0m  [1m[34mSELECT "scores".* FROM "scores" WHERE "scores"."tutor_id" = 14 AND "scores"."score_type" = 'ths' ORDER BY "scores"."computed_at" DESC LIMIT 1 /*action='risk_list',application='TutorInsights',controller='tutors'*/[0m
+  ↳ app/controllers/api/admin/tutors/tutors_controller.rb:11:in `block in risk_list'
+  [1m[36mScore Load (0.2ms)[0m  [1m[34mSELECT "scores".* FROM "scores" WHERE "scores"."tutor_id" = 14 AND "scores"."score_type" = 'tcrs' ORDER BY "scores"."computed_at" DESC LIMIT 1 /*action='risk_list',application='TutorInsights',controller='tutors'*/[0m
+  ↳ app/controllers/api/admin/tutors/tutors_controller.rb:12:in `block in risk_list'
+  [1m[36mAlert Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "alerts" WHERE "alerts"."tutor_id" = 14 AND "alerts"."status" = 'open' /*action='risk_list',application='TutorInsights',controller='tutors'*/[0m
+  ↳ app/controllers/api/admin/tutors/tutors_controller.rb:15:in `block in risk_list'
+Completed 200 OK in 61ms (Views: 0.1ms | ActiveRecord: 8.5ms (57 queries, 0 cached) | GC: 2.2ms)
+
+
+Started GET "/tutor/1" for ::1 at 2025-11-05 12:11:12 -0600
+Processing by TutorsController#show as HTML
+  Parameters: {"id"=>"1"}
+  Rendering layout layouts/application.html.erb
+  Rendering tutors/show.html.erb within layouts/application
+  Rendered tutors/show.html.erb within layouts/application (Duration: 0.0ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 1.3ms | GC: 0.0ms)
+Completed 200 OK in 17ms (Views: 1.5ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/api/tutor/1/fsqs_latest" for ::1 at 2025-11-05 12:11:12 -0600
+Started GET "/api/tutor/1/performance_summary" for ::1 at 2025-11-05 12:11:12 -0600
+Started GET "/api/tutor/1/session_list" for ::1 at 2025-11-05 12:11:12 -0600
+Processing by Api::Tutor::TutorsController#fsqs_latest as */*
+  Parameters: {"id"=>"1"}
+Processing by Api::Tutor::TutorsController#session_list as */*
+  Parameters: {"id"=>"1"}
+Processing by Api::Tutor::TutorsController#performance_summary as */*
+  Parameters: {"id"=>"1"}
+  [1m[36mTutor Load (0.5ms)[0m  [1m[34mSELECT "tutors".* FROM "tutors" WHERE "tutors"."id" = 1 LIMIT 1 /*action='session_list',application='TutorInsights',controller='tutors'*/[0m
+  [1m[36mTutor Load (0.7ms)[0m  [1m[34mSELECT "tutors".* FROM "tutors" WHERE "tutors"."id" = 1 LIMIT 1 /*action='fsqs_latest',application='TutorInsights',controller='tutors'*/[0m
+  ↳ app/controllers/api/tutor/tutors_controller.rb:57:in `session_list'
+  ↳ app/controllers/api/tutor/tutors_controller.rb:5:in `fsqs_latest'
+  [1m[36mTutor Load (1.0ms)[0m  [1m[34mSELECT "tutors".* FROM "tutors" WHERE "tutors"."id" = 1 LIMIT 1 /*action='performance_summary',application='TutorInsights',controller='tutors'*/[0m
+  ↳ app/controllers/api/tutor/tutors_controller.rb:46:in `performance_summary'
+Completed 200 OK in 56ms (Views: 0.1ms | ActiveRecord: 1.0ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+  [1m[36mSession Load (0.7ms)[0m  [1m[34mSELECT "sessions".* FROM "sessions" WHERE "sessions"."tutor_id" = 1 AND "sessions"."status" = 'completed' ORDER BY "sessions"."scheduled_start_at" DESC LIMIT 20 /*action='session_list',application='TutorInsights',controller='tutors'*/[0m
+  ↳ app/controllers/api/tutor/tutors_controller.rb:65:in `map'
+  [1m[36mScore Load (1.2ms)[0m  [1m[34mSELECT "scores".* FROM "scores" WHERE "scores"."tutor_id" = 1 AND "scores"."score_type" = 'fsqs' ORDER BY "scores"."computed_at" DESC LIMIT 1 /*action='fsqs_latest',application='TutorInsights',controller='tutors'*/[0m
+  ↳ app/controllers/api/tutor/tutors_controller.rb:10:in `fsqs_latest'
+Completed 200 OK in 59ms (Views: 0.1ms | ActiveRecord: 1.9ms (2 queries, 0 cached) | GC: 0.0ms)
+
+
+  [1m[36mStudent Load (0.8ms)[0m  [1m[34mSELECT "students".* FROM "students" WHERE "students"."id" IN (4, 21, 1, 17, 16, 22, 23, 24, 19, 25, 5, 3, 6, 8, 18, 14) /*action='session_list',application='TutorInsights',controller='tutors'*/[0m
+  ↳ app/controllers/api/tutor/tutors_controller.rb:65:in `map'
+  [1m[36mScore Load (1.1ms)[0m  [1m[34mSELECT "scores".* FROM "scores" WHERE "scores"."session_id" IN (149, 299, 298, 7, 154, 300, 301, 302, 171, 303, 176, 192, 57, 69, 237, 245, 101, 105, 272, 121) /*action='session_list',application='TutorInsights',controller='tutors'*/[0m
+  ↳ app/controllers/api/tutor/tutors_controller.rb:65:in `map'
+Completed 200 OK in 62ms (Views: 0.1ms | ActiveRecord: 3.1ms (4 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/api/tutor/1/fsqs_history" for ::1 at 2025-11-05 12:11:12 -0600
+Processing by Api::Tutor::TutorsController#fsqs_history as */*
+  Parameters: {"id"=>"1"}
+  [1m[36mTutor Load (0.3ms)[0m  [1m[34mSELECT "tutors".* FROM "tutors" WHERE "tutors"."id" = 1 LIMIT 1 /*action='fsqs_history',application='TutorInsights',controller='tutors'*/[0m
+  ↳ app/controllers/api/tutor/tutors_controller.rb:23:in `fsqs_history'
+  [1m[36mScore Load (0.3ms)[0m  [1m[34mSELECT "scores".* FROM "scores" WHERE "scores"."tutor_id" = 1 AND "scores"."score_type" = 'fsqs' ORDER BY "scores"."computed_at" DESC LIMIT 5 /*action='fsqs_history',application='TutorInsights',controller='tutors'*/[0m
+  ↳ app/controllers/api/tutor/tutors_controller.rb:31:in `map'
+  [1m[36mSession Load (0.3ms)[0m  [1m[34mSELECT "sessions".* FROM "sessions" WHERE "sessions"."id" IN (57, 303, 302, 301) /*action='fsqs_history',application='TutorInsights',controller='tutors'*/[0m
+  ↳ app/controllers/api/tutor/tutors_controller.rb:31:in `map'
+  [1m[36mStudent Load (0.2ms)[0m  [1m[34mSELECT "students".* FROM "students" WHERE "students"."id" = 6 LIMIT 1 /*action='fsqs_history',application='TutorInsights',controller='tutors'*/[0m
+  ↳ app/controllers/api/tutor/tutors_controller.rb:35:in `block in fsqs_history'
+  [1m[36mStudent Load (0.1ms)[0m  [1m[34mSELECT "students".* FROM "students" WHERE "students"."id" = 25 LIMIT 1 /*action='fsqs_history',application='TutorInsights',controller='tutors'*/[0m
+  ↳ app/controllers/api/tutor/tutors_controller.rb:35:in `block in fsqs_history'
+  [1m[36mStudent Load (0.1ms)[0m  [1m[34mSELECT "students".* FROM "students" WHERE "students"."id" = 24 LIMIT 1 /*action='fsqs_history',application='TutorInsights',controller='tutors'*/[0m
+  ↳ app/controllers/api/tutor/tutors_controller.rb:35:in `block in fsqs_history'
+  [1m[36mStudent Load (0.1ms)[0m  [1m[34mSELECT "students".* FROM "students" WHERE "students"."id" = 23 LIMIT 1 /*action='fsqs_history',application='TutorInsights',controller='tutors'*/[0m
+  ↳ app/controllers/api/tutor/tutors_controller.rb:35:in `block in fsqs_history'
+Completed 200 OK in 20ms (Views: 0.1ms | ActiveRecord: 1.5ms (7 queries, 0 cached) | GC: 1.0ms)
+
+
+Started GET "/tutor/1" for ::1 at 2025-11-05 12:12:04 -0600
+Processing by TutorsController#show as HTML
+  Parameters: {"id"=>"1"}
+Started GET "/tutor/1" for ::1 at 2025-11-05 12:12:05 -0600
+Processing by TutorsController#show as HTML
+  Parameters: {"id"=>"1"}
+  Rendering layout layouts/application.html.erb
+  Rendering tutors/show.html.erb within layouts/application
+  Rendered tutors/show.html.erb within layouts/application (Duration: 0.1ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 3.2ms | GC: 0.2ms)
+Completed 200 OK in 37ms (Views: 3.3ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.2ms)
+
+
+  Rendering layout layouts/application.html.erb
+  Rendering tutors/show.html.erb within layouts/application
+  Rendered tutors/show.html.erb within layouts/application (Duration: 0.0ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 0.7ms | GC: 0.0ms)
+Completed 200 OK in 44ms (Views: 1.0ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.6ms)
+
+
+Started GET "/.well-known/appspecific/com.chrome.devtools.json" for ::1 at 2025-11-05 12:12:05 -0600
+  
+ActionController::RoutingError (No route matches [GET] "/.well-known/appspecific/com.chrome.devtools.json"):
+  
+Started GET "/api/tutor/1/fsqs_history" for ::1 at 2025-11-05 12:12:05 -0600
+Started GET "/api/tutor/1/performance_summary" for ::1 at 2025-11-05 12:12:05 -0600
+Processing by Api::Tutor::TutorsController#fsqs_history as */*
+  Parameters: {"id"=>"1"}
+Processing by Api::Tutor::TutorsController#performance_summary as */*
+  Parameters: {"id"=>"1"}
+Started GET "/api/tutor/1/fsqs_latest" for ::1 at 2025-11-05 12:12:05 -0600
+Processing by Api::Tutor::TutorsController#fsqs_latest as */*
+  Parameters: {"id"=>"1"}
+  [1m[36mTutor Load (0.6ms)[0m  [1m[34mSELECT "tutors".* FROM "tutors" WHERE "tutors"."id" = 1 LIMIT 1 /*action='fsqs_history',application='TutorInsights',controller='tutors'*/[0m
+  ↳ app/controllers/api/tutor/tutors_controller.rb:23:in `fsqs_history'
+  [1m[36mTutor Load (0.9ms)[0m  [1m[34mSELECT "tutors".* FROM "tutors" WHERE "tutors"."id" = 1 LIMIT 1 /*action='performance_summary',application='TutorInsights',controller='tutors'*/[0m
+  ↳ app/controllers/api/tutor/tutors_controller.rb:46:in `performance_summary'
+Completed 200 OK in 58ms (Views: 0.0ms | ActiveRecord: 0.9ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+  [1m[36mScore Load (0.6ms)[0m  [1m[34mSELECT "scores".* FROM "scores" WHERE "scores"."tutor_id" = 1 AND "scores"."score_type" = 'fsqs' ORDER BY "scores"."computed_at" DESC LIMIT 5 /*action='fsqs_history',application='TutorInsights',controller='tutors'*/[0m
+  ↳ app/controllers/api/tutor/tutors_controller.rb:31:in `map'
+  [1m[36mSession Load (0.5ms)[0m  [1m[34mSELECT "sessions".* FROM "sessions" WHERE "sessions"."id" IN (57, 303, 302, 301) /*action='fsqs_history',application='TutorInsights',controller='tutors'*/[0m
+  ↳ app/controllers/api/tutor/tutors_controller.rb:31:in `map'
+  [1m[36mStudent Load (0.3ms)[0m  [1m[34mSELECT "students".* FROM "students" WHERE "students"."id" = 6 LIMIT 1 /*action='fsqs_history',application='TutorInsights',controller='tutors'*/[0m
+  ↳ app/controllers/api/tutor/tutors_controller.rb:35:in `block in fsqs_history'
+  [1m[36mStudent Load (0.3ms)[0m  [1m[34mSELECT "students".* FROM "students" WHERE "students"."id" = 25 LIMIT 1 /*action='fsqs_history',application='TutorInsights',controller='tutors'*/[0m
+  ↳ app/controllers/api/tutor/tutors_controller.rb:35:in `block in fsqs_history'
+  [1m[36mStudent Load (0.2ms)[0m  [1m[34mSELECT "students".* FROM "students" WHERE "students"."id" = 24 LIMIT 1 /*action='fsqs_history',application='TutorInsights',controller='tutors'*/[0m
+  ↳ app/controllers/api/tutor/tutors_controller.rb:35:in `block in fsqs_history'
+  [1m[36mStudent Load (0.2ms)[0m  [1m[34mSELECT "students".* FROM "students" WHERE "students"."id" = 23 LIMIT 1 /*action='fsqs_history',application='TutorInsights',controller='tutors'*/[0m
+  ↳ app/controllers/api/tutor/tutors_controller.rb:35:in `block in fsqs_history'
+Completed 200 OK in 64ms (Views: 0.1ms | ActiveRecord: 2.6ms (7 queries, 0 cached) | GC: 0.2ms)
+
+
+  [1m[36mTutor Load (0.5ms)[0m  [1m[34mSELECT "tutors".* FROM "tutors" WHERE "tutors"."id" = 1 LIMIT 1 /*action='fsqs_latest',application='TutorInsights',controller='tutors'*/[0m
+  ↳ app/controllers/api/tutor/tutors_controller.rb:5:in `fsqs_latest'
+  [1m[36mScore Load (0.5ms)[0m  [1m[34mSELECT "scores".* FROM "scores" WHERE "scores"."tutor_id" = 1 AND "scores"."score_type" = 'fsqs' ORDER BY "scores"."computed_at" DESC LIMIT 1 /*action='fsqs_latest',application='TutorInsights',controller='tutors'*/[0m
+  ↳ app/controllers/api/tutor/tutors_controller.rb:10:in `fsqs_latest'
+Completed 200 OK in 54ms (Views: 0.1ms | ActiveRecord: 1.0ms (2 queries, 0 cached) | GC: 0.4ms)
+
+
+Started GET "/api/tutor/1/session_list" for ::1 at 2025-11-05 12:12:05 -0600
+Processing by Api::Tutor::TutorsController#session_list as */*
+  Parameters: {"id"=>"1"}
+Started GET "/api/tutor/1/fsqs_latest" for ::1 at 2025-11-05 12:12:05 -0600
+Processing by Api::Tutor::TutorsController#fsqs_latest as */*
+  Parameters: {"id"=>"1"}
+Started GET "/api/tutor/1/fsqs_history" for ::1 at 2025-11-05 12:12:05 -0600
+Processing by Api::Tutor::TutorsController#fsqs_history as */*
+  Parameters: {"id"=>"1"}
+  [1m[36mTutor Load (0.5ms)[0m  [1m[34mSELECT "tutors".* FROM "tutors" WHERE "tutors"."id" = 1 LIMIT 1 /*action='session_list',application='TutorInsights',controller='tutors'*/[0m
+  ↳ app/controllers/api/tutor/tutors_controller.rb:57:in `session_list'
+  [1m[36mSession Load (0.6ms)[0m  [1m[34mSELECT "sessions".* FROM "sessions" WHERE "sessions"."tutor_id" = 1 AND "sessions"."status" = 'completed' ORDER BY "sessions"."scheduled_start_at" DESC LIMIT 20 /*action='session_list',application='TutorInsights',controller='tutors'*/[0m
+  ↳ app/controllers/api/tutor/tutors_controller.rb:65:in `map'
+  [1m[36mStudent Load (0.4ms)[0m  [1m[34mSELECT "students".* FROM "students" WHERE "students"."id" IN (4, 21, 1, 17, 16, 22, 23, 24, 19, 25, 5, 3, 6, 8, 18, 14) /*action='session_list',application='TutorInsights',controller='tutors'*/[0m
+  ↳ app/controllers/api/tutor/tutors_controller.rb:65:in `map'
+  [1m[36mScore Load (0.8ms)[0m  [1m[34mSELECT "scores".* FROM "scores" WHERE "scores"."session_id" IN (149, 299, 298, 7, 154, 300, 301, 302, 171, 303, 176, 192, 57, 69, 237, 245, 101, 105, 272, 121) /*action='session_list',application='TutorInsights',controller='tutors'*/[0m
+  ↳ app/controllers/api/tutor/tutors_controller.rb:65:in `map'
+Completed 200 OK in 58ms (Views: 0.1ms | ActiveRecord: 2.2ms (4 queries, 0 cached) | GC: 0.5ms)
+
+
+  [1m[36mTutor Load (0.5ms)[0m  [1m[34mSELECT "tutors".* FROM "tutors" WHERE "tutors"."id" = 1 LIMIT 1 /*action='fsqs_latest',application='TutorInsights',controller='tutors'*/[0m
+  ↳ app/controllers/api/tutor/tutors_controller.rb:5:in `fsqs_latest'
+  [1m[36mScore Load (0.4ms)[0m  [1m[34mSELECT "scores".* FROM "scores" WHERE "scores"."tutor_id" = 1 AND "scores"."score_type" = 'fsqs' ORDER BY "scores"."computed_at" DESC LIMIT 1 /*action='fsqs_latest',application='TutorInsights',controller='tutors'*/[0m
+  ↳ app/controllers/api/tutor/tutors_controller.rb:10:in `fsqs_latest'
+Completed 200 OK in 61ms (Views: 0.1ms | ActiveRecord: 0.8ms (2 queries, 0 cached) | GC: 0.0ms)
+
+
+  [1m[36mTutor Load (0.4ms)[0m  [1m[34mSELECT "tutors".* FROM "tutors" WHERE "tutors"."id" = 1 LIMIT 1 /*action='fsqs_history',application='TutorInsights',controller='tutors'*/[0m
+  ↳ app/controllers/api/tutor/tutors_controller.rb:23:in `fsqs_history'
+  [1m[36mScore Load (0.6ms)[0m  [1m[34mSELECT "scores".* FROM "scores" WHERE "scores"."tutor_id" = 1 AND "scores"."score_type" = 'fsqs' ORDER BY "scores"."computed_at" DESC LIMIT 5 /*action='fsqs_history',application='TutorInsights',controller='tutors'*/[0m
+  ↳ app/controllers/api/tutor/tutors_controller.rb:31:in `map'
+  [1m[36mSession Load (0.4ms)[0m  [1m[34mSELECT "sessions".* FROM "sessions" WHERE "sessions"."id" IN (57, 303, 302, 301) /*action='fsqs_history',application='TutorInsights',controller='tutors'*/[0m
+  ↳ app/controllers/api/tutor/tutors_controller.rb:31:in `map'
+  [1m[36mStudent Load (0.4ms)[0m  [1m[34mSELECT "students".* FROM "students" WHERE "students"."id" = 6 LIMIT 1 /*action='fsqs_history',application='TutorInsights',controller='tutors'*/[0m
+  ↳ app/controllers/api/tutor/tutors_controller.rb:35:in `block in fsqs_history'
+  [1m[36mStudent Load (0.3ms)[0m  [1m[34mSELECT "students".* FROM "students" WHERE "students"."id" = 25 LIMIT 1 /*action='fsqs_history',application='TutorInsights',controller='tutors'*/[0m
+  ↳ app/controllers/api/tutor/tutors_controller.rb:35:in `block in fsqs_history'
+  [1m[36mStudent Load (0.3ms)[0m  [1m[34mSELECT "students".* FROM "students" WHERE "students"."id" = 24 LIMIT 1 /*action='fsqs_history',application='TutorInsights',controller='tutors'*/[0m
+  ↳ app/controllers/api/tutor/tutors_controller.rb:35:in `block in fsqs_history'
+  [1m[36mStudent Load (0.3ms)[0m  [1m[34mSELECT "students".* FROM "students" WHERE "students"."id" = 23 LIMIT 1 /*action='fsqs_history',application='TutorInsights',controller='tutors'*/[0m
+  ↳ app/controllers/api/tutor/tutors_controller.rb:35:in `block in fsqs_history'
+Completed 200 OK in 68ms (Views: 0.1ms | ActiveRecord: 2.7ms (7 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/api/tutor/1/session_list" for ::1 at 2025-11-05 12:12:05 -0600
+Processing by Api::Tutor::TutorsController#session_list as */*
+  Parameters: {"id"=>"1"}
+Started GET "/api/tutor/1/performance_summary" for ::1 at 2025-11-05 12:12:05 -0600
+Processing by Api::Tutor::TutorsController#performance_summary as */*
+  Parameters: {"id"=>"1"}
+  [1m[36mTutor Load (0.5ms)[0m  [1m[34mSELECT "tutors".* FROM "tutors" WHERE "tutors"."id" = 1 LIMIT 1 /*action='session_list',application='TutorInsights',controller='tutors'*/[0m
+  ↳ app/controllers/api/tutor/tutors_controller.rb:57:in `session_list'
+  [1m[36mSession Load (0.3ms)[0m  [1m[34mSELECT "sessions".* FROM "sessions" WHERE "sessions"."tutor_id" = 1 AND "sessions"."status" = 'completed' ORDER BY "sessions"."scheduled_start_at" DESC LIMIT 20 /*action='session_list',application='TutorInsights',controller='tutors'*/[0m
+  ↳ app/controllers/api/tutor/tutors_controller.rb:65:in `map'
+  [1m[36mStudent Load (0.3ms)[0m  [1m[34mSELECT "students".* FROM "students" WHERE "students"."id" IN (4, 21, 1, 17, 16, 22, 23, 24, 19, 25, 5, 3, 6, 8, 18, 14) /*action='session_list',application='TutorInsights',controller='tutors'*/[0m
+  ↳ app/controllers/api/tutor/tutors_controller.rb:65:in `map'
+  [1m[36mScore Load (0.5ms)[0m  [1m[34mSELECT "scores".* FROM "scores" WHERE "scores"."session_id" IN (149, 299, 298, 7, 154, 300, 301, 302, 171, 303, 176, 192, 57, 69, 237, 245, 101, 105, 272, 121) /*action='session_list',application='TutorInsights',controller='tutors'*/[0m
+  ↳ app/controllers/api/tutor/tutors_controller.rb:65:in `map'
+Completed 200 OK in 37ms (Views: 0.2ms | ActiveRecord: 1.6ms (4 queries, 0 cached) | GC: 0.3ms)
+
+
+  [1m[36mTutor Load (0.3ms)[0m  [1m[34mSELECT "tutors".* FROM "tutors" WHERE "tutors"."id" = 1 LIMIT 1 /*action='performance_summary',application='TutorInsights',controller='tutors'*/[0m
+  ↳ app/controllers/api/tutor/tutors_controller.rb:46:in `performance_summary'
+Completed 200 OK in 33ms (Views: 0.0ms | ActiveRecord: 0.3ms (1 query, 0 cached) | GC: 0.3ms)
+
+
+Started GET "/tutor/1" for ::1 at 2025-11-05 12:14:02 -0600
+Processing by TutorsController#show as HTML
+  Parameters: {"id"=>"1"}
+Started GET "/tutor/1" for ::1 at 2025-11-05 12:14:02 -0600
+Processing by TutorsController#show as HTML
+  Parameters: {"id"=>"1"}
+  Rendering layout layouts/application.html.erb
+  Rendering tutors/show.html.erb within layouts/application
+  Rendered tutors/show.html.erb within layouts/application (Duration: 0.1ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 3.8ms | GC: 0.0ms)
+Completed 200 OK in 35ms (Views: 4.0ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.2ms)
+
+
+  Rendering layout layouts/application.html.erb
+  Rendering tutors/show.html.erb within layouts/application
+  Rendered tutors/show.html.erb within layouts/application (Duration: 0.1ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 0.8ms | GC: 0.0ms)
+Completed 200 OK in 38ms (Views: 1.3ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.6ms)
+
+
+Started GET "/.well-known/appspecific/com.chrome.devtools.json" for ::1 at 2025-11-05 12:14:02 -0600
+  
+ActionController::RoutingError (No route matches [GET] "/.well-known/appspecific/com.chrome.devtools.json"):
+  
+Started GET "/api/tutor/1/session_list" for ::1 at 2025-11-05 12:14:02 -0600
+Started GET "/api/tutor/1/performance_summary" for ::1 at 2025-11-05 12:14:02 -0600
+Processing by Api::Tutor::TutorsController#session_list as */*
+  Parameters: {"id"=>"1"}
+Processing by Api::Tutor::TutorsController#performance_summary as */*
+  Parameters: {"id"=>"1"}
+Started GET "/api/tutor/1/fsqs_history" for ::1 at 2025-11-05 12:14:02 -0600
+  [1m[36mTutor Load (0.7ms)[0m  [1m[34mSELECT "tutors".* FROM "tutors" WHERE "tutors"."id" = 1 LIMIT 1 /*action='session_list',application='TutorInsights',controller='tutors'*/[0m
+  [1m[36mTutor Load (0.5ms)[0m  [1m[34mSELECT "tutors".* FROM "tutors" WHERE "tutors"."id" = 1 LIMIT 1 /*action='performance_summary',application='TutorInsights',controller='tutors'*/[0m
+  ↳ app/controllers/api/tutor/tutors_controller.rb:57:in `session_list'
+  ↳ app/controllers/api/tutor/tutors_controller.rb:46:in `performance_summary'
+Completed 200 OK in 61ms (Views: 0.1ms | ActiveRecord: 0.5ms (1 query, 0 cached) | GC: 0.3ms)
+
+
+  [1m[36mSession Load (0.8ms)[0m  [1m[34mSELECT "sessions".* FROM "sessions" WHERE "sessions"."tutor_id" = 1 AND "sessions"."status" = 'completed' ORDER BY "sessions"."scheduled_start_at" DESC LIMIT 20 /*action='session_list',application='TutorInsights',controller='tutors'*/[0m
+  ↳ app/controllers/api/tutor/tutors_controller.rb:65:in `map'
+  [1m[36mStudent Load (0.4ms)[0m  [1m[34mSELECT "students".* FROM "students" WHERE "students"."id" IN (4, 21, 1, 17, 16, 22, 23, 24, 19, 25, 5, 3, 6, 8, 18, 14) /*action='session_list',application='TutorInsights',controller='tutors'*/[0m
+  ↳ app/controllers/api/tutor/tutors_controller.rb:65:in `map'
+Processing by Api::Tutor::TutorsController#fsqs_history as */*
+  Parameters: {"id"=>"1"}
+  [1m[36mScore Load (0.8ms)[0m  [1m[34mSELECT "scores".* FROM "scores" WHERE "scores"."session_id" IN (149, 299, 298, 7, 154, 300, 301, 302, 171, 303, 176, 192, 57, 69, 237, 245, 101, 105, 272, 121) /*action='session_list',application='TutorInsights',controller='tutors'*/[0m
+  ↳ app/controllers/api/tutor/tutors_controller.rb:65:in `map'
+Completed 200 OK in 66ms (Views: 0.1ms | ActiveRecord: 2.6ms (4 queries, 0 cached) | GC: 0.3ms)
+
+
+Started GET "/api/tutor/1/fsqs_latest" for ::1 at 2025-11-05 12:14:02 -0600
+Started GET "/api/tutor/1/fsqs_latest" for ::1 at 2025-11-05 12:14:02 -0600
+  [1m[36mTutor Load (0.6ms)[0m  [1m[34mSELECT "tutors".* FROM "tutors" WHERE "tutors"."id" = 1 LIMIT 1 /*action='fsqs_history',application='TutorInsights',controller='tutors'*/[0m
+  ↳ app/controllers/api/tutor/tutors_controller.rb:23:in `fsqs_history'
+  [1m[36mScore Load (0.5ms)[0m  [1m[34mSELECT "scores".* FROM "scores" WHERE "scores"."tutor_id" = 1 AND "scores"."score_type" = 'fsqs' ORDER BY "scores"."computed_at" DESC LIMIT 5 /*action='fsqs_history',application='TutorInsights',controller='tutors'*/[0m
+  ↳ app/controllers/api/tutor/tutors_controller.rb:31:in `map'
+  [1m[36mSession Load (0.4ms)[0m  [1m[34mSELECT "sessions".* FROM "sessions" WHERE "sessions"."id" IN (57, 303, 302, 301) /*action='fsqs_history',application='TutorInsights',controller='tutors'*/[0m
+  ↳ app/controllers/api/tutor/tutors_controller.rb:31:in `map'
+  [1m[36mStudent Load (0.4ms)[0m  [1m[34mSELECT "students".* FROM "students" WHERE "students"."id" = 6 LIMIT 1 /*action='fsqs_history',application='TutorInsights',controller='tutors'*/[0m
+  ↳ app/controllers/api/tutor/tutors_controller.rb:35:in `block in fsqs_history'
+  [1m[36mStudent Load (0.2ms)[0m  [1m[34mSELECT "students".* FROM "students" WHERE "students"."id" = 25 LIMIT 1 /*action='fsqs_history',application='TutorInsights',controller='tutors'*/[0m
+  ↳ app/controllers/api/tutor/tutors_controller.rb:35:in `block in fsqs_history'
+  [1m[36mStudent Load (0.2ms)[0m  [1m[34mSELECT "students".* FROM "students" WHERE "students"."id" = 24 LIMIT 1 /*action='fsqs_history',application='TutorInsights',controller='tutors'*/[0m
+  ↳ app/controllers/api/tutor/tutors_controller.rb:35:in `block in fsqs_history'
+  [1m[36mStudent Load (0.2ms)[0m  [1m[34mSELECT "students".* FROM "students" WHERE "students"."id" = 23 LIMIT 1 /*action='fsqs_history',application='TutorInsights',controller='tutors'*/[0m
+  ↳ app/controllers/api/tutor/tutors_controller.rb:35:in `block in fsqs_history'
+Completed 200 OK in 61ms (Views: 0.1ms | ActiveRecord: 2.5ms (7 queries, 0 cached) | GC: 0.0ms)
+
+
+Processing by Api::Tutor::TutorsController#fsqs_latest as */*
+  Parameters: {"id"=>"1"}
+Processing by Api::Tutor::TutorsController#fsqs_latest as */*
+  Parameters: {"id"=>"1"}
+Started GET "/api/tutor/1/performance_summary" for ::1 at 2025-11-05 12:14:02 -0600
+  [1m[36mTutor Load (0.5ms)[0m  [1m[34mSELECT "tutors".* FROM "tutors" WHERE "tutors"."id" = 1 LIMIT 1 /*action='fsqs_latest',application='TutorInsights',controller='tutors'*/[0m
+  ↳ app/controllers/api/tutor/tutors_controller.rb:5:in `fsqs_latest'
+  [1m[36mTutor Load (0.5ms)[0m  [1m[34mSELECT "tutors".* FROM "tutors" WHERE "tutors"."id" = 1 LIMIT 1 /*action='fsqs_latest',application='TutorInsights',controller='tutors'*/[0m
+  ↳ app/controllers/api/tutor/tutors_controller.rb:5:in `fsqs_latest'
+  [1m[36mScore Load (0.6ms)[0m  [1m[34mSELECT "scores".* FROM "scores" WHERE "scores"."tutor_id" = 1 AND "scores"."score_type" = 'fsqs' ORDER BY "scores"."computed_at" DESC LIMIT 1 /*action='fsqs_latest',application='TutorInsights',controller='tutors'*/[0m
+  ↳ app/controllers/api/tutor/tutors_controller.rb:10:in `fsqs_latest'
+Completed 200 OK in 62ms (Views: 0.1ms | ActiveRecord: 1.1ms (2 queries, 0 cached) | GC: 0.9ms)
+
+
+  [1m[36mScore Load (0.6ms)[0m  [1m[34mSELECT "scores".* FROM "scores" WHERE "scores"."tutor_id" = 1 AND "scores"."score_type" = 'fsqs' ORDER BY "scores"."computed_at" DESC LIMIT 1 /*action='fsqs_latest',application='TutorInsights',controller='tutors'*/[0m
+  ↳ app/controllers/api/tutor/tutors_controller.rb:10:in `fsqs_latest'
+Completed 200 OK in 62ms (Views: 0.0ms | ActiveRecord: 1.1ms (2 queries, 0 cached) | GC: 0.9ms)
+
+
+Processing by Api::Tutor::TutorsController#performance_summary as */*
+  Parameters: {"id"=>"1"}
+Started GET "/api/tutor/1/fsqs_history" for ::1 at 2025-11-05 12:14:02 -0600
+Started GET "/api/tutor/1/session_list" for ::1 at 2025-11-05 12:14:02 -0600
+  [1m[36mTutor Load (0.5ms)[0m  [1m[34mSELECT "tutors".* FROM "tutors" WHERE "tutors"."id" = 1 LIMIT 1 /*action='performance_summary',application='TutorInsights',controller='tutors'*/[0m
+  ↳ app/controllers/api/tutor/tutors_controller.rb:46:in `performance_summary'
+Completed 200 OK in 57ms (Views: 0.1ms | ActiveRecord: 0.5ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Processing by Api::Tutor::TutorsController#fsqs_history as */*
+  Parameters: {"id"=>"1"}
+Processing by Api::Tutor::TutorsController#session_list as */*
+  Parameters: {"id"=>"1"}
+  [1m[36mTutor Load (0.8ms)[0m  [1m[34mSELECT "tutors".* FROM "tutors" WHERE "tutors"."id" = 1 LIMIT 1 /*action='fsqs_history',application='TutorInsights',controller='tutors'*/[0m
+  ↳ app/controllers/api/tutor/tutors_controller.rb:23:in `fsqs_history'
+  [1m[36mTutor Load (0.7ms)[0m  [1m[34mSELECT "tutors".* FROM "tutors" WHERE "tutors"."id" = 1 LIMIT 1 /*action='session_list',application='TutorInsights',controller='tutors'*/[0m
+  ↳ app/controllers/api/tutor/tutors_controller.rb:57:in `session_list'
+  [1m[36mScore Load (0.4ms)[0m  [1m[34mSELECT "scores".* FROM "scores" WHERE "scores"."tutor_id" = 1 AND "scores"."score_type" = 'fsqs' ORDER BY "scores"."computed_at" DESC LIMIT 5 /*action='fsqs_history',application='TutorInsights',controller='tutors'*/[0m
+  ↳ app/controllers/api/tutor/tutors_controller.rb:31:in `map'
+  [1m[36mSession Load (0.6ms)[0m  [1m[34mSELECT "sessions".* FROM "sessions" WHERE "sessions"."tutor_id" = 1 AND "sessions"."status" = 'completed' ORDER BY "sessions"."scheduled_start_at" DESC LIMIT 20 /*action='session_list',application='TutorInsights',controller='tutors'*/[0m
+  ↳ app/controllers/api/tutor/tutors_controller.rb:65:in `map'
+  [1m[36mSession Load (0.7ms)[0m  [1m[34mSELECT "sessions".* FROM "sessions" WHERE "sessions"."id" IN (57, 303, 302, 301) /*action='fsqs_history',application='TutorInsights',controller='tutors'*/[0m
+  ↳ app/controllers/api/tutor/tutors_controller.rb:31:in `map'
+  [1m[36mStudent Load (0.8ms)[0m  [1m[34mSELECT "students".* FROM "students" WHERE "students"."id" IN (4, 21, 1, 17, 16, 22, 23, 24, 19, 25, 5, 3, 6, 8, 18, 14) /*action='session_list',application='TutorInsights',controller='tutors'*/[0m
+  ↳ app/controllers/api/tutor/tutors_controller.rb:65:in `map'
+  [1m[36mStudent Load (0.8ms)[0m  [1m[34mSELECT "students".* FROM "students" WHERE "students"."id" = 6 LIMIT 1 /*action='fsqs_history',application='TutorInsights',controller='tutors'*/[0m
+  ↳ app/controllers/api/tutor/tutors_controller.rb:35:in `block in fsqs_history'
+  [1m[36mScore Load (0.5ms)[0m  [1m[34mSELECT "scores".* FROM "scores" WHERE "scores"."session_id" IN (149, 299, 298, 7, 154, 300, 301, 302, 171, 303, 176, 192, 57, 69, 237, 245, 101, 105, 272, 121) /*action='session_list',application='TutorInsights',controller='tutors'*/[0m
+  ↳ app/controllers/api/tutor/tutors_controller.rb:65:in `map'
+  [1m[36mStudent Load (0.3ms)[0m  [1m[34mSELECT "students".* FROM "students" WHERE "students"."id" = 25 LIMIT 1 /*action='fsqs_history',application='TutorInsights',controller='tutors'*/[0m
+Completed 200 OK in 40ms (Views: 0.1ms | ActiveRecord: 2.5ms (4 queries, 0 cached) | GC: 0.7ms)
+
+
+  ↳ app/controllers/api/tutor/tutors_controller.rb:35:in `block in fsqs_history'
+  [1m[36mStudent Load (0.2ms)[0m  [1m[34mSELECT "students".* FROM "students" WHERE "students"."id" = 24 LIMIT 1 /*action='fsqs_history',application='TutorInsights',controller='tutors'*/[0m
+  ↳ app/controllers/api/tutor/tutors_controller.rb:35:in `block in fsqs_history'
+  [1m[36mStudent Load (0.1ms)[0m  [1m[34mSELECT "students".* FROM "students" WHERE "students"."id" = 23 LIMIT 1 /*action='fsqs_history',application='TutorInsights',controller='tutors'*/[0m
+  ↳ app/controllers/api/tutor/tutors_controller.rb:35:in `block in fsqs_history'
+Completed 200 OK in 42ms (Views: 0.1ms | ActiveRecord: 3.3ms (7 queries, 0 cached) | GC: 0.7ms)
+
+
+Started GET "/tutor/1" for ::1 at 2025-11-05 12:14:05 -0600
+Processing by TutorsController#show as HTML
+  Parameters: {"id"=>"1"}
+Started GET "/tutor/1" for ::1 at 2025-11-05 12:14:05 -0600
+Processing by TutorsController#show as HTML
+  Parameters: {"id"=>"1"}
+  Rendering layout layouts/application.html.erb
+  Rendering tutors/show.html.erb within layouts/application
+  Rendered tutors/show.html.erb within layouts/application (Duration: 0.1ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 1.4ms | GC: 0.0ms)
+Completed 200 OK in 35ms (Views: 1.5ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.2ms)
+
+
+  Rendering layout layouts/application.html.erb
+  Rendering tutors/show.html.erb within layouts/application
+  Rendered tutors/show.html.erb within layouts/application (Duration: 0.2ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 0.9ms | GC: 0.0ms)
+Completed 200 OK in 31ms (Views: 1.2ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.8ms)
+
+
+Started GET "/.well-known/appspecific/com.chrome.devtools.json" for ::1 at 2025-11-05 12:14:05 -0600
+  
+ActionController::RoutingError (No route matches [GET] "/.well-known/appspecific/com.chrome.devtools.json"):
+  
+Started GET "/api/tutor/1/session_list" for ::1 at 2025-11-05 12:14:05 -0600
+Started GET "/api/tutor/1/fsqs_latest" for ::1 at 2025-11-05 12:14:05 -0600
+Processing by Api::Tutor::TutorsController#session_list as */*
+  Parameters: {"id"=>"1"}
+Processing by Api::Tutor::TutorsController#fsqs_latest as */*
+  Parameters: {"id"=>"1"}
+Started GET "/api/tutor/1/performance_summary" for ::1 at 2025-11-05 12:14:05 -0600
+  [1m[36mTutor Load (0.6ms)[0m  [1m[34mSELECT "tutors".* FROM "tutors" WHERE "tutors"."id" = 1 LIMIT 1 /*action='session_list',application='TutorInsights',controller='tutors'*/[0m
+  ↳ app/controllers/api/tutor/tutors_controller.rb:57:in `session_list'
+  [1m[36mTutor Load (0.6ms)[0m  [1m[34mSELECT "tutors".* FROM "tutors" WHERE "tutors"."id" = 1 LIMIT 1 /*action='fsqs_latest',application='TutorInsights',controller='tutors'*/[0m
+Processing by Api::Tutor::TutorsController#performance_summary as */*
+  ↳ app/controllers/api/tutor/tutors_controller.rb:5:in `fsqs_latest'
+  Parameters: {"id"=>"1"}
+  [1m[36mSession Load (0.5ms)[0m  [1m[34mSELECT "sessions".* FROM "sessions" WHERE "sessions"."tutor_id" = 1 AND "sessions"."status" = 'completed' ORDER BY "sessions"."scheduled_start_at" DESC LIMIT 20 /*action='session_list',application='TutorInsights',controller='tutors'*/[0m
+  ↳ app/controllers/api/tutor/tutors_controller.rb:65:in `map'
+  [1m[36mScore Load (0.9ms)[0m  [1m[34mSELECT "scores".* FROM "scores" WHERE "scores"."tutor_id" = 1 AND "scores"."score_type" = 'fsqs' ORDER BY "scores"."computed_at" DESC LIMIT 1 /*action='fsqs_latest',application='TutorInsights',controller='tutors'*/[0m
+  ↳ app/controllers/api/tutor/tutors_controller.rb:10:in `fsqs_latest'
+Completed 200 OK in 59ms (Views: 0.1ms | ActiveRecord: 1.4ms (2 queries, 0 cached) | GC: 0.0ms)
+
+
+  [1m[36mStudent Load (0.5ms)[0m  [1m[34mSELECT "students".* FROM "students" WHERE "students"."id" IN (4, 21, 1, 17, 16, 22, 23, 24, 19, 25, 5, 3, 6, 8, 18, 14) /*action='session_list',application='TutorInsights',controller='tutors'*/[0m
+  ↳ app/controllers/api/tutor/tutors_controller.rb:65:in `map'
+  [1m[36mScore Load (0.5ms)[0m  [1m[34mSELECT "scores".* FROM "scores" WHERE "scores"."session_id" IN (149, 299, 298, 7, 154, 300, 301, 302, 171, 303, 176, 192, 57, 69, 237, 245, 101, 105, 272, 121) /*action='session_list',application='TutorInsights',controller='tutors'*/[0m
+  ↳ app/controllers/api/tutor/tutors_controller.rb:65:in `map'
+Completed 200 OK in 62ms (Views: 0.1ms | ActiveRecord: 2.1ms (4 queries, 0 cached) | GC: 0.1ms)
+
+
+Started GET "/api/tutor/1/fsqs_history" for ::1 at 2025-11-05 12:14:05 -0600
+  [1m[36mTutor Load (1.1ms)[0m  [1m[34mSELECT "tutors".* FROM "tutors" WHERE "tutors"."id" = 1 LIMIT 1 /*action='performance_summary',application='TutorInsights',controller='tutors'*/[0m
+  ↳ app/controllers/api/tutor/tutors_controller.rb:46:in `performance_summary'
+Completed 200 OK in 79ms (Views: 0.1ms | ActiveRecord: 1.1ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/api/tutor/1/fsqs_latest" for ::1 at 2025-11-05 12:14:05 -0600
+Processing by Api::Tutor::TutorsController#fsqs_history as */*
+  Parameters: {"id"=>"1"}
+Processing by Api::Tutor::TutorsController#fsqs_latest as */*
+  Parameters: {"id"=>"1"}
+Started GET "/api/tutor/1/performance_summary" for ::1 at 2025-11-05 12:14:05 -0600
+  [1m[36mTutor Load (0.3ms)[0m  [1m[34mSELECT "tutors".* FROM "tutors" WHERE "tutors"."id" = 1 LIMIT 1 /*action='fsqs_history',application='TutorInsights',controller='tutors'*/[0m
+  ↳ app/controllers/api/tutor/tutors_controller.rb:23:in `fsqs_history'
+  [1m[36mTutor Load (1.0ms)[0m  [1m[34mSELECT "tutors".* FROM "tutors" WHERE "tutors"."id" = 1 LIMIT 1 /*action='fsqs_latest',application='TutorInsights',controller='tutors'*/[0m
+  ↳ app/controllers/api/tutor/tutors_controller.rb:5:in `fsqs_latest'
+  [1m[36mScore Load (0.6ms)[0m  [1m[34mSELECT "scores".* FROM "scores" WHERE "scores"."tutor_id" = 1 AND "scores"."score_type" = 'fsqs' ORDER BY "scores"."computed_at" DESC LIMIT 5 /*action='fsqs_history',application='TutorInsights',controller='tutors'*/[0m
+  ↳ app/controllers/api/tutor/tutors_controller.rb:31:in `map'
+  [1m[36mScore Load (0.5ms)[0m  [1m[34mSELECT "scores".* FROM "scores" WHERE "scores"."tutor_id" = 1 AND "scores"."score_type" = 'fsqs' ORDER BY "scores"."computed_at" DESC LIMIT 1 /*action='fsqs_latest',application='TutorInsights',controller='tutors'*/[0m
+  ↳ app/controllers/api/tutor/tutors_controller.rb:10:in `fsqs_latest'
+Completed 200 OK in 85ms (Views: 0.3ms | ActiveRecord: 1.4ms (2 queries, 0 cached) | GC: 0.6ms)
+
+
+  [1m[36mSession Load (3.6ms)[0m  [1m[34mSELECT "sessions".* FROM "sessions" WHERE "sessions"."id" IN (57, 303, 302, 301) /*action='fsqs_history',application='TutorInsights',controller='tutors'*/[0m
+  ↳ app/controllers/api/tutor/tutors_controller.rb:31:in `map'
+Processing by Api::Tutor::TutorsController#performance_summary as */*
+  Parameters: {"id"=>"1"}
+  [1m[36mStudent Load (0.7ms)[0m  [1m[34mSELECT "students".* FROM "students" WHERE "students"."id" = 6 LIMIT 1 /*action='fsqs_history',application='TutorInsights',controller='tutors'*/[0m
+  ↳ app/controllers/api/tutor/tutors_controller.rb:35:in `block in fsqs_history'
+  [1m[36mStudent Load (0.2ms)[0m  [1m[34mSELECT "students".* FROM "students" WHERE "students"."id" = 25 LIMIT 1 /*action='fsqs_history',application='TutorInsights',controller='tutors'*/[0m
+  ↳ app/controllers/api/tutor/tutors_controller.rb:35:in `block in fsqs_history'
+  [1m[36mStudent Load (0.2ms)[0m  [1m[34mSELECT "students".* FROM "students" WHERE "students"."id" = 24 LIMIT 1 /*action='fsqs_history',application='TutorInsights',controller='tutors'*/[0m
+  ↳ app/controllers/api/tutor/tutors_controller.rb:35:in `block in fsqs_history'
+  [1m[36mStudent Load (0.1ms)[0m  [1m[34mSELECT "students".* FROM "students" WHERE "students"."id" = 23 LIMIT 1 /*action='fsqs_history',application='TutorInsights',controller='tutors'*/[0m
+  ↳ app/controllers/api/tutor/tutors_controller.rb:35:in `block in fsqs_history'
+Completed 200 OK in 94ms (Views: 0.1ms | ActiveRecord: 5.8ms (7 queries, 0 cached) | GC: 0.6ms)
+
+
+Started GET "/api/tutor/1/fsqs_history" for ::1 at 2025-11-05 12:14:06 -0600
+Started GET "/api/tutor/1/session_list" for ::1 at 2025-11-05 12:14:06 -0600
+  [1m[36mTutor Load (0.4ms)[0m  [1m[34mSELECT "tutors".* FROM "tutors" WHERE "tutors"."id" = 1 LIMIT 1 /*action='performance_summary',application='TutorInsights',controller='tutors'*/[0m
+  ↳ app/controllers/api/tutor/tutors_controller.rb:46:in `performance_summary'
+Completed 200 OK in 86ms (Views: 0.0ms | ActiveRecord: 0.4ms (1 query, 0 cached) | GC: 0.4ms)
+
+
+Processing by Api::Tutor::TutorsController#fsqs_history as */*
+  Parameters: {"id"=>"1"}
+Processing by Api::Tutor::TutorsController#session_list as */*
+  Parameters: {"id"=>"1"}
+  [1m[36mTutor Load (0.3ms)[0m  [1m[34mSELECT "tutors".* FROM "tutors" WHERE "tutors"."id" = 1 LIMIT 1 /*action='fsqs_history',application='TutorInsights',controller='tutors'*/[0m
+  [1m[36mTutor Load (0.2ms)[0m  [1m[34mSELECT "tutors".* FROM "tutors" WHERE "tutors"."id" = 1 LIMIT 1 /*action='session_list',application='TutorInsights',controller='tutors'*/[0m
+  ↳ app/controllers/api/tutor/tutors_controller.rb:23:in `fsqs_history'
+  ↳ app/controllers/api/tutor/tutors_controller.rb:57:in `session_list'
+  [1m[36mScore Load (0.3ms)[0m  [1m[34mSELECT "scores".* FROM "scores" WHERE "scores"."tutor_id" = 1 AND "scores"."score_type" = 'fsqs' ORDER BY "scores"."computed_at" DESC LIMIT 5 /*action='fsqs_history',application='TutorInsights',controller='tutors'*/[0m
+  ↳ app/controllers/api/tutor/tutors_controller.rb:31:in `map'
+  [1m[36mSession Load (0.5ms)[0m  [1m[34mSELECT "sessions".* FROM "sessions" WHERE "sessions"."tutor_id" = 1 AND "sessions"."status" = 'completed' ORDER BY "sessions"."scheduled_start_at" DESC LIMIT 20 /*action='session_list',application='TutorInsights',controller='tutors'*/[0m
+  ↳ app/controllers/api/tutor/tutors_controller.rb:65:in `map'
+  [1m[36mSession Load (0.8ms)[0m  [1m[34mSELECT "sessions".* FROM "sessions" WHERE "sessions"."id" IN (57, 303, 302, 301) /*action='fsqs_history',application='TutorInsights',controller='tutors'*/[0m
+  ↳ app/controllers/api/tutor/tutors_controller.rb:31:in `map'
+  [1m[36mStudent Load (0.9ms)[0m  [1m[34mSELECT "students".* FROM "students" WHERE "students"."id" IN (4, 21, 1, 17, 16, 22, 23, 24, 19, 25, 5, 3, 6, 8, 18, 14) /*action='session_list',application='TutorInsights',controller='tutors'*/[0m
+  ↳ app/controllers/api/tutor/tutors_controller.rb:65:in `map'
+  [1m[36mStudent Load (0.7ms)[0m  [1m[34mSELECT "students".* FROM "students" WHERE "students"."id" = 6 LIMIT 1 /*action='fsqs_history',application='TutorInsights',controller='tutors'*/[0m
+  ↳ app/controllers/api/tutor/tutors_controller.rb:35:in `block in fsqs_history'
+  [1m[36mScore Load (0.5ms)[0m  [1m[34mSELECT "scores".* FROM "scores" WHERE "scores"."session_id" IN (149, 299, 298, 7, 154, 300, 301, 302, 171, 303, 176, 192, 57, 69, 237, 245, 101, 105, 272, 121) /*action='session_list',application='TutorInsights',controller='tutors'*/[0m
+  ↳ app/controllers/api/tutor/tutors_controller.rb:65:in `map'
+Completed 200 OK in 40ms (Views: 0.3ms | ActiveRecord: 2.0ms (4 queries, 0 cached) | GC: 0.3ms)
+
+
+  [1m[36mStudent Load (1.4ms)[0m  [1m[34mSELECT "students".* FROM "students" WHERE "students"."id" = 25 LIMIT 1 /*action='fsqs_history',application='TutorInsights',controller='tutors'*/[0m
+  ↳ app/controllers/api/tutor/tutors_controller.rb:35:in `block in fsqs_history'
+  [1m[36mStudent Load (0.2ms)[0m  [1m[34mSELECT "students".* FROM "students" WHERE "students"."id" = 24 LIMIT 1 /*action='fsqs_history',application='TutorInsights',controller='tutors'*/[0m
+  ↳ app/controllers/api/tutor/tutors_controller.rb:35:in `block in fsqs_history'
+  [1m[36mStudent Load (0.2ms)[0m  [1m[34mSELECT "students".* FROM "students" WHERE "students"."id" = 23 LIMIT 1 /*action='fsqs_history',application='TutorInsights',controller='tutors'*/[0m
+  ↳ app/controllers/api/tutor/tutors_controller.rb:35:in `block in fsqs_history'
+Completed 200 OK in 42ms (Views: 0.1ms | ActiveRecord: 3.8ms (7 queries, 0 cached) | GC: 0.3ms)
+
+
+Started GET "/tutor/1" for ::1 at 2025-11-05 12:14:12 -0600
+Processing by TutorsController#show as HTML
+  Parameters: {"id"=>"1"}
+Started GET "/tutor/1" for ::1 at 2025-11-05 12:14:12 -0600
+Processing by TutorsController#show as HTML
+  Parameters: {"id"=>"1"}
+  Rendering layout layouts/application.html.erb
+  Rendering tutors/show.html.erb within layouts/application
+  Rendered tutors/show.html.erb within layouts/application (Duration: 0.1ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 1.6ms | GC: 0.0ms)
+Completed 200 OK in 36ms (Views: 1.9ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.9ms)
+
+
+  Rendering layout layouts/application.html.erb
+  Rendering tutors/show.html.erb within layouts/application
+  Rendered tutors/show.html.erb within layouts/application (Duration: 0.1ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 1.0ms | GC: 0.0ms)
+Completed 200 OK in 31ms (Views: 1.6ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/.well-known/appspecific/com.chrome.devtools.json" for ::1 at 2025-11-05 12:14:12 -0600
+  
+ActionController::RoutingError (No route matches [GET] "/.well-known/appspecific/com.chrome.devtools.json"):
+  
+Started GET "/api/tutor/1/fsqs_history" for ::1 at 2025-11-05 12:14:12 -0600
+Started GET "/api/tutor/1/fsqs_latest" for ::1 at 2025-11-05 12:14:12 -0600
+Processing by Api::Tutor::TutorsController#fsqs_history as */*
+  Parameters: {"id"=>"1"}
+Processing by Api::Tutor::TutorsController#fsqs_latest as */*
+  Parameters: {"id"=>"1"}
+Started GET "/api/tutor/1/session_list" for ::1 at 2025-11-05 12:14:12 -0600
+  [1m[36mTutor Load (0.6ms)[0m  [1m[34mSELECT "tutors".* FROM "tutors" WHERE "tutors"."id" = 1 LIMIT 1 /*action='fsqs_history',application='TutorInsights',controller='tutors'*/[0m
+  [1m[36mTutor Load (0.4ms)[0m  [1m[34mSELECT "tutors".* FROM "tutors" WHERE "tutors"."id" = 1 LIMIT 1 /*action='fsqs_latest',application='TutorInsights',controller='tutors'*/[0m
+  ↳ app/controllers/api/tutor/tutors_controller.rb:23:in `fsqs_history'
+  ↳ app/controllers/api/tutor/tutors_controller.rb:5:in `fsqs_latest'
+  [1m[36mScore Load (0.4ms)[0m  [1m[34mSELECT "scores".* FROM "scores" WHERE "scores"."tutor_id" = 1 AND "scores"."score_type" = 'fsqs' ORDER BY "scores"."computed_at" DESC LIMIT 5 /*action='fsqs_history',application='TutorInsights',controller='tutors'*/[0m
+  ↳ app/controllers/api/tutor/tutors_controller.rb:31:in `map'
+  [1m[36mScore Load (0.8ms)[0m  [1m[34mSELECT "scores".* FROM "scores" WHERE "scores"."tutor_id" = 1 AND "scores"."score_type" = 'fsqs' ORDER BY "scores"."computed_at" DESC LIMIT 1 /*action='fsqs_latest',application='TutorInsights',controller='tutors'*/[0m
+Processing by Api::Tutor::TutorsController#session_list as */*
+  ↳ app/controllers/api/tutor/tutors_controller.rb:10:in `fsqs_latest'
+  Parameters: {"id"=>"1"}
+Completed 200 OK in 63ms (Views: 0.1ms | ActiveRecord: 1.3ms (2 queries, 0 cached) | GC: 0.0ms)
+
+
+  [1m[36mSession Load (0.8ms)[0m  [1m[34mSELECT "sessions".* FROM "sessions" WHERE "sessions"."id" IN (57, 303, 302, 301) /*action='fsqs_history',application='TutorInsights',controller='tutors'*/[0m
+  ↳ app/controllers/api/tutor/tutors_controller.rb:31:in `map'
+  [1m[36mStudent Load (0.4ms)[0m  [1m[34mSELECT "students".* FROM "students" WHERE "students"."id" = 6 LIMIT 1 /*action='fsqs_history',application='TutorInsights',controller='tutors'*/[0m
+  ↳ app/controllers/api/tutor/tutors_controller.rb:35:in `block in fsqs_history'
+  [1m[36mStudent Load (0.3ms)[0m  [1m[34mSELECT "students".* FROM "students" WHERE "students"."id" = 25 LIMIT 1 /*action='fsqs_history',application='TutorInsights',controller='tutors'*/[0m
+  ↳ app/controllers/api/tutor/tutors_controller.rb:35:in `block in fsqs_history'
+  [1m[36mStudent Load (0.3ms)[0m  [1m[34mSELECT "students".* FROM "students" WHERE "students"."id" = 24 LIMIT 1 /*action='fsqs_history',application='TutorInsights',controller='tutors'*/[0m
+  ↳ app/controllers/api/tutor/tutors_controller.rb:35:in `block in fsqs_history'
+  [1m[36mStudent Load (0.3ms)[0m  [1m[34mSELECT "students".* FROM "students" WHERE "students"."id" = 23 LIMIT 1 /*action='fsqs_history',application='TutorInsights',controller='tutors'*/[0m
+  ↳ app/controllers/api/tutor/tutors_controller.rb:35:in `block in fsqs_history'
+Completed 200 OK in 69ms (Views: 0.1ms | ActiveRecord: 3.1ms (7 queries, 0 cached) | GC: 1.0ms)
+
+
+Started GET "/api/tutor/1/performance_summary" for ::1 at 2025-11-05 12:14:12 -0600
+  [1m[36mTutor Load (0.7ms)[0m  [1m[34mSELECT "tutors".* FROM "tutors" WHERE "tutors"."id" = 1 LIMIT 1 /*action='session_list',application='TutorInsights',controller='tutors'*/[0m
+  ↳ app/controllers/api/tutor/tutors_controller.rb:57:in `session_list'
+  [1m[36mSession Load (0.4ms)[0m  [1m[34mSELECT "sessions".* FROM "sessions" WHERE "sessions"."tutor_id" = 1 AND "sessions"."status" = 'completed' ORDER BY "sessions"."scheduled_start_at" DESC LIMIT 20 /*action='session_list',application='TutorInsights',controller='tutors'*/[0m
+  ↳ app/controllers/api/tutor/tutors_controller.rb:65:in `map'
+  [1m[36mStudent Load (0.4ms)[0m  [1m[34mSELECT "students".* FROM "students" WHERE "students"."id" IN (4, 21, 1, 17, 16, 22, 23, 24, 19, 25, 5, 3, 6, 8, 18, 14) /*action='session_list',application='TutorInsights',controller='tutors'*/[0m
+  ↳ app/controllers/api/tutor/tutors_controller.rb:65:in `map'
+Started GET "/api/tutor/1/fsqs_latest" for ::1 at 2025-11-05 12:14:12 -0600
+  [1m[36mScore Load (0.9ms)[0m  [1m[34mSELECT "scores".* FROM "scores" WHERE "scores"."session_id" IN (149, 299, 298, 7, 154, 300, 301, 302, 171, 303, 176, 192, 57, 69, 237, 245, 101, 105, 272, 121) /*action='session_list',application='TutorInsights',controller='tutors'*/[0m
+  ↳ app/controllers/api/tutor/tutors_controller.rb:65:in `map'
+Completed 200 OK in 66ms (Views: 0.1ms | ActiveRecord: 2.3ms (4 queries, 0 cached) | GC: 2.0ms)
+
+
+Processing by Api::Tutor::TutorsController#performance_summary as */*
+  Parameters: {"id"=>"1"}
+Processing by Api::Tutor::TutorsController#fsqs_latest as */*
+  Parameters: {"id"=>"1"}
+Started GET "/api/tutor/1/session_list" for ::1 at 2025-11-05 12:14:12 -0600
+  [1m[36mTutor Load (0.4ms)[0m  [1m[34mSELECT "tutors".* FROM "tutors" WHERE "tutors"."id" = 1 LIMIT 1 /*action='performance_summary',application='TutorInsights',controller='tutors'*/[0m
+  ↳ app/controllers/api/tutor/tutors_controller.rb:46:in `performance_summary'
+Completed 200 OK in 55ms (Views: 0.1ms | ActiveRecord: 0.4ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Processing by Api::Tutor::TutorsController#session_list as */*
+  [1m[36mTutor Load (1.0ms)[0m  [1m[34mSELECT "tutors".* FROM "tutors" WHERE "tutors"."id" = 1 LIMIT 1 /*action='fsqs_latest',application='TutorInsights',controller='tutors'*/[0m
+  Parameters: {"id"=>"1"}
+  ↳ app/controllers/api/tutor/tutors_controller.rb:5:in `fsqs_latest'
+  [1m[36mScore Load (0.4ms)[0m  [1m[34mSELECT "scores".* FROM "scores" WHERE "scores"."tutor_id" = 1 AND "scores"."score_type" = 'fsqs' ORDER BY "scores"."computed_at" DESC LIMIT 1 /*action='fsqs_latest',application='TutorInsights',controller='tutors'*/[0m
+  ↳ app/controllers/api/tutor/tutors_controller.rb:10:in `fsqs_latest'
+Completed 200 OK in 57ms (Views: 0.0ms | ActiveRecord: 1.4ms (2 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/api/tutor/1/performance_summary" for ::1 at 2025-11-05 12:14:12 -0600
+Started GET "/api/tutor/1/fsqs_history" for ::1 at 2025-11-05 12:14:12 -0600
+  [1m[36mTutor Load (0.5ms)[0m  [1m[34mSELECT "tutors".* FROM "tutors" WHERE "tutors"."id" = 1 LIMIT 1 /*action='session_list',application='TutorInsights',controller='tutors'*/[0m
+  ↳ app/controllers/api/tutor/tutors_controller.rb:57:in `session_list'
+  [1m[36mSession Load (0.4ms)[0m  [1m[34mSELECT "sessions".* FROM "sessions" WHERE "sessions"."tutor_id" = 1 AND "sessions"."status" = 'completed' ORDER BY "sessions"."scheduled_start_at" DESC LIMIT 20 /*action='session_list',application='TutorInsights',controller='tutors'*/[0m
+  ↳ app/controllers/api/tutor/tutors_controller.rb:65:in `map'
+  [1m[36mStudent Load (0.4ms)[0m  [1m[34mSELECT "students".* FROM "students" WHERE "students"."id" IN (4, 21, 1, 17, 16, 22, 23, 24, 19, 25, 5, 3, 6, 8, 18, 14) /*action='session_list',application='TutorInsights',controller='tutors'*/[0m
+  ↳ app/controllers/api/tutor/tutors_controller.rb:65:in `map'
+  [1m[36mScore Load (0.6ms)[0m  [1m[34mSELECT "scores".* FROM "scores" WHERE "scores"."session_id" IN (149, 299, 298, 7, 154, 300, 301, 302, 171, 303, 176, 192, 57, 69, 237, 245, 101, 105, 272, 121) /*action='session_list',application='TutorInsights',controller='tutors'*/[0m
+  ↳ app/controllers/api/tutor/tutors_controller.rb:65:in `map'
+Completed 200 OK in 60ms (Views: 0.1ms | ActiveRecord: 1.9ms (4 queries, 0 cached) | GC: 0.3ms)
+
+
+Processing by Api::Tutor::TutorsController#performance_summary as */*
+  Parameters: {"id"=>"1"}
+Processing by Api::Tutor::TutorsController#fsqs_history as */*
+  Parameters: {"id"=>"1"}
+  [1m[36mTutor Load (0.3ms)[0m  [1m[34mSELECT "tutors".* FROM "tutors" WHERE "tutors"."id" = 1 LIMIT 1 /*action='performance_summary',application='TutorInsights',controller='tutors'*/[0m
+  ↳ app/controllers/api/tutor/tutors_controller.rb:46:in `performance_summary'
+Completed 200 OK in 35ms (Views: 0.1ms | ActiveRecord: 0.3ms (1 query, 0 cached) | GC: 0.9ms)
+
+
+  [1m[36mTutor Load (0.2ms)[0m  [1m[34mSELECT "tutors".* FROM "tutors" WHERE "tutors"."id" = 1 LIMIT 1 /*action='fsqs_history',application='TutorInsights',controller='tutors'*/[0m
+  ↳ app/controllers/api/tutor/tutors_controller.rb:23:in `fsqs_history'
+  [1m[36mScore Load (0.4ms)[0m  [1m[34mSELECT "scores".* FROM "scores" WHERE "scores"."tutor_id" = 1 AND "scores"."score_type" = 'fsqs' ORDER BY "scores"."computed_at" DESC LIMIT 5 /*action='fsqs_history',application='TutorInsights',controller='tutors'*/[0m
+  ↳ app/controllers/api/tutor/tutors_controller.rb:31:in `map'
+  [1m[36mSession Load (0.3ms)[0m  [1m[34mSELECT "sessions".* FROM "sessions" WHERE "sessions"."id" IN (57, 303, 302, 301) /*action='fsqs_history',application='TutorInsights',controller='tutors'*/[0m
+  ↳ app/controllers/api/tutor/tutors_controller.rb:31:in `map'
+  [1m[36mStudent Load (0.1ms)[0m  [1m[34mSELECT "students".* FROM "students" WHERE "students"."id" = 6 LIMIT 1 /*action='fsqs_history',application='TutorInsights',controller='tutors'*/[0m
+  ↳ app/controllers/api/tutor/tutors_controller.rb:35:in `block in fsqs_history'
+  [1m[36mStudent Load (0.1ms)[0m  [1m[34mSELECT "students".* FROM "students" WHERE "students"."id" = 25 LIMIT 1 /*action='fsqs_history',application='TutorInsights',controller='tutors'*/[0m
+  ↳ app/controllers/api/tutor/tutors_controller.rb:35:in `block in fsqs_history'
+  [1m[36mStudent Load (0.1ms)[0m  [1m[34mSELECT "students".* FROM "students" WHERE "students"."id" = 24 LIMIT 1 /*action='fsqs_history',application='TutorInsights',controller='tutors'*/[0m
+  ↳ app/controllers/api/tutor/tutors_controller.rb:35:in `block in fsqs_history'
+  [1m[36mStudent Load (0.1ms)[0m  [1m[34mSELECT "students".* FROM "students" WHERE "students"."id" = 23 LIMIT 1 /*action='fsqs_history',application='TutorInsights',controller='tutors'*/[0m
+  ↳ app/controllers/api/tutor/tutors_controller.rb:35:in `block in fsqs_history'
+Completed 200 OK in 37ms (Views: 0.1ms | ActiveRecord: 1.3ms (7 queries, 0 cached) | GC: 0.0ms)
+
+
