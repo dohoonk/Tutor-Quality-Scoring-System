@@ -47,7 +47,7 @@ const Tooltip = ({ text }) => {
         </svg>
       </button>
       {show && (
-        <div className="absolute z-50 w-72 p-3 bg-gray-900 text-white text-sm rounded-lg shadow-lg -top-2 left-6 transform -translate-y-full animate-fade-in">
+        <div className="absolute z-[9999] w-72 p-3 bg-gray-900 text-white text-sm rounded-lg shadow-lg -top-2 left-6 transform -translate-y-full animate-fade-in">
           <div className="absolute -bottom-2 left-2 w-0 h-0 border-l-8 border-r-8 border-t-8 border-transparent border-t-gray-900"></div>
           {text}
         </div>
@@ -347,29 +347,9 @@ const TutorDashboard = ({ tutorId }) => {
                   </div>
                 </div>
 
-                {/* Right: Feedback & Educational Content (Desktop only) */}
+                {/* Right: Educational Content (Desktop only) */}
                 <div className="hidden md:block">
                   <div className="flex flex-col space-y-4" style={{ paddingTop: isDesktop ? '30px' : '0' }}>
-                    {/* What Went Well - Feedback */}
-                    {fsqsLatest.feedback?.what_went_well && (
-                      <div className="bg-green-50 rounded-lg p-4 border-l-4 border-green-500">
-                        <h4 className="text-lg font-semibold text-green-700 mb-2 flex items-center gap-2">
-                          <span>✓</span> What Went Well
-                        </h4>
-                        <p className="text-gray-700 text-sm leading-relaxed">{fsqsLatest.feedback.what_went_well}</p>
-                      </div>
-                    )}
-
-                    {/* One Improvement Idea - Feedback */}
-                    {fsqsLatest.feedback?.improvement_idea && (
-                      <div className="bg-blue-50 rounded-lg p-4 border-l-4 border-blue-500">
-                        <h4 className="text-lg font-semibold text-blue-700 mb-2 flex items-center gap-2">
-                          <span>💡</span> One Improvement Idea
-                        </h4>
-                        <p className="text-gray-700 text-sm leading-relaxed">{fsqsLatest.feedback.improvement_idea}</p>
-                      </div>
-                    )}
-
                     {/* Why FSQS Matters */}
                     <div className="bg-blue-50 rounded-lg p-4 border-l-4 border-blue-500">
                       <h4 className="text-lg font-semibold text-blue-900 mb-2 flex items-center gap-2">
@@ -416,28 +396,6 @@ const TutorDashboard = ({ tutorId }) => {
             </div>
           )}
 
-          {/* Mobile: Feedback sections (shown below chart on mobile) */}
-          <div className="md:hidden space-y-4 mb-4">
-            {/* What Went Well */}
-            {fsqsLatest.feedback?.what_went_well && (
-              <div className="p-4 bg-green-50 rounded-lg border-l-4 border-green-500">
-                <h3 className="text-lg font-semibold text-green-700 mb-2 flex items-center gap-2">
-                  <span>✓</span> What Went Well
-                </h3>
-                <p className="text-gray-700">{fsqsLatest.feedback.what_went_well}</p>
-              </div>
-            )}
-
-            {/* One Improvement Idea */}
-            {fsqsLatest.feedback?.improvement_idea && (
-              <div className="p-4 bg-blue-50 rounded-lg border-l-4 border-blue-500">
-                <h3 className="text-lg font-semibold text-blue-700 mb-2 flex items-center gap-2">
-                  <span>💡</span> One Improvement Idea
-                </h3>
-                <p className="text-gray-700">{fsqsLatest.feedback.improvement_idea}</p>
-              </div>
-            )}
-          </div>
 
           {/* Past First Sessions Side Panel */}
           {showPastSessions && (
@@ -615,28 +573,6 @@ const TutorDashboard = ({ tutorId }) => {
                           </div>
                         )
                       })()}
-                    </div>
-                    
-                    {/* Chart - Full Width */}
-                    <div className="flex items-end gap-1 md:gap-2 h-32 w-full">
-                      {sessionList.slice(0, 10).map((session, index) => {
-                        if (!session.sqs) return null
-                        const maxSqs = Math.max(...sessionList.map(s => s.sqs || 0), 100)
-                        const height = (session.sqs / maxSqs) * 100
-                        const sqsLabel = getScoreLabel(session.sqs, 'sqs')
-                        const color = sqsLabel.color === 'red' ? 'bg-red-500' : 
-                                     sqsLabel.color === 'yellow' ? 'bg-yellow-500' : 'bg-green-500'
-                        return (
-                          <div key={index} className="flex-1 flex flex-col items-center group">
-                            <div
-                              className={`w-full ${color} rounded-t transition-all hover:opacity-80`}
-                              style={{ height: `${height}%` }}
-                              title={`SQS: ${session.sqs}`}
-                              aria-label={`Session ${index + 1}: SQS ${session.sqs}`}
-                            />
-                          </div>
-                        )
-                      })}
                     </div>
                   </div>
                 </div>

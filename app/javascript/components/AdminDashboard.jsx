@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import { 
   LoadingSpinner, 
   SkeletonDashboard, 
@@ -7,6 +7,63 @@ import {
   AccessibleButton,
   MobileSearchableTable
 } from './ui'
+
+// Tooltip Component with improved accessibility
+const Tooltip = ({ text }) => {
+  const [show, setShow] = useState(false)
+  const [position, setPosition] = useState({ top: 0, left: 0 })
+  const buttonRef = useRef(null)
+  
+  const updatePosition = () => {
+    if (buttonRef.current) {
+      const rect = buttonRef.current.getBoundingClientRect()
+      setPosition({
+        top: rect.top - 8, // Position above the button
+        left: rect.left + rect.width / 2 // Center horizontally
+      })
+    }
+  }
+  
+  const handleMouseEnter = () => {
+    updatePosition()
+    setShow(true)
+  }
+  
+  return (
+    <>
+      <div className="relative inline-block">
+        <button
+          ref={buttonRef}
+          type="button"
+          onMouseEnter={handleMouseEnter}
+          onMouseLeave={() => setShow(false)}
+          onFocus={handleMouseEnter}
+          onBlur={() => setShow(false)}
+          className="ml-1 text-gray-400 hover:text-gray-600 cursor-help transition-colors focus-ring"
+          aria-label="More information"
+        >
+          <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">
+            <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-8-3a1 1 0 00-.867.5 1 1 0 11-1.731-1A3 3 0 0113 8a3.001 3.001 0 01-2 2.83V11a1 1 0 11-2 0v-1a1 1 0 011-1 1 1 0 100-2zm0 8a1 1 0 100-2 1 1 0 000 2z" clipRule="evenodd" />
+          </svg>
+        </button>
+      </div>
+      {show && (
+        <div 
+          className="fixed w-64 p-3 bg-gray-900 text-white text-xs rounded-lg shadow-lg z-[9999] pointer-events-none"
+          style={{
+            top: `${position.top}px`,
+            left: `${position.left}px`,
+            transform: 'translate(-50%, -100%)',
+            marginTop: '-8px'
+          }}
+        >
+          {text}
+          <div className="absolute top-full left-1/2 transform -translate-x-1/2 -mt-1 border-4 border-transparent border-t-gray-900"></div>
+        </div>
+      )}
+    </>
+  )
+}
 
 const AdminDashboard = ({ adminId }) => {
   const [tutorList, setTutorList] = useState([])
@@ -104,6 +161,12 @@ const AdminDashboard = ({ adminId }) => {
     return 'low'
   }
 
+  // Get status badges for filtering
+  const getStatusBadges = (tutor) => {
+    const badges = getRiskBadge(tutor.fsqs, tutor.ths, tutor.tcrs)
+    return badges.map(badge => badge.label)
+  }
+
   // Loading State
   if (loading) {
     return (
@@ -153,6 +216,20 @@ const AdminDashboard = ({ adminId }) => {
               ]
             },
             {
+              key: 'status',
+              label: 'Status',
+              getValue: (tutor) => getStatusBadges(tutor),
+              options: [
+                { value: 'Low First Session Quality', label: 'Low First Session Quality' },
+                { value: 'First Session Warning', label: 'First Session Warning' },
+                { value: 'Reliability Risk', label: 'Reliability Risk' },
+                { value: 'Monitor Reliability', label: 'Monitor Reliability' },
+                { value: 'Churn Risk', label: 'Churn Risk' },
+                { value: 'Monitor Churn', label: 'Monitor Churn' },
+                { value: 'Stable', label: 'Stable' }
+              ]
+            },
+            {
               key: 'has_alerts',
               label: 'Alerts',
               options: [
@@ -199,7 +276,12 @@ const AdminDashboard = ({ adminId }) => {
             },
             {
               key: 'fsqs',
-              label: 'FSQS',
+              label: (
+                <span className="flex items-center">
+                  FSQS
+                  <Tooltip text="First Session Quality Score (FSQS) measures the quality of initial sessions with new students. A higher score (70-100) indicates strong rapport-building, clear goal-setting, and encouraging communication. Scores below 50 suggest areas to improve such as reducing confusion, using positive language, or providing better session structure." />
+                </span>
+              ),
               sortable: true,
               render: (tutor) => (
                 tutor.fsqs !== null ? (
@@ -211,7 +293,12 @@ const AdminDashboard = ({ adminId }) => {
             },
             {
               key: 'ths',
-              label: 'THS',
+              label: (
+                <span className="flex items-center">
+                  THS
+                  <Tooltip text="Tutor Health Score (THS) measures 7-day reliability metrics including tutor-initiated reschedules, no-shows, and behavioral lateness patterns. Higher scores (75+) indicate stable reliability, while scores below 55 suggest high reliability risk requiring attention." />
+                </span>
+              ),
               sortable: true,
               render: (tutor) => (
                 tutor.ths !== null ? (
@@ -223,7 +310,12 @@ const AdminDashboard = ({ adminId }) => {
             },
             {
               key: 'tcrs',
-              label: 'TCRS',
+              label: (
+                <span className="flex items-center">
+                  TCRS
+                  <Tooltip text="Tutor Churn Risk Score (TCRS) predicts tutor disengagement based on 14-day engagement metrics including availability drop, session completion decline, and repeat student rate. Scores ≥0.6 indicate high churn risk, 0.3-0.59 suggest monitoring needed, and <0.3 indicates stable engagement." />
+                </span>
+              ),
               sortable: true,
               render: (tutor) => (
                 tutor.tcrs !== null ? (
@@ -302,7 +394,10 @@ const AdminDashboard = ({ adminId }) => {
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6 mb-6">
                   {/* FSQS Card */}
                   <div className="bg-white rounded-lg shadow-md p-4 md:p-6 hover-lift">
-                    <h3 className="text-base md:text-lg font-semibold mb-2">First Session Quality Score</h3>
+                    <h3 className="text-base md:text-lg font-semibold mb-2 flex items-center">
+                      First Session Quality Score
+                      <Tooltip text="First Session Quality Score (FSQS) measures the quality of initial sessions with new students. A higher score (70-100) indicates strong rapport-building, clear goal-setting, and encouraging communication. Scores below 50 suggest areas to improve such as reducing confusion, using positive language, or providing better session structure." />
+                    </h3>
                     <div className="text-3xl md:text-4xl font-bold mb-2">
                       {tutorMetrics.fsqs !== null ? tutorMetrics.fsqs.toFixed(1) : 'N/A'}
                     </div>
@@ -319,7 +414,10 @@ const AdminDashboard = ({ adminId }) => {
 
                   {/* THS Card */}
                   <div className="bg-white rounded-lg shadow-md p-4 md:p-6 hover-lift">
-                    <h3 className="text-base md:text-lg font-semibold mb-2">Tutor Health Score (7d)</h3>
+                    <h3 className="text-base md:text-lg font-semibold mb-2 flex items-center">
+                      Tutor Health Score (7d)
+                      <Tooltip text="Tutor Health Score (THS) measures 7-day reliability metrics including tutor-initiated reschedules, no-shows, and behavioral lateness patterns. Higher scores (75+) indicate stable reliability, while scores below 55 suggest high reliability risk requiring attention." />
+                    </h3>
                     <div className="text-3xl md:text-4xl font-bold mb-2">
                       {tutorMetrics.ths !== null ? tutorMetrics.ths.toFixed(1) : 'N/A'}
                     </div>
@@ -336,7 +434,10 @@ const AdminDashboard = ({ adminId }) => {
 
                   {/* TCRS Card */}
                   <div className="bg-white rounded-lg shadow-md p-4 md:p-6 hover-lift">
-                    <h3 className="text-base md:text-lg font-semibold mb-2">Churn Risk Score (14d)</h3>
+                    <h3 className="text-base md:text-lg font-semibold mb-2 flex items-center">
+                      Churn Risk Score (14d)
+                      <Tooltip text="Tutor Churn Risk Score (TCRS) predicts tutor disengagement based on 14-day engagement metrics including availability drop, session completion decline, and repeat student rate. Scores ≥0.6 indicate high churn risk, 0.3-0.59 suggest monitoring needed, and <0.3 indicates stable engagement." />
+                    </h3>
                     <div className="text-3xl md:text-4xl font-bold mb-2">
                       {tutorMetrics.tcrs !== null ? tutorMetrics.tcrs.toFixed(2) : 'N/A'}
                     </div>
