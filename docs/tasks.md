@@ -317,20 +317,20 @@
 - [x] Update admin API risk scoring algorithm (invert FSQS comparison)
 - [ ] Maintain backward compatibility (optional: support both endpoints temporarily)
 
-### Task 11.5: Update Frontend Components
-- [ ] Update TutorDashboard.jsx:
-  - [ ] Rename all `fsrs` variables to `fsqs`
-  - [ ] Update API endpoint calls
-  - [ ] Invert threshold logic: `>= 50` → `<= 50`, `>= 30` → `<= 70`
-  - [ ] Update tooltips: "Risk Score" → "Quality Score", explain higher is better
-  - [ ] Update trend indicators: ↑ = improvement, ↓ = decline
-  - [ ] Update labels: "FSRS" → "FSQS"
-- [ ] Update AdminDashboard.jsx:
-  - [ ] Rename all `fsrs` variables to `fsqs`
-  - [ ] Update getRiskBadge logic (invert thresholds)
-  - [ ] Update metric cards: "First Session Risk Score" → "First Session Quality Score"
-  - [ ] Invert color coding logic
-- [ ] Update session table displays (both dashboards)
+### Task 11.5: Update Frontend Components ✅
+- [x] Update TutorDashboard.jsx:
+  - [x] Rename all `fsrs` variables to `fsqs`
+  - [x] Update API endpoint calls
+  - [x] Invert threshold logic: `>= 50` → `<= 50`, `>= 30` → `<= 70`
+  - [x] Update tooltips: "Risk Score" → "Quality Score", explain higher is better
+  - [x] Update trend indicators: ↑ = improvement, ↓ = decline
+  - [x] Update labels: "FSRS" → "FSQS"
+- [x] Update AdminDashboard.jsx:
+  - [x] Rename all `fsrs` variables to `fsqs`
+  - [x] Update getRiskBadge logic (invert thresholds)
+  - [x] Update metric cards: "First Session Risk Score" → "First Session Quality Score"
+  - [x] Invert color coding logic
+- [x] Update session table displays (both dashboards)
 
 ### Task 11.6: Update All Tests
 - [ ] Update service specs:
@@ -373,10 +373,11 @@
   - [ ] Update alert type descriptions
 - [ ] Update README.md if it contains FSRS references
 
-### Task 11.8: Clean Up Legacy Code
-- [ ] Remove or update legacy `compute_fsrs` method in SessionScoringJob (if exists)
-- [ ] Update any remaining comments referencing "risk" to "quality"
-- [ ] Remove old service file after renaming
+### Task 11.8: Clean Up Legacy Code ✅
+- [x] Remove or update legacy `compute_fsrs` method in SessionScoringJob (replaced with service call)
+- [x] Update any remaining comments referencing "risk" to "quality"
+- [x] Remove old service file (first_session_risk_score_service.rb)
+- [x] Remove old email templates (poor_first_session_alert.*)
 
 ### Task 11.9: Testing & Verification
 - [ ] Run full test suite and ensure all tests pass
