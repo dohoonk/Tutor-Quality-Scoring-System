@@ -1,11 +1,30 @@
 # frozen_string_literal: true
 
 class PerformanceSummaryService
+  CACHE_EXPIRY = 1.hour
+
   def initialize(tutor)
     @tutor = tutor
   end
 
   def generate_summary
+    Rails.cache.fetch(cache_key, expires_in: CACHE_EXPIRY) do
+      compute_summary
+    end
+  end
+
+  # Bust the cache when new scores are added
+  def self.bust_cache(tutor_id)
+    Rails.cache.delete("performance_summary:tutor:#{tutor_id}")
+  end
+
+  private
+
+  def cache_key
+    "performance_summary:tutor:#{@tutor.id}"
+  end
+
+  def compute_summary
     sqs_scores = fetch_recent_sqs_scores
     
     if sqs_scores.length < 3
@@ -23,8 +42,6 @@ class PerformanceSummaryService
       improvement_suggestion: generate_improvement_suggestion(avg_score, trend)
     }
   end
-
-  private
 
   def fetch_recent_sqs_scores
     @tutor.scores

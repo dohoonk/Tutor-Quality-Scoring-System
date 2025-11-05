@@ -80,6 +80,9 @@ class SessionScoringJob < ApplicationJob
       components: components,
       computed_at: Time.current
     )
+    
+    # Bust performance summary cache when new SQS is added
+    PerformanceSummaryService.bust_cache(session.tutor.id)
   end
 
   def compute_fsrs(session)
