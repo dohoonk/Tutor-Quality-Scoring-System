@@ -252,19 +252,23 @@
 
 ---
 
-## EPIC 10 — Email Notifications (Post-MVP)
-- [ ] Configure ActionMailer for email delivery
-- [ ] Set up SMTP settings (development and production)
-- [ ] Create AlertMailer with email templates:
-  - [ ] Poor first session alert email
-  - [ ] High reliability risk alert email
-  - [ ] Churn risk alert email
-- [ ] Update AlertService to send emails when alerts are created:
-  - [ ] Send email to admin/coach when alert is triggered
-  - [ ] Include alert details and tutor information
-  - [ ] Add link to admin dashboard for alert management
-- [ ] Add email preferences/configuration:
-  - [ ] Allow admins to configure email recipients
-  - [ ] Support email frequency settings (immediate, daily digest, etc.)
-- [ ] Test email delivery in development and staging
-- [ ] Document email notification system
+## EPIC 10 — Email Notifications ✅ COMPLETE
+- [x] Configure ActionMailer for email delivery (development: letter_opener, production: SMTP)
+- [x] Set up SMTP settings (development and production)
+- [x] Create AlertMailer with email templates:
+  - [x] Poor first session alert email (HTML + plain text)
+  - [x] High reliability risk alert email (HTML + plain text)
+  - [x] Churn risk alert email (HTML + plain text)
+- [x] Update AlertService to send emails when alerts are created:
+  - [x] Send email to admin/coach when alert is triggered
+  - [x] Include alert details and tutor information
+  - [x] Add link to admin dashboard for alert management
+  - [x] Use deliver_later for async delivery via Sidekiq
+- [ ] Add email preferences/configuration (FUTURE ENHANCEMENT):
+  - Documented in EMAIL_NOTIFICATIONS.md
+  - Multiple recipients support
+  - Alert type filtering
+  - Frequency settings (immediate, daily digest, weekly summary)
+  - Unsubscribe functionality
+- [x] Test email delivery in development (letter_opener auto-opens in browser)
+- [x] Document email notification system (docs/EMAIL_NOTIFICATIONS.md)
