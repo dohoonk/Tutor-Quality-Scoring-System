@@ -3814,3 +3814,167 @@ FOREIGN KEY ("tutor_id")
   [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN /*application='TutorInsights'*/[0m
   [1m[36mSessionTranscript Create (4.0ms)[0m  [1m[32mINSERT INTO "session_transcripts" ("session_id", "payload", "created_at", "updated_at") VALUES (298, '{"speakers":[{"speaker":"tutor","text":"Hello! What are your goals for today?","words":7},{"speaker":"student","text":"I want to learn math","words":5},{"speaker":"tutor","text":"Great! You are doing well. Keep it up!","words":8},{"speaker":"student","text":"Thank you","words":2},{"speaker":"tutor","text":"Let us summarize what we covered today and plan next steps","words":12}],"metadata":{"total_words_tutor":27,"total_words_student":7}}', '2025-11-05 07:31:31.936268', '2025-11-05 07:31:31.936268') RETURNING "id" /*application='TutorInsights'*/[0m
   [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mCOMMIT /*application='TutorInsights'*/[0m
+  [1m[36mTutor Load (0.3ms)[0m  [1m[34mSELECT "tutors".* FROM "tutors" ORDER BY "tutors"."id" ASC LIMIT 1 /*application='TutorInsights'*/[0m
+  [1m[36mStudent Load (0.2ms)[0m  [1m[34mSELECT "students".* FROM "students" WHERE "students"."email" = 'student0@test.com' LIMIT 1 /*application='TutorInsights'*/[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mBEGIN /*application='TutorInsights'*/[0m
+  [1m[36mStudent Create (0.2ms)[0m  [1m[32mINSERT INTO "students" ("name", "email", "created_at", "updated_at") VALUES ('Student 0', 'student0@test.com', '2025-11-05 07:47:49.991237', '2025-11-05 07:47:49.991237') RETURNING "id" /*application='TutorInsights'*/[0m
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mCOMMIT /*application='TutorInsights'*/[0m
+  [1m[36mSession Load (0.5ms)[0m  [1m[34mSELECT "sessions".* FROM "sessions" WHERE "sessions"."tutor_id" = 1 AND "sessions"."student_id" = 21 AND "sessions"."scheduled_start_at" = '2025-11-05 07:47:49.995015' LIMIT 1 /*application='TutorInsights'*/[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN /*application='TutorInsights'*/[0m
+  [1m[36mSession Create (0.5ms)[0m  [1m[32mINSERT INTO "sessions" ("tutor_id", "student_id", "scheduled_start_at", "actual_start_at", "scheduled_end_at", "actual_end_at", "status", "reschedule_initiator", "tech_issue", "first_session_for_student", "created_at", "updated_at") VALUES (1, 21, '2025-11-05 07:47:49.995015', '2025-11-05 07:47:50.003034', '2025-11-05 08:47:50.003092', '2025-11-05 08:47:50.003152', 'completed', NULL, FALSE, TRUE, '2025-11-05 07:47:50.003527', '2025-11-05 07:47:50.003527') RETURNING "id" /*application='TutorInsights'*/[0m
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[35mCOMMIT /*application='TutorInsights'*/[0m
+  [1m[36mSessionTranscript Load (0.3ms)[0m  [1m[34mSELECT "session_transcripts".* FROM "session_transcripts" WHERE "session_transcripts"."session_id" = 299 LIMIT 1 /*application='TutorInsights'*/[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mBEGIN /*application='TutorInsights'*/[0m
+  [1m[36mSessionTranscript Create (0.4ms)[0m  [1m[32mINSERT INTO "session_transcripts" ("session_id", "payload", "created_at", "updated_at") VALUES (299, '{"speakers":[{"speaker":"tutor","text":"What are your goals for today?","words":6},{"speaker":"student","text":"I want to learn","words":4},{"speaker":"tutor","text":"Great! Let us summarize.","words":4}],"metadata":{"total_words_tutor":10,"total_words_student":4}}', '2025-11-05 07:47:50.011254', '2025-11-05 07:47:50.011254') RETURNING "id" /*application='TutorInsights'*/[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mCOMMIT /*application='TutorInsights'*/[0m
+  [1m[36mScore Exists? (0.6ms)[0m  [1m[34mSELECT 1 AS one FROM "scores" WHERE "scores"."session_id" = 299 AND "scores"."score_type" = 'sqs' LIMIT 1 /*application='TutorInsights'*/[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN /*application='TutorInsights'*/[0m
+  [1m[36mScore Create (1.0ms)[0m  [1m[32mINSERT INTO "scores" ("session_id", "tutor_id", "score_type", "value", "components", "computed_at", "created_at", "updated_at") VALUES (299, 1, 'sqs', 78.0, '{"base":80,"lateness_penalty":2,"shortfall_penalty":0,"tech_penalty":0,"label":"ok"}', '2025-11-05 07:47:50.015588', '2025-11-05 07:47:50.024733', '2025-11-05 07:47:50.024733') RETURNING "id" /*application='TutorInsights'*/[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mCOMMIT /*application='TutorInsights'*/[0m
+  [1m[36mScore Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "scores" WHERE "scores"."session_id" = 299 AND "scores"."score_type" = 'fsrs' LIMIT 1 /*application='TutorInsights'*/[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN /*application='TutorInsights'*/[0m
+  [1m[36mScore Create (0.6ms)[0m  [1m[32mINSERT INTO "scores" ("session_id", "tutor_id", "score_type", "value", "components", "computed_at", "created_at", "updated_at") VALUES (299, 1, 'fsrs', 0.0, '{"confusion_phrases":0,"word_share_imbalance":0,"missing_goal_setting":0,"missing_encouragement":0,"negative_phrasing":0,"missing_closing_summary":0,"tech_lateness_disruption":0,"score":0,"feedback":{"what_went_well":"Student showed good understanding with minimal confusion. Good balance of tutor and student participation. Goal-setting question was asked early in the session. Encouragement phrases were used throughout. Positive, supportive language was maintained. Session ended with clear summary and next steps","improvement_idea":"Continue building on these positive patterns","breakdown":{"confusion_phrases":0,"word_share_imbalance":0,"missing_goal_setting":0,"missing_encouragement":0,"negative_phrasing":0,"missing_closing_summary":0,"tech_lateness_disruption":0}}}', '2025-11-05 07:47:50.028208', '2025-11-05 07:47:50.028402', '2025-11-05 07:47:50.028402') RETURNING "id" /*application='TutorInsights'*/[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mCOMMIT /*application='TutorInsights'*/[0m
+  [1m[36mStudent Load (0.1ms)[0m  [1m[34mSELECT "students".* FROM "students" WHERE "students"."email" = 'student1@test.com' LIMIT 1 /*application='TutorInsights'*/[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mBEGIN /*application='TutorInsights'*/[0m
+  [1m[36mStudent Create (0.2ms)[0m  [1m[32mINSERT INTO "students" ("name", "email", "created_at", "updated_at") VALUES ('Student 1', 'student1@test.com', '2025-11-05 07:47:50.030088', '2025-11-05 07:47:50.030088') RETURNING "id" /*application='TutorInsights'*/[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mCOMMIT /*application='TutorInsights'*/[0m
+  [1m[36mSession Load (0.2ms)[0m  [1m[34mSELECT "sessions".* FROM "sessions" WHERE "sessions"."tutor_id" = 1 AND "sessions"."student_id" = 22 AND "sessions"."scheduled_start_at" = '2025-11-04 07:47:50.030885' LIMIT 1 /*application='TutorInsights'*/[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN /*application='TutorInsights'*/[0m
+  [1m[36mSession Create (0.5ms)[0m  [1m[32mINSERT INTO "sessions" ("tutor_id", "student_id", "scheduled_start_at", "actual_start_at", "scheduled_end_at", "actual_end_at", "status", "reschedule_initiator", "tech_issue", "first_session_for_student", "created_at", "updated_at") VALUES (1, 22, '2025-11-04 07:47:50.030885', '2025-11-04 07:47:50.031555', '2025-11-04 08:47:50.031596', '2025-11-04 08:47:50.031617', 'completed', NULL, FALSE, TRUE, '2025-11-05 07:47:50.031743', '2025-11-05 07:47:50.031743') RETURNING "id" /*application='TutorInsights'*/[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mCOMMIT /*application='TutorInsights'*/[0m
+  [1m[36mSessionTranscript Load (0.2ms)[0m  [1m[34mSELECT "session_transcripts".* FROM "session_transcripts" WHERE "session_transcripts"."session_id" = 300 LIMIT 1 /*application='TutorInsights'*/[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mBEGIN /*application='TutorInsights'*/[0m
+  [1m[36mSessionTranscript Create (0.3ms)[0m  [1m[32mINSERT INTO "session_transcripts" ("session_id", "payload", "created_at", "updated_at") VALUES (300, '{"speakers":[{"speaker":"tutor","text":"What are your goals for today?","words":6},{"speaker":"student","text":"I want to learn","words":4},{"speaker":"tutor","text":"Great! Let us summarize.","words":4}],"metadata":{"total_words_tutor":10,"total_words_student":4}}', '2025-11-05 07:47:50.033420', '2025-11-05 07:47:50.033420') RETURNING "id" /*application='TutorInsights'*/[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mCOMMIT /*application='TutorInsights'*/[0m
+  [1m[36mScore Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "scores" WHERE "scores"."session_id" = 300 AND "scores"."score_type" = 'sqs' LIMIT 1 /*application='TutorInsights'*/[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mBEGIN /*application='TutorInsights'*/[0m
+  [1m[36mScore Create (0.3ms)[0m  [1m[32mINSERT INTO "scores" ("session_id", "tutor_id", "score_type", "value", "components", "computed_at", "created_at", "updated_at") VALUES (300, 1, 'sqs', 78.0, '{"base":80,"lateness_penalty":2,"shortfall_penalty":0,"tech_penalty":0,"label":"ok"}', '2025-11-05 07:47:50.034613', '2025-11-05 07:47:50.034793', '2025-11-05 07:47:50.034793') RETURNING "id" /*application='TutorInsights'*/[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mCOMMIT /*application='TutorInsights'*/[0m
+  [1m[36mScore Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "scores" WHERE "scores"."session_id" = 300 AND "scores"."score_type" = 'fsrs' LIMIT 1 /*application='TutorInsights'*/[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mBEGIN /*application='TutorInsights'*/[0m
+  [1m[36mScore Create (0.2ms)[0m  [1m[32mINSERT INTO "scores" ("session_id", "tutor_id", "score_type", "value", "components", "computed_at", "created_at", "updated_at") VALUES (300, 1, 'fsrs', 0.0, '{"confusion_phrases":0,"word_share_imbalance":0,"missing_goal_setting":0,"missing_encouragement":0,"negative_phrasing":0,"missing_closing_summary":0,"tech_lateness_disruption":0,"score":0,"feedback":{"what_went_well":"Student showed good understanding with minimal confusion. Good balance of tutor and student participation. Goal-setting question was asked early in the session. Encouragement phrases were used throughout. Positive, supportive language was maintained. Session ended with clear summary and next steps","improvement_idea":"Continue building on these positive patterns","breakdown":{"confusion_phrases":0,"word_share_imbalance":0,"missing_goal_setting":0,"missing_encouragement":0,"negative_phrasing":0,"missing_closing_summary":0,"tech_lateness_disruption":0}}}', '2025-11-05 07:47:50.035734', '2025-11-05 07:47:50.035847', '2025-11-05 07:47:50.035847') RETURNING "id" /*application='TutorInsights'*/[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mCOMMIT /*application='TutorInsights'*/[0m
+  [1m[36mStudent Load (0.1ms)[0m  [1m[34mSELECT "students".* FROM "students" WHERE "students"."email" = 'student2@test.com' LIMIT 1 /*application='TutorInsights'*/[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mBEGIN /*application='TutorInsights'*/[0m
+  [1m[36mStudent Create (0.2ms)[0m  [1m[32mINSERT INTO "students" ("name", "email", "created_at", "updated_at") VALUES ('Student 2', 'student2@test.com', '2025-11-05 07:47:50.037206', '2025-11-05 07:47:50.037206') RETURNING "id" /*application='TutorInsights'*/[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mCOMMIT /*application='TutorInsights'*/[0m
+  [1m[36mSession Load (0.1ms)[0m  [1m[34mSELECT "sessions".* FROM "sessions" WHERE "sessions"."tutor_id" = 1 AND "sessions"."student_id" = 23 AND "sessions"."scheduled_start_at" = '2025-11-03 07:47:50.037752' LIMIT 1 /*application='TutorInsights'*/[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN /*application='TutorInsights'*/[0m
+  [1m[36mSession Create (0.5ms)[0m  [1m[32mINSERT INTO "sessions" ("tutor_id", "student_id", "scheduled_start_at", "actual_start_at", "scheduled_end_at", "actual_end_at", "status", "reschedule_initiator", "tech_issue", "first_session_for_student", "created_at", "updated_at") VALUES (1, 23, '2025-11-03 07:47:50.037752', '2025-11-03 07:47:50.038235', '2025-11-03 08:47:50.038260', '2025-11-03 08:47:50.038279', 'completed', NULL, FALSE, TRUE, '2025-11-05 07:47:50.038382', '2025-11-05 07:47:50.038382') RETURNING "id" /*application='TutorInsights'*/[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mCOMMIT /*application='TutorInsights'*/[0m
+  [1m[36mSessionTranscript Load (0.2ms)[0m  [1m[34mSELECT "session_transcripts".* FROM "session_transcripts" WHERE "session_transcripts"."session_id" = 301 LIMIT 1 /*application='TutorInsights'*/[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN /*application='TutorInsights'*/[0m
+  [1m[36mSessionTranscript Create (0.4ms)[0m  [1m[32mINSERT INTO "session_transcripts" ("session_id", "payload", "created_at", "updated_at") VALUES (301, '{"speakers":[{"speaker":"tutor","text":"What are your goals for today?","words":6},{"speaker":"student","text":"I want to learn","words":4},{"speaker":"tutor","text":"Great! Let us summarize.","words":4}],"metadata":{"total_words_tutor":10,"total_words_student":4}}', '2025-11-05 07:47:50.040405', '2025-11-05 07:47:50.040405') RETURNING "id" /*application='TutorInsights'*/[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mCOMMIT /*application='TutorInsights'*/[0m
+  [1m[36mScore Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "scores" WHERE "scores"."session_id" = 301 AND "scores"."score_type" = 'sqs' LIMIT 1 /*application='TutorInsights'*/[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mBEGIN /*application='TutorInsights'*/[0m
+  [1m[36mScore Create (0.4ms)[0m  [1m[32mINSERT INTO "scores" ("session_id", "tutor_id", "score_type", "value", "components", "computed_at", "created_at", "updated_at") VALUES (301, 1, 'sqs', 78.0, '{"base":80,"lateness_penalty":2,"shortfall_penalty":0,"tech_penalty":0,"label":"ok"}', '2025-11-05 07:47:50.041644', '2025-11-05 07:47:50.041836', '2025-11-05 07:47:50.041836') RETURNING "id" /*application='TutorInsights'*/[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mCOMMIT /*application='TutorInsights'*/[0m
+  [1m[36mScore Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "scores" WHERE "scores"."session_id" = 301 AND "scores"."score_type" = 'fsrs' LIMIT 1 /*application='TutorInsights'*/[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mBEGIN /*application='TutorInsights'*/[0m
+  [1m[36mScore Create (0.3ms)[0m  [1m[32mINSERT INTO "scores" ("session_id", "tutor_id", "score_type", "value", "components", "computed_at", "created_at", "updated_at") VALUES (301, 1, 'fsrs', 0.0, '{"confusion_phrases":0,"word_share_imbalance":0,"missing_goal_setting":0,"missing_encouragement":0,"negative_phrasing":0,"missing_closing_summary":0,"tech_lateness_disruption":0,"score":0,"feedback":{"what_went_well":"Student showed good understanding with minimal confusion. Good balance of tutor and student participation. Goal-setting question was asked early in the session. Encouragement phrases were used throughout. Positive, supportive language was maintained. Session ended with clear summary and next steps","improvement_idea":"Continue building on these positive patterns","breakdown":{"confusion_phrases":0,"word_share_imbalance":0,"missing_goal_setting":0,"missing_encouragement":0,"negative_phrasing":0,"missing_closing_summary":0,"tech_lateness_disruption":0}}}', '2025-11-05 07:47:50.043099', '2025-11-05 07:47:50.043281', '2025-11-05 07:47:50.043281') RETURNING "id" /*application='TutorInsights'*/[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mCOMMIT /*application='TutorInsights'*/[0m
+  [1m[36mStudent Load (0.1ms)[0m  [1m[34mSELECT "students".* FROM "students" WHERE "students"."email" = 'student3@test.com' LIMIT 1 /*application='TutorInsights'*/[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mBEGIN /*application='TutorInsights'*/[0m
+  [1m[36mStudent Create (0.2ms)[0m  [1m[32mINSERT INTO "students" ("name", "email", "created_at", "updated_at") VALUES ('Student 3', 'student3@test.com', '2025-11-05 07:47:50.044761', '2025-11-05 07:47:50.044761') RETURNING "id" /*application='TutorInsights'*/[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mCOMMIT /*application='TutorInsights'*/[0m
+  [1m[36mSession Load (0.2ms)[0m  [1m[34mSELECT "sessions".* FROM "sessions" WHERE "sessions"."tutor_id" = 1 AND "sessions"."student_id" = 24 AND "sessions"."scheduled_start_at" = '2025-11-02 07:47:50.045370' LIMIT 1 /*application='TutorInsights'*/[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mBEGIN /*application='TutorInsights'*/[0m
+  [1m[36mSession Create (0.3ms)[0m  [1m[32mINSERT INTO "sessions" ("tutor_id", "student_id", "scheduled_start_at", "actual_start_at", "scheduled_end_at", "actual_end_at", "status", "reschedule_initiator", "tech_issue", "first_session_for_student", "created_at", "updated_at") VALUES (1, 24, '2025-11-02 07:47:50.045370', '2025-11-02 07:47:50.045874', '2025-11-02 08:47:50.045895', '2025-11-02 08:47:50.045916', 'completed', NULL, FALSE, TRUE, '2025-11-05 07:47:50.045996', '2025-11-05 07:47:50.045996') RETURNING "id" /*application='TutorInsights'*/[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mCOMMIT /*application='TutorInsights'*/[0m
+  [1m[36mSessionTranscript Load (0.1ms)[0m  [1m[34mSELECT "session_transcripts".* FROM "session_transcripts" WHERE "session_transcripts"."session_id" = 302 LIMIT 1 /*application='TutorInsights'*/[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mBEGIN /*application='TutorInsights'*/[0m
+  [1m[36mSessionTranscript Create (0.2ms)[0m  [1m[32mINSERT INTO "session_transcripts" ("session_id", "payload", "created_at", "updated_at") VALUES (302, '{"speakers":[{"speaker":"tutor","text":"What are your goals for today?","words":6},{"speaker":"student","text":"I want to learn","words":4},{"speaker":"tutor","text":"Great! Let us summarize.","words":4}],"metadata":{"total_words_tutor":10,"total_words_student":4}}', '2025-11-05 07:47:50.047096', '2025-11-05 07:47:50.047096') RETURNING "id" /*application='TutorInsights'*/[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mCOMMIT /*application='TutorInsights'*/[0m
+  [1m[36mScore Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM "scores" WHERE "scores"."session_id" = 302 AND "scores"."score_type" = 'sqs' LIMIT 1 /*application='TutorInsights'*/[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mBEGIN /*application='TutorInsights'*/[0m
+  [1m[36mScore Create (0.3ms)[0m  [1m[32mINSERT INTO "scores" ("session_id", "tutor_id", "score_type", "value", "components", "computed_at", "created_at", "updated_at") VALUES (302, 1, 'sqs', 78.0, '{"base":80,"lateness_penalty":2,"shortfall_penalty":0,"tech_penalty":0,"label":"ok"}', '2025-11-05 07:47:50.047993', '2025-11-05 07:47:50.048101', '2025-11-05 07:47:50.048101') RETURNING "id" /*application='TutorInsights'*/[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mCOMMIT /*application='TutorInsights'*/[0m
+  [1m[36mScore Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "scores" WHERE "scores"."session_id" = 302 AND "scores"."score_type" = 'fsrs' LIMIT 1 /*application='TutorInsights'*/[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mBEGIN /*application='TutorInsights'*/[0m
+  [1m[36mScore Create (0.4ms)[0m  [1m[32mINSERT INTO "scores" ("session_id", "tutor_id", "score_type", "value", "components", "computed_at", "created_at", "updated_at") VALUES (302, 1, 'fsrs', 0.0, '{"confusion_phrases":0,"word_share_imbalance":0,"missing_goal_setting":0,"missing_encouragement":0,"negative_phrasing":0,"missing_closing_summary":0,"tech_lateness_disruption":0,"score":0,"feedback":{"what_went_well":"Student showed good understanding with minimal confusion. Good balance of tutor and student participation. Goal-setting question was asked early in the session. Encouragement phrases were used throughout. Positive, supportive language was maintained. Session ended with clear summary and next steps","improvement_idea":"Continue building on these positive patterns","breakdown":{"confusion_phrases":0,"word_share_imbalance":0,"missing_goal_setting":0,"missing_encouragement":0,"negative_phrasing":0,"missing_closing_summary":0,"tech_lateness_disruption":0}}}', '2025-11-05 07:47:50.049034', '2025-11-05 07:47:50.049127', '2025-11-05 07:47:50.049127') RETURNING "id" /*application='TutorInsights'*/[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mCOMMIT /*application='TutorInsights'*/[0m
+  [1m[36mStudent Load (0.3ms)[0m  [1m[34mSELECT "students".* FROM "students" WHERE "students"."email" = 'student4@test.com' LIMIT 1 /*application='TutorInsights'*/[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN /*application='TutorInsights'*/[0m
+  [1m[36mStudent Create (0.3ms)[0m  [1m[32mINSERT INTO "students" ("name", "email", "created_at", "updated_at") VALUES ('Student 4', 'student4@test.com', '2025-11-05 07:47:50.051033', '2025-11-05 07:47:50.051033') RETURNING "id" /*application='TutorInsights'*/[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mCOMMIT /*application='TutorInsights'*/[0m
+  [1m[36mSession Load (0.2ms)[0m  [1m[34mSELECT "sessions".* FROM "sessions" WHERE "sessions"."tutor_id" = 1 AND "sessions"."student_id" = 25 AND "sessions"."scheduled_start_at" = '2025-11-01 07:47:50.051867' LIMIT 1 /*application='TutorInsights'*/[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mBEGIN /*application='TutorInsights'*/[0m
+  [1m[36mSession Create (0.3ms)[0m  [1m[32mINSERT INTO "sessions" ("tutor_id", "student_id", "scheduled_start_at", "actual_start_at", "scheduled_end_at", "actual_end_at", "status", "reschedule_initiator", "tech_issue", "first_session_for_student", "created_at", "updated_at") VALUES (1, 25, '2025-11-01 07:47:50.051867', '2025-11-01 07:47:50.052466', '2025-11-01 08:47:50.052485', '2025-11-01 08:47:50.052501', 'completed', NULL, FALSE, TRUE, '2025-11-05 07:47:50.052581', '2025-11-05 07:47:50.052581') RETURNING "id" /*application='TutorInsights'*/[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mCOMMIT /*application='TutorInsights'*/[0m
+  [1m[36mSessionTranscript Load (0.1ms)[0m  [1m[34mSELECT "session_transcripts".* FROM "session_transcripts" WHERE "session_transcripts"."session_id" = 303 LIMIT 1 /*application='TutorInsights'*/[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN /*application='TutorInsights'*/[0m
+  [1m[36mSessionTranscript Create (0.3ms)[0m  [1m[32mINSERT INTO "session_transcripts" ("session_id", "payload", "created_at", "updated_at") VALUES (303, '{"speakers":[{"speaker":"tutor","text":"What are your goals for today?","words":6},{"speaker":"student","text":"I want to learn","words":4},{"speaker":"tutor","text":"Great! Let us summarize.","words":4}],"metadata":{"total_words_tutor":10,"total_words_student":4}}', '2025-11-05 07:47:50.053852', '2025-11-05 07:47:50.053852') RETURNING "id" /*application='TutorInsights'*/[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mCOMMIT /*application='TutorInsights'*/[0m
+  [1m[36mScore Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "scores" WHERE "scores"."session_id" = 303 AND "scores"."score_type" = 'sqs' LIMIT 1 /*application='TutorInsights'*/[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mBEGIN /*application='TutorInsights'*/[0m
+  [1m[36mScore Create (0.2ms)[0m  [1m[32mINSERT INTO "scores" ("session_id", "tutor_id", "score_type", "value", "components", "computed_at", "created_at", "updated_at") VALUES (303, 1, 'sqs', 78.0, '{"base":80,"lateness_penalty":2,"shortfall_penalty":0,"tech_penalty":0,"label":"ok"}', '2025-11-05 07:47:50.054733', '2025-11-05 07:47:50.054859', '2025-11-05 07:47:50.054859') RETURNING "id" /*application='TutorInsights'*/[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mCOMMIT /*application='TutorInsights'*/[0m
+  [1m[36mScore Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM "scores" WHERE "scores"."session_id" = 303 AND "scores"."score_type" = 'fsrs' LIMIT 1 /*application='TutorInsights'*/[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN /*application='TutorInsights'*/[0m
+  [1m[36mScore Create (0.3ms)[0m  [1m[32mINSERT INTO "scores" ("session_id", "tutor_id", "score_type", "value", "components", "computed_at", "created_at", "updated_at") VALUES (303, 1, 'fsrs', 0.0, '{"confusion_phrases":0,"word_share_imbalance":0,"missing_goal_setting":0,"missing_encouragement":0,"negative_phrasing":0,"missing_closing_summary":0,"tech_lateness_disruption":0,"score":0,"feedback":{"what_went_well":"Student showed good understanding with minimal confusion. Good balance of tutor and student participation. Goal-setting question was asked early in the session. Encouragement phrases were used throughout. Positive, supportive language was maintained. Session ended with clear summary and next steps","improvement_idea":"Continue building on these positive patterns","breakdown":{"confusion_phrases":0,"word_share_imbalance":0,"missing_goal_setting":0,"missing_encouragement":0,"negative_phrasing":0,"missing_closing_summary":0,"tech_lateness_disruption":0}}}', '2025-11-05 07:47:50.055787', '2025-11-05 07:47:50.055884', '2025-11-05 07:47:50.055884') RETURNING "id" /*application='TutorInsights'*/[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mCOMMIT /*application='TutorInsights'*/[0m
+Started GET "/tutor/1" for ::1 at 2025-11-05 01:48:11 -0600
+  [1m[36mActiveRecord::SchemaMigration Load (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='TutorInsights'*/[0m
+Processing by TutorsController#show as HTML
+  Parameters: {"id"=>"1"}
+  Rendering layout layouts/application.html.erb
+  Rendering tutors/show.html.erb within layouts/application
+  Rendered tutors/show.html.erb within layouts/application (Duration: 0.1ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 5.6ms | GC: 0.0ms)
+Completed 200 OK in 27ms (Views: 7.2ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.5ms)
+
+
+Started GET "/tutor/2" for ::1 at 2025-11-05 01:48:33 -0600
+Processing by TutorsController#show as HTML
+  Parameters: {"id"=>"2"}
+  Rendering layout layouts/application.html.erb
+  Rendering tutors/show.html.erb within layouts/application
+  Rendered tutors/show.html.erb within layouts/application (Duration: 0.0ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 6.1ms | GC: 0.0ms)
+Completed 200 OK in 26ms (Views: 6.4ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/tutor/3" for ::1 at 2025-11-05 01:48:36 -0600
+Processing by TutorsController#show as HTML
+  Parameters: {"id"=>"3"}
+  Rendering layout layouts/application.html.erb
+  Rendering tutors/show.html.erb within layouts/application
+  Rendered tutors/show.html.erb within layouts/application (Duration: 0.0ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 1.5ms | GC: 0.0ms)
+Completed 200 OK in 22ms (Views: 1.7ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/.well-known/appspecific/com.chrome.devtools.json" for ::1 at 2025-11-05 01:48:38 -0600
+  
+ActionController::RoutingError (No route matches [GET] "/.well-known/appspecific/com.chrome.devtools.json"):
+  
+Started GET "/tutor/3" for ::1 at 2025-11-05 01:49:19 -0600
+Processing by TutorsController#show as HTML
+  Parameters: {"id"=>"3"}
+  Rendering layout layouts/application.html.erb
+  Rendering tutors/show.html.erb within layouts/application
+  Rendered tutors/show.html.erb within layouts/application (Duration: 0.0ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 1.8ms | GC: 0.1ms)
+Completed 200 OK in 19ms (Views: 2.1ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.1ms)
+
+
+Started GET "/.well-known/appspecific/com.chrome.devtools.json" for ::1 at 2025-11-05 01:49:19 -0600
+  
+ActionController::RoutingError (No route matches [GET] "/.well-known/appspecific/com.chrome.devtools.json"):
+  
+Started GET "/tutor/3" for ::1 at 2025-11-05 01:49:32 -0600
+Processing by TutorsController#show as HTML
+  Parameters: {"id"=>"3"}
+  Rendering layout layouts/application.html.erb
+  Rendering tutors/show.html.erb within layouts/application
+  Rendered tutors/show.html.erb within layouts/application (Duration: 0.0ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 1.3ms | GC: 0.0ms)
+Completed 200 OK in 17ms (Views: 1.6ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/.well-known/appspecific/com.chrome.devtools.json" for ::1 at 2025-11-05 01:49:32 -0600
+  
+ActionController::RoutingError (No route matches [GET] "/.well-known/appspecific/com.chrome.devtools.json"):
+  

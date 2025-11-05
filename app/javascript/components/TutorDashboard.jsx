@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from 'react'
+/** @jsxImportSource react */
+import { useState, useEffect } from 'react'
 
 const TutorDashboard = ({ tutorId }) => {
   const [fsrsLatest, setFsrsLatest] = useState(null)

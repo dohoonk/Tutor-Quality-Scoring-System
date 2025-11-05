@@ -1,4 +1,4 @@
-import React from 'react'
+/** @jsxImportSource react */
 import { createRoot } from 'react-dom/client'
 import TutorDashboard from '../components/TutorDashboard'
 import AdminDashboard from '../components/AdminDashboard'

@@ -1,4 +1,4 @@
-import React from 'react'
+/** @jsxImportSource react */
 
 const AdminDashboard = ({ adminId }) => {
   return (
