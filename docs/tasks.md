@@ -84,15 +84,15 @@
 - [x] Skip FSRS if transcript lacks speaker diarization
 
 ### Alert Generation
-- [ ] Write AlertService tests (TDD: write test → see fail → build service → see pass)
-- [ ] Create AlertService to evaluate triggers:
-  - [ ] FSRS ≥ 50 → "Poor first session" alert
-  - [ ] THS < 55 → "High reliability risk" alert
-  - [ ] TCRS ≥ 0.6 → "Churn risk" alert
-- [ ] Write AlertJob tests (TDD: write test → see fail → build job → see pass)
-- [ ] Create AlertJob to run every 10 min
-- [ ] Generate alerts in `alerts` table
-- [ ] Auto-resolve alerts when conditions improve
+- [x] Write AlertService tests (TDD: write test → see fail → build service → see pass)
+- [x] Create AlertService to evaluate triggers:
+  - [x] FSRS ≥ 50 → "Poor first session" alert
+  - [x] THS < 55 → "High reliability risk" alert
+  - [x] TCRS ≥ 0.6 → "Churn risk" alert
+- [x] Write AlertJob tests (TDD: write test → see fail → build job → see pass)
+- [x] Create AlertJob to run every 10 min
+- [x] Generate alerts in `alerts` table
+- [x] Auto-resolve alerts when conditions improve
 
 ---
 

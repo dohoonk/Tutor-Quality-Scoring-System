@@ -1,0 +1,33 @@
+# Sidekiq Scheduler Configuration
+# Jobs run every N minutes using cron syntax
+
+session_scoring_job:
+  class: SessionScoringJob
+  queue: default
+  cron: "*/5 * * * *" # Every 5 minutes
+  description: "Compute SQS + FSRS on recent sessions"
+
+tutor_daily_aggregation_job:
+  class: TutorDailyAggregationJob
+  queue: default
+  cron: "*/10 * * * *" # Every 10 minutes
+  description: "Aggregate daily metrics per tutor"
+
+tutor_health_score_job:
+  class: TutorHealthScoreJob
+  queue: default
+  cron: "*/10 * * * *" # Every 10 minutes (runs after aggregation)
+  description: "Compute THS from 7-day rolling window"
+
+tutor_churn_risk_score_job:
+  class: TutorChurnRiskScoreJob
+  queue: default
+  cron: "*/10 * * * *" # Every 10 minutes (runs after aggregation)
+  description: "Compute TCRS from 14-day rolling window"
+
+alert_job:
+  class: AlertJob
+  queue: default
+  cron: "*/10 * * * *" # Every 10 minutes
+  description: "Generate or close alerts based on score thresholds"
+

@@ -2290,3 +2290,338 @@ Migrating to AddRefreshFunctionsForMaterializedViews (20251105072137)
   [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
   [1m[36mScore Load (0.5ms)[0m  [1m[34mSELECT "scores".* FROM "scores" WHERE "scores"."session_id" = $1 AND "scores"."score_type" = $2 LIMIT $3[0m  [["session_id", 79], ["score_type", "fsrs"], ["LIMIT", 1]]
   [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.3ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "schema_sha1"]]
+  [1m[36mActiveRecord::SchemaMigration Load (0.3ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.3ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "schema_sha1"]]
+  [1m[36mActiveRecord::SchemaMigration Load (0.3ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.6ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "schema_sha1"]]
+  [1m[36mActiveRecord::SchemaMigration Load (0.4ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+[dotenv] Saved a snapshot of [32mENV[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTutor Create (0.5ms)[0m  [1m[32mINSERT INTO "tutors" ("name", "email", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", "Test Tutor"], ["email", "[FILTERED]"], ["created_at", "2025-11-05 07:36:28.268154"], ["updated_at", "2025-11-05 07:36:28.268154"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mScore Create (0.4ms)[0m  [1m[32mINSERT INTO "scores" ("session_id", "tutor_id", "score_type", "value", "components", "computed_at", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["session_id", nil], ["tutor_id", 80], ["score_type", "fsrs"], ["value", "55.0"], ["components", "{\"score\":55}"], ["computed_at", "2025-11-05 07:36:28.269214"], ["created_at", "2025-11-05 07:36:28.274233"], ["updated_at", "2025-11-05 07:36:28.274233"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mScore Load (0.3ms)[0m  [1m[34mSELECT "scores".* FROM "scores" WHERE "scores"."tutor_id" = $1 AND "scores"."score_type" = $2 ORDER BY "scores"."computed_at" DESC LIMIT $3[0m  [["tutor_id", 80], ["score_type", "fsrs"], ["LIMIT", 1]]
+  [1m[36mScore Load (0.1ms)[0m  [1m[34mSELECT "scores".* FROM "scores" WHERE "scores"."tutor_id" = $1 AND "scores"."score_type" = $2 ORDER BY "scores"."computed_at" DESC LIMIT $3[0m  [["tutor_id", 80], ["score_type", "ths"], ["LIMIT", 1]]
+  [1m[36mScore Load (0.0ms)[0m  [1m[34mSELECT "scores".* FROM "scores" WHERE "scores"."tutor_id" = $1 AND "scores"."score_type" = $2 ORDER BY "scores"."computed_at" DESC LIMIT $3[0m  [["tutor_id", 80], ["score_type", "tcrs"], ["LIMIT", 1]]
+  [1m[36mAlert Load (0.2ms)[0m  [1m[34mSELECT "alerts".* FROM "alerts" WHERE "alerts"."tutor_id" = $1 AND "alerts"."alert_type" = $2 AND "alerts"."status" = $3 LIMIT $4[0m  [["tutor_id", 80], ["alert_type", "poor_first_session"], ["status", "open"], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mAlert Create (0.3ms)[0m  [1m[32mINSERT INTO "alerts" ("tutor_id", "alert_type", "severity", "status", "triggered_at", "resolved_at", "metadata", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING "id"[0m  [["tutor_id", 80], ["alert_type", "poor_first_session"], ["severity", "medium"], ["status", "open"], ["triggered_at", "2025-11-05 07:36:28.279772"], ["resolved_at", nil], ["metadata", "{\"score_value\":\"55.0\",\"score_computed_at\":\"2025-11-05T07:36:28.269Z\",\"score_components\":{\"score\":55}}"], ["created_at", "2025-11-05 07:36:28.281793"], ["updated_at", "2025-11-05 07:36:28.281793"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mAlert Load (0.1ms)[0m  [1m[34mSELECT "alerts".* FROM "alerts" WHERE "alerts"."tutor_id" = $1 AND "alerts"."alert_type" = $2 AND "alerts"."status" = $3 LIMIT $4[0m  [["tutor_id", 80], ["alert_type", "high_reliability_risk"], ["status", "open"], ["LIMIT", 1]]
+  [1m[36mAlert Load (0.0ms)[0m  [1m[34mSELECT "alerts".* FROM "alerts" WHERE "alerts"."tutor_id" = $1 AND "alerts"."alert_type" = $2 AND "alerts"."status" = $3 LIMIT $4[0m  [["tutor_id", 80], ["alert_type", "churn_risk"], ["status", "open"], ["LIMIT", 1]]
+  [1m[36mAlert Load (0.1ms)[0m  [1m[34mSELECT "alerts".* FROM "alerts" WHERE "alerts"."tutor_id" = $1 AND "alerts"."alert_type" = $2 LIMIT $3[0m  [["tutor_id", 80], ["alert_type", "poor_first_session"], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTutor Create (0.2ms)[0m  [1m[32mINSERT INTO "tutors" ("name", "email", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", "Test Tutor"], ["email", "[FILTERED]"], ["created_at", "2025-11-05 07:36:28.287798"], ["updated_at", "2025-11-05 07:36:28.287798"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mScore Create (0.4ms)[0m  [1m[32mINSERT INTO "scores" ("session_id", "tutor_id", "score_type", "value", "components", "computed_at", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["session_id", nil], ["tutor_id", 81], ["score_type", "ths"], ["value", "50.0"], ["components", "{\"score\":50}"], ["computed_at", "2025-11-05 07:36:28.288276"], ["created_at", "2025-11-05 07:36:28.288421"], ["updated_at", "2025-11-05 07:36:28.288421"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mScore Load (0.1ms)[0m  [1m[34mSELECT "scores".* FROM "scores" WHERE "scores"."tutor_id" = $1 AND "scores"."score_type" = $2 ORDER BY "scores"."computed_at" DESC LIMIT $3[0m  [["tutor_id", 81], ["score_type", "fsrs"], ["LIMIT", 1]]
+  [1m[36mScore Load (0.1ms)[0m  [1m[34mSELECT "scores".* FROM "scores" WHERE "scores"."tutor_id" = $1 AND "scores"."score_type" = $2 ORDER BY "scores"."computed_at" DESC LIMIT $3[0m  [["tutor_id", 81], ["score_type", "ths"], ["LIMIT", 1]]
+  [1m[36mScore Load (0.1ms)[0m  [1m[34mSELECT "scores".* FROM "scores" WHERE "scores"."tutor_id" = $1 AND "scores"."score_type" = $2 ORDER BY "scores"."computed_at" DESC LIMIT $3[0m  [["tutor_id", 81], ["score_type", "tcrs"], ["LIMIT", 1]]
+  [1m[36mAlert Load (0.1ms)[0m  [1m[34mSELECT "alerts".* FROM "alerts" WHERE "alerts"."tutor_id" = $1 AND "alerts"."alert_type" = $2 AND "alerts"."status" = $3 LIMIT $4[0m  [["tutor_id", 81], ["alert_type", "poor_first_session"], ["status", "open"], ["LIMIT", 1]]
+  [1m[36mAlert Load (0.1ms)[0m  [1m[34mSELECT "alerts".* FROM "alerts" WHERE "alerts"."tutor_id" = $1 AND "alerts"."alert_type" = $2 AND "alerts"."status" = $3 LIMIT $4[0m  [["tutor_id", 81], ["alert_type", "high_reliability_risk"], ["status", "open"], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mAlert Create (0.2ms)[0m  [1m[32mINSERT INTO "alerts" ("tutor_id", "alert_type", "severity", "status", "triggered_at", "resolved_at", "metadata", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING "id"[0m  [["tutor_id", 81], ["alert_type", "high_reliability_risk"], ["severity", "high"], ["status", "open"], ["triggered_at", "2025-11-05 07:36:28.290212"], ["resolved_at", nil], ["metadata", "{\"score_value\":\"50.0\",\"score_computed_at\":\"2025-11-05T07:36:28.288Z\",\"score_components\":{\"score\":50}}"], ["created_at", "2025-11-05 07:36:28.290338"], ["updated_at", "2025-11-05 07:36:28.290338"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mAlert Load (0.1ms)[0m  [1m[34mSELECT "alerts".* FROM "alerts" WHERE "alerts"."tutor_id" = $1 AND "alerts"."alert_type" = $2 AND "alerts"."status" = $3 LIMIT $4[0m  [["tutor_id", 81], ["alert_type", "churn_risk"], ["status", "open"], ["LIMIT", 1]]
+  [1m[36mAlert Load (0.1ms)[0m  [1m[34mSELECT "alerts".* FROM "alerts" WHERE "alerts"."tutor_id" = $1 AND "alerts"."alert_type" = $2 LIMIT $3[0m  [["tutor_id", 81], ["alert_type", "high_reliability_risk"], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTutor Create (0.2ms)[0m  [1m[32mINSERT INTO "tutors" ("name", "email", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", "Test Tutor"], ["email", "[FILTERED]"], ["created_at", "2025-11-05 07:36:28.291865"], ["updated_at", "2025-11-05 07:36:28.291865"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mScore Create (0.2ms)[0m  [1m[32mINSERT INTO "scores" ("session_id", "tutor_id", "score_type", "value", "components", "computed_at", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["session_id", nil], ["tutor_id", 82], ["score_type", "tcrs"], ["value", "0.65"], ["components", "{\"score\":0.65}"], ["computed_at", "2025-11-05 07:36:28.292222"], ["created_at", "2025-11-05 07:36:28.292328"], ["updated_at", "2025-11-05 07:36:28.292328"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mScore Load (0.1ms)[0m  [1m[34mSELECT "scores".* FROM "scores" WHERE "scores"."tutor_id" = $1 AND "scores"."score_type" = $2 ORDER BY "scores"."computed_at" DESC LIMIT $3[0m  [["tutor_id", 82], ["score_type", "fsrs"], ["LIMIT", 1]]
+  [1m[36mScore Load (0.0ms)[0m  [1m[34mSELECT "scores".* FROM "scores" WHERE "scores"."tutor_id" = $1 AND "scores"."score_type" = $2 ORDER BY "scores"."computed_at" DESC LIMIT $3[0m  [["tutor_id", 82], ["score_type", "ths"], ["LIMIT", 1]]
+  [1m[36mScore Load (0.1ms)[0m  [1m[34mSELECT "scores".* FROM "scores" WHERE "scores"."tutor_id" = $1 AND "scores"."score_type" = $2 ORDER BY "scores"."computed_at" DESC LIMIT $3[0m  [["tutor_id", 82], ["score_type", "tcrs"], ["LIMIT", 1]]
+  [1m[36mAlert Load (0.0ms)[0m  [1m[34mSELECT "alerts".* FROM "alerts" WHERE "alerts"."tutor_id" = $1 AND "alerts"."alert_type" = $2 AND "alerts"."status" = $3 LIMIT $4[0m  [["tutor_id", 82], ["alert_type", "poor_first_session"], ["status", "open"], ["LIMIT", 1]]
+  [1m[36mAlert Load (0.0ms)[0m  [1m[34mSELECT "alerts".* FROM "alerts" WHERE "alerts"."tutor_id" = $1 AND "alerts"."alert_type" = $2 AND "alerts"."status" = $3 LIMIT $4[0m  [["tutor_id", 82], ["alert_type", "high_reliability_risk"], ["status", "open"], ["LIMIT", 1]]
+  [1m[36mAlert Load (0.1ms)[0m  [1m[34mSELECT "alerts".* FROM "alerts" WHERE "alerts"."tutor_id" = $1 AND "alerts"."alert_type" = $2 AND "alerts"."status" = $3 LIMIT $4[0m  [["tutor_id", 82], ["alert_type", "churn_risk"], ["status", "open"], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mAlert Create (0.2ms)[0m  [1m[32mINSERT INTO "alerts" ("tutor_id", "alert_type", "severity", "status", "triggered_at", "resolved_at", "metadata", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING "id"[0m  [["tutor_id", 82], ["alert_type", "churn_risk"], ["severity", "high"], ["status", "open"], ["triggered_at", "2025-11-05 07:36:28.293707"], ["resolved_at", nil], ["metadata", "{\"score_value\":\"0.65\",\"score_computed_at\":\"2025-11-05T07:36:28.292Z\",\"score_components\":{\"score\":0.65}}"], ["created_at", "2025-11-05 07:36:28.293836"], ["updated_at", "2025-11-05 07:36:28.293836"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mAlert Load (0.1ms)[0m  [1m[34mSELECT "alerts".* FROM "alerts" WHERE "alerts"."tutor_id" = $1 AND "alerts"."alert_type" = $2 LIMIT $3[0m  [["tutor_id", 82], ["alert_type", "churn_risk"], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTutor Create (0.1ms)[0m  [1m[32mINSERT INTO "tutors" ("name", "email", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", "Test Tutor"], ["email", "[FILTERED]"], ["created_at", "2025-11-05 07:36:28.295196"], ["updated_at", "2025-11-05 07:36:28.295196"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mScore Create (0.2ms)[0m  [1m[32mINSERT INTO "scores" ("session_id", "tutor_id", "score_type", "value", "components", "computed_at", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["session_id", nil], ["tutor_id", 83], ["score_type", "fsrs"], ["value", "55.0"], ["components", "{\"score\":55}"], ["computed_at", "2025-11-05 07:36:28.295519"], ["created_at", "2025-11-05 07:36:28.295612"], ["updated_at", "2025-11-05 07:36:28.295612"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mScore Create (0.2ms)[0m  [1m[32mINSERT INTO "scores" ("session_id", "tutor_id", "score_type", "value", "components", "computed_at", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["session_id", nil], ["tutor_id", 83], ["score_type", "ths"], ["value", "50.0"], ["components", "{\"score\":50}"], ["computed_at", "2025-11-05 07:36:28.295974"], ["created_at", "2025-11-05 07:36:28.296047"], ["updated_at", "2025-11-05 07:36:28.296047"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mScore Load (0.1ms)[0m  [1m[34mSELECT "scores".* FROM "scores" WHERE "scores"."tutor_id" = $1 AND "scores"."score_type" = $2 ORDER BY "scores"."computed_at" DESC LIMIT $3[0m  [["tutor_id", 83], ["score_type", "fsrs"], ["LIMIT", 1]]
+  [1m[36mScore Load (0.1ms)[0m  [1m[34mSELECT "scores".* FROM "scores" WHERE "scores"."tutor_id" = $1 AND "scores"."score_type" = $2 ORDER BY "scores"."computed_at" DESC LIMIT $3[0m  [["tutor_id", 83], ["score_type", "ths"], ["LIMIT", 1]]
+  [1m[36mScore Load (0.1ms)[0m  [1m[34mSELECT "scores".* FROM "scores" WHERE "scores"."tutor_id" = $1 AND "scores"."score_type" = $2 ORDER BY "scores"."computed_at" DESC LIMIT $3[0m  [["tutor_id", 83], ["score_type", "tcrs"], ["LIMIT", 1]]
+  [1m[36mAlert Load (0.1ms)[0m  [1m[34mSELECT "alerts".* FROM "alerts" WHERE "alerts"."tutor_id" = $1 AND "alerts"."alert_type" = $2 AND "alerts"."status" = $3 LIMIT $4[0m  [["tutor_id", 83], ["alert_type", "poor_first_session"], ["status", "open"], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mAlert Create (0.2ms)[0m  [1m[32mINSERT INTO "alerts" ("tutor_id", "alert_type", "severity", "status", "triggered_at", "resolved_at", "metadata", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING "id"[0m  [["tutor_id", 83], ["alert_type", "poor_first_session"], ["severity", "medium"], ["status", "open"], ["triggered_at", "2025-11-05 07:36:28.297128"], ["resolved_at", nil], ["metadata", "{\"score_value\":\"55.0\",\"score_computed_at\":\"2025-11-05T07:36:28.295Z\",\"score_components\":{\"score\":55}}"], ["created_at", "2025-11-05 07:36:28.297210"], ["updated_at", "2025-11-05 07:36:28.297210"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mAlert Load (0.1ms)[0m  [1m[34mSELECT "alerts".* FROM "alerts" WHERE "alerts"."tutor_id" = $1 AND "alerts"."alert_type" = $2 AND "alerts"."status" = $3 LIMIT $4[0m  [["tutor_id", 83], ["alert_type", "high_reliability_risk"], ["status", "open"], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mAlert Create (0.2ms)[0m  [1m[32mINSERT INTO "alerts" ("tutor_id", "alert_type", "severity", "status", "triggered_at", "resolved_at", "metadata", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING "id"[0m  [["tutor_id", 83], ["alert_type", "high_reliability_risk"], ["severity", "high"], ["status", "open"], ["triggered_at", "2025-11-05 07:36:28.297740"], ["resolved_at", nil], ["metadata", "{\"score_value\":\"50.0\",\"score_computed_at\":\"2025-11-05T07:36:28.295Z\",\"score_components\":{\"score\":50}}"], ["created_at", "2025-11-05 07:36:28.297816"], ["updated_at", "2025-11-05 07:36:28.297816"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mAlert Load (0.0ms)[0m  [1m[34mSELECT "alerts".* FROM "alerts" WHERE "alerts"."tutor_id" = $1 AND "alerts"."alert_type" = $2 AND "alerts"."status" = $3 LIMIT $4[0m  [["tutor_id", 83], ["alert_type", "churn_risk"], ["status", "open"], ["LIMIT", 1]]
+  [1m[36mAlert Count (0.2ms)[0m  [1m[34mSELECT COUNT(*) FROM "alerts" WHERE "alerts"."tutor_id" = $1[0m  [["tutor_id", 83]]
+  [1m[36mAlert Pluck (0.1ms)[0m  [1m[34mSELECT "alerts"."alert_type" FROM "alerts" WHERE "alerts"."tutor_id" = $1[0m  [["tutor_id", 83]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTutor Create (0.2ms)[0m  [1m[32mINSERT INTO "tutors" ("name", "email", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", "Test Tutor"], ["email", "[FILTERED]"], ["created_at", "2025-11-05 07:36:28.299431"], ["updated_at", "2025-11-05 07:36:28.299431"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mScore Create (0.2ms)[0m  [1m[32mINSERT INTO "scores" ("session_id", "tutor_id", "score_type", "value", "components", "computed_at", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["session_id", nil], ["tutor_id", 84], ["score_type", "fsrs"], ["value", "40.0"], ["components", "{\"score\":40}"], ["computed_at", "2025-11-05 07:36:28.299772"], ["created_at", "2025-11-05 07:36:28.299851"], ["updated_at", "2025-11-05 07:36:28.299851"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mScore Create (0.2ms)[0m  [1m[32mINSERT INTO "scores" ("session_id", "tutor_id", "score_type", "value", "components", "computed_at", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["session_id", nil], ["tutor_id", 84], ["score_type", "ths"], ["value", "60.0"], ["components", "{\"score\":60}"], ["computed_at", "2025-11-05 07:36:28.300278"], ["created_at", "2025-11-05 07:36:28.300353"], ["updated_at", "2025-11-05 07:36:28.300353"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mScore Load (0.1ms)[0m  [1m[34mSELECT "scores".* FROM "scores" WHERE "scores"."tutor_id" = $1 AND "scores"."score_type" = $2 ORDER BY "scores"."computed_at" DESC LIMIT $3[0m  [["tutor_id", 84], ["score_type", "fsrs"], ["LIMIT", 1]]
+  [1m[36mScore Load (0.1ms)[0m  [1m[34mSELECT "scores".* FROM "scores" WHERE "scores"."tutor_id" = $1 AND "scores"."score_type" = $2 ORDER BY "scores"."computed_at" DESC LIMIT $3[0m  [["tutor_id", 84], ["score_type", "ths"], ["LIMIT", 1]]
+  [1m[36mScore Load (0.1ms)[0m  [1m[34mSELECT "scores".* FROM "scores" WHERE "scores"."tutor_id" = $1 AND "scores"."score_type" = $2 ORDER BY "scores"."computed_at" DESC LIMIT $3[0m  [["tutor_id", 84], ["score_type", "tcrs"], ["LIMIT", 1]]
+  [1m[36mAlert Load (0.1ms)[0m  [1m[34mSELECT "alerts".* FROM "alerts" WHERE "alerts"."tutor_id" = $1 AND "alerts"."alert_type" = $2 AND "alerts"."status" = $3 LIMIT $4[0m  [["tutor_id", 84], ["alert_type", "poor_first_session"], ["status", "open"], ["LIMIT", 1]]
+  [1m[36mAlert Load (0.1ms)[0m  [1m[34mSELECT "alerts".* FROM "alerts" WHERE "alerts"."tutor_id" = $1 AND "alerts"."alert_type" = $2 AND "alerts"."status" = $3 LIMIT $4[0m  [["tutor_id", 84], ["alert_type", "high_reliability_risk"], ["status", "open"], ["LIMIT", 1]]
+  [1m[36mAlert Load (0.0ms)[0m  [1m[34mSELECT "alerts".* FROM "alerts" WHERE "alerts"."tutor_id" = $1 AND "alerts"."alert_type" = $2 AND "alerts"."status" = $3 LIMIT $4[0m  [["tutor_id", 84], ["alert_type", "churn_risk"], ["status", "open"], ["LIMIT", 1]]
+  [1m[36mAlert Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "alerts" WHERE "alerts"."tutor_id" = $1[0m  [["tutor_id", 84]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTutor Create (0.1ms)[0m  [1m[32mINSERT INTO "tutors" ("name", "email", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", "Test Tutor"], ["email", "[FILTERED]"], ["created_at", "2025-11-05 07:36:28.302344"], ["updated_at", "2025-11-05 07:36:28.302344"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mAlert Create (0.2ms)[0m  [1m[32mINSERT INTO "alerts" ("tutor_id", "alert_type", "severity", "status", "triggered_at", "resolved_at", "metadata", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING "id"[0m  [["tutor_id", 85], ["alert_type", "poor_first_session"], ["severity", "medium"], ["status", "open"], ["triggered_at", "2025-11-05 06:36:28.302674"], ["resolved_at", nil], ["metadata", "{}"], ["created_at", "2025-11-05 07:36:28.302762"], ["updated_at", "2025-11-05 07:36:28.302762"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mScore Create (0.1ms)[0m  [1m[32mINSERT INTO "scores" ("session_id", "tutor_id", "score_type", "value", "components", "computed_at", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["session_id", nil], ["tutor_id", 85], ["score_type", "fsrs"], ["value", "55.0"], ["components", "{\"score\":55}"], ["computed_at", "2025-11-05 07:36:28.303131"], ["created_at", "2025-11-05 07:36:28.303210"], ["updated_at", "2025-11-05 07:36:28.303210"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mScore Load (0.1ms)[0m  [1m[34mSELECT "scores".* FROM "scores" WHERE "scores"."tutor_id" = $1 AND "scores"."score_type" = $2 ORDER BY "scores"."computed_at" DESC LIMIT $3[0m  [["tutor_id", 85], ["score_type", "fsrs"], ["LIMIT", 1]]
+  [1m[36mScore Load (0.0ms)[0m  [1m[34mSELECT "scores".* FROM "scores" WHERE "scores"."tutor_id" = $1 AND "scores"."score_type" = $2 ORDER BY "scores"."computed_at" DESC LIMIT $3[0m  [["tutor_id", 85], ["score_type", "ths"], ["LIMIT", 1]]
+  [1m[36mScore Load (0.0ms)[0m  [1m[34mSELECT "scores".* FROM "scores" WHERE "scores"."tutor_id" = $1 AND "scores"."score_type" = $2 ORDER BY "scores"."computed_at" DESC LIMIT $3[0m  [["tutor_id", 85], ["score_type", "tcrs"], ["LIMIT", 1]]
+  [1m[36mAlert Load (0.1ms)[0m  [1m[34mSELECT "alerts".* FROM "alerts" WHERE "alerts"."tutor_id" = $1 AND "alerts"."alert_type" = $2 AND "alerts"."status" = $3 LIMIT $4[0m  [["tutor_id", 85], ["alert_type", "poor_first_session"], ["status", "open"], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mAlert Update (0.3ms)[0m  [1m[33mUPDATE "alerts" SET "metadata" = $1, "updated_at" = $2 WHERE "alerts"."id" = $3[0m  [["metadata", "{\"last_checked_at\":\"2025-11-05T07:36:28.304Z\",\"score_value\":\"55.0\",\"score_computed_at\":\"2025-11-05T07:36:28.303Z\"}"], ["updated_at", "2025-11-05 07:36:28.304353"], ["id", 6]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mAlert Load (0.1ms)[0m  [1m[34mSELECT "alerts".* FROM "alerts" WHERE "alerts"."tutor_id" = $1 AND "alerts"."alert_type" = $2 AND "alerts"."status" = $3 LIMIT $4[0m  [["tutor_id", 85], ["alert_type", "high_reliability_risk"], ["status", "open"], ["LIMIT", 1]]
+  [1m[36mAlert Load (0.1ms)[0m  [1m[34mSELECT "alerts".* FROM "alerts" WHERE "alerts"."tutor_id" = $1 AND "alerts"."alert_type" = $2 AND "alerts"."status" = $3 LIMIT $4[0m  [["tutor_id", 85], ["alert_type", "churn_risk"], ["status", "open"], ["LIMIT", 1]]
+  [1m[36mAlert Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "alerts" WHERE "alerts"."tutor_id" = $1 AND "alerts"."alert_type" = $2 AND "alerts"."status" = $3[0m  [["tutor_id", 85], ["alert_type", "poor_first_session"], ["status", "open"]]
+  [1m[36mAlert Load (0.3ms)[0m  [1m[34mSELECT "alerts".* FROM "alerts" WHERE "alerts"."tutor_id" = $1 AND "alerts"."alert_type" = $2 AND "alerts"."status" = $3 ORDER BY "alerts"."id" ASC LIMIT $4[0m  [["tutor_id", 85], ["alert_type", "poor_first_session"], ["status", "open"], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTutor Create (0.2ms)[0m  [1m[32mINSERT INTO "tutors" ("name", "email", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", "Test Tutor"], ["email", "[FILTERED]"], ["created_at", "2025-11-05 07:36:28.306959"], ["updated_at", "2025-11-05 07:36:28.306959"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mAlert Create (0.2ms)[0m  [1m[32mINSERT INTO "alerts" ("tutor_id", "alert_type", "severity", "status", "triggered_at", "resolved_at", "metadata", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING "id"[0m  [["tutor_id", 86], ["alert_type", "poor_first_session"], ["severity", "medium"], ["status", "open"], ["triggered_at", "2025-11-05 06:36:28.307442"], ["resolved_at", nil], ["metadata", "{}"], ["created_at", "2025-11-05 07:36:28.307573"], ["updated_at", "2025-11-05 07:36:28.307573"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mScore Create (0.2ms)[0m  [1m[32mINSERT INTO "scores" ("session_id", "tutor_id", "score_type", "value", "components", "computed_at", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["session_id", nil], ["tutor_id", 86], ["score_type", "fsrs"], ["value", "40.0"], ["components", "{\"score\":40}"], ["computed_at", "2025-11-05 07:36:28.307998"], ["created_at", "2025-11-05 07:36:28.308101"], ["updated_at", "2025-11-05 07:36:28.308101"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mScore Load (0.1ms)[0m  [1m[34mSELECT "scores".* FROM "scores" WHERE "scores"."tutor_id" = $1 AND "scores"."score_type" = $2 ORDER BY "scores"."computed_at" DESC LIMIT $3[0m  [["tutor_id", 86], ["score_type", "fsrs"], ["LIMIT", 1]]
+  [1m[36mScore Load (0.1ms)[0m  [1m[34mSELECT "scores".* FROM "scores" WHERE "scores"."tutor_id" = $1 AND "scores"."score_type" = $2 ORDER BY "scores"."computed_at" DESC LIMIT $3[0m  [["tutor_id", 86], ["score_type", "ths"], ["LIMIT", 1]]
+  [1m[36mScore Load (0.0ms)[0m  [1m[34mSELECT "scores".* FROM "scores" WHERE "scores"."tutor_id" = $1 AND "scores"."score_type" = $2 ORDER BY "scores"."computed_at" DESC LIMIT $3[0m  [["tutor_id", 86], ["score_type", "tcrs"], ["LIMIT", 1]]
+  [1m[36mAlert Load (0.1ms)[0m  [1m[34mSELECT "alerts".* FROM "alerts" WHERE "alerts"."tutor_id" = $1 AND "alerts"."alert_type" = $2 AND "alerts"."status" = $3 LIMIT $4[0m  [["tutor_id", 86], ["alert_type", "poor_first_session"], ["status", "open"], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mAlert Update (0.2ms)[0m  [1m[33mUPDATE "alerts" SET "status" = $1, "resolved_at" = $2, "metadata" = $3, "updated_at" = $4 WHERE "alerts"."id" = $5[0m  [["status", "resolved"], ["resolved_at", "2025-11-05 07:36:28.309324"], ["metadata", "{\"resolved_at\":\"2025-11-05T07:36:28.309Z\",\"auto_resolved\":true}"], ["updated_at", "2025-11-05 07:36:28.309408"], ["id", 7]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mAlert Load (0.0ms)[0m  [1m[34mSELECT "alerts".* FROM "alerts" WHERE "alerts"."tutor_id" = $1 AND "alerts"."alert_type" = $2 AND "alerts"."status" = $3 LIMIT $4[0m  [["tutor_id", 86], ["alert_type", "high_reliability_risk"], ["status", "open"], ["LIMIT", 1]]
+  [1m[36mAlert Load (0.0ms)[0m  [1m[34mSELECT "alerts".* FROM "alerts" WHERE "alerts"."tutor_id" = $1 AND "alerts"."alert_type" = $2 AND "alerts"."status" = $3 LIMIT $4[0m  [["tutor_id", 86], ["alert_type", "churn_risk"], ["status", "open"], ["LIMIT", 1]]
+  [1m[36mAlert Load (0.1ms)[0m  [1m[34mSELECT "alerts".* FROM "alerts" WHERE "alerts"."id" = $1 LIMIT $2[0m  [["id", 7], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTutor Create (0.1ms)[0m  [1m[32mINSERT INTO "tutors" ("name", "email", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", "Test Tutor"], ["email", "[FILTERED]"], ["created_at", "2025-11-05 07:36:28.310847"], ["updated_at", "2025-11-05 07:36:28.310847"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mScore Load (0.0ms)[0m  [1m[34mSELECT "scores".* FROM "scores" WHERE "scores"."tutor_id" = $1 AND "scores"."score_type" = $2 ORDER BY "scores"."computed_at" DESC LIMIT $3[0m  [["tutor_id", 87], ["score_type", "fsrs"], ["LIMIT", 1]]
+  [1m[36mScore Load (0.0ms)[0m  [1m[34mSELECT "scores".* FROM "scores" WHERE "scores"."tutor_id" = $1 AND "scores"."score_type" = $2 ORDER BY "scores"."computed_at" DESC LIMIT $3[0m  [["tutor_id", 87], ["score_type", "ths"], ["LIMIT", 1]]
+  [1m[36mScore Load (0.0ms)[0m  [1m[34mSELECT "scores".* FROM "scores" WHERE "scores"."tutor_id" = $1 AND "scores"."score_type" = $2 ORDER BY "scores"."computed_at" DESC LIMIT $3[0m  [["tutor_id", 87], ["score_type", "tcrs"], ["LIMIT", 1]]
+  [1m[36mAlert Load (0.1ms)[0m  [1m[34mSELECT "alerts".* FROM "alerts" WHERE "alerts"."tutor_id" = $1 AND "alerts"."alert_type" = $2 AND "alerts"."status" = $3 LIMIT $4[0m  [["tutor_id", 87], ["alert_type", "poor_first_session"], ["status", "open"], ["LIMIT", 1]]
+  [1m[36mAlert Load (0.0ms)[0m  [1m[34mSELECT "alerts".* FROM "alerts" WHERE "alerts"."tutor_id" = $1 AND "alerts"."alert_type" = $2 AND "alerts"."status" = $3 LIMIT $4[0m  [["tutor_id", 87], ["alert_type", "high_reliability_risk"], ["status", "open"], ["LIMIT", 1]]
+  [1m[36mAlert Load (0.0ms)[0m  [1m[34mSELECT "alerts".* FROM "alerts" WHERE "alerts"."tutor_id" = $1 AND "alerts"."alert_type" = $2 AND "alerts"."status" = $3 LIMIT $4[0m  [["tutor_id", 87], ["alert_type", "churn_risk"], ["status", "open"], ["LIMIT", 1]]
+  [1m[36mAlert Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "alerts" WHERE "alerts"."tutor_id" = $1[0m  [["tutor_id", 87]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTutor Create (0.1ms)[0m  [1m[32mINSERT INTO "tutors" ("name", "email", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", "Tutor 1"], ["email", "[FILTERED]"], ["created_at", "2025-11-05 07:36:28.312964"], ["updated_at", "2025-11-05 07:36:28.312964"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTutor Create (0.1ms)[0m  [1m[32mINSERT INTO "tutors" ("name", "email", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", "Tutor 2"], ["email", "[FILTERED]"], ["created_at", "2025-11-05 07:36:28.313387"], ["updated_at", "2025-11-05 07:36:28.313387"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mScore Create (0.2ms)[0m  [1m[32mINSERT INTO "scores" ("session_id", "tutor_id", "score_type", "value", "components", "computed_at", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["session_id", nil], ["tutor_id", 88], ["score_type", "fsrs"], ["value", "55.0"], ["components", "{\"score\":55}"], ["computed_at", "2025-11-05 07:36:28.313737"], ["created_at", "2025-11-05 07:36:28.313868"], ["updated_at", "2025-11-05 07:36:28.313868"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mScore Create (0.1ms)[0m  [1m[32mINSERT INTO "scores" ("session_id", "tutor_id", "score_type", "value", "components", "computed_at", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["session_id", nil], ["tutor_id", 89], ["score_type", "ths"], ["value", "50.0"], ["components", "{\"score\":50}"], ["computed_at", "2025-11-05 07:36:28.314241"], ["created_at", "2025-11-05 07:36:28.314316"], ["updated_at", "2025-11-05 07:36:28.314316"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTutor Load (0.2ms)[0m  [1m[34mSELECT "tutors".* FROM "tutors" ORDER BY "tutors"."id" ASC LIMIT $1[0m  [["LIMIT", 1000]]
+  [1m[36mScore Load (0.1ms)[0m  [1m[34mSELECT "scores".* FROM "scores" WHERE "scores"."tutor_id" = $1 AND "scores"."score_type" = $2 ORDER BY "scores"."computed_at" DESC LIMIT $3[0m  [["tutor_id", 88], ["score_type", "fsrs"], ["LIMIT", 1]]
+  [1m[36mScore Load (0.1ms)[0m  [1m[34mSELECT "scores".* FROM "scores" WHERE "scores"."tutor_id" = $1 AND "scores"."score_type" = $2 ORDER BY "scores"."computed_at" DESC LIMIT $3[0m  [["tutor_id", 88], ["score_type", "ths"], ["LIMIT", 1]]
+  [1m[36mScore Load (0.1ms)[0m  [1m[34mSELECT "scores".* FROM "scores" WHERE "scores"."tutor_id" = $1 AND "scores"."score_type" = $2 ORDER BY "scores"."computed_at" DESC LIMIT $3[0m  [["tutor_id", 88], ["score_type", "tcrs"], ["LIMIT", 1]]
+  [1m[36mAlert Load (0.1ms)[0m  [1m[34mSELECT "alerts".* FROM "alerts" WHERE "alerts"."tutor_id" = $1 AND "alerts"."alert_type" = $2 AND "alerts"."status" = $3 LIMIT $4[0m  [["tutor_id", 88], ["alert_type", "poor_first_session"], ["status", "open"], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mAlert Create (0.3ms)[0m  [1m[32mINSERT INTO "alerts" ("tutor_id", "alert_type", "severity", "status", "triggered_at", "resolved_at", "metadata", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING "id"[0m  [["tutor_id", 88], ["alert_type", "poor_first_session"], ["severity", "medium"], ["status", "open"], ["triggered_at", "2025-11-05 07:36:28.316007"], ["resolved_at", nil], ["metadata", "{\"score_value\":\"55.0\",\"score_computed_at\":\"2025-11-05T07:36:28.313Z\",\"score_components\":{\"score\":55}}"], ["created_at", "2025-11-05 07:36:28.316127"], ["updated_at", "2025-11-05 07:36:28.316127"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mAlert Load (0.1ms)[0m  [1m[34mSELECT "alerts".* FROM "alerts" WHERE "alerts"."tutor_id" = $1 AND "alerts"."alert_type" = $2 AND "alerts"."status" = $3 LIMIT $4[0m  [["tutor_id", 88], ["alert_type", "high_reliability_risk"], ["status", "open"], ["LIMIT", 1]]
+  [1m[36mAlert Load (0.1ms)[0m  [1m[34mSELECT "alerts".* FROM "alerts" WHERE "alerts"."tutor_id" = $1 AND "alerts"."alert_type" = $2 AND "alerts"."status" = $3 LIMIT $4[0m  [["tutor_id", 88], ["alert_type", "churn_risk"], ["status", "open"], ["LIMIT", 1]]
+  [1m[36mScore Load (0.1ms)[0m  [1m[34mSELECT "scores".* FROM "scores" WHERE "scores"."tutor_id" = $1 AND "scores"."score_type" = $2 ORDER BY "scores"."computed_at" DESC LIMIT $3[0m  [["tutor_id", 89], ["score_type", "fsrs"], ["LIMIT", 1]]
+  [1m[36mScore Load (0.1ms)[0m  [1m[34mSELECT "scores".* FROM "scores" WHERE "scores"."tutor_id" = $1 AND "scores"."score_type" = $2 ORDER BY "scores"."computed_at" DESC LIMIT $3[0m  [["tutor_id", 89], ["score_type", "ths"], ["LIMIT", 1]]
+  [1m[36mScore Load (0.1ms)[0m  [1m[34mSELECT "scores".* FROM "scores" WHERE "scores"."tutor_id" = $1 AND "scores"."score_type" = $2 ORDER BY "scores"."computed_at" DESC LIMIT $3[0m  [["tutor_id", 89], ["score_type", "tcrs"], ["LIMIT", 1]]
+  [1m[36mAlert Load (0.1ms)[0m  [1m[34mSELECT "alerts".* FROM "alerts" WHERE "alerts"."tutor_id" = $1 AND "alerts"."alert_type" = $2 AND "alerts"."status" = $3 LIMIT $4[0m  [["tutor_id", 89], ["alert_type", "poor_first_session"], ["status", "open"], ["LIMIT", 1]]
+  [1m[36mAlert Load (0.1ms)[0m  [1m[34mSELECT "alerts".* FROM "alerts" WHERE "alerts"."tutor_id" = $1 AND "alerts"."alert_type" = $2 AND "alerts"."status" = $3 LIMIT $4[0m  [["tutor_id", 89], ["alert_type", "high_reliability_risk"], ["status", "open"], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mAlert Create (0.2ms)[0m  [1m[32mINSERT INTO "alerts" ("tutor_id", "alert_type", "severity", "status", "triggered_at", "resolved_at", "metadata", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING "id"[0m  [["tutor_id", 89], ["alert_type", "high_reliability_risk"], ["severity", "high"], ["status", "open"], ["triggered_at", "2025-11-05 07:36:28.317721"], ["resolved_at", nil], ["metadata", "{\"score_value\":\"50.0\",\"score_computed_at\":\"2025-11-05T07:36:28.314Z\",\"score_components\":{\"score\":50}}"], ["created_at", "2025-11-05 07:36:28.317828"], ["updated_at", "2025-11-05 07:36:28.317828"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mAlert Load (0.0ms)[0m  [1m[34mSELECT "alerts".* FROM "alerts" WHERE "alerts"."tutor_id" = $1 AND "alerts"."alert_type" = $2 AND "alerts"."status" = $3 LIMIT $4[0m  [["tutor_id", 89], ["alert_type", "churn_risk"], ["status", "open"], ["LIMIT", 1]]
+  [1m[36mAlert Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "alerts" WHERE "alerts"."tutor_id" = $1[0m  [["tutor_id", 88]]
+  [1m[36mAlert Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "alerts" WHERE "alerts"."tutor_id" = $1[0m  [["tutor_id", 89]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.6ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "schema_sha1"]]
+  [1m[36mActiveRecord::SchemaMigration Load (0.3ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.3ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "schema_sha1"]]
+  [1m[36mActiveRecord::SchemaMigration Load (0.3ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+[dotenv] Saved a snapshot of [32mENV[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTutor Create (0.3ms)[0m  [1m[32mINSERT INTO "tutors" ("name", "email", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", "Tutor 1"], ["email", "[FILTERED]"], ["created_at", "2025-11-05 07:36:48.981592"], ["updated_at", "2025-11-05 07:36:48.981592"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTutor Create (0.1ms)[0m  [1m[32mINSERT INTO "tutors" ("name", "email", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", "Tutor 2"], ["email", "[FILTERED]"], ["created_at", "2025-11-05 07:36:48.982409"], ["updated_at", "2025-11-05 07:36:48.982409"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mScore Create (0.4ms)[0m  [1m[32mINSERT INTO "scores" ("session_id", "tutor_id", "score_type", "value", "components", "computed_at", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["session_id", nil], ["tutor_id", 90], ["score_type", "fsrs"], ["value", "55.0"], ["components", "{\"score\":55}"], ["computed_at", "2025-11-05 07:36:48.983510"], ["created_at", "2025-11-05 07:36:48.997196"], ["updated_at", "2025-11-05 07:36:48.997196"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mScore Create (0.1ms)[0m  [1m[32mINSERT INTO "scores" ("session_id", "tutor_id", "score_type", "value", "components", "computed_at", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["session_id", nil], ["tutor_id", 91], ["score_type", "ths"], ["value", "50.0"], ["components", "{\"score\":50}"], ["computed_at", "2025-11-05 07:36:48.999192"], ["created_at", "2025-11-05 07:36:48.999851"], ["updated_at", "2025-11-05 07:36:48.999851"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+[ActiveJob] [AlertJob] [3fb75539-b77d-459f-8a17-24411566319a] Performing AlertJob (Job ID: 3fb75539-b77d-459f-8a17-24411566319a) from Test(default)
+[ActiveJob] [AlertJob] [3fb75539-b77d-459f-8a17-24411566319a]   [1m[36mTutor Load (0.5ms)[0m  [1m[34mSELECT "tutors".* FROM "tutors" ORDER BY "tutors"."id" ASC LIMIT $1[0m  [["LIMIT", 1000]]
+[ActiveJob] [AlertJob] [3fb75539-b77d-459f-8a17-24411566319a]   [1m[36mScore Load (0.6ms)[0m  [1m[34mSELECT "scores".* FROM "scores" WHERE "scores"."tutor_id" = $1 AND "scores"."score_type" = $2 ORDER BY "scores"."computed_at" DESC LIMIT $3[0m  [["tutor_id", 90], ["score_type", "fsrs"], ["LIMIT", 1]]
+[ActiveJob] [AlertJob] [3fb75539-b77d-459f-8a17-24411566319a]   [1m[36mScore Load (0.1ms)[0m  [1m[34mSELECT "scores".* FROM "scores" WHERE "scores"."tutor_id" = $1 AND "scores"."score_type" = $2 ORDER BY "scores"."computed_at" DESC LIMIT $3[0m  [["tutor_id", 90], ["score_type", "ths"], ["LIMIT", 1]]
+[ActiveJob] [AlertJob] [3fb75539-b77d-459f-8a17-24411566319a]   [1m[36mScore Load (0.1ms)[0m  [1m[34mSELECT "scores".* FROM "scores" WHERE "scores"."tutor_id" = $1 AND "scores"."score_type" = $2 ORDER BY "scores"."computed_at" DESC LIMIT $3[0m  [["tutor_id", 90], ["score_type", "tcrs"], ["LIMIT", 1]]
+[ActiveJob] [AlertJob] [3fb75539-b77d-459f-8a17-24411566319a]   [1m[36mAlert Load (0.4ms)[0m  [1m[34mSELECT "alerts".* FROM "alerts" WHERE "alerts"."tutor_id" = $1 AND "alerts"."alert_type" = $2 AND "alerts"."status" = $3 LIMIT $4[0m  [["tutor_id", 90], ["alert_type", "poor_first_session"], ["status", "open"], ["LIMIT", 1]]
+[ActiveJob] [AlertJob] [3fb75539-b77d-459f-8a17-24411566319a]   [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+[ActiveJob] [AlertJob] [3fb75539-b77d-459f-8a17-24411566319a]   [1m[36mAlert Create (0.5ms)[0m  [1m[32mINSERT INTO "alerts" ("tutor_id", "alert_type", "severity", "status", "triggered_at", "resolved_at", "metadata", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING "id"[0m  [["tutor_id", 90], ["alert_type", "poor_first_session"], ["severity", "medium"], ["status", "open"], ["triggered_at", "2025-11-05 07:36:49.021817"], ["resolved_at", nil], ["metadata", "{\"score_value\":\"55.0\",\"score_computed_at\":\"2025-11-05T07:36:48.983Z\",\"score_components\":{\"score\":55}}"], ["created_at", "2025-11-05 07:36:49.024997"], ["updated_at", "2025-11-05 07:36:49.024997"]]
+[ActiveJob] [AlertJob] [3fb75539-b77d-459f-8a17-24411566319a]   [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+[ActiveJob] [AlertJob] [3fb75539-b77d-459f-8a17-24411566319a]   [1m[36mAlert Load (0.1ms)[0m  [1m[34mSELECT "alerts".* FROM "alerts" WHERE "alerts"."tutor_id" = $1 AND "alerts"."alert_type" = $2 AND "alerts"."status" = $3 LIMIT $4[0m  [["tutor_id", 90], ["alert_type", "high_reliability_risk"], ["status", "open"], ["LIMIT", 1]]
+[ActiveJob] [AlertJob] [3fb75539-b77d-459f-8a17-24411566319a]   [1m[36mAlert Load (0.1ms)[0m  [1m[34mSELECT "alerts".* FROM "alerts" WHERE "alerts"."tutor_id" = $1 AND "alerts"."alert_type" = $2 AND "alerts"."status" = $3 LIMIT $4[0m  [["tutor_id", 90], ["alert_type", "churn_risk"], ["status", "open"], ["LIMIT", 1]]
+[ActiveJob] [AlertJob] [3fb75539-b77d-459f-8a17-24411566319a]   [1m[36mScore Load (0.1ms)[0m  [1m[34mSELECT "scores".* FROM "scores" WHERE "scores"."tutor_id" = $1 AND "scores"."score_type" = $2 ORDER BY "scores"."computed_at" DESC LIMIT $3[0m  [["tutor_id", 91], ["score_type", "fsrs"], ["LIMIT", 1]]
+[ActiveJob] [AlertJob] [3fb75539-b77d-459f-8a17-24411566319a]   [1m[36mScore Load (0.1ms)[0m  [1m[34mSELECT "scores".* FROM "scores" WHERE "scores"."tutor_id" = $1 AND "scores"."score_type" = $2 ORDER BY "scores"."computed_at" DESC LIMIT $3[0m  [["tutor_id", 91], ["score_type", "ths"], ["LIMIT", 1]]
+[ActiveJob] [AlertJob] [3fb75539-b77d-459f-8a17-24411566319a]   [1m[36mScore Load (0.1ms)[0m  [1m[34mSELECT "scores".* FROM "scores" WHERE "scores"."tutor_id" = $1 AND "scores"."score_type" = $2 ORDER BY "scores"."computed_at" DESC LIMIT $3[0m  [["tutor_id", 91], ["score_type", "tcrs"], ["LIMIT", 1]]
+[ActiveJob] [AlertJob] [3fb75539-b77d-459f-8a17-24411566319a]   [1m[36mAlert Load (0.1ms)[0m  [1m[34mSELECT "alerts".* FROM "alerts" WHERE "alerts"."tutor_id" = $1 AND "alerts"."alert_type" = $2 AND "alerts"."status" = $3 LIMIT $4[0m  [["tutor_id", 91], ["alert_type", "poor_first_session"], ["status", "open"], ["LIMIT", 1]]
+[ActiveJob] [AlertJob] [3fb75539-b77d-459f-8a17-24411566319a]   [1m[36mAlert Load (0.1ms)[0m  [1m[34mSELECT "alerts".* FROM "alerts" WHERE "alerts"."tutor_id" = $1 AND "alerts"."alert_type" = $2 AND "alerts"."status" = $3 LIMIT $4[0m  [["tutor_id", 91], ["alert_type", "high_reliability_risk"], ["status", "open"], ["LIMIT", 1]]
+[ActiveJob] [AlertJob] [3fb75539-b77d-459f-8a17-24411566319a]   [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+[ActiveJob] [AlertJob] [3fb75539-b77d-459f-8a17-24411566319a]   [1m[36mAlert Create (0.3ms)[0m  [1m[32mINSERT INTO "alerts" ("tutor_id", "alert_type", "severity", "status", "triggered_at", "resolved_at", "metadata", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING "id"[0m  [["tutor_id", 91], ["alert_type", "high_reliability_risk"], ["severity", "high"], ["status", "open"], ["triggered_at", "2025-11-05 07:36:49.027421"], ["resolved_at", nil], ["metadata", "{\"score_value\":\"50.0\",\"score_computed_at\":\"2025-11-05T07:36:48.999Z\",\"score_components\":{\"score\":50}}"], ["created_at", "2025-11-05 07:36:49.027563"], ["updated_at", "2025-11-05 07:36:49.027563"]]
+[ActiveJob] [AlertJob] [3fb75539-b77d-459f-8a17-24411566319a]   [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+[ActiveJob] [AlertJob] [3fb75539-b77d-459f-8a17-24411566319a]   [1m[36mAlert Load (0.1ms)[0m  [1m[34mSELECT "alerts".* FROM "alerts" WHERE "alerts"."tutor_id" = $1 AND "alerts"."alert_type" = $2 AND "alerts"."status" = $3 LIMIT $4[0m  [["tutor_id", 91], ["alert_type", "churn_risk"], ["status", "open"], ["LIMIT", 1]]
+[ActiveJob] [AlertJob] [3fb75539-b77d-459f-8a17-24411566319a] Performed AlertJob (Job ID: 3fb75539-b77d-459f-8a17-24411566319a) from Test(default) in 15.45ms
+  [1m[36mAlert Count (0.2ms)[0m  [1m[34mSELECT COUNT(*) FROM "alerts" WHERE "alerts"."tutor_id" = $1[0m  [["tutor_id", 90]]
+  [1m[36mAlert Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "alerts" WHERE "alerts"."tutor_id" = $1[0m  [["tutor_id", 91]]
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mBEGIN[0m
+[ActiveJob] [AlertJob] [e4c8c9c3-40c4-4889-b05c-3ee473352c44] Performing AlertJob (Job ID: e4c8c9c3-40c4-4889-b05c-3ee473352c44) from Test(default)
+[ActiveJob] [AlertJob] [e4c8c9c3-40c4-4889-b05c-3ee473352c44] AlertJob failed: Test error
+[ActiveJob] [AlertJob] [e4c8c9c3-40c4-4889-b05c-3ee473352c44] /Users/dohoonkim/.rvm/gems/ruby-3.3.5/gems/rspec-mocks-3.13.7/lib/rspec/mocks/message_expectation.rb:188:in `block in and_raise'
+/Users/dohoonkim/.rvm/gems/ruby-3.3.5/gems/rspec-mocks-3.13.7/lib/rspec/mocks/message_expectation.rb:797:in `block in call'
+/Users/dohoonkim/.rvm/gems/ruby-3.3.5/gems/rspec-mocks-3.13.7/lib/rspec/mocks/message_expectation.rb:796:in `map'
+/Users/dohoonkim/.rvm/gems/ruby-3.3.5/gems/rspec-mocks-3.13.7/lib/rspec/mocks/message_expectation.rb:796:in `call'
+/Users/dohoonkim/.rvm/gems/ruby-3.3.5/gems/rspec-mocks-3.13.7/lib/rspec/mocks/message_expectation.rb:654:in `invoke_incrementing_actual_calls_by'
+/Users/dohoonkim/.rvm/gems/ruby-3.3.5/gems/rspec-mocks-3.13.7/lib/rspec/mocks/message_expectation.rb:482:in `invoke'
+/Users/dohoonkim/.rvm/gems/ruby-3.3.5/gems/rspec-mocks-3.13.7/lib/rspec/mocks/proxy.rb:206:in `message_received'
+/Users/dohoonkim/.rvm/gems/ruby-3.3.5/gems/rspec-mocks-3.13.7/lib/rspec/mocks/proxy.rb:358:in `message_received'
+/Users/dohoonkim/.rvm/gems/ruby-3.3.5/gems/rspec-mocks-3.13.7/lib/rspec/mocks/method_double.rb:98:in `proxy_method_invoked'
+/Users/dohoonkim/.rvm/gems/ruby-3.3.5/gems/rspec-mocks-3.13.7/lib/rspec/mocks/verifying_proxy.rb:161:in `proxy_method_invoked'
+/Users/dohoonkim/.rvm/gems/ruby-3.3.5/gems/rspec-mocks-3.13.7/lib/rspec/mocks/method_double.rb:74:in `block (2 levels) in define_proxy_method'
+/Users/dohoonkim/.rvm/gems/ruby-3.3.5/gems/rspec-mocks-3.13.7/lib/rspec/mocks/any_instance/recorder.rb:265:in `block in observe!'
+/Users/dohoonkim/GauntletAI/Tutor_Quality_Scoring_System/tutor-insights/app/jobs/alert_job.rb:5:in `perform'
+/Users/dohoonkim/.rvm/gems/ruby-3.3.5/gems/activejob-8.0.4/lib/active_job/execution.rb:68:in `block in _perform_job'
+/Users/dohoonkim/.rvm/gems/ruby-3.3.5/gems/activesupport-8.0.4/lib/active_support/callbacks.rb:120:in `block in run_callbacks'
+/Users/dohoonkim/.rvm/gems/ruby-3.3.5/gems/i18n-1.14.7/lib/i18n.rb:348:in `with_locale'
+/Users/dohoonkim/.rvm/gems/ruby-3.3.5/gems/activejob-8.0.4/lib/active_job/translation.rb:9:in `block (2 levels) in <module:Translation>'
+/Users/dohoonkim/.rvm/gems/ruby-3.3.5/gems/activesupport-8.0.4/lib/active_support/callbacks.rb:129:in `instance_exec'
+/Users/dohoonkim/.rvm/gems/ruby-3.3.5/gems/activesupport-8.0.4/lib/active_support/callbacks.rb:129:in `block in run_callbacks'
+/Users/dohoonkim/.rvm/gems/ruby-3.3.5/gems/activesupport-8.0.4/lib/active_support/core_ext/time/zones.rb:65:in `use_zone'
+/Users/dohoonkim/.rvm/gems/ruby-3.3.5/gems/activejob-8.0.4/lib/active_job/timezones.rb:9:in `block (2 levels) in <module:Timezones>'
+/Users/dohoonkim/.rvm/gems/ruby-3.3.5/gems/activesupport-8.0.4/lib/active_support/callbacks.rb:129:in `instance_exec'
+/Users/dohoonkim/.rvm/gems/ruby-3.3.5/gems/activesupport-8.0.4/lib/active_support/callbacks.rb:129:in `block in run_callbacks'
+/Users/dohoonkim/.rvm/gems/ruby-3.3.5/gems/activesupport-8.0.4/lib/active_support/callbacks.rb:140:in `run_callbacks'
+/Users/dohoonkim/.rvm/gems/ruby-3.3.5/gems/activejob-8.0.4/lib/active_job/execution.rb:67:in `_perform_job'
+/Users/dohoonkim/.rvm/gems/ruby-3.3.5/gems/activejob-8.0.4/lib/active_job/instrumentation.rb:32:in `_perform_job'
+/Users/dohoonkim/.rvm/gems/ruby-3.3.5/gems/activejob-8.0.4/lib/active_job/execution.rb:51:in `perform_now'
+/Users/dohoonkim/.rvm/gems/ruby-3.3.5/gems/activejob-8.0.4/lib/active_job/instrumentation.rb:26:in `block in perform_now'
+/Users/dohoonkim/.rvm/gems/ruby-3.3.5/gems/activerecord-8.0.4/lib/active_record/railties/job_runtime.rb:13:in `block in instrument'
+/Users/dohoonkim/.rvm/gems/ruby-3.3.5/gems/activejob-8.0.4/lib/active_job/instrumentation.rb:40:in `block in instrument'
+/Users/dohoonkim/.rvm/gems/ruby-3.3.5/gems/activesupport-8.0.4/lib/active_support/notifications.rb:210:in `block in instrument'
+/Users/dohoonkim/.rvm/gems/ruby-3.3.5/gems/activesupport-8.0.4/lib/active_support/notifications/instrumenter.rb:58:in `instrument'
+/Users/dohoonkim/.rvm/gems/ruby-3.3.5/gems/activesupport-8.0.4/lib/active_support/notifications.rb:210:in `instrument'
+/Users/dohoonkim/.rvm/gems/ruby-3.3.5/gems/activejob-8.0.4/lib/active_job/instrumentation.rb:39:in `instrument'
+/Users/dohoonkim/.rvm/gems/ruby-3.3.5/gems/activerecord-8.0.4/lib/active_record/railties/job_runtime.rb:11:in `instrument'
+/Users/dohoonkim/.rvm/gems/ruby-3.3.5/gems/activejob-8.0.4/lib/active_job/instrumentation.rb:26:in `perform_now'
+/Users/dohoonkim/.rvm/gems/ruby-3.3.5/gems/activejob-8.0.4/lib/active_job/logging.rb:32:in `block in perform_now'
+/Users/dohoonkim/.rvm/gems/ruby-3.3.5/gems/activesupport-8.0.4/lib/active_support/tagged_logging.rb:143:in `block in tagged'
+/Users/dohoonkim/.rvm/gems/ruby-3.3.5/gems/activesupport-8.0.4/lib/active_support/tagged_logging.rb:38:in `tagged'
+/Users/dohoonkim/.rvm/gems/ruby-3.3.5/gems/activesupport-8.0.4/lib/active_support/tagged_logging.rb:143:in `tagged'
+/Users/dohoonkim/.rvm/gems/ruby-3.3.5/gems/activesupport-8.0.4/lib/active_support/broadcast_logger.rb:228:in `method_missing'
+/Users/dohoonkim/.rvm/gems/ruby-3.3.5/gems/activejob-8.0.4/lib/active_job/logging.rb:39:in `tag_logger'
+/Users/dohoonkim/.rvm/gems/ruby-3.3.5/gems/activejob-8.0.4/lib/active_job/logging.rb:32:in `perform_now'
+/Users/dohoonkim/.rvm/gems/ruby-3.3.5/gems/activejob-8.0.4/lib/active_job/execution.rb:23:in `perform_now'
+/Users/dohoonkim/GauntletAI/Tutor_Quality_Scoring_System/tutor-insights/spec/jobs/alert_job_spec.rb:37:in `block (4 levels) in <top (required)>'
+/Users/dohoonkim/.rvm/gems/ruby-3.3.5/gems/rspec-expectations-3.13.5/lib/rspec/matchers/built_in/raise_error.rb:63:in `matches?'
+/Users/dohoonkim/.rvm/gems/ruby-3.3.5/gems/rspec-expectations-3.13.5/lib/rspec/matchers/built_in/raise_error.rb:85:in `does_not_match?'
+/Users/dohoonkim/.rvm/gems/ruby-3.3.5/gems/rspec-expectations-3.13.5/lib/rspec/expectations/handler.rb:89:in `does_not_match?'
+/Users/dohoonkim/.rvm/gems/ruby-3.3.5/gems/rspec-expectations-3.13.5/lib/rspec/expectations/handler.rb:78:in `block in handle_matcher'
+/Users/dohoonkim/.rvm/gems/ruby-3.3.5/gems/rspec-expectations-3.13.5/lib/rspec/expectations/handler.rb:26:in `with_matcher'
+/Users/dohoonkim/.rvm/gems/ruby-3.3.5/gems/rspec-expectations-3.13.5/lib/rspec/expectations/handler.rb:75:in `handle_matcher'
+/Users/dohoonkim/.rvm/gems/ruby-3.3.5/gems/rspec-expectations-3.13.5/lib/rspec/expectations/expectation_target.rb:78:in `not_to'
+/Users/dohoonkim/.rvm/gems/ruby-3.3.5/gems/rspec-expectations-3.13.5/lib/rspec/expectations/expectation_target.rb:144:in `not_to'
+/Users/dohoonkim/GauntletAI/Tutor_Quality_Scoring_System/tutor-insights/spec/jobs/alert_job_spec.rb:37:in `block (3 levels) in <top (required)>'
+/Users/dohoonkim/.rvm/gems/ruby-3.3.5/gems/rspec-core-3.13.6/lib/rspec/core/example.rb:263:in `instance_exec'
+/Users/dohoonkim/.rvm/gems/ruby-3.3.5/gems/rspec-core-3.13.6/lib/rspec/core/example.rb:263:in `block in run'
+/Users/dohoonkim/.rvm/gems/ruby-3.3.5/gems/rspec-core-3.13.6/lib/rspec/core/example.rb:511:in `block in with_around_and_singleton_context_hooks'
+/Users/dohoonkim/.rvm/gems/ruby-3.3.5/gems/rspec-core-3.13.6/lib/rspec/core/example.rb:468:in `block in with_around_example_hooks'
+/Users/dohoonkim/.rvm/gems/ruby-3.3.5/gems/rspec-core-3.13.6/lib/rspec/core/hooks.rb:486:in `block in run'
+/Users/dohoonkim/.rvm/gems/ruby-3.3.5/gems/rspec-core-3.13.6/lib/rspec/core/hooks.rb:626:in `block in run_around_example_hooks_for'
+/Users/dohoonkim/.rvm/gems/ruby-3.3.5/gems/rspec-core-3.13.6/lib/rspec/core/example.rb:352:in `call'
+/Users/dohoonkim/.rvm/gems/ruby-3.3.5/gems/rspec-rails-8.0.2/lib/rspec/rails/adapters.rb:75:in `block (2 levels) in <module:MinitestLifecycleAdapter>'
+/Users/dohoonkim/.rvm/gems/ruby-3.3.5/gems/rspec-core-3.13.6/lib/rspec/core/example.rb:457:in `instance_exec'
+/Users/dohoonkim/.rvm/gems/ruby-3.3.5/gems/rspec-core-3.13.6/lib/rspec/core/example.rb:457:in `instance_exec'
+/Users/dohoonkim/.rvm/gems/ruby-3.3.5/gems/rspec-core-3.13.6/lib/rspec/core/hooks.rb:390:in `execute_with'
+/Users/dohoonkim/.rvm/gems/ruby-3.3.5/gems/rspec-core-3.13.6/lib/rspec/core/hooks.rb:628:in `block (2 levels) in run_around_example_hooks_for'
+/Users/dohoonkim/.rvm/gems/ruby-3.3.5/gems/rspec-core-3.13.6/lib/rspec/core/example.rb:352:in `call'
+/Users/dohoonkim/.rvm/gems/ruby-3.3.5/gems/rspec-core-3.13.6/lib/rspec/core/hooks.rb:629:in `run_around_example_hooks_for'
+/Users/dohoonkim/.rvm/gems/ruby-3.3.5/gems/rspec-core-3.13.6/lib/rspec/core/hooks.rb:486:in `run'
+/Users/dohoonkim/.rvm/gems/ruby-3.3.5/gems/rspec-core-3.13.6/lib/rspec/core/example.rb:468:in `with_around_example_hooks'
+/Users/dohoonkim/.rvm/gems/ruby-3.3.5/gems/rspec-core-3.13.6/lib/rspec/core/example.rb:511:in `with_around_and_singleton_context_hooks'
+/Users/dohoonkim/.rvm/gems/ruby-3.3.5/gems/rspec-core-3.13.6/lib/rspec/core/example.rb:259:in `run'
+/Users/dohoonkim/.rvm/gems/ruby-3.3.5/gems/rspec-core-3.13.6/lib/rspec/core/example_group.rb:653:in `block in run_examples'
+/Users/dohoonkim/.rvm/gems/ruby-3.3.5/gems/rspec-core-3.13.6/lib/rspec/core/example_group.rb:649:in `map'
+/Users/dohoonkim/.rvm/gems/ruby-3.3.5/gems/rspec-core-3.13.6/lib/rspec/core/example_group.rb:649:in `run_examples'
+/Users/dohoonkim/.rvm/gems/ruby-3.3.5/gems/rspec-core-3.13.6/lib/rspec/core/example_group.rb:614:in `run'
+/Users/dohoonkim/.rvm/gems/ruby-3.3.5/gems/rspec-core-3.13.6/lib/rspec/core/example_group.rb:615:in `block in run'
+/Users/dohoonkim/.rvm/gems/ruby-3.3.5/gems/rspec-core-3.13.6/lib/rspec/core/example_group.rb:615:in `map'
+/Users/dohoonkim/.rvm/gems/ruby-3.3.5/gems/rspec-core-3.13.6/lib/rspec/core/example_group.rb:615:in `run'
+/Users/dohoonkim/.rvm/gems/ruby-3.3.5/gems/rspec-core-3.13.6/lib/rspec/core/runner.rb:121:in `block (3 levels) in run_specs'
+/Users/dohoonkim/.rvm/gems/ruby-3.3.5/gems/rspec-core-3.13.6/lib/rspec/core/runner.rb:121:in `map'
+/Users/dohoonkim/.rvm/gems/ruby-3.3.5/gems/rspec-core-3.13.6/lib/rspec/core/runner.rb:121:in `block (2 levels) in run_specs'
+/Users/dohoonkim/.rvm/gems/ruby-3.3.5/gems/rspec-core-3.13.6/lib/rspec/core/configuration.rb:2097:in `with_suite_hooks'
+/Users/dohoonkim/.rvm/gems/ruby-3.3.5/gems/rspec-core-3.13.6/lib/rspec/core/runner.rb:116:in `block in run_specs'
+/Users/dohoonkim/.rvm/gems/ruby-3.3.5/gems/rspec-core-3.13.6/lib/rspec/core/reporter.rb:74:in `report'
+/Users/dohoonkim/.rvm/gems/ruby-3.3.5/gems/rspec-core-3.13.6/lib/rspec/core/runner.rb:115:in `run_specs'
+/Users/dohoonkim/.rvm/gems/ruby-3.3.5/gems/rspec-core-3.13.6/lib/rspec/core/runner.rb:89:in `run'
+/Users/dohoonkim/.rvm/gems/ruby-3.3.5/gems/rspec-core-3.13.6/lib/rspec/core/runner.rb:71:in `run'
+/Users/dohoonkim/.rvm/gems/ruby-3.3.5/gems/rspec-core-3.13.6/lib/rspec/core/runner.rb:45:in `invoke'
+/Users/dohoonkim/.rvm/gems/ruby-3.3.5/gems/rspec-core-3.13.6/exe/rspec:4:in `<top (required)>'
+/Users/dohoonkim/.rvm/gems/ruby-3.3.5/bin/rspec:25:in `load'
+/Users/dohoonkim/.rvm/gems/ruby-3.3.5/bin/rspec:25:in `<main>'
+/Users/dohoonkim/.rvm/gems/ruby-3.3.5/bin/ruby_executable_hooks:22:in `eval'
+/Users/dohoonkim/.rvm/gems/ruby-3.3.5/bin/ruby_executable_hooks:22:in `<main>'
+[ActiveJob] [AlertJob] [e4c8c9c3-40c4-4889-b05c-3ee473352c44] Performed AlertJob (Job ID: e4c8c9c3-40c4-4889-b05c-3ee473352c44) from Test(default) in 0.22ms
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mROLLBACK[0m
