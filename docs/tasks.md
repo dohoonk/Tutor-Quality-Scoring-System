@@ -1,7 +1,7 @@
 # Task List (Concise, PR-Sized)
 
 ## EPIC 1 — Project Setup
-- [ ] Create Rails app (`rails new tutor-insights --database=postgresql --css=tailwind`)
+- [x] Create Rails app (`rails new tutor-insights --database=postgresql --css=tailwind`)
 - [ ] Configure Postgres & run `db:create db:migrate`
 - [ ] Add dotenv-rails for env mgmt
 

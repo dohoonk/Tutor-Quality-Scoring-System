@@ -1,0 +1,79 @@
+Description: Task-by-task workflow with automatic progress tracking and commits
+Globs: tasks.md
+
+# Task-Driven Development Workflow
+
+## Core Principle
+Always work on ONE task at a time, following the exact order in `tasks.md`. Complete the task, mark it done, and commit before moving to the next task.
+
+## Workflow Steps
+
+### 1. Start of Session
+- **MUST** read `tasks.md` at the beginning of every session
+- Identify the **first uncompleted task** (the first `- [ ]` checkbox in document order)
+- This is the task you will work on
+
+### 2. Working on a Task
+- Focus ONLY on the current task
+- Complete all subtasks if the task has nested items
+- Do not skip ahead or work on multiple tasks simultaneously
+- If a task seems too large, break it down but complete it fully before marking done
+
+### 3. Marking Task Complete
+- When task is fully implemented and tested:
+  1. Update `tasks.md`: Change `- [ ]` to `- [x]` for the completed task
+  2. Ensure all nested subtasks are also marked `- [x]` if they were completed
+- Use exact string matching to find and replace the checkbox
+
+### 4. Committing Changes
+- **ALWAYS** commit after marking a task complete
+- Commit message format: `"[EPIC X] Complete: [Task description]"`
+- Include the task description from the checkbox text
+- Stage ALL related changes (code, tests, config, documentation, tasks.md)
+- Use: `git add -A && git commit -m "[EPIC X] Complete: [Task description]"`
+- Example: `git commit -m "[EPIC 1] Complete: Create Rails app"`
+- If git repository doesn't exist, initialize it first: `git init && git add . && git commit -m "[EPIC X] Complete: [Task description]"`
+
+### 5. Moving to Next Task
+- After commit, immediately identify the next uncompleted task
+- Repeat the process
+
+## Task Identification Rules
+- Search for the first `- [ ]` in `tasks.md` (top to bottom, reading line by line)
+- Work on tasks in strict document order (EPIC 1 → EPIC 2 → EPIC 3, etc.)
+- For nested subtasks (indented with 2 spaces):
+  - If parent task is incomplete, work on parent first
+  - If parent is complete, work on nested subtasks in order
+  - Complete ALL nested subtasks before moving to next top-level task
+- Example: If "Create Session model" has nested fields, complete all fields before marking parent done
+
+## Exception Handling
+- If a task cannot be completed due to dependencies, document why in a comment and move to the next available task
+- If a task requires clarification, ask the user but do not skip ahead
+- If you complete multiple related subtasks together, mark them all as done and commit once
+
+## Commit Best Practices
+- Commit message should be clear and reference the exact task
+- Include all files changed for that task
+- Do not bundle unrelated tasks in one commit
+- Use descriptive commit messages that explain what was done
+
+## Example Workflow
+
+```
+1. Read tasks.md
+2. Find first task: "- [ ] Create Rails app"
+3. Run: rails new tutor-insights --database=postgresql --css=tailwind
+4. Update tasks.md: "- [x] Create Rails app"
+5. Commit: git add . && git commit -m "[EPIC 1] Complete: Create Rails app"
+6. Read tasks.md again
+7. Find next task: "- [ ] Configure Postgres & run db:create db:migrate"
+8. Repeat...
+```
+
+## Important Notes
+- Never skip tasks or work out of order
+- Never mark a task as done until it's fully implemented
+- Always commit after completing a task
+- If you need to work on a task that's not next, ask the user first
+- Keep the workflow linear and predictable
