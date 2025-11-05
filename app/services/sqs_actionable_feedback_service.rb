@@ -4,11 +4,13 @@ class SqsActionableFeedbackService
   end
 
   def generate_feedback
-    # Get last 10 SQS scores with components
+    # Get last 10 SQS scores with components (ordered by session date, not computed_at)
+    # This ensures we're looking at the most recent 10 sessions chronologically
     sqs_scores = Score.where(tutor: @tutor, score_type: 'sqs')
-                      .includes(:session)
-                      .order(computed_at: :desc)
+                      .joins(:session)
+                      .order('sessions.scheduled_start_at DESC')
                       .limit(10)
+                      .includes(:session)
 
     return { perfect: true, message: nil, items: [] } if sqs_scores.empty?
 
