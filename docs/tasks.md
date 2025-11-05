@@ -332,21 +332,21 @@
   - [x] Invert color coding logic
 - [x] Update session table displays (both dashboards)
 
-### Task 11.6: Update All Tests
-- [ ] Update service specs:
-  - [ ] Rename `first_session_quality_score_service_spec.rb` → `first_session_quality_score_service_spec.rb`
-  - [ ] Update all score expectations (invert values)
-  - [ ] Update test descriptions and assertions
-- [ ] Update job specs:
-  - [ ] `session_scoring_job_spec.rb` - update FSQS expectations
-  - [ ] `alert_job_spec.rb` - update threshold tests
-- [ ] Update request specs:
-  - [ ] `api/tutor_api_spec.rb` - rename endpoints, update expectations
-  - [ ] `api/admin_api_spec.rb` - update risk scoring tests
-- [ ] Update mailer specs:
-  - [ ] `alert_mailer_spec.rb` - update FSQS expectations
-- [ ] Update alert service specs:
-  - [ ] Invert threshold expectations
+### Task 11.6: Update All Tests ✅
+- [x] Update service specs:
+  - [x] Rename `first_session_risk_score_service_spec.rb` → `first_session_quality_score_service_spec.rb`
+  - [x] Update all score expectations (inverted values)
+  - [x] Update test descriptions and assertions
+- [x] Update job specs:
+  - [x] `session_scoring_job_spec.rb` - update FSQS expectations
+  - [x] `alert_job_spec.rb` - update threshold tests
+- [x] Update request specs:
+  - [x] `api/tutor_api_spec.rb` - rename endpoints, update expectations
+  - [x] `api/admin_api_spec.rb` - update risk scoring tests
+- [x] Update mailer specs:
+  - [x] `alert_mailer_spec.rb` - update FSQS expectations
+- [x] Update alert service specs:
+  - [x] Invert threshold expectations
 
 ### Task 11.7: Update Documentation ✅
 - [x] Update `docs/prd.md`:
@@ -388,11 +388,12 @@
 - [ ] Verify email notifications show correct information
 - [ ] Test both dashboards (tutor and admin)
 
-### Task 11.10: Database Migration & Deployment
-- [ ] Create data migration script to update existing scores
+### Task 11.10: Database Migration & Deployment ✅
+- [x] Create data migration script to update existing scores (`db/migrate/20251105165351_migrate_fsrs_to_fsqs.rb`)
+- [x] Include conversion formula: `new_score = 100 * (1 - old_score/120)`
+- [x] Document rollback procedure (migration includes `down` method)
+- [ ] Run migration in development: `bin/rails db:migrate`
 - [ ] Test migration on development data
-- [ ] Document rollback procedure
-- [ ] Update deployment notes
-- [ ] Plan for zero-downtime migration if needed
+- [ ] Plan for zero-downtime migration if needed (future deployment consideration)
 
 ---
