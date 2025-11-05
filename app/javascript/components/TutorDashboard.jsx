@@ -289,34 +289,83 @@ const TutorDashboard = ({ tutorId }) => {
                 </AccessibleButton>
               </div>
               
-              {/* Bar Chart - Last 5 First Sessions */}
-              <div className="mb-4">
-                <BarChart
-                  data={fsqsHistory.slice(0, 5).map((item, index) => ({
-                    value: item.score || 0,
-                    label: item.student_name || `Session ${index + 1}`,
-                    date: item.date ? formatDate(item.date) : null
-                  }))}
-                  height={isDesktop ? 471 : 280}
-                  showGrid={true}
-                  showThresholds={true}
-                  thresholds={[
-                    { value: 50, color: 'red' },
-                    { value: 70, color: 'yellow' }
-                  ]}
-                  showTooltip={true}
-                  formatValue={(v) => Math.round(v)}
-                  maxValue={100}
-                  minValue={0}
-                />
-              </div>
+              {/* Desktop: Side-by-side layout (Chart left, Info right) */}
+              <div className="md:grid md:grid-cols-2 md:gap-6">
+                {/* Left: Bar Chart - Last 5 First Sessions */}
+                <div className="mb-4 md:mb-0">
+                  <BarChart
+                    data={fsqsHistory.slice(0, 5).map((item, index) => ({
+                      value: item.score || 0,
+                      label: item.student_name || `Session ${index + 1}`,
+                      date: item.date ? formatDate(item.date) : null
+                    }))}
+                    height={isDesktop ? 471 : 280}
+                    showGrid={true}
+                    showThresholds={true}
+                    thresholds={[
+                      { value: 50, color: 'red' },
+                      { value: 70, color: 'yellow' }
+                    ]}
+                    showTooltip={true}
+                    formatValue={(v) => Math.round(v)}
+                    maxValue={100}
+                    minValue={0}
+                  />
+                  
+                  <div className="text-sm text-gray-600 mt-2">
+                    Average: <span className="font-semibold">{avgFsqs}</span> {improvement && (
+                      <span className={improvement > 0 ? 'text-green-600 font-medium' : 'text-red-600 font-medium'}>
+                        • {improvement > 0 ? 'Improving' : 'Declining'} by {Math.abs(improvement)}% vs previous period
+                      </span>
+                    )}
+                  </div>
+                </div>
 
-              <div className="text-sm text-gray-600">
-                Average: <span className="font-semibold">{avgFsqs}</span> {improvement && (
-                  <span className={improvement > 0 ? 'text-green-600 font-medium' : 'text-red-600 font-medium'}>
-                    • {improvement > 0 ? 'Improving' : 'Declining'} by {Math.abs(improvement)}% vs previous period
-                  </span>
-                )}
+                {/* Right: Educational Content (Desktop only) */}
+                <div className="hidden md:block">
+                  <div className="h-full flex flex-col justify-center space-y-4">
+                    {/* Why FSQS Matters */}
+                    <div className="bg-blue-50 rounded-lg p-4 border-l-4 border-blue-500">
+                      <h4 className="text-lg font-semibold text-blue-900 mb-2 flex items-center gap-2">
+                        <span>📊</span> Why This Score Matters
+                      </h4>
+                      <p className="text-gray-700 text-sm leading-relaxed">
+                        Your First Session Quality Score (FSQS) measures how well you're setting up new students for success. 
+                        A strong first session builds trust, sets clear expectations, and creates a positive learning foundation. 
+                        Students with great first sessions are more likely to continue and engage actively.
+                      </p>
+                    </div>
+
+                    {/* How to Improve */}
+                    <div className="bg-green-50 rounded-lg p-4 border-l-4 border-green-500">
+                      <h4 className="text-lg font-semibold text-green-900 mb-2 flex items-center gap-2">
+                        <span>🚀</span> How to Improve Your Score
+                      </h4>
+                      <ul className="text-gray-700 text-sm space-y-2 leading-relaxed">
+                        <li className="flex items-start gap-2">
+                          <span className="text-green-600 font-bold mt-0.5">•</span>
+                          <span><strong>Set clear goals:</strong> Discuss what the student wants to achieve in the first 5 minutes.</span>
+                        </li>
+                        <li className="flex items-start gap-2">
+                          <span className="text-green-600 font-bold mt-0.5">•</span>
+                          <span><strong>Encourage actively:</strong> Use positive phrases like "Great question!" and "You're doing well!"</span>
+                        </li>
+                        <li className="flex items-start gap-2">
+                          <span className="text-green-600 font-bold mt-0.5">•</span>
+                          <span><strong>Balance the conversation:</strong> Aim for 40-60% student speaking time.</span>
+                        </li>
+                        <li className="flex items-start gap-2">
+                          <span className="text-green-600 font-bold mt-0.5">•</span>
+                          <span><strong>Summarize at the end:</strong> Recap what was covered and what's next.</span>
+                        </li>
+                        <li className="flex items-start gap-2">
+                          <span className="text-green-600 font-bold mt-0.5">•</span>
+                          <span><strong>Avoid confusion:</strong> Watch for student confusion phrases and clarify immediately.</span>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
           )}
