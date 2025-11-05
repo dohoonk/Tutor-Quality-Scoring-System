@@ -4033,3 +4033,203 @@ ActionController::RoutingError (No route matches [GET] "/.well-known/appspecific
   
 ActionController::RoutingError (No route matches [GET] "/tailwind/application.css"):
   
+Started GET "/tutor/3" for ::1 at 2025-11-05 01:52:41 -0600
+  [1m[36mActiveRecord::SchemaMigration Load (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='TutorInsights'*/[0m
+Processing by TutorsController#show as HTML
+  Parameters: {"id"=>"3"}
+  Rendering layout layouts/application.html.erb
+  Rendering tutors/show.html.erb within layouts/application
+  Rendered tutors/show.html.erb within layouts/application (Duration: 0.1ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 5.1ms | GC: 0.0ms)
+Completed 200 OK in 24ms (Views: 6.1ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.1ms)
+
+
+Started GET "/.well-known/appspecific/com.chrome.devtools.json" for ::1 at 2025-11-05 01:52:41 -0600
+  
+ActionController::RoutingError (No route matches [GET] "/.well-known/appspecific/com.chrome.devtools.json"):
+  
+Started GET "/tutor/3" for ::1 at 2025-11-05 01:52:44 -0600
+Processing by TutorsController#show as HTML
+  Parameters: {"id"=>"3"}
+  Rendering layout layouts/application.html.erb
+  Rendering tutors/show.html.erb within layouts/application
+  Rendered tutors/show.html.erb within layouts/application (Duration: 0.0ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 1.3ms | GC: 0.0ms)
+Completed 200 OK in 17ms (Views: 1.5ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/.well-known/appspecific/com.chrome.devtools.json" for ::1 at 2025-11-05 01:52:44 -0600
+  
+ActionController::RoutingError (No route matches [GET] "/.well-known/appspecific/com.chrome.devtools.json"):
+  
+Started GET "/tutor/3" for ::1 at 2025-11-05 01:53:40 -0600
+Processing by TutorsController#show as HTML
+  Parameters: {"id"=>"3"}
+  Rendering layout layouts/application.html.erb
+  Rendering tutors/show.html.erb within layouts/application
+  Rendered tutors/show.html.erb within layouts/application (Duration: 0.0ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 1.4ms | GC: 0.0ms)
+Completed 200 OK in 21ms (Views: 1.6ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/.well-known/appspecific/com.chrome.devtools.json" for ::1 at 2025-11-05 01:53:40 -0600
+  
+ActionController::RoutingError (No route matches [GET] "/.well-known/appspecific/com.chrome.devtools.json"):
+  
+Started GET "/tutor/3" for ::1 at 2025-11-05 01:53:48 -0600
+  [1m[36mActiveRecord::SchemaMigration Load (0.4ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='TutorInsights'*/[0m
+Processing by TutorsController#show as HTML
+  Parameters: {"id"=>"3"}
+  Rendering layout layouts/application.html.erb
+  Rendering tutors/show.html.erb within layouts/application
+  Rendered tutors/show.html.erb within layouts/application (Duration: 0.1ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 5.1ms | GC: 0.0ms)
+Completed 200 OK in 23ms (Views: 6.1ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.1ms)
+
+
+Started GET "/.well-known/appspecific/com.chrome.devtools.json" for ::1 at 2025-11-05 01:53:48 -0600
+  
+ActionController::RoutingError (No route matches [GET] "/.well-known/appspecific/com.chrome.devtools.json"):
+  
+Started GET "/tutor/3" for ::1 at 2025-11-05 01:53:52 -0600
+Processing by TutorsController#show as HTML
+  Parameters: {"id"=>"3"}
+  Rendering layout layouts/application.html.erb
+  Rendering tutors/show.html.erb within layouts/application
+  Rendered tutors/show.html.erb within layouts/application (Duration: 0.0ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 1.3ms | GC: 0.0ms)
+Completed 200 OK in 21ms (Views: 1.5ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/.well-known/appspecific/com.chrome.devtools.json" for ::1 at 2025-11-05 01:53:52 -0600
+  
+ActionController::RoutingError (No route matches [GET] "/.well-known/appspecific/com.chrome.devtools.json"):
+  
+Started GET "/tutor/1" for ::1 at 2025-11-05 01:53:54 -0600
+Processing by TutorsController#show as HTML
+  Parameters: {"id"=>"1"}
+  Rendering layout layouts/application.html.erb
+  Rendering tutors/show.html.erb within layouts/application
+  Rendered tutors/show.html.erb within layouts/application (Duration: 0.0ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 1.4ms | GC: 0.0ms)
+Completed 200 OK in 21ms (Views: 1.6ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/.well-known/appspecific/com.chrome.devtools.json" for ::1 at 2025-11-05 01:53:54 -0600
+  
+ActionController::RoutingError (No route matches [GET] "/.well-known/appspecific/com.chrome.devtools.json"):
+  
+Started GET "/tutor/2" for ::1 at 2025-11-05 01:53:56 -0600
+Processing by TutorsController#show as HTML
+  Parameters: {"id"=>"2"}
+  Rendering layout layouts/application.html.erb
+  Rendering tutors/show.html.erb within layouts/application
+  Rendered tutors/show.html.erb within layouts/application (Duration: 0.0ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 1.3ms | GC: 0.0ms)
+Completed 200 OK in 22ms (Views: 1.5ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/.well-known/appspecific/com.chrome.devtools.json" for ::1 at 2025-11-05 01:53:56 -0600
+  
+ActionController::RoutingError (No route matches [GET] "/.well-known/appspecific/com.chrome.devtools.json"):
+  
+Started GET "/tutor/1" for ::1 at 2025-11-05 01:54:00 -0600
+Processing by TutorsController#show as HTML
+  Parameters: {"id"=>"1"}
+  Rendering layout layouts/application.html.erb
+  Rendering tutors/show.html.erb within layouts/application
+  Rendered tutors/show.html.erb within layouts/application (Duration: 0.0ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 1.3ms | GC: 0.0ms)
+Completed 200 OK in 21ms (Views: 1.6ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/.well-known/appspecific/com.chrome.devtools.json" for ::1 at 2025-11-05 01:54:00 -0600
+  
+ActionController::RoutingError (No route matches [GET] "/.well-known/appspecific/com.chrome.devtools.json"):
+  
+  [1m[36mTutor Load (41.8ms)[0m  [1m[34mSELECT "tutors".* FROM "tutors" ORDER BY "tutors"."id" DESC LIMIT 1 /*application='TutorInsights'*/[0m
+Started GET "/tutor/1" for ::1 at 2025-11-05 01:54:34 -0600
+Processing by TutorsController#show as HTML
+  Parameters: {"id"=>"1"}
+  Rendering layout layouts/application.html.erb
+  Rendering tutors/show.html.erb within layouts/application
+  Rendered tutors/show.html.erb within layouts/application (Duration: 0.0ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 1.4ms | GC: 0.0ms)
+Completed 200 OK in 20ms (Views: 1.6ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/.well-known/appspecific/com.chrome.devtools.json" for ::1 at 2025-11-05 01:54:34 -0600
+  
+ActionController::RoutingError (No route matches [GET] "/.well-known/appspecific/com.chrome.devtools.json"):
+  
+Started GET "/tutor/1" for ::1 at 2025-11-05 01:55:34 -0600
+Processing by TutorsController#show as HTML
+  Parameters: {"id"=>"1"}
+  Rendering layout layouts/application.html.erb
+  Rendering tutors/show.html.erb within layouts/application
+  Rendered tutors/show.html.erb within layouts/application (Duration: 0.0ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 1.7ms | GC: 0.0ms)
+Completed 200 OK in 18ms (Views: 1.9ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/.well-known/appspecific/com.chrome.devtools.json" for ::1 at 2025-11-05 01:55:34 -0600
+  
+ActionController::RoutingError (No route matches [GET] "/.well-known/appspecific/com.chrome.devtools.json"):
+  
+Started GET "/tutor/1" for ::1 at 2025-11-05 01:55:50 -0600
+Processing by TutorsController#show as HTML
+  Parameters: {"id"=>"1"}
+  Rendering layout layouts/application.html.erb
+  Rendering tutors/show.html.erb within layouts/application
+  Rendered tutors/show.html.erb within layouts/application (Duration: 0.0ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 1.4ms | GC: 0.1ms)
+Completed 200 OK in 15ms (Views: 1.6ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.1ms)
+
+
+Started GET "/.well-known/appspecific/com.chrome.devtools.json" for ::1 at 2025-11-05 01:55:50 -0600
+  
+ActionController::RoutingError (No route matches [GET] "/.well-known/appspecific/com.chrome.devtools.json"):
+  
+Started GET "/tutor/1" for ::1 at 2025-11-05 01:56:19 -0600
+  [1m[36mActiveRecord::SchemaMigration Load (0.4ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='TutorInsights'*/[0m
+Processing by TutorsController#show as HTML
+  Parameters: {"id"=>"1"}
+  Rendering layout layouts/application.html.erb
+  Rendering tutors/show.html.erb within layouts/application
+  Rendered tutors/show.html.erb within layouts/application (Duration: 0.1ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 5.4ms | GC: 0.0ms)
+Completed 200 OK in 25ms (Views: 6.6ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.1ms)
+
+
+Started GET "/.well-known/appspecific/com.chrome.devtools.json" for ::1 at 2025-11-05 01:56:19 -0600
+  
+ActionController::RoutingError (No route matches [GET] "/.well-known/appspecific/com.chrome.devtools.json"):
+  
+Started GET "/tutor/1" for ::1 at 2025-11-05 01:56:22 -0600
+Processing by TutorsController#show as HTML
+  Parameters: {"id"=>"1"}
+  Rendering layout layouts/application.html.erb
+  Rendering tutors/show.html.erb within layouts/application
+  Rendered tutors/show.html.erb within layouts/application (Duration: 0.0ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 1.3ms | GC: 0.0ms)
+Completed 200 OK in 23ms (Views: 1.5ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/.well-known/appspecific/com.chrome.devtools.json" for ::1 at 2025-11-05 01:56:22 -0600
+  
+ActionController::RoutingError (No route matches [GET] "/.well-known/appspecific/com.chrome.devtools.json"):
+  
+Started GET "/tutor/1" for ::1 at 2025-11-05 01:56:23 -0600
+Processing by TutorsController#show as HTML
+  Parameters: {"id"=>"1"}
+  Rendering layout layouts/application.html.erb
+  Rendering tutors/show.html.erb within layouts/application
+  Rendered tutors/show.html.erb within layouts/application (Duration: 0.0ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 0.6ms | GC: 0.0ms)
+Completed 200 OK in 21ms (Views: 0.8ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/.well-known/appspecific/com.chrome.devtools.json" for ::1 at 2025-11-05 01:56:23 -0600
+  
+ActionController::RoutingError (No route matches [GET] "/.well-known/appspecific/com.chrome.devtools.json"):
+  
