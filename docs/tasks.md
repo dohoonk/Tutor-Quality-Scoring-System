@@ -5,7 +5,7 @@
 - [x] Configure Postgres & run `db:create db:migrate`
 - [x] Add dotenv-rails for env mgmt
 
-- [ ] Add Vite + React (`bundle add vite_rails && rails vite:install`)
+- [x] Add Vite + React (`bundle add vite_rails && rails vite:install`)
 - [ ] Confirm React mounts to `/tutor/:id` and `/admin/:id`
 
 - [ ] Add Sidekiq + Redis
