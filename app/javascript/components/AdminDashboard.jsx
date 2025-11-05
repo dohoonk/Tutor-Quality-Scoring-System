@@ -6,6 +6,8 @@ const AdminDashboard = ({ adminId }) => {
   const [tutorMetrics, setTutorMetrics] = useState(null)
   const [tutorAlerts, setTutorAlerts] = useState([])
   const [loading, setLoading] = useState(true)
+  const [sortColumn, setSortColumn] = useState('risk_score') // Default sort by risk
+  const [sortDirection, setSortDirection] = useState('desc') // desc = high to low
 
   useEffect(() => {
     fetchTutorList()
@@ -49,6 +51,38 @@ const AdminDashboard = ({ adminId }) => {
     }
   }
 
+  const handleSort = (column) => {
+    if (sortColumn === column) {
+      // Toggle direction if clicking the same column
+      setSortDirection(sortDirection === 'asc' ? 'desc' : 'asc')
+    } else {
+      // New column, default to descending for scores, ascending for name
+      setSortColumn(column)
+      setSortDirection(column === 'name' ? 'asc' : 'desc')
+    }
+  }
+
+  const sortedTutorList = [...tutorList].sort((a, b) => {
+    let aVal = a[sortColumn]
+    let bVal = b[sortColumn]
+    
+    // Handle null values (put them at the end)
+    if (aVal === null || aVal === undefined) return 1
+    if (bVal === null || bVal === undefined) return -1
+    
+    // String comparison for name
+    if (sortColumn === 'name') {
+      aVal = aVal.toLowerCase()
+      bVal = bVal.toLowerCase()
+      return sortDirection === 'asc' 
+        ? aVal.localeCompare(bVal)
+        : bVal.localeCompare(aVal)
+    }
+    
+    // Numeric comparison for scores
+    return sortDirection === 'asc' ? aVal - bVal : bVal - aVal
+  })
+
   const getRiskBadge = (fsrs, ths, tcrs) => {
     const badges = []
     
@@ -77,6 +111,15 @@ const AdminDashboard = ({ adminId }) => {
     return badges
   }
 
+  const SortIcon = ({ column }) => {
+    if (sortColumn !== column) {
+      return <span className="ml-1 text-gray-400">⇅</span>
+    }
+    return sortDirection === 'asc' 
+      ? <span className="ml-1 text-gray-700">↑</span>
+      : <span className="ml-1 text-gray-700">↓</span>
+  }
+
   if (loading) {
     return (
       <div className="p-6">
@@ -96,20 +139,44 @@ const AdminDashboard = ({ adminId }) => {
           <table className="min-w-full divide-y divide-gray-200">
             <thead className="bg-gray-50">
               <tr>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                  Tutor Name
+                <th 
+                  className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider cursor-pointer hover:bg-gray-100"
+                  onClick={() => handleSort('name')}
+                >
+                  <div className="flex items-center">
+                    Tutor Name
+                    <SortIcon column="name" />
+                  </div>
                 </th>
                 <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                   Status
                 </th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                  FSRS
+                <th 
+                  className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider cursor-pointer hover:bg-gray-100"
+                  onClick={() => handleSort('fsrs')}
+                >
+                  <div className="flex items-center">
+                    FSRS
+                    <SortIcon column="fsrs" />
+                  </div>
                 </th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                  THS
+                <th 
+                  className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider cursor-pointer hover:bg-gray-100"
+                  onClick={() => handleSort('ths')}
+                >
+                  <div className="flex items-center">
+                    THS
+                    <SortIcon column="ths" />
+                  </div>
                 </th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                  TCRS
+                <th 
+                  className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider cursor-pointer hover:bg-gray-100"
+                  onClick={() => handleSort('tcrs')}
+                >
+                  <div className="flex items-center">
+                    TCRS
+                    <SortIcon column="tcrs" />
+                  </div>
                 </th>
                 <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                   Alerts
@@ -120,14 +187,14 @@ const AdminDashboard = ({ adminId }) => {
               </tr>
             </thead>
             <tbody className="bg-white divide-y divide-gray-200">
-              {tutorList.length === 0 ? (
+              {sortedTutorList.length === 0 ? (
                 <tr>
                   <td colSpan="7" className="px-6 py-4 text-center text-gray-500">
                     No tutors found
                   </td>
                 </tr>
               ) : (
-                tutorList.map((tutor) => {
+                sortedTutorList.map((tutor) => {
                   const badges = getRiskBadge(tutor.fsrs, tutor.ths, tutor.tcrs)
                   return (
                     <tr key={tutor.id} className={selectedTutor === tutor.id ? 'bg-blue-50' : ''}>

@@ -272,3 +272,126 @@
   - Unsubscribe functionality
 - [x] Test email delivery in development (letter_opener auto-opens in browser)
 - [x] Document email notification system (docs/EMAIL_NOTIFICATIONS.md)
+
+---
+
+## EPIC 11 — Refactor FSRS to FSQS (First Session Quality Score)
+
+**Goal:** Rename FSRS (First Session Risk Score) to FSQS (First Session Quality Score) and invert scoring system from "lower is better" to "higher is better" for consistency with SQS. New scoring: 100 (perfect) - penalties = final score.
+
+### Task 11.1: Update Core Scoring Service
+- [ ] Rename `FirstSessionRiskScoreService` to `FirstSessionQualityScoreService`
+- [ ] Update score calculation to start at 100 and subtract penalties
+- [ ] Update MAX_SCORE constant from 120 to 100
+- [ ] Update component penalty values to fit 0-100 scale:
+  - [ ] Missing Goal Setting: 25 → 20
+  - [ ] Confusion Phrases: 20 → 20
+  - [ ] Word Share Imbalance: 20 → 20
+  - [ ] Missing Closing Summary: 20 → 15
+  - [ ] Missing Encouragement: 15 → 10
+  - [ ] Tech/Lateness Disruption: 10 → 10
+  - [ ] Negative Phrasing: 10 → 5
+  - [ ] **New Total: 100 points**
+- [ ] Update feedback generation to reflect quality scoring (higher is better)
+- [ ] Add comments explaining inverted scoring system
+
+### Task 11.2: Update Database & Model References
+- [ ] Update Score model validation: `%w[sqs fsrs ths tcrs]` → `%w[sqs fsqs ths tcrs]`
+- [ ] Create database migration to rename score_type from 'fsrs' to 'fsqs'
+- [ ] Update all existing scores in database
+- [ ] Update job references (SessionScoringJob, etc.)
+
+### Task 11.3: Update Alert System
+- [ ] Update AlertService threshold: `>= 50` → `<= 50` (inverted)
+- [ ] Rename alert mailer views: `poor_first_session_alert` → `low_first_session_quality_alert`
+- [ ] Update email templates to reflect FSQS naming
+- [ ] Update email content: "Risk Score" → "Quality Score"
+- [ ] Update threshold explanations in emails (higher is better)
+
+### Task 11.4: Update API Endpoints
+- [ ] Rename API routes:
+  - [ ] `/api/tutor/:id/fsrs_latest` → `/api/tutor/:id/fsqs_latest`
+  - [ ] `/api/tutor/:id/fsrs_history` → `/api/tutor/:id/fsqs_history`
+  - [ ] `/api/admin/tutor/:id/fsrs_history` → `/api/admin/tutor/:id/fsqs_history`
+- [ ] Update controller methods and logic
+- [ ] Update admin API risk scoring algorithm (invert FSQS comparison)
+- [ ] Maintain backward compatibility (optional: support both endpoints temporarily)
+
+### Task 11.5: Update Frontend Components
+- [ ] Update TutorDashboard.jsx:
+  - [ ] Rename all `fsrs` variables to `fsqs`
+  - [ ] Update API endpoint calls
+  - [ ] Invert threshold logic: `>= 50` → `<= 50`, `>= 30` → `<= 70`
+  - [ ] Update tooltips: "Risk Score" → "Quality Score", explain higher is better
+  - [ ] Update trend indicators: ↑ = improvement, ↓ = decline
+  - [ ] Update labels: "FSRS" → "FSQS"
+- [ ] Update AdminDashboard.jsx:
+  - [ ] Rename all `fsrs` variables to `fsqs`
+  - [ ] Update getRiskBadge logic (invert thresholds)
+  - [ ] Update metric cards: "First Session Risk Score" → "First Session Quality Score"
+  - [ ] Invert color coding logic
+- [ ] Update session table displays (both dashboards)
+
+### Task 11.6: Update All Tests
+- [ ] Update service specs:
+  - [ ] Rename `first_session_risk_score_service_spec.rb` → `first_session_quality_score_service_spec.rb`
+  - [ ] Update all score expectations (invert values)
+  - [ ] Update test descriptions and assertions
+- [ ] Update job specs:
+  - [ ] `session_scoring_job_spec.rb` - update FSQS expectations
+  - [ ] `alert_job_spec.rb` - update threshold tests
+- [ ] Update request specs:
+  - [ ] `api/tutor_api_spec.rb` - rename endpoints, update expectations
+  - [ ] `api/admin_api_spec.rb` - update risk scoring tests
+- [ ] Update mailer specs:
+  - [ ] `alert_mailer_spec.rb` - update FSQS expectations
+- [ ] Update alert service specs:
+  - [ ] Invert threshold expectations
+
+### Task 11.7: Update Documentation
+- [ ] Update `docs/prd.md`:
+  - [ ] Replace all FSRS references with FSQS
+  - [ ] Update scoring explanation (100 = perfect, 0 = worst)
+  - [ ] Update threshold descriptions
+- [ ] Update `docs/architecture.md`:
+  - [ ] Rename service references
+  - [ ] Update API endpoint documentation
+  - [ ] Update scoring system explanation
+- [ ] Update `docs/PROJECT_SUMMARY.md`:
+  - [ ] Update FSQS description
+  - [ ] Update metrics explanation
+- [ ] Update `docs/tasks.md`:
+  - [ ] Update EPIC 4 task descriptions (historical record)
+- [ ] Update `docs/DEMO_GUIDE.md`:
+  - [ ] Update demo profile scores to reflect 0-100 scale
+  - [ ] Update script explanations
+- [ ] Update `docs/MANUAL_TESTING.md`:
+  - [ ] Update test procedures for FSQS
+  - [ ] Update expected values
+- [ ] Update `docs/EMAIL_NOTIFICATIONS.md`:
+  - [ ] Update threshold explanations
+  - [ ] Update alert type descriptions
+- [ ] Update README.md if it contains FSRS references
+
+### Task 11.8: Clean Up Legacy Code
+- [ ] Remove or update legacy `compute_fsrs` method in SessionScoringJob (if exists)
+- [ ] Update any remaining comments referencing "risk" to "quality"
+- [ ] Remove old service file after renaming
+
+### Task 11.9: Testing & Verification
+- [ ] Run full test suite and ensure all tests pass
+- [ ] Test score calculation manually with sample data
+- [ ] Verify alert thresholds work correctly
+- [ ] Test API endpoints return correct data
+- [ ] Test frontend displays scores correctly
+- [ ] Verify email notifications show correct information
+- [ ] Test both dashboards (tutor and admin)
+
+### Task 11.10: Database Migration & Deployment
+- [ ] Create data migration script to update existing scores
+- [ ] Test migration on development data
+- [ ] Document rollback procedure
+- [ ] Update deployment notes
+- [ ] Plan for zero-downtime migration if needed
+
+---
