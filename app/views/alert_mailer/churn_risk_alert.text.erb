@@ -1,0 +1,35 @@
+🚨 TUTOR CHURN RISK ALERT
+
+Tutor: <%= @tutor.name %> (<%= @tutor.email %>)
+Alert Triggered: <%= @alert.triggered_at.strftime('%B %d, %Y at %I:%M %p') %>
+
+==========================================
+
+TUTOR CHURN RISK SCORE (TCRS) - 14 Day Analysis: <%= (@tcrs_score * 100).round(1) %>%
+(Higher = More Likely to Leave)
+
+⚠️ HIGH PRIORITY: This tutor is showing disengagement patterns that typically precede voluntary departure.
+
+Why this matters:
+Based on 14-day behavior patterns, this tutor shows signs of potential churn - including reduced session counts, irregular scheduling, or declining engagement metrics.
+
+==========================================
+
+RECOMMENDED ACTIONS (TIME-SENSITIVE):
+  • IMMEDIATE OUTREACH: Schedule a 1-on-1 conversation with <%= @tutor.name %>
+  • Understand any challenges, frustrations, or reasons for reduced engagement
+  • Discuss their goals and satisfaction with the tutoring role
+  • Address any technical, scheduling, or support needs
+  • Consider workload adjustments or additional support
+  • Follow up weekly to monitor engagement recovery
+
+Impact if not addressed:
+Losing a trained tutor disrupts student relationships, increases hiring/training costs, and impacts team morale.
+
+==========================================
+
+View full details in the Admin Dashboard:
+<%= @admin_dashboard_url %>
+
+This is an automated alert from the Tutor Quality Scoring System.
+

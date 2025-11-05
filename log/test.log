@@ -7284,3 +7284,839 @@ Processing by Api::Tutor::TutorsController#fsrs_latest as HTML
   [1m[36mScore Load (0.6ms)[0m  [1m[34mSELECT "scores".* FROM "scores" WHERE "scores"."tutor_id" = $1 AND "scores"."score_type" = $2 ORDER BY "scores"."computed_at" DESC LIMIT $3[0m  [["tutor_id", 170], ["score_type", "fsrs"], ["LIMIT", 1]]
 Completed 404 Not Found in 8ms (Views: 0.1ms | ActiveRecord: 2.3ms (2 queries, 0 cached) | GC: 0.0ms)
   [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mROLLBACK[0m
+✓ Sidekiq schedule configuration loaded: session_scoring, alert_evaluation
+  [1m[36mActiveRecord::InternalMetadata Load (0.4ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "schema_sha1"]]
+  [1m[36mActiveRecord::SchemaMigration Load (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+✓ Sidekiq schedule configuration loaded: session_scoring, alert_evaluation
+  [1m[36mActiveRecord::InternalMetadata Load (0.3ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "schema_sha1"]]
+  [1m[36mActiveRecord::SchemaMigration Load (0.3ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+[dotenv] Saved a snapshot of [32mENV[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTutor Create (0.3ms)[0m  [1m[32mINSERT INTO "tutors" ("name", "email", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", "Alice Smith"], ["email", "[FILTERED]"], ["created_at", "2025-11-05 15:35:03.713873"], ["updated_at", "2025-11-05 15:35:03.713873"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mAlert Create (0.4ms)[0m  [1m[32mINSERT INTO "alerts" ("tutor_id", "alert_type", "severity", "status", "triggered_at", "resolved_at", "metadata", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING "id"[0m  [["tutor_id", 171], ["alert_type", "poor_first_session"], ["severity", "high"], ["status", "open"], ["triggered_at", "2025-11-05 15:35:03.714759"], ["resolved_at", nil], ["metadata", "{\"score_value\":55.0,\"score_components\":{\"confusion_phrases\":2,\"negative_phrasing\":1,\"missing_goal_setting\":1}}"], ["created_at", "2025-11-05 15:35:03.718404"], ["updated_at", "2025-11-05 15:35:03.718404"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+AlertMailer#poor_first_session_alert: processed outbound mail in 20.7ms
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTutor Create (0.3ms)[0m  [1m[32mINSERT INTO "tutors" ("name", "email", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", "Alice Smith"], ["email", "[FILTERED]"], ["created_at", "2025-11-05 15:35:03.741555"], ["updated_at", "2025-11-05 15:35:03.741555"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mAlert Create (0.3ms)[0m  [1m[32mINSERT INTO "alerts" ("tutor_id", "alert_type", "severity", "status", "triggered_at", "resolved_at", "metadata", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING "id"[0m  [["tutor_id", 172], ["alert_type", "poor_first_session"], ["severity", "high"], ["status", "open"], ["triggered_at", "2025-11-05 15:35:03.742228"], ["resolved_at", nil], ["metadata", "{\"score_value\":55.0,\"score_components\":{\"confusion_phrases\":2,\"negative_phrasing\":1,\"missing_goal_setting\":1}}"], ["created_at", "2025-11-05 15:35:03.742817"], ["updated_at", "2025-11-05 15:35:03.742817"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+AlertMailer#poor_first_session_alert: processed outbound mail in 0.1ms
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTutor Create (0.2ms)[0m  [1m[32mINSERT INTO "tutors" ("name", "email", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", "Alice Smith"], ["email", "[FILTERED]"], ["created_at", "2025-11-05 15:35:03.744228"], ["updated_at", "2025-11-05 15:35:03.744228"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mAlert Create (0.2ms)[0m  [1m[32mINSERT INTO "alerts" ("tutor_id", "alert_type", "severity", "status", "triggered_at", "resolved_at", "metadata", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING "id"[0m  [["tutor_id", 173], ["alert_type", "poor_first_session"], ["severity", "high"], ["status", "open"], ["triggered_at", "2025-11-05 15:35:03.744618"], ["resolved_at", nil], ["metadata", "{\"score_value\":55.0,\"score_components\":{\"confusion_phrases\":2,\"negative_phrasing\":1,\"missing_goal_setting\":1}}"], ["created_at", "2025-11-05 15:35:03.744704"], ["updated_at", "2025-11-05 15:35:03.744704"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+AlertMailer#poor_first_session_alert: processed outbound mail in 0.0ms
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTutor Create (0.1ms)[0m  [1m[32mINSERT INTO "tutors" ("name", "email", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", "Alice Smith"], ["email", "[FILTERED]"], ["created_at", "2025-11-05 15:35:03.745912"], ["updated_at", "2025-11-05 15:35:03.745912"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mAlert Create (0.2ms)[0m  [1m[32mINSERT INTO "alerts" ("tutor_id", "alert_type", "severity", "status", "triggered_at", "resolved_at", "metadata", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING "id"[0m  [["tutor_id", 174], ["alert_type", "poor_first_session"], ["severity", "high"], ["status", "open"], ["triggered_at", "2025-11-05 15:35:03.746231"], ["resolved_at", nil], ["metadata", "{\"score_value\":55.0,\"score_components\":{\"confusion_phrases\":2,\"negative_phrasing\":1,\"missing_goal_setting\":1}}"], ["created_at", "2025-11-05 15:35:03.746310"], ["updated_at", "2025-11-05 15:35:03.746310"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+AlertMailer#poor_first_session_alert: processed outbound mail in 0.0ms
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTutor Create (0.2ms)[0m  [1m[32mINSERT INTO "tutors" ("name", "email", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", "Alice Smith"], ["email", "[FILTERED]"], ["created_at", "2025-11-05 15:35:03.747279"], ["updated_at", "2025-11-05 15:35:03.747279"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mAlert Create (0.2ms)[0m  [1m[32mINSERT INTO "alerts" ("tutor_id", "alert_type", "severity", "status", "triggered_at", "resolved_at", "metadata", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING "id"[0m  [["tutor_id", 175], ["alert_type", "poor_first_session"], ["severity", "high"], ["status", "open"], ["triggered_at", "2025-11-05 15:35:03.747621"], ["resolved_at", nil], ["metadata", "{\"score_value\":55.0,\"score_components\":{\"confusion_phrases\":2,\"negative_phrasing\":1,\"missing_goal_setting\":1}}"], ["created_at", "2025-11-05 15:35:03.747942"], ["updated_at", "2025-11-05 15:35:03.747942"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+AlertMailer#poor_first_session_alert: processed outbound mail in 0.1ms
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTutor Create (0.2ms)[0m  [1m[32mINSERT INTO "tutors" ("name", "email", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", "Alice Smith"], ["email", "[FILTERED]"], ["created_at", "2025-11-05 15:35:03.749029"], ["updated_at", "2025-11-05 15:35:03.749029"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mAlert Create (0.2ms)[0m  [1m[32mINSERT INTO "alerts" ("tutor_id", "alert_type", "severity", "status", "triggered_at", "resolved_at", "metadata", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING "id"[0m  [["tutor_id", 176], ["alert_type", "high_reliability_risk"], ["severity", "high"], ["status", "open"], ["triggered_at", "2025-11-05 15:35:03.749410"], ["resolved_at", nil], ["metadata", "{\"score_value\":45.0,\"ths_below_threshold\":true}"], ["created_at", "2025-11-05 15:35:03.749512"], ["updated_at", "2025-11-05 15:35:03.749512"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+AlertMailer#high_reliability_risk_alert: processed outbound mail in 0.1ms
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTutor Create (0.1ms)[0m  [1m[32mINSERT INTO "tutors" ("name", "email", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", "Alice Smith"], ["email", "[FILTERED]"], ["created_at", "2025-11-05 15:35:03.750636"], ["updated_at", "2025-11-05 15:35:03.750636"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mAlert Create (0.1ms)[0m  [1m[32mINSERT INTO "alerts" ("tutor_id", "alert_type", "severity", "status", "triggered_at", "resolved_at", "metadata", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING "id"[0m  [["tutor_id", 177], ["alert_type", "high_reliability_risk"], ["severity", "high"], ["status", "open"], ["triggered_at", "2025-11-05 15:35:03.750950"], ["resolved_at", nil], ["metadata", "{\"score_value\":45.0,\"ths_below_threshold\":true}"], ["created_at", "2025-11-05 15:35:03.751045"], ["updated_at", "2025-11-05 15:35:03.751045"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+AlertMailer#high_reliability_risk_alert: processed outbound mail in 0.0ms
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTutor Create (0.1ms)[0m  [1m[32mINSERT INTO "tutors" ("name", "email", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", "Alice Smith"], ["email", "[FILTERED]"], ["created_at", "2025-11-05 15:35:03.751999"], ["updated_at", "2025-11-05 15:35:03.751999"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mAlert Create (0.1ms)[0m  [1m[32mINSERT INTO "alerts" ("tutor_id", "alert_type", "severity", "status", "triggered_at", "resolved_at", "metadata", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING "id"[0m  [["tutor_id", 178], ["alert_type", "high_reliability_risk"], ["severity", "high"], ["status", "open"], ["triggered_at", "2025-11-05 15:35:03.752317"], ["resolved_at", nil], ["metadata", "{\"score_value\":45.0,\"ths_below_threshold\":true}"], ["created_at", "2025-11-05 15:35:03.752394"], ["updated_at", "2025-11-05 15:35:03.752394"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+AlertMailer#high_reliability_risk_alert: processed outbound mail in 0.0ms
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTutor Create (0.2ms)[0m  [1m[32mINSERT INTO "tutors" ("name", "email", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", "Alice Smith"], ["email", "[FILTERED]"], ["created_at", "2025-11-05 15:35:03.753293"], ["updated_at", "2025-11-05 15:35:03.753293"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mAlert Create (0.7ms)[0m  [1m[32mINSERT INTO "alerts" ("tutor_id", "alert_type", "severity", "status", "triggered_at", "resolved_at", "metadata", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING "id"[0m  [["tutor_id", 179], ["alert_type", "high_reliability_risk"], ["severity", "high"], ["status", "open"], ["triggered_at", "2025-11-05 15:35:03.753655"], ["resolved_at", nil], ["metadata", "{\"score_value\":45.0,\"ths_below_threshold\":true}"], ["created_at", "2025-11-05 15:35:03.753734"], ["updated_at", "2025-11-05 15:35:03.753734"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+AlertMailer#high_reliability_risk_alert: processed outbound mail in 0.0ms
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTutor Create (0.2ms)[0m  [1m[32mINSERT INTO "tutors" ("name", "email", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", "Alice Smith"], ["email", "[FILTERED]"], ["created_at", "2025-11-05 15:35:03.755353"], ["updated_at", "2025-11-05 15:35:03.755353"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mAlert Create (0.2ms)[0m  [1m[32mINSERT INTO "alerts" ("tutor_id", "alert_type", "severity", "status", "triggered_at", "resolved_at", "metadata", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING "id"[0m  [["tutor_id", 180], ["alert_type", "churn_risk"], ["severity", "high"], ["status", "open"], ["triggered_at", "2025-11-05 15:35:03.755703"], ["resolved_at", nil], ["metadata", "{\"score_value\":0.75,\"engagement_drop\":true,\"low_session_count\":true}"], ["created_at", "2025-11-05 15:35:03.755782"], ["updated_at", "2025-11-05 15:35:03.755782"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+AlertMailer#churn_risk_alert: processed outbound mail in 0.0ms
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTutor Create (0.2ms)[0m  [1m[32mINSERT INTO "tutors" ("name", "email", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", "Alice Smith"], ["email", "[FILTERED]"], ["created_at", "2025-11-05 15:35:03.757022"], ["updated_at", "2025-11-05 15:35:03.757022"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mAlert Create (0.2ms)[0m  [1m[32mINSERT INTO "alerts" ("tutor_id", "alert_type", "severity", "status", "triggered_at", "resolved_at", "metadata", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING "id"[0m  [["tutor_id", 181], ["alert_type", "churn_risk"], ["severity", "high"], ["status", "open"], ["triggered_at", "2025-11-05 15:35:03.757434"], ["resolved_at", nil], ["metadata", "{\"score_value\":0.75,\"engagement_drop\":true,\"low_session_count\":true}"], ["created_at", "2025-11-05 15:35:03.757527"], ["updated_at", "2025-11-05 15:35:03.757527"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+AlertMailer#churn_risk_alert: processed outbound mail in 0.0ms
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTutor Create (0.1ms)[0m  [1m[32mINSERT INTO "tutors" ("name", "email", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", "Alice Smith"], ["email", "[FILTERED]"], ["created_at", "2025-11-05 15:35:03.758663"], ["updated_at", "2025-11-05 15:35:03.758663"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mAlert Create (0.2ms)[0m  [1m[32mINSERT INTO "alerts" ("tutor_id", "alert_type", "severity", "status", "triggered_at", "resolved_at", "metadata", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING "id"[0m  [["tutor_id", 182], ["alert_type", "churn_risk"], ["severity", "high"], ["status", "open"], ["triggered_at", "2025-11-05 15:35:03.759006"], ["resolved_at", nil], ["metadata", "{\"score_value\":0.75,\"engagement_drop\":true,\"low_session_count\":true}"], ["created_at", "2025-11-05 15:35:03.759098"], ["updated_at", "2025-11-05 15:35:03.759098"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+AlertMailer#churn_risk_alert: processed outbound mail in 0.0ms
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTutor Create (0.1ms)[0m  [1m[32mINSERT INTO "tutors" ("name", "email", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", "Alice Smith"], ["email", "[FILTERED]"], ["created_at", "2025-11-05 15:35:03.760143"], ["updated_at", "2025-11-05 15:35:03.760143"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mAlert Create (0.2ms)[0m  [1m[32mINSERT INTO "alerts" ("tutor_id", "alert_type", "severity", "status", "triggered_at", "resolved_at", "metadata", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING "id"[0m  [["tutor_id", 183], ["alert_type", "churn_risk"], ["severity", "high"], ["status", "open"], ["triggered_at", "2025-11-05 15:35:03.760455"], ["resolved_at", nil], ["metadata", "{\"score_value\":0.75,\"engagement_drop\":true,\"low_session_count\":true}"], ["created_at", "2025-11-05 15:35:03.760567"], ["updated_at", "2025-11-05 15:35:03.760567"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+AlertMailer#churn_risk_alert: processed outbound mail in 0.0ms
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTutor Create (0.1ms)[0m  [1m[32mINSERT INTO "tutors" ("name", "email", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", "Alice Smith"], ["email", "[FILTERED]"], ["created_at", "2025-11-05 15:35:03.761650"], ["updated_at", "2025-11-05 15:35:03.761650"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mAlert Create (0.2ms)[0m  [1m[32mINSERT INTO "alerts" ("tutor_id", "alert_type", "severity", "status", "triggered_at", "resolved_at", "metadata", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING "id"[0m  [["tutor_id", 184], ["alert_type", "churn_risk"], ["severity", "high"], ["status", "open"], ["triggered_at", "2025-11-05 15:35:03.762007"], ["resolved_at", nil], ["metadata", "{\"score_value\":0.75,\"engagement_drop\":true,\"low_session_count\":true}"], ["created_at", "2025-11-05 15:35:03.762104"], ["updated_at", "2025-11-05 15:35:03.762104"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+AlertMailer#churn_risk_alert: processed outbound mail in 0.0ms
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mROLLBACK[0m
+✓ Sidekiq schedule configuration loaded: session_scoring, alert_evaluation
+  [1m[36mActiveRecord::InternalMetadata Load (0.3ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "schema_sha1"]]
+  [1m[36mActiveRecord::SchemaMigration Load (0.3ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+[dotenv] Saved a snapshot of [32mENV[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTutor Create (0.3ms)[0m  [1m[32mINSERT INTO "tutors" ("name", "email", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", "Alice Smith"], ["email", "[FILTERED]"], ["created_at", "2025-11-05 15:35:25.197633"], ["updated_at", "2025-11-05 15:35:25.197633"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mAlert Create (0.5ms)[0m  [1m[32mINSERT INTO "alerts" ("tutor_id", "alert_type", "severity", "status", "triggered_at", "resolved_at", "metadata", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING "id"[0m  [["tutor_id", 185], ["alert_type", "poor_first_session"], ["severity", "high"], ["status", "open"], ["triggered_at", "2025-11-05 15:35:25.198504"], ["resolved_at", nil], ["metadata", "{\"score_value\":55.0,\"score_components\":{\"confusion_phrases\":2,\"negative_phrasing\":1,\"missing_goal_setting\":1}}"], ["created_at", "2025-11-05 15:35:25.202442"], ["updated_at", "2025-11-05 15:35:25.202442"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  Rendering layout layouts/mailer.html.erb
+  Rendering alert_mailer/poor_first_session_alert.html.erb within layouts/mailer
+  Rendered alert_mailer/poor_first_session_alert.html.erb within layouts/mailer (Duration: 0.3ms | GC: 0.0ms)
+  Rendered layout layouts/mailer.html.erb (Duration: 0.4ms | GC: 0.0ms)
+  Rendering layout layouts/mailer.text.erb
+  Rendering alert_mailer/poor_first_session_alert.text.erb within layouts/mailer
+  Rendered alert_mailer/poor_first_session_alert.text.erb within layouts/mailer (Duration: 0.1ms | GC: 0.0ms)
+  Rendered layout layouts/mailer.text.erb (Duration: 0.2ms | GC: 0.0ms)
+AlertMailer#poor_first_session_alert: processed outbound mail in 28.9ms
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTutor Create (0.3ms)[0m  [1m[32mINSERT INTO "tutors" ("name", "email", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", "Alice Smith"], ["email", "[FILTERED]"], ["created_at", "2025-11-05 15:35:25.234698"], ["updated_at", "2025-11-05 15:35:25.234698"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mAlert Create (0.4ms)[0m  [1m[32mINSERT INTO "alerts" ("tutor_id", "alert_type", "severity", "status", "triggered_at", "resolved_at", "metadata", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING "id"[0m  [["tutor_id", 186], ["alert_type", "poor_first_session"], ["severity", "high"], ["status", "open"], ["triggered_at", "2025-11-05 15:35:25.235399"], ["resolved_at", nil], ["metadata", "{\"score_value\":55.0,\"score_components\":{\"confusion_phrases\":2,\"negative_phrasing\":1,\"missing_goal_setting\":1}}"], ["created_at", "2025-11-05 15:35:25.235577"], ["updated_at", "2025-11-05 15:35:25.235577"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  Rendering layout layouts/mailer.html.erb
+  Rendering alert_mailer/poor_first_session_alert.html.erb within layouts/mailer
+  Rendered alert_mailer/poor_first_session_alert.html.erb within layouts/mailer (Duration: 0.0ms | GC: 0.0ms)
+  Rendered layout layouts/mailer.html.erb (Duration: 0.1ms | GC: 0.0ms)
+  Rendering layout layouts/mailer.text.erb
+  Rendering alert_mailer/poor_first_session_alert.text.erb within layouts/mailer
+  Rendered alert_mailer/poor_first_session_alert.text.erb within layouts/mailer (Duration: 0.0ms | GC: 0.0ms)
+  Rendered layout layouts/mailer.text.erb (Duration: 0.0ms | GC: 0.0ms)
+AlertMailer#poor_first_session_alert: processed outbound mail in 0.8ms
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTutor Create (0.2ms)[0m  [1m[32mINSERT INTO "tutors" ("name", "email", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", "Alice Smith"], ["email", "[FILTERED]"], ["created_at", "2025-11-05 15:35:25.240830"], ["updated_at", "2025-11-05 15:35:25.240830"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mAlert Create (0.2ms)[0m  [1m[32mINSERT INTO "alerts" ("tutor_id", "alert_type", "severity", "status", "triggered_at", "resolved_at", "metadata", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING "id"[0m  [["tutor_id", 187], ["alert_type", "poor_first_session"], ["severity", "high"], ["status", "open"], ["triggered_at", "2025-11-05 15:35:25.241357"], ["resolved_at", nil], ["metadata", "{\"score_value\":55.0,\"score_components\":{\"confusion_phrases\":2,\"negative_phrasing\":1,\"missing_goal_setting\":1}}"], ["created_at", "2025-11-05 15:35:25.241488"], ["updated_at", "2025-11-05 15:35:25.241488"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  Rendering layout layouts/mailer.html.erb
+  Rendering alert_mailer/poor_first_session_alert.html.erb within layouts/mailer
+  Rendered alert_mailer/poor_first_session_alert.html.erb within layouts/mailer (Duration: 0.0ms | GC: 0.0ms)
+  Rendered layout layouts/mailer.html.erb (Duration: 0.1ms | GC: 0.0ms)
+  Rendering layout layouts/mailer.text.erb
+  Rendering alert_mailer/poor_first_session_alert.text.erb within layouts/mailer
+  Rendered alert_mailer/poor_first_session_alert.text.erb within layouts/mailer (Duration: 0.0ms | GC: 0.0ms)
+  Rendered layout layouts/mailer.text.erb (Duration: 0.1ms | GC: 0.0ms)
+AlertMailer#poor_first_session_alert: processed outbound mail in 0.7ms
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTutor Create (0.2ms)[0m  [1m[32mINSERT INTO "tutors" ("name", "email", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", "Alice Smith"], ["email", "[FILTERED]"], ["created_at", "2025-11-05 15:35:25.243608"], ["updated_at", "2025-11-05 15:35:25.243608"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mAlert Create (0.2ms)[0m  [1m[32mINSERT INTO "alerts" ("tutor_id", "alert_type", "severity", "status", "triggered_at", "resolved_at", "metadata", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING "id"[0m  [["tutor_id", 188], ["alert_type", "poor_first_session"], ["severity", "high"], ["status", "open"], ["triggered_at", "2025-11-05 15:35:25.244000"], ["resolved_at", nil], ["metadata", "{\"score_value\":55.0,\"score_components\":{\"confusion_phrases\":2,\"negative_phrasing\":1,\"missing_goal_setting\":1}}"], ["created_at", "2025-11-05 15:35:25.244106"], ["updated_at", "2025-11-05 15:35:25.244106"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  Rendering layout layouts/mailer.html.erb
+  Rendering alert_mailer/poor_first_session_alert.html.erb within layouts/mailer
+  Rendered alert_mailer/poor_first_session_alert.html.erb within layouts/mailer (Duration: 0.0ms | GC: 0.0ms)
+  Rendered layout layouts/mailer.html.erb (Duration: 0.1ms | GC: 0.0ms)
+  Rendering layout layouts/mailer.text.erb
+  Rendering alert_mailer/poor_first_session_alert.text.erb within layouts/mailer
+  Rendered alert_mailer/poor_first_session_alert.text.erb within layouts/mailer (Duration: 0.0ms | GC: 0.0ms)
+  Rendered layout layouts/mailer.text.erb (Duration: 0.0ms | GC: 0.0ms)
+AlertMailer#poor_first_session_alert: processed outbound mail in 0.6ms
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTutor Create (0.2ms)[0m  [1m[32mINSERT INTO "tutors" ("name", "email", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", "Alice Smith"], ["email", "[FILTERED]"], ["created_at", "2025-11-05 15:35:25.248364"], ["updated_at", "2025-11-05 15:35:25.248364"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mAlert Create (0.2ms)[0m  [1m[32mINSERT INTO "alerts" ("tutor_id", "alert_type", "severity", "status", "triggered_at", "resolved_at", "metadata", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING "id"[0m  [["tutor_id", 189], ["alert_type", "poor_first_session"], ["severity", "high"], ["status", "open"], ["triggered_at", "2025-11-05 15:35:25.248755"], ["resolved_at", nil], ["metadata", "{\"score_value\":55.0,\"score_components\":{\"confusion_phrases\":2,\"negative_phrasing\":1,\"missing_goal_setting\":1}}"], ["created_at", "2025-11-05 15:35:25.248863"], ["updated_at", "2025-11-05 15:35:25.248863"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  Rendering layout layouts/mailer.html.erb
+  Rendering alert_mailer/poor_first_session_alert.html.erb within layouts/mailer
+  Rendered alert_mailer/poor_first_session_alert.html.erb within layouts/mailer (Duration: 0.0ms | GC: 0.0ms)
+  Rendered layout layouts/mailer.html.erb (Duration: 0.1ms | GC: 0.0ms)
+  Rendering layout layouts/mailer.text.erb
+  Rendering alert_mailer/poor_first_session_alert.text.erb within layouts/mailer
+  Rendered alert_mailer/poor_first_session_alert.text.erb within layouts/mailer (Duration: 0.0ms | GC: 0.0ms)
+  Rendered layout layouts/mailer.text.erb (Duration: 0.1ms | GC: 0.0ms)
+AlertMailer#poor_first_session_alert: processed outbound mail in 0.6ms
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTutor Create (0.2ms)[0m  [1m[32mINSERT INTO "tutors" ("name", "email", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", "Alice Smith"], ["email", "[FILTERED]"], ["created_at", "2025-11-05 15:35:25.251347"], ["updated_at", "2025-11-05 15:35:25.251347"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mAlert Create (0.2ms)[0m  [1m[32mINSERT INTO "alerts" ("tutor_id", "alert_type", "severity", "status", "triggered_at", "resolved_at", "metadata", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING "id"[0m  [["tutor_id", 190], ["alert_type", "high_reliability_risk"], ["severity", "high"], ["status", "open"], ["triggered_at", "2025-11-05 15:35:25.251727"], ["resolved_at", nil], ["metadata", "{\"score_value\":45.0,\"ths_below_threshold\":true}"], ["created_at", "2025-11-05 15:35:25.251860"], ["updated_at", "2025-11-05 15:35:25.251860"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  Rendering layout layouts/mailer.html.erb
+  Rendering alert_mailer/high_reliability_risk_alert.html.erb within layouts/mailer
+  Rendered alert_mailer/high_reliability_risk_alert.html.erb within layouts/mailer (Duration: 0.2ms | GC: 0.0ms)
+  Rendered layout layouts/mailer.html.erb (Duration: 0.2ms | GC: 0.0ms)
+  Rendering layout layouts/mailer.text.erb
+  Rendering alert_mailer/high_reliability_risk_alert.text.erb within layouts/mailer
+  Rendered alert_mailer/high_reliability_risk_alert.text.erb within layouts/mailer (Duration: 0.1ms | GC: 0.0ms)
+  Rendered layout layouts/mailer.text.erb (Duration: 0.1ms | GC: 0.0ms)
+AlertMailer#high_reliability_risk_alert: processed outbound mail in 1.1ms
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTutor Create (0.2ms)[0m  [1m[32mINSERT INTO "tutors" ("name", "email", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", "Alice Smith"], ["email", "[FILTERED]"], ["created_at", "2025-11-05 15:35:25.254181"], ["updated_at", "2025-11-05 15:35:25.254181"]]
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mAlert Create (0.6ms)[0m  [1m[32mINSERT INTO "alerts" ("tutor_id", "alert_type", "severity", "status", "triggered_at", "resolved_at", "metadata", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING "id"[0m  [["tutor_id", 191], ["alert_type", "high_reliability_risk"], ["severity", "high"], ["status", "open"], ["triggered_at", "2025-11-05 15:35:25.255023"], ["resolved_at", nil], ["metadata", "{\"score_value\":45.0,\"ths_below_threshold\":true}"], ["created_at", "2025-11-05 15:35:25.255186"], ["updated_at", "2025-11-05 15:35:25.255186"]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  Rendering layout layouts/mailer.html.erb
+  Rendering alert_mailer/high_reliability_risk_alert.html.erb within layouts/mailer
+  Rendered alert_mailer/high_reliability_risk_alert.html.erb within layouts/mailer (Duration: 0.0ms | GC: 0.0ms)
+  Rendered layout layouts/mailer.html.erb (Duration: 0.1ms | GC: 0.0ms)
+  Rendering layout layouts/mailer.text.erb
+  Rendering alert_mailer/high_reliability_risk_alert.text.erb within layouts/mailer
+  Rendered alert_mailer/high_reliability_risk_alert.text.erb within layouts/mailer (Duration: 0.0ms | GC: 0.0ms)
+  Rendered layout layouts/mailer.text.erb (Duration: 0.0ms | GC: 0.0ms)
+AlertMailer#high_reliability_risk_alert: processed outbound mail in 0.7ms
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTutor Create (0.2ms)[0m  [1m[32mINSERT INTO "tutors" ("name", "email", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", "Alice Smith"], ["email", "[FILTERED]"], ["created_at", "2025-11-05 15:35:25.257998"], ["updated_at", "2025-11-05 15:35:25.257998"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mAlert Create (0.2ms)[0m  [1m[32mINSERT INTO "alerts" ("tutor_id", "alert_type", "severity", "status", "triggered_at", "resolved_at", "metadata", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING "id"[0m  [["tutor_id", 192], ["alert_type", "high_reliability_risk"], ["severity", "high"], ["status", "open"], ["triggered_at", "2025-11-05 15:35:25.258396"], ["resolved_at", nil], ["metadata", "{\"score_value\":45.0,\"ths_below_threshold\":true}"], ["created_at", "2025-11-05 15:35:25.258494"], ["updated_at", "2025-11-05 15:35:25.258494"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  Rendering layout layouts/mailer.html.erb
+  Rendering alert_mailer/high_reliability_risk_alert.html.erb within layouts/mailer
+  Rendered alert_mailer/high_reliability_risk_alert.html.erb within layouts/mailer (Duration: 0.0ms | GC: 0.0ms)
+  Rendered layout layouts/mailer.html.erb (Duration: 0.0ms | GC: 0.0ms)
+  Rendering layout layouts/mailer.text.erb
+  Rendering alert_mailer/high_reliability_risk_alert.text.erb within layouts/mailer
+  Rendered alert_mailer/high_reliability_risk_alert.text.erb within layouts/mailer (Duration: 0.0ms | GC: 0.0ms)
+  Rendered layout layouts/mailer.text.erb (Duration: 0.0ms | GC: 0.0ms)
+AlertMailer#high_reliability_risk_alert: processed outbound mail in 9.2ms
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTutor Create (0.8ms)[0m  [1m[32mINSERT INTO "tutors" ("name", "email", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", "Alice Smith"], ["email", "[FILTERED]"], ["created_at", "2025-11-05 15:35:25.269423"], ["updated_at", "2025-11-05 15:35:25.269423"]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mAlert Create (0.3ms)[0m  [1m[32mINSERT INTO "alerts" ("tutor_id", "alert_type", "severity", "status", "triggered_at", "resolved_at", "metadata", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING "id"[0m  [["tutor_id", 193], ["alert_type", "high_reliability_risk"], ["severity", "high"], ["status", "open"], ["triggered_at", "2025-11-05 15:35:25.270508"], ["resolved_at", nil], ["metadata", "{\"score_value\":45.0,\"ths_below_threshold\":true}"], ["created_at", "2025-11-05 15:35:25.270639"], ["updated_at", "2025-11-05 15:35:25.270639"]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  Rendering layout layouts/mailer.html.erb
+  Rendering alert_mailer/high_reliability_risk_alert.html.erb within layouts/mailer
+  Rendered alert_mailer/high_reliability_risk_alert.html.erb within layouts/mailer (Duration: 0.0ms | GC: 0.0ms)
+  Rendered layout layouts/mailer.html.erb (Duration: 0.1ms | GC: 0.0ms)
+  Rendering layout layouts/mailer.text.erb
+  Rendering alert_mailer/high_reliability_risk_alert.text.erb within layouts/mailer
+  Rendered alert_mailer/high_reliability_risk_alert.text.erb within layouts/mailer (Duration: 0.0ms | GC: 0.0ms)
+  Rendered layout layouts/mailer.text.erb (Duration: 0.0ms | GC: 0.0ms)
+AlertMailer#high_reliability_risk_alert: processed outbound mail in 0.6ms
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTutor Create (0.2ms)[0m  [1m[32mINSERT INTO "tutors" ("name", "email", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", "Alice Smith"], ["email", "[FILTERED]"], ["created_at", "2025-11-05 15:35:25.273342"], ["updated_at", "2025-11-05 15:35:25.273342"]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mAlert Create (0.3ms)[0m  [1m[32mINSERT INTO "alerts" ("tutor_id", "alert_type", "severity", "status", "triggered_at", "resolved_at", "metadata", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING "id"[0m  [["tutor_id", 194], ["alert_type", "churn_risk"], ["severity", "high"], ["status", "open"], ["triggered_at", "2025-11-05 15:35:25.273820"], ["resolved_at", nil], ["metadata", "{\"score_value\":0.75,\"engagement_drop\":true,\"low_session_count\":true}"], ["created_at", "2025-11-05 15:35:25.273956"], ["updated_at", "2025-11-05 15:35:25.273956"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  Rendering layout layouts/mailer.html.erb
+  Rendering alert_mailer/churn_risk_alert.html.erb within layouts/mailer
+  Rendered alert_mailer/churn_risk_alert.html.erb within layouts/mailer (Duration: 0.2ms | GC: 0.0ms)
+  Rendered layout layouts/mailer.html.erb (Duration: 0.3ms | GC: 0.0ms)
+  Rendering layout layouts/mailer.text.erb
+  Rendering alert_mailer/churn_risk_alert.text.erb within layouts/mailer
+  Rendered alert_mailer/churn_risk_alert.text.erb within layouts/mailer (Duration: 0.1ms | GC: 0.0ms)
+  Rendered layout layouts/mailer.text.erb (Duration: 0.1ms | GC: 0.0ms)
+AlertMailer#churn_risk_alert: processed outbound mail in 1.4ms
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTutor Create (0.2ms)[0m  [1m[32mINSERT INTO "tutors" ("name", "email", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", "Alice Smith"], ["email", "[FILTERED]"], ["created_at", "2025-11-05 15:35:25.277010"], ["updated_at", "2025-11-05 15:35:25.277010"]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mAlert Create (0.2ms)[0m  [1m[32mINSERT INTO "alerts" ("tutor_id", "alert_type", "severity", "status", "triggered_at", "resolved_at", "metadata", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING "id"[0m  [["tutor_id", 195], ["alert_type", "churn_risk"], ["severity", "high"], ["status", "open"], ["triggered_at", "2025-11-05 15:35:25.277542"], ["resolved_at", nil], ["metadata", "{\"score_value\":0.75,\"engagement_drop\":true,\"low_session_count\":true}"], ["created_at", "2025-11-05 15:35:25.277669"], ["updated_at", "2025-11-05 15:35:25.277669"]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  Rendering layout layouts/mailer.html.erb
+  Rendering alert_mailer/churn_risk_alert.html.erb within layouts/mailer
+  Rendered alert_mailer/churn_risk_alert.html.erb within layouts/mailer (Duration: 0.0ms | GC: 0.0ms)
+  Rendered layout layouts/mailer.html.erb (Duration: 0.0ms | GC: 0.0ms)
+  Rendering layout layouts/mailer.text.erb
+  Rendering alert_mailer/churn_risk_alert.text.erb within layouts/mailer
+  Rendered alert_mailer/churn_risk_alert.text.erb within layouts/mailer (Duration: 0.0ms | GC: 0.0ms)
+  Rendered layout layouts/mailer.text.erb (Duration: 0.0ms | GC: 0.0ms)
+AlertMailer#churn_risk_alert: processed outbound mail in 0.6ms
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTutor Create (0.2ms)[0m  [1m[32mINSERT INTO "tutors" ("name", "email", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", "Alice Smith"], ["email", "[FILTERED]"], ["created_at", "2025-11-05 15:35:25.279578"], ["updated_at", "2025-11-05 15:35:25.279578"]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mAlert Create (0.2ms)[0m  [1m[32mINSERT INTO "alerts" ("tutor_id", "alert_type", "severity", "status", "triggered_at", "resolved_at", "metadata", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING "id"[0m  [["tutor_id", 196], ["alert_type", "churn_risk"], ["severity", "high"], ["status", "open"], ["triggered_at", "2025-11-05 15:35:25.280062"], ["resolved_at", nil], ["metadata", "{\"score_value\":0.75,\"engagement_drop\":true,\"low_session_count\":true}"], ["created_at", "2025-11-05 15:35:25.280141"], ["updated_at", "2025-11-05 15:35:25.280141"]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  Rendering layout layouts/mailer.html.erb
+  Rendering alert_mailer/churn_risk_alert.html.erb within layouts/mailer
+  Rendered alert_mailer/churn_risk_alert.html.erb within layouts/mailer (Duration: 0.0ms | GC: 0.0ms)
+  Rendered layout layouts/mailer.html.erb (Duration: 0.0ms | GC: 0.0ms)
+  Rendering layout layouts/mailer.text.erb
+  Rendering alert_mailer/churn_risk_alert.text.erb within layouts/mailer
+  Rendered alert_mailer/churn_risk_alert.text.erb within layouts/mailer (Duration: 0.0ms | GC: 0.0ms)
+  Rendered layout layouts/mailer.text.erb (Duration: 0.0ms | GC: 0.0ms)
+AlertMailer#churn_risk_alert: processed outbound mail in 0.5ms
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTutor Create (0.3ms)[0m  [1m[32mINSERT INTO "tutors" ("name", "email", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", "Alice Smith"], ["email", "[FILTERED]"], ["created_at", "2025-11-05 15:35:25.282393"], ["updated_at", "2025-11-05 15:35:25.282393"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mAlert Create (0.2ms)[0m  [1m[32mINSERT INTO "alerts" ("tutor_id", "alert_type", "severity", "status", "triggered_at", "resolved_at", "metadata", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING "id"[0m  [["tutor_id", 197], ["alert_type", "churn_risk"], ["severity", "high"], ["status", "open"], ["triggered_at", "2025-11-05 15:35:25.282899"], ["resolved_at", nil], ["metadata", "{\"score_value\":0.75,\"engagement_drop\":true,\"low_session_count\":true}"], ["created_at", "2025-11-05 15:35:25.283005"], ["updated_at", "2025-11-05 15:35:25.283005"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  Rendering layout layouts/mailer.html.erb
+  Rendering alert_mailer/churn_risk_alert.html.erb within layouts/mailer
+  Rendered alert_mailer/churn_risk_alert.html.erb within layouts/mailer (Duration: 0.0ms | GC: 0.0ms)
+  Rendered layout layouts/mailer.html.erb (Duration: 0.1ms | GC: 0.0ms)
+  Rendering layout layouts/mailer.text.erb
+  Rendering alert_mailer/churn_risk_alert.text.erb within layouts/mailer
+  Rendered alert_mailer/churn_risk_alert.text.erb within layouts/mailer (Duration: 0.0ms | GC: 0.0ms)
+  Rendered layout layouts/mailer.text.erb (Duration: 0.0ms | GC: 0.0ms)
+AlertMailer#churn_risk_alert: processed outbound mail in 0.7ms
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTutor Create (0.2ms)[0m  [1m[32mINSERT INTO "tutors" ("name", "email", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", "Alice Smith"], ["email", "[FILTERED]"], ["created_at", "2025-11-05 15:35:25.286456"], ["updated_at", "2025-11-05 15:35:25.286456"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mAlert Create (0.2ms)[0m  [1m[32mINSERT INTO "alerts" ("tutor_id", "alert_type", "severity", "status", "triggered_at", "resolved_at", "metadata", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING "id"[0m  [["tutor_id", 198], ["alert_type", "churn_risk"], ["severity", "high"], ["status", "open"], ["triggered_at", "2025-11-05 15:35:25.286878"], ["resolved_at", nil], ["metadata", "{\"score_value\":0.75,\"engagement_drop\":true,\"low_session_count\":true}"], ["created_at", "2025-11-05 15:35:25.286969"], ["updated_at", "2025-11-05 15:35:25.286969"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  Rendering layout layouts/mailer.html.erb
+  Rendering alert_mailer/churn_risk_alert.html.erb within layouts/mailer
+  Rendered alert_mailer/churn_risk_alert.html.erb within layouts/mailer (Duration: 0.0ms | GC: 0.0ms)
+  Rendered layout layouts/mailer.html.erb (Duration: 0.0ms | GC: 0.0ms)
+  Rendering layout layouts/mailer.text.erb
+  Rendering alert_mailer/churn_risk_alert.text.erb within layouts/mailer
+  Rendered alert_mailer/churn_risk_alert.text.erb within layouts/mailer (Duration: 0.5ms | GC: 0.5ms)
+  Rendered layout layouts/mailer.text.erb (Duration: 0.5ms | GC: 0.5ms)
+AlertMailer#churn_risk_alert: processed outbound mail in 2.4ms
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mROLLBACK[0m
+✓ Sidekiq schedule configuration loaded: session_scoring, alert_evaluation
+  [1m[36mActiveRecord::InternalMetadata Load (0.4ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "schema_sha1"]]
+  [1m[36mActiveRecord::SchemaMigration Load (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+[dotenv] Saved a snapshot of [32mENV[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTutor Create (0.3ms)[0m  [1m[32mINSERT INTO "tutors" ("name", "email", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", "Alice Smith"], ["email", "[FILTERED]"], ["created_at", "2025-11-05 15:35:49.764145"], ["updated_at", "2025-11-05 15:35:49.764145"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mAlert Create (0.4ms)[0m  [1m[32mINSERT INTO "alerts" ("tutor_id", "alert_type", "severity", "status", "triggered_at", "resolved_at", "metadata", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING "id"[0m  [["tutor_id", 199], ["alert_type", "poor_first_session"], ["severity", "high"], ["status", "open"], ["triggered_at", "2025-11-05 15:35:49.764944"], ["resolved_at", nil], ["metadata", "{\"score_value\":55.0,\"score_components\":{\"confusion_phrases\":2,\"negative_phrasing\":1,\"missing_goal_setting\":1}}"], ["created_at", "2025-11-05 15:35:49.768413"], ["updated_at", "2025-11-05 15:35:49.768413"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  Rendering layout layouts/mailer.html.erb
+  Rendering alert_mailer/poor_first_session_alert.html.erb within layouts/mailer
+  Rendered alert_mailer/poor_first_session_alert.html.erb within layouts/mailer (Duration: 0.4ms | GC: 0.0ms)
+  Rendered layout layouts/mailer.html.erb (Duration: 0.6ms | GC: 0.0ms)
+  Rendering layout layouts/mailer.text.erb
+  Rendering alert_mailer/poor_first_session_alert.text.erb within layouts/mailer
+  Rendered alert_mailer/poor_first_session_alert.text.erb within layouts/mailer (Duration: 0.2ms | GC: 0.0ms)
+  Rendered layout layouts/mailer.text.erb (Duration: 0.2ms | GC: 0.0ms)
+AlertMailer#poor_first_session_alert: processed outbound mail in 24.2ms
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTutor Create (0.3ms)[0m  [1m[32mINSERT INTO "tutors" ("name", "email", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", "Alice Smith"], ["email", "[FILTERED]"], ["created_at", "2025-11-05 15:35:49.795029"], ["updated_at", "2025-11-05 15:35:49.795029"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mAlert Create (0.2ms)[0m  [1m[32mINSERT INTO "alerts" ("tutor_id", "alert_type", "severity", "status", "triggered_at", "resolved_at", "metadata", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING "id"[0m  [["tutor_id", 200], ["alert_type", "poor_first_session"], ["severity", "high"], ["status", "open"], ["triggered_at", "2025-11-05 15:35:49.795598"], ["resolved_at", nil], ["metadata", "{\"score_value\":55.0,\"score_components\":{\"confusion_phrases\":2,\"negative_phrasing\":1,\"missing_goal_setting\":1}}"], ["created_at", "2025-11-05 15:35:49.795721"], ["updated_at", "2025-11-05 15:35:49.795721"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  Rendering layout layouts/mailer.html.erb
+  Rendering alert_mailer/poor_first_session_alert.html.erb within layouts/mailer
+  Rendered alert_mailer/poor_first_session_alert.html.erb within layouts/mailer (Duration: 0.0ms | GC: 0.0ms)
+  Rendered layout layouts/mailer.html.erb (Duration: 0.1ms | GC: 0.0ms)
+  Rendering layout layouts/mailer.text.erb
+  Rendering alert_mailer/poor_first_session_alert.text.erb within layouts/mailer
+  Rendered alert_mailer/poor_first_session_alert.text.erb within layouts/mailer (Duration: 0.0ms | GC: 0.0ms)
+  Rendered layout layouts/mailer.text.erb (Duration: 0.3ms | GC: 0.2ms)
+AlertMailer#poor_first_session_alert: processed outbound mail in 0.9ms
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTutor Create (0.3ms)[0m  [1m[32mINSERT INTO "tutors" ("name", "email", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", "Alice Smith"], ["email", "[FILTERED]"], ["created_at", "2025-11-05 15:35:49.798972"], ["updated_at", "2025-11-05 15:35:49.798972"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mAlert Create (0.2ms)[0m  [1m[32mINSERT INTO "alerts" ("tutor_id", "alert_type", "severity", "status", "triggered_at", "resolved_at", "metadata", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING "id"[0m  [["tutor_id", 201], ["alert_type", "poor_first_session"], ["severity", "high"], ["status", "open"], ["triggered_at", "2025-11-05 15:35:49.799496"], ["resolved_at", nil], ["metadata", "{\"score_value\":55.0,\"score_components\":{\"confusion_phrases\":2,\"negative_phrasing\":1,\"missing_goal_setting\":1}}"], ["created_at", "2025-11-05 15:35:49.799602"], ["updated_at", "2025-11-05 15:35:49.799602"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  Rendering layout layouts/mailer.html.erb
+  Rendering alert_mailer/poor_first_session_alert.html.erb within layouts/mailer
+  Rendered alert_mailer/poor_first_session_alert.html.erb within layouts/mailer (Duration: 0.0ms | GC: 0.0ms)
+  Rendered layout layouts/mailer.html.erb (Duration: 0.1ms | GC: 0.0ms)
+  Rendering layout layouts/mailer.text.erb
+  Rendering alert_mailer/poor_first_session_alert.text.erb within layouts/mailer
+  Rendered alert_mailer/poor_first_session_alert.text.erb within layouts/mailer (Duration: 0.0ms | GC: 0.0ms)
+  Rendered layout layouts/mailer.text.erb (Duration: 0.0ms | GC: 0.0ms)
+AlertMailer#poor_first_session_alert: processed outbound mail in 0.7ms
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTutor Create (0.2ms)[0m  [1m[32mINSERT INTO "tutors" ("name", "email", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", "Alice Smith"], ["email", "[FILTERED]"], ["created_at", "2025-11-05 15:35:49.801746"], ["updated_at", "2025-11-05 15:35:49.801746"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mAlert Create (0.2ms)[0m  [1m[32mINSERT INTO "alerts" ("tutor_id", "alert_type", "severity", "status", "triggered_at", "resolved_at", "metadata", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING "id"[0m  [["tutor_id", 202], ["alert_type", "poor_first_session"], ["severity", "high"], ["status", "open"], ["triggered_at", "2025-11-05 15:35:49.802124"], ["resolved_at", nil], ["metadata", "{\"score_value\":55.0,\"score_components\":{\"confusion_phrases\":2,\"negative_phrasing\":1,\"missing_goal_setting\":1}}"], ["created_at", "2025-11-05 15:35:49.802215"], ["updated_at", "2025-11-05 15:35:49.802215"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  Rendering layout layouts/mailer.html.erb
+  Rendering alert_mailer/poor_first_session_alert.html.erb within layouts/mailer
+  Rendered alert_mailer/poor_first_session_alert.html.erb within layouts/mailer (Duration: 0.0ms | GC: 0.0ms)
+  Rendered layout layouts/mailer.html.erb (Duration: 0.1ms | GC: 0.0ms)
+  Rendering layout layouts/mailer.text.erb
+  Rendering alert_mailer/poor_first_session_alert.text.erb within layouts/mailer
+  Rendered alert_mailer/poor_first_session_alert.text.erb within layouts/mailer (Duration: 0.0ms | GC: 0.0ms)
+  Rendered layout layouts/mailer.text.erb (Duration: 0.0ms | GC: 0.0ms)
+AlertMailer#poor_first_session_alert: processed outbound mail in 0.5ms
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTutor Create (0.2ms)[0m  [1m[32mINSERT INTO "tutors" ("name", "email", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", "Alice Smith"], ["email", "[FILTERED]"], ["created_at", "2025-11-05 15:35:49.803872"], ["updated_at", "2025-11-05 15:35:49.803872"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mAlert Create (0.2ms)[0m  [1m[32mINSERT INTO "alerts" ("tutor_id", "alert_type", "severity", "status", "triggered_at", "resolved_at", "metadata", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING "id"[0m  [["tutor_id", 203], ["alert_type", "poor_first_session"], ["severity", "high"], ["status", "open"], ["triggered_at", "2025-11-05 15:35:49.804208"], ["resolved_at", nil], ["metadata", "{\"score_value\":55.0,\"score_components\":{\"confusion_phrases\":2,\"negative_phrasing\":1,\"missing_goal_setting\":1}}"], ["created_at", "2025-11-05 15:35:49.804282"], ["updated_at", "2025-11-05 15:35:49.804282"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  Rendering layout layouts/mailer.html.erb
+  Rendering alert_mailer/poor_first_session_alert.html.erb within layouts/mailer
+  Rendered alert_mailer/poor_first_session_alert.html.erb within layouts/mailer (Duration: 0.0ms | GC: 0.0ms)
+  Rendered layout layouts/mailer.html.erb (Duration: 0.1ms | GC: 0.0ms)
+  Rendering layout layouts/mailer.text.erb
+  Rendering alert_mailer/poor_first_session_alert.text.erb within layouts/mailer
+  Rendered alert_mailer/poor_first_session_alert.text.erb within layouts/mailer (Duration: 0.0ms | GC: 0.0ms)
+  Rendered layout layouts/mailer.text.erb (Duration: 0.0ms | GC: 0.0ms)
+AlertMailer#poor_first_session_alert: processed outbound mail in 0.5ms
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTutor Create (0.2ms)[0m  [1m[32mINSERT INTO "tutors" ("name", "email", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", "Alice Smith"], ["email", "[FILTERED]"], ["created_at", "2025-11-05 15:35:49.806179"], ["updated_at", "2025-11-05 15:35:49.806179"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mAlert Create (0.2ms)[0m  [1m[32mINSERT INTO "alerts" ("tutor_id", "alert_type", "severity", "status", "triggered_at", "resolved_at", "metadata", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING "id"[0m  [["tutor_id", 204], ["alert_type", "high_reliability_risk"], ["severity", "high"], ["status", "open"], ["triggered_at", "2025-11-05 15:35:49.806556"], ["resolved_at", nil], ["metadata", "{\"score_value\":45.0,\"ths_below_threshold\":true}"], ["created_at", "2025-11-05 15:35:49.806630"], ["updated_at", "2025-11-05 15:35:49.806630"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  Rendering layout layouts/mailer.html.erb
+  Rendering alert_mailer/high_reliability_risk_alert.html.erb within layouts/mailer
+  Rendered alert_mailer/high_reliability_risk_alert.html.erb within layouts/mailer (Duration: 0.2ms | GC: 0.0ms)
+  Rendered layout layouts/mailer.html.erb (Duration: 0.2ms | GC: 0.0ms)
+  Rendering layout layouts/mailer.text.erb
+  Rendering alert_mailer/high_reliability_risk_alert.text.erb within layouts/mailer
+  Rendered alert_mailer/high_reliability_risk_alert.text.erb within layouts/mailer (Duration: 0.1ms | GC: 0.0ms)
+  Rendered layout layouts/mailer.text.erb (Duration: 0.1ms | GC: 0.0ms)
+AlertMailer#high_reliability_risk_alert: processed outbound mail in 0.9ms
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTutor Create (0.2ms)[0m  [1m[32mINSERT INTO "tutors" ("name", "email", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", "Alice Smith"], ["email", "[FILTERED]"], ["created_at", "2025-11-05 15:35:49.808686"], ["updated_at", "2025-11-05 15:35:49.808686"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mAlert Create (0.2ms)[0m  [1m[32mINSERT INTO "alerts" ("tutor_id", "alert_type", "severity", "status", "triggered_at", "resolved_at", "metadata", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING "id"[0m  [["tutor_id", 205], ["alert_type", "high_reliability_risk"], ["severity", "high"], ["status", "open"], ["triggered_at", "2025-11-05 15:35:49.809092"], ["resolved_at", nil], ["metadata", "{\"score_value\":45.0,\"ths_below_threshold\":true}"], ["created_at", "2025-11-05 15:35:49.809197"], ["updated_at", "2025-11-05 15:35:49.809197"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  Rendering layout layouts/mailer.html.erb
+  Rendering alert_mailer/high_reliability_risk_alert.html.erb within layouts/mailer
+  Rendered alert_mailer/high_reliability_risk_alert.html.erb within layouts/mailer (Duration: 0.0ms | GC: 0.0ms)
+  Rendered layout layouts/mailer.html.erb (Duration: 0.1ms | GC: 0.0ms)
+  Rendering layout layouts/mailer.text.erb
+  Rendering alert_mailer/high_reliability_risk_alert.text.erb within layouts/mailer
+  Rendered alert_mailer/high_reliability_risk_alert.text.erb within layouts/mailer (Duration: 0.0ms | GC: 0.0ms)
+  Rendered layout layouts/mailer.text.erb (Duration: 0.0ms | GC: 0.0ms)
+AlertMailer#high_reliability_risk_alert: processed outbound mail in 0.6ms
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTutor Create (0.4ms)[0m  [1m[32mINSERT INTO "tutors" ("name", "email", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", "Alice Smith"], ["email", "[FILTERED]"], ["created_at", "2025-11-05 15:35:49.811205"], ["updated_at", "2025-11-05 15:35:49.811205"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mAlert Create (0.2ms)[0m  [1m[32mINSERT INTO "alerts" ("tutor_id", "alert_type", "severity", "status", "triggered_at", "resolved_at", "metadata", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING "id"[0m  [["tutor_id", 206], ["alert_type", "high_reliability_risk"], ["severity", "high"], ["status", "open"], ["triggered_at", "2025-11-05 15:35:49.811814"], ["resolved_at", nil], ["metadata", "{\"score_value\":45.0,\"ths_below_threshold\":true}"], ["created_at", "2025-11-05 15:35:49.811902"], ["updated_at", "2025-11-05 15:35:49.811902"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  Rendering layout layouts/mailer.html.erb
+  Rendering alert_mailer/high_reliability_risk_alert.html.erb within layouts/mailer
+  Rendered alert_mailer/high_reliability_risk_alert.html.erb within layouts/mailer (Duration: 0.0ms | GC: 0.0ms)
+  Rendered layout layouts/mailer.html.erb (Duration: 0.0ms | GC: 0.0ms)
+  Rendering layout layouts/mailer.text.erb
+  Rendering alert_mailer/high_reliability_risk_alert.text.erb within layouts/mailer
+  Rendered alert_mailer/high_reliability_risk_alert.text.erb within layouts/mailer (Duration: 0.0ms | GC: 0.0ms)
+  Rendered layout layouts/mailer.text.erb (Duration: 0.0ms | GC: 0.0ms)
+AlertMailer#high_reliability_risk_alert: processed outbound mail in 0.5ms
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTutor Create (0.2ms)[0m  [1m[32mINSERT INTO "tutors" ("name", "email", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", "Alice Smith"], ["email", "[FILTERED]"], ["created_at", "2025-11-05 15:35:49.813598"], ["updated_at", "2025-11-05 15:35:49.813598"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mAlert Create (0.2ms)[0m  [1m[32mINSERT INTO "alerts" ("tutor_id", "alert_type", "severity", "status", "triggered_at", "resolved_at", "metadata", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING "id"[0m  [["tutor_id", 207], ["alert_type", "high_reliability_risk"], ["severity", "high"], ["status", "open"], ["triggered_at", "2025-11-05 15:35:49.814029"], ["resolved_at", nil], ["metadata", "{\"score_value\":45.0,\"ths_below_threshold\":true}"], ["created_at", "2025-11-05 15:35:49.814107"], ["updated_at", "2025-11-05 15:35:49.814107"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  Rendering layout layouts/mailer.html.erb
+  Rendering alert_mailer/high_reliability_risk_alert.html.erb within layouts/mailer
+  Rendered alert_mailer/high_reliability_risk_alert.html.erb within layouts/mailer (Duration: 0.0ms | GC: 0.0ms)
+  Rendered layout layouts/mailer.html.erb (Duration: 0.0ms | GC: 0.0ms)
+  Rendering layout layouts/mailer.text.erb
+  Rendering alert_mailer/high_reliability_risk_alert.text.erb within layouts/mailer
+  Rendered alert_mailer/high_reliability_risk_alert.text.erb within layouts/mailer (Duration: 0.0ms | GC: 0.0ms)
+  Rendered layout layouts/mailer.text.erb (Duration: 0.0ms | GC: 0.0ms)
+AlertMailer#high_reliability_risk_alert: processed outbound mail in 0.5ms
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTutor Create (0.2ms)[0m  [1m[32mINSERT INTO "tutors" ("name", "email", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", "Alice Smith"], ["email", "[FILTERED]"], ["created_at", "2025-11-05 15:35:49.815979"], ["updated_at", "2025-11-05 15:35:49.815979"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mAlert Create (0.2ms)[0m  [1m[32mINSERT INTO "alerts" ("tutor_id", "alert_type", "severity", "status", "triggered_at", "resolved_at", "metadata", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING "id"[0m  [["tutor_id", 208], ["alert_type", "churn_risk"], ["severity", "high"], ["status", "open"], ["triggered_at", "2025-11-05 15:35:49.816356"], ["resolved_at", nil], ["metadata", "{\"score_value\":0.75,\"engagement_drop\":true,\"low_session_count\":true}"], ["created_at", "2025-11-05 15:35:49.816449"], ["updated_at", "2025-11-05 15:35:49.816449"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  Rendering layout layouts/mailer.html.erb
+  Rendering alert_mailer/churn_risk_alert.html.erb within layouts/mailer
+  Rendered alert_mailer/churn_risk_alert.html.erb within layouts/mailer (Duration: 0.2ms | GC: 0.0ms)
+  Rendered layout layouts/mailer.html.erb (Duration: 0.2ms | GC: 0.0ms)
+  Rendering layout layouts/mailer.text.erb
+  Rendering alert_mailer/churn_risk_alert.text.erb within layouts/mailer
+  Rendered alert_mailer/churn_risk_alert.text.erb within layouts/mailer (Duration: 8.0ms | GC: 7.8ms)
+  Rendered layout layouts/mailer.text.erb (Duration: 8.1ms | GC: 7.8ms)
+AlertMailer#churn_risk_alert: processed outbound mail in 9.0ms
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTutor Create (0.2ms)[0m  [1m[32mINSERT INTO "tutors" ("name", "email", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", "Alice Smith"], ["email", "[FILTERED]"], ["created_at", "2025-11-05 15:35:49.826908"], ["updated_at", "2025-11-05 15:35:49.826908"]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mAlert Create (0.3ms)[0m  [1m[32mINSERT INTO "alerts" ("tutor_id", "alert_type", "severity", "status", "triggered_at", "resolved_at", "metadata", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING "id"[0m  [["tutor_id", 209], ["alert_type", "churn_risk"], ["severity", "high"], ["status", "open"], ["triggered_at", "2025-11-05 15:35:49.827820"], ["resolved_at", nil], ["metadata", "{\"score_value\":0.75,\"engagement_drop\":true,\"low_session_count\":true}"], ["created_at", "2025-11-05 15:35:49.827935"], ["updated_at", "2025-11-05 15:35:49.827935"]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  Rendering layout layouts/mailer.html.erb
+  Rendering alert_mailer/churn_risk_alert.html.erb within layouts/mailer
+  Rendered alert_mailer/churn_risk_alert.html.erb within layouts/mailer (Duration: 0.0ms | GC: 0.0ms)
+  Rendered layout layouts/mailer.html.erb (Duration: 0.1ms | GC: 0.0ms)
+  Rendering layout layouts/mailer.text.erb
+  Rendering alert_mailer/churn_risk_alert.text.erb within layouts/mailer
+  Rendered alert_mailer/churn_risk_alert.text.erb within layouts/mailer (Duration: 0.0ms | GC: 0.0ms)
+  Rendered layout layouts/mailer.text.erb (Duration: 0.0ms | GC: 0.0ms)
+AlertMailer#churn_risk_alert: processed outbound mail in 0.7ms
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTutor Create (0.2ms)[0m  [1m[32mINSERT INTO "tutors" ("name", "email", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", "Alice Smith"], ["email", "[FILTERED]"], ["created_at", "2025-11-05 15:35:49.830376"], ["updated_at", "2025-11-05 15:35:49.830376"]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mAlert Create (0.3ms)[0m  [1m[32mINSERT INTO "alerts" ("tutor_id", "alert_type", "severity", "status", "triggered_at", "resolved_at", "metadata", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING "id"[0m  [["tutor_id", 210], ["alert_type", "churn_risk"], ["severity", "high"], ["status", "open"], ["triggered_at", "2025-11-05 15:35:49.830808"], ["resolved_at", nil], ["metadata", "{\"score_value\":0.75,\"engagement_drop\":true,\"low_session_count\":true}"], ["created_at", "2025-11-05 15:35:49.830918"], ["updated_at", "2025-11-05 15:35:49.830918"]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  Rendering layout layouts/mailer.html.erb
+  Rendering alert_mailer/churn_risk_alert.html.erb within layouts/mailer
+  Rendered alert_mailer/churn_risk_alert.html.erb within layouts/mailer (Duration: 0.1ms | GC: 0.1ms)
+  Rendered layout layouts/mailer.html.erb (Duration: 0.2ms | GC: 0.1ms)
+  Rendering layout layouts/mailer.text.erb
+  Rendering alert_mailer/churn_risk_alert.text.erb within layouts/mailer
+  Rendered alert_mailer/churn_risk_alert.text.erb within layouts/mailer (Duration: 0.0ms | GC: 0.0ms)
+  Rendered layout layouts/mailer.text.erb (Duration: 0.0ms | GC: 0.0ms)
+AlertMailer#churn_risk_alert: processed outbound mail in 0.8ms
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTutor Create (0.3ms)[0m  [1m[32mINSERT INTO "tutors" ("name", "email", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", "Alice Smith"], ["email", "[FILTERED]"], ["created_at", "2025-11-05 15:35:49.833601"], ["updated_at", "2025-11-05 15:35:49.833601"]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mAlert Create (1.6ms)[0m  [1m[32mINSERT INTO "alerts" ("tutor_id", "alert_type", "severity", "status", "triggered_at", "resolved_at", "metadata", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING "id"[0m  [["tutor_id", 211], ["alert_type", "churn_risk"], ["severity", "high"], ["status", "open"], ["triggered_at", "2025-11-05 15:35:49.834219"], ["resolved_at", nil], ["metadata", "{\"score_value\":0.75,\"engagement_drop\":true,\"low_session_count\":true}"], ["created_at", "2025-11-05 15:35:49.834338"], ["updated_at", "2025-11-05 15:35:49.834338"]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  Rendering layout layouts/mailer.html.erb
+  Rendering alert_mailer/churn_risk_alert.html.erb within layouts/mailer
+  Rendered alert_mailer/churn_risk_alert.html.erb within layouts/mailer (Duration: 0.0ms | GC: 0.0ms)
+  Rendered layout layouts/mailer.html.erb (Duration: 0.1ms | GC: 0.0ms)
+  Rendering layout layouts/mailer.text.erb
+  Rendering alert_mailer/churn_risk_alert.text.erb within layouts/mailer
+  Rendered alert_mailer/churn_risk_alert.text.erb within layouts/mailer (Duration: 0.0ms | GC: 0.0ms)
+  Rendered layout layouts/mailer.text.erb (Duration: 0.0ms | GC: 0.0ms)
+AlertMailer#churn_risk_alert: processed outbound mail in 0.7ms
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTutor Create (0.3ms)[0m  [1m[32mINSERT INTO "tutors" ("name", "email", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", "Alice Smith"], ["email", "[FILTERED]"], ["created_at", "2025-11-05 15:35:49.838328"], ["updated_at", "2025-11-05 15:35:49.838328"]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mAlert Create (0.3ms)[0m  [1m[32mINSERT INTO "alerts" ("tutor_id", "alert_type", "severity", "status", "triggered_at", "resolved_at", "metadata", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING "id"[0m  [["tutor_id", 212], ["alert_type", "churn_risk"], ["severity", "high"], ["status", "open"], ["triggered_at", "2025-11-05 15:35:49.838860"], ["resolved_at", nil], ["metadata", "{\"score_value\":0.75,\"engagement_drop\":true,\"low_session_count\":true}"], ["created_at", "2025-11-05 15:35:49.838963"], ["updated_at", "2025-11-05 15:35:49.838963"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  Rendering layout layouts/mailer.html.erb
+  Rendering alert_mailer/churn_risk_alert.html.erb within layouts/mailer
+  Rendered alert_mailer/churn_risk_alert.html.erb within layouts/mailer (Duration: 0.0ms | GC: 0.0ms)
+  Rendered layout layouts/mailer.html.erb (Duration: 0.0ms | GC: 0.0ms)
+  Rendering layout layouts/mailer.text.erb
+  Rendering alert_mailer/churn_risk_alert.text.erb within layouts/mailer
+  Rendered alert_mailer/churn_risk_alert.text.erb within layouts/mailer (Duration: 0.0ms | GC: 0.0ms)
+  Rendered layout layouts/mailer.text.erb (Duration: 0.0ms | GC: 0.0ms)
+AlertMailer#churn_risk_alert: processed outbound mail in 0.6ms
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mROLLBACK[0m
+✓ Sidekiq schedule configuration loaded: session_scoring, alert_evaluation
+  [1m[36mActiveRecord::InternalMetadata Load (0.5ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "schema_sha1"]]
+  [1m[36mActiveRecord::SchemaMigration Load (0.4ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+[dotenv] Saved a snapshot of [32mENV[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTutor Create (0.3ms)[0m  [1m[32mINSERT INTO "tutors" ("name", "email", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", "Alice Smith"], ["email", "[FILTERED]"], ["created_at", "2025-11-05 15:36:26.825494"], ["updated_at", "2025-11-05 15:36:26.825494"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mScore Create (0.5ms)[0m  [1m[32mINSERT INTO "scores" ("session_id", "tutor_id", "score_type", "value", "components", "computed_at", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["session_id", nil], ["tutor_id", 213], ["score_type", "fsrs"], ["value", "55.0"], ["components", "{}"], ["computed_at", "2025-11-05 15:36:26.826544"], ["created_at", "2025-11-05 15:36:26.831705"], ["updated_at", "2025-11-05 15:36:26.831705"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mAlert Count (0.2ms)[0m  [1m[34mSELECT COUNT(*) FROM "alerts" WHERE "alerts"."alert_type" = $1[0m  [["alert_type", "poor_first_session"]]
+  [1m[36mTutor Load (0.2ms)[0m  [1m[34mSELECT "tutors".* FROM "tutors" ORDER BY "tutors"."id" ASC LIMIT $1[0m  [["LIMIT", 1000]]
+  [1m[36mScore Load (0.7ms)[0m  [1m[34mSELECT "scores".* FROM "scores" WHERE "scores"."tutor_id" = $1 AND "scores"."score_type" = $2 ORDER BY "scores"."computed_at" DESC LIMIT $3[0m  [["tutor_id", 213], ["score_type", "fsrs"], ["LIMIT", 1]]
+  [1m[36mScore Load (0.1ms)[0m  [1m[34mSELECT "scores".* FROM "scores" WHERE "scores"."tutor_id" = $1 AND "scores"."score_type" = $2 ORDER BY "scores"."computed_at" DESC LIMIT $3[0m  [["tutor_id", 213], ["score_type", "ths"], ["LIMIT", 1]]
+  [1m[36mScore Load (0.1ms)[0m  [1m[34mSELECT "scores".* FROM "scores" WHERE "scores"."tutor_id" = $1 AND "scores"."score_type" = $2 ORDER BY "scores"."computed_at" DESC LIMIT $3[0m  [["tutor_id", 213], ["score_type", "tcrs"], ["LIMIT", 1]]
+  [1m[36mAlert Load (0.2ms)[0m  [1m[34mSELECT "alerts".* FROM "alerts" WHERE "alerts"."tutor_id" = $1 AND "alerts"."alert_type" = $2 AND "alerts"."status" = $3 LIMIT $4[0m  [["tutor_id", 213], ["alert_type", "poor_first_session"], ["status", "open"], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mAlert Create (0.6ms)[0m  [1m[32mINSERT INTO "alerts" ("tutor_id", "alert_type", "severity", "status", "triggered_at", "resolved_at", "metadata", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING "id"[0m  [["tutor_id", 213], ["alert_type", "poor_first_session"], ["severity", "high"], ["status", "open"], ["triggered_at", "2025-11-05 15:36:26.838491"], ["resolved_at", nil], ["metadata", "{\"score_value\":\"55.0\",\"score_computed_at\":\"2025-11-05T15:36:26.826Z\",\"score_components\":{}}"], ["created_at", "2025-11-05 15:36:26.841402"], ["updated_at", "2025-11-05 15:36:26.841402"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+[ActiveJob] Enqueued ActionMailer::MailDeliveryJob (Job ID: a8bf6105-06e3-4895-8c37-eb266276b467) to Test(default) with arguments: "AlertMailer", "poor_first_session_alert", "deliver_now", {:args=>[#<GlobalID:0x0000000123e93850 @uri=#<URI::GID gid://tutor-insights/Alert/73>>, "admin@example.com"]}
+  [1m[36mAlert Load (0.2ms)[0m  [1m[34mSELECT "alerts".* FROM "alerts" WHERE "alerts"."tutor_id" = $1 AND "alerts"."alert_type" = $2 AND "alerts"."status" = $3 LIMIT $4[0m  [["tutor_id", 213], ["alert_type", "high_reliability_risk"], ["status", "open"], ["LIMIT", 1]]
+  [1m[36mAlert Load (0.1ms)[0m  [1m[34mSELECT "alerts".* FROM "alerts" WHERE "alerts"."tutor_id" = $1 AND "alerts"."alert_type" = $2 AND "alerts"."status" = $3 LIMIT $4[0m  [["tutor_id", 213], ["alert_type", "churn_risk"], ["status", "open"], ["LIMIT", 1]]
+  [1m[36mAlert Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "alerts" WHERE "alerts"."alert_type" = $1[0m  [["alert_type", "poor_first_session"]]
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTutor Create (0.2ms)[0m  [1m[32mINSERT INTO "tutors" ("name", "email", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", "Alice Smith"], ["email", "[FILTERED]"], ["created_at", "2025-11-05 15:36:26.849320"], ["updated_at", "2025-11-05 15:36:26.849320"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mScore Create (0.3ms)[0m  [1m[32mINSERT INTO "scores" ("session_id", "tutor_id", "score_type", "value", "components", "computed_at", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["session_id", nil], ["tutor_id", 214], ["score_type", "fsrs"], ["value", "55.0"], ["components", "{}"], ["computed_at", "2025-11-05 15:36:26.849806"], ["created_at", "2025-11-05 15:36:26.849958"], ["updated_at", "2025-11-05 15:36:26.849958"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTutor Load (0.1ms)[0m  [1m[34mSELECT "tutors".* FROM "tutors" ORDER BY "tutors"."id" ASC LIMIT $1[0m  [["LIMIT", 1000]]
+  [1m[36mScore Load (0.1ms)[0m  [1m[34mSELECT "scores".* FROM "scores" WHERE "scores"."tutor_id" = $1 AND "scores"."score_type" = $2 ORDER BY "scores"."computed_at" DESC LIMIT $3[0m  [["tutor_id", 214], ["score_type", "fsrs"], ["LIMIT", 1]]
+  [1m[36mScore Load (0.1ms)[0m  [1m[34mSELECT "scores".* FROM "scores" WHERE "scores"."tutor_id" = $1 AND "scores"."score_type" = $2 ORDER BY "scores"."computed_at" DESC LIMIT $3[0m  [["tutor_id", 214], ["score_type", "ths"], ["LIMIT", 1]]
+  [1m[36mScore Load (0.1ms)[0m  [1m[34mSELECT "scores".* FROM "scores" WHERE "scores"."tutor_id" = $1 AND "scores"."score_type" = $2 ORDER BY "scores"."computed_at" DESC LIMIT $3[0m  [["tutor_id", 214], ["score_type", "tcrs"], ["LIMIT", 1]]
+  [1m[36mAlert Load (0.1ms)[0m  [1m[34mSELECT "alerts".* FROM "alerts" WHERE "alerts"."tutor_id" = $1 AND "alerts"."alert_type" = $2 AND "alerts"."status" = $3 LIMIT $4[0m  [["tutor_id", 214], ["alert_type", "poor_first_session"], ["status", "open"], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mAlert Create (0.3ms)[0m  [1m[32mINSERT INTO "alerts" ("tutor_id", "alert_type", "severity", "status", "triggered_at", "resolved_at", "metadata", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING "id"[0m  [["tutor_id", 214], ["alert_type", "poor_first_session"], ["severity", "high"], ["status", "open"], ["triggered_at", "2025-11-05 15:36:26.851881"], ["resolved_at", nil], ["metadata", "{\"score_value\":\"55.0\",\"score_computed_at\":\"2025-11-05T15:36:26.849Z\",\"score_components\":{}}"], ["created_at", "2025-11-05 15:36:26.852018"], ["updated_at", "2025-11-05 15:36:26.852018"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+[ActiveJob] Enqueued ActionMailer::MailDeliveryJob (Job ID: 6278e3e4-b7dc-4c8d-bb45-4eeee82dc0d5) to Test(default) with arguments: "AlertMailer", "poor_first_session_alert", "deliver_now", {:args=>[#<GlobalID:0x0000000125013198 @uri=#<URI::GID gid://tutor-insights/Alert/74>>, "admin@example.com"]}
+  [1m[36mAlert Load (0.1ms)[0m  [1m[34mSELECT "alerts".* FROM "alerts" WHERE "alerts"."tutor_id" = $1 AND "alerts"."alert_type" = $2 AND "alerts"."status" = $3 LIMIT $4[0m  [["tutor_id", 214], ["alert_type", "high_reliability_risk"], ["status", "open"], ["LIMIT", 1]]
+  [1m[36mAlert Load (0.1ms)[0m  [1m[34mSELECT "alerts".* FROM "alerts" WHERE "alerts"."tutor_id" = $1 AND "alerts"."alert_type" = $2 AND "alerts"."status" = $3 LIMIT $4[0m  [["tutor_id", 214], ["alert_type", "churn_risk"], ["status", "open"], ["LIMIT", 1]]
+  [1m[36mAlert Load (0.1ms)[0m  [1m[34mSELECT "alerts".* FROM "alerts" WHERE "alerts"."tutor_id" = $1 AND "alerts"."alert_type" = $2 LIMIT $3[0m  [["tutor_id", 214], ["alert_type", "poor_first_session"], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTutor Create (0.2ms)[0m  [1m[32mINSERT INTO "tutors" ("name", "email", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", "Alice Smith"], ["email", "[FILTERED]"], ["created_at", "2025-11-05 15:36:26.854137"], ["updated_at", "2025-11-05 15:36:26.854137"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mScore Create (0.2ms)[0m  [1m[32mINSERT INTO "scores" ("session_id", "tutor_id", "score_type", "value", "components", "computed_at", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["session_id", nil], ["tutor_id", 215], ["score_type", "fsrs"], ["value", "55.0"], ["components", "{}"], ["computed_at", "2025-11-05 15:36:26.854536"], ["created_at", "2025-11-05 15:36:26.854666"], ["updated_at", "2025-11-05 15:36:26.854666"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTutor Load (0.1ms)[0m  [1m[34mSELECT "tutors".* FROM "tutors" ORDER BY "tutors"."id" ASC LIMIT $1[0m  [["LIMIT", 1000]]
+  [1m[36mScore Load (0.1ms)[0m  [1m[34mSELECT "scores".* FROM "scores" WHERE "scores"."tutor_id" = $1 AND "scores"."score_type" = $2 ORDER BY "scores"."computed_at" DESC LIMIT $3[0m  [["tutor_id", 215], ["score_type", "fsrs"], ["LIMIT", 1]]
+  [1m[36mScore Load (0.0ms)[0m  [1m[34mSELECT "scores".* FROM "scores" WHERE "scores"."tutor_id" = $1 AND "scores"."score_type" = $2 ORDER BY "scores"."computed_at" DESC LIMIT $3[0m  [["tutor_id", 215], ["score_type", "ths"], ["LIMIT", 1]]
+  [1m[36mScore Load (0.1ms)[0m  [1m[34mSELECT "scores".* FROM "scores" WHERE "scores"."tutor_id" = $1 AND "scores"."score_type" = $2 ORDER BY "scores"."computed_at" DESC LIMIT $3[0m  [["tutor_id", 215], ["score_type", "tcrs"], ["LIMIT", 1]]
+  [1m[36mAlert Load (0.0ms)[0m  [1m[34mSELECT "alerts".* FROM "alerts" WHERE "alerts"."tutor_id" = $1 AND "alerts"."alert_type" = $2 AND "alerts"."status" = $3 LIMIT $4[0m  [["tutor_id", 215], ["alert_type", "poor_first_session"], ["status", "open"], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mAlert Create (0.2ms)[0m  [1m[32mINSERT INTO "alerts" ("tutor_id", "alert_type", "severity", "status", "triggered_at", "resolved_at", "metadata", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING "id"[0m  [["tutor_id", 215], ["alert_type", "poor_first_session"], ["severity", "high"], ["status", "open"], ["triggered_at", "2025-11-05 15:36:26.856111"], ["resolved_at", nil], ["metadata", "{\"score_value\":\"55.0\",\"score_computed_at\":\"2025-11-05T15:36:26.854Z\",\"score_components\":{}}"], ["created_at", "2025-11-05 15:36:26.856211"], ["updated_at", "2025-11-05 15:36:26.856211"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+[ActiveJob] Enqueued ActionMailer::MailDeliveryJob (Job ID: 2b724667-161f-4292-8464-55a03560af0b) to Test(default) with arguments: "AlertMailer", "poor_first_session_alert", "deliver_now", {:args=>[#<GlobalID:0x00000001250935a0 @uri=#<URI::GID gid://tutor-insights/Alert/75>>, "admin@example.com"]}
+  [1m[36mAlert Load (0.0ms)[0m  [1m[34mSELECT "alerts".* FROM "alerts" WHERE "alerts"."tutor_id" = $1 AND "alerts"."alert_type" = $2 AND "alerts"."status" = $3 LIMIT $4[0m  [["tutor_id", 215], ["alert_type", "high_reliability_risk"], ["status", "open"], ["LIMIT", 1]]
+  [1m[36mAlert Load (0.0ms)[0m  [1m[34mSELECT "alerts".* FROM "alerts" WHERE "alerts"."tutor_id" = $1 AND "alerts"."alert_type" = $2 AND "alerts"."status" = $3 LIMIT $4[0m  [["tutor_id", 215], ["alert_type", "churn_risk"], ["status", "open"], ["LIMIT", 1]]
+  [1m[36mAlert Load (0.1ms)[0m  [1m[34mSELECT "alerts".* FROM "alerts" WHERE "alerts"."tutor_id" = $1 AND "alerts"."alert_type" = $2 LIMIT $3[0m  [["tutor_id", 215], ["alert_type", "poor_first_session"], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTutor Create (0.2ms)[0m  [1m[32mINSERT INTO "tutors" ("name", "email", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", "Alice Smith"], ["email", "[FILTERED]"], ["created_at", "2025-11-05 15:36:26.857858"], ["updated_at", "2025-11-05 15:36:26.857858"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mScore Create (0.2ms)[0m  [1m[32mINSERT INTO "scores" ("session_id", "tutor_id", "score_type", "value", "components", "computed_at", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["session_id", nil], ["tutor_id", 216], ["score_type", "ths"], ["value", "45.0"], ["components", "{}"], ["computed_at", "2025-11-05 15:36:26.858267"], ["created_at", "2025-11-05 15:36:26.858362"], ["updated_at", "2025-11-05 15:36:26.858362"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mAlert Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "alerts" WHERE "alerts"."alert_type" = $1[0m  [["alert_type", "high_reliability_risk"]]
+  [1m[36mTutor Load (0.1ms)[0m  [1m[34mSELECT "tutors".* FROM "tutors" ORDER BY "tutors"."id" ASC LIMIT $1[0m  [["LIMIT", 1000]]
+  [1m[36mScore Load (0.1ms)[0m  [1m[34mSELECT "scores".* FROM "scores" WHERE "scores"."tutor_id" = $1 AND "scores"."score_type" = $2 ORDER BY "scores"."computed_at" DESC LIMIT $3[0m  [["tutor_id", 216], ["score_type", "fsrs"], ["LIMIT", 1]]
+  [1m[36mScore Load (0.1ms)[0m  [1m[34mSELECT "scores".* FROM "scores" WHERE "scores"."tutor_id" = $1 AND "scores"."score_type" = $2 ORDER BY "scores"."computed_at" DESC LIMIT $3[0m  [["tutor_id", 216], ["score_type", "ths"], ["LIMIT", 1]]
+  [1m[36mScore Load (0.1ms)[0m  [1m[34mSELECT "scores".* FROM "scores" WHERE "scores"."tutor_id" = $1 AND "scores"."score_type" = $2 ORDER BY "scores"."computed_at" DESC LIMIT $3[0m  [["tutor_id", 216], ["score_type", "tcrs"], ["LIMIT", 1]]
+  [1m[36mAlert Load (0.0ms)[0m  [1m[34mSELECT "alerts".* FROM "alerts" WHERE "alerts"."tutor_id" = $1 AND "alerts"."alert_type" = $2 AND "alerts"."status" = $3 LIMIT $4[0m  [["tutor_id", 216], ["alert_type", "poor_first_session"], ["status", "open"], ["LIMIT", 1]]
+  [1m[36mAlert Load (0.1ms)[0m  [1m[34mSELECT "alerts".* FROM "alerts" WHERE "alerts"."tutor_id" = $1 AND "alerts"."alert_type" = $2 AND "alerts"."status" = $3 LIMIT $4[0m  [["tutor_id", 216], ["alert_type", "high_reliability_risk"], ["status", "open"], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mAlert Create (0.3ms)[0m  [1m[32mINSERT INTO "alerts" ("tutor_id", "alert_type", "severity", "status", "triggered_at", "resolved_at", "metadata", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING "id"[0m  [["tutor_id", 216], ["alert_type", "high_reliability_risk"], ["severity", "high"], ["status", "open"], ["triggered_at", "2025-11-05 15:36:26.860132"], ["resolved_at", nil], ["metadata", "{\"score_value\":\"45.0\",\"score_computed_at\":\"2025-11-05T15:36:26.858Z\",\"score_components\":{}}"], ["created_at", "2025-11-05 15:36:26.860230"], ["updated_at", "2025-11-05 15:36:26.860230"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+[ActiveJob] Enqueued ActionMailer::MailDeliveryJob (Job ID: c2652f5d-a7eb-482b-bfaf-a52d16cd1afd) to Test(default) with arguments: "AlertMailer", "high_reliability_risk_alert", "deliver_now", {:args=>[#<GlobalID:0x0000000125112058 @uri=#<URI::GID gid://tutor-insights/Alert/76>>, "admin@example.com"]}
+  [1m[36mAlert Load (0.1ms)[0m  [1m[34mSELECT "alerts".* FROM "alerts" WHERE "alerts"."tutor_id" = $1 AND "alerts"."alert_type" = $2 AND "alerts"."status" = $3 LIMIT $4[0m  [["tutor_id", 216], ["alert_type", "churn_risk"], ["status", "open"], ["LIMIT", 1]]
+  [1m[36mAlert Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "alerts" WHERE "alerts"."alert_type" = $1[0m  [["alert_type", "high_reliability_risk"]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTutor Create (0.2ms)[0m  [1m[32mINSERT INTO "tutors" ("name", "email", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", "Alice Smith"], ["email", "[FILTERED]"], ["created_at", "2025-11-05 15:36:26.861719"], ["updated_at", "2025-11-05 15:36:26.861719"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mScore Create (0.2ms)[0m  [1m[32mINSERT INTO "scores" ("session_id", "tutor_id", "score_type", "value", "components", "computed_at", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["session_id", nil], ["tutor_id", 217], ["score_type", "tcrs"], ["value", "0.7"], ["components", "{}"], ["computed_at", "2025-11-05 15:36:26.862135"], ["created_at", "2025-11-05 15:36:26.862258"], ["updated_at", "2025-11-05 15:36:26.862258"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mAlert Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "alerts" WHERE "alerts"."alert_type" = $1[0m  [["alert_type", "churn_risk"]]
+  [1m[36mTutor Load (0.1ms)[0m  [1m[34mSELECT "tutors".* FROM "tutors" ORDER BY "tutors"."id" ASC LIMIT $1[0m  [["LIMIT", 1000]]
+  [1m[36mScore Load (0.1ms)[0m  [1m[34mSELECT "scores".* FROM "scores" WHERE "scores"."tutor_id" = $1 AND "scores"."score_type" = $2 ORDER BY "scores"."computed_at" DESC LIMIT $3[0m  [["tutor_id", 217], ["score_type", "fsrs"], ["LIMIT", 1]]
+  [1m[36mScore Load (0.2ms)[0m  [1m[34mSELECT "scores".* FROM "scores" WHERE "scores"."tutor_id" = $1 AND "scores"."score_type" = $2 ORDER BY "scores"."computed_at" DESC LIMIT $3[0m  [["tutor_id", 217], ["score_type", "ths"], ["LIMIT", 1]]
+  [1m[36mScore Load (0.0ms)[0m  [1m[34mSELECT "scores".* FROM "scores" WHERE "scores"."tutor_id" = $1 AND "scores"."score_type" = $2 ORDER BY "scores"."computed_at" DESC LIMIT $3[0m  [["tutor_id", 217], ["score_type", "tcrs"], ["LIMIT", 1]]
+  [1m[36mAlert Load (0.0ms)[0m  [1m[34mSELECT "alerts".* FROM "alerts" WHERE "alerts"."tutor_id" = $1 AND "alerts"."alert_type" = $2 AND "alerts"."status" = $3 LIMIT $4[0m  [["tutor_id", 217], ["alert_type", "poor_first_session"], ["status", "open"], ["LIMIT", 1]]
+  [1m[36mAlert Load (0.0ms)[0m  [1m[34mSELECT "alerts".* FROM "alerts" WHERE "alerts"."tutor_id" = $1 AND "alerts"."alert_type" = $2 AND "alerts"."status" = $3 LIMIT $4[0m  [["tutor_id", 217], ["alert_type", "high_reliability_risk"], ["status", "open"], ["LIMIT", 1]]
+  [1m[36mAlert Load (0.1ms)[0m  [1m[34mSELECT "alerts".* FROM "alerts" WHERE "alerts"."tutor_id" = $1 AND "alerts"."alert_type" = $2 AND "alerts"."status" = $3 LIMIT $4[0m  [["tutor_id", 217], ["alert_type", "churn_risk"], ["status", "open"], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mAlert Create (0.2ms)[0m  [1m[32mINSERT INTO "alerts" ("tutor_id", "alert_type", "severity", "status", "triggered_at", "resolved_at", "metadata", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING "id"[0m  [["tutor_id", 217], ["alert_type", "churn_risk"], ["severity", "high"], ["status", "open"], ["triggered_at", "2025-11-05 15:36:26.864601"], ["resolved_at", nil], ["metadata", "{\"score_value\":\"0.7\",\"score_computed_at\":\"2025-11-05T15:36:26.862Z\",\"score_components\":{}}"], ["created_at", "2025-11-05 15:36:26.864743"], ["updated_at", "2025-11-05 15:36:26.864743"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+[ActiveJob] Enqueued ActionMailer::MailDeliveryJob (Job ID: 59569a83-9862-431b-a364-038a1d3fec99) to Test(default) with arguments: "AlertMailer", "churn_risk_alert", "deliver_now", {:args=>[#<GlobalID:0x0000000125190818 @uri=#<URI::GID gid://tutor-insights/Alert/77>>, "admin@example.com"]}
+  [1m[36mAlert Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "alerts" WHERE "alerts"."alert_type" = $1[0m  [["alert_type", "churn_risk"]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTutor Create (0.1ms)[0m  [1m[32mINSERT INTO "tutors" ("name", "email", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", "Alice Smith"], ["email", "[FILTERED]"], ["created_at", "2025-11-05 15:36:26.866336"], ["updated_at", "2025-11-05 15:36:26.866336"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mScore Create (0.2ms)[0m  [1m[32mINSERT INTO "scores" ("session_id", "tutor_id", "score_type", "value", "components", "computed_at", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["session_id", nil], ["tutor_id", 218], ["score_type", "fsrs"], ["value", "55.0"], ["components", "{}"], ["computed_at", "2025-11-05 15:36:26.866705"], ["created_at", "2025-11-05 15:36:26.866829"], ["updated_at", "2025-11-05 15:36:26.866829"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mAlert Create (0.2ms)[0m  [1m[32mINSERT INTO "alerts" ("tutor_id", "alert_type", "severity", "status", "triggered_at", "resolved_at", "metadata", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING "id"[0m  [["tutor_id", 218], ["alert_type", "poor_first_session"], ["severity", "high"], ["status", "open"], ["triggered_at", "2025-11-05 14:36:26.867261"], ["resolved_at", nil], ["metadata", "{}"], ["created_at", "2025-11-05 15:36:26.867363"], ["updated_at", "2025-11-05 15:36:26.867363"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mAlert Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "alerts" WHERE "alerts"."alert_type" = $1[0m  [["alert_type", "poor_first_session"]]
+  [1m[36mTutor Load (0.1ms)[0m  [1m[34mSELECT "tutors".* FROM "tutors" ORDER BY "tutors"."id" ASC LIMIT $1[0m  [["LIMIT", 1000]]
+  [1m[36mScore Load (0.1ms)[0m  [1m[34mSELECT "scores".* FROM "scores" WHERE "scores"."tutor_id" = $1 AND "scores"."score_type" = $2 ORDER BY "scores"."computed_at" DESC LIMIT $3[0m  [["tutor_id", 218], ["score_type", "fsrs"], ["LIMIT", 1]]
+  [1m[36mScore Load (0.1ms)[0m  [1m[34mSELECT "scores".* FROM "scores" WHERE "scores"."tutor_id" = $1 AND "scores"."score_type" = $2 ORDER BY "scores"."computed_at" DESC LIMIT $3[0m  [["tutor_id", 218], ["score_type", "ths"], ["LIMIT", 1]]
+  [1m[36mScore Load (0.1ms)[0m  [1m[34mSELECT "scores".* FROM "scores" WHERE "scores"."tutor_id" = $1 AND "scores"."score_type" = $2 ORDER BY "scores"."computed_at" DESC LIMIT $3[0m  [["tutor_id", 218], ["score_type", "tcrs"], ["LIMIT", 1]]
+  [1m[36mAlert Load (0.1ms)[0m  [1m[34mSELECT "alerts".* FROM "alerts" WHERE "alerts"."tutor_id" = $1 AND "alerts"."alert_type" = $2 AND "alerts"."status" = $3 LIMIT $4[0m  [["tutor_id", 218], ["alert_type", "poor_first_session"], ["status", "open"], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mAlert Update (0.3ms)[0m  [1m[33mUPDATE "alerts" SET "metadata" = $1, "updated_at" = $2 WHERE "alerts"."id" = $3[0m  [["metadata", "{\"last_checked_at\":\"2025-11-05T15:36:26.869Z\",\"score_value\":\"55.0\",\"score_computed_at\":\"2025-11-05T15:36:26.866Z\"}"], ["updated_at", "2025-11-05 15:36:26.869287"], ["id", 78]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mAlert Load (0.1ms)[0m  [1m[34mSELECT "alerts".* FROM "alerts" WHERE "alerts"."tutor_id" = $1 AND "alerts"."alert_type" = $2 AND "alerts"."status" = $3 LIMIT $4[0m  [["tutor_id", 218], ["alert_type", "high_reliability_risk"], ["status", "open"], ["LIMIT", 1]]
+  [1m[36mAlert Load (0.1ms)[0m  [1m[34mSELECT "alerts".* FROM "alerts" WHERE "alerts"."tutor_id" = $1 AND "alerts"."alert_type" = $2 AND "alerts"."status" = $3 LIMIT $4[0m  [["tutor_id", 218], ["alert_type", "churn_risk"], ["status", "open"], ["LIMIT", 1]]
+  [1m[36mAlert Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "alerts" WHERE "alerts"."alert_type" = $1[0m  [["alert_type", "poor_first_session"]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTutor Create (0.1ms)[0m  [1m[32mINSERT INTO "tutors" ("name", "email", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", "Alice Smith"], ["email", "[FILTERED]"], ["created_at", "2025-11-05 15:36:26.870918"], ["updated_at", "2025-11-05 15:36:26.870918"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mAlert Create (0.2ms)[0m  [1m[32mINSERT INTO "alerts" ("tutor_id", "alert_type", "severity", "status", "triggered_at", "resolved_at", "metadata", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING "id"[0m  [["tutor_id", 219], ["alert_type", "poor_first_session"], ["severity", "high"], ["status", "open"], ["triggered_at", "2025-11-05 14:36:26.871253"], ["resolved_at", nil], ["metadata", "{}"], ["created_at", "2025-11-05 15:36:26.871341"], ["updated_at", "2025-11-05 15:36:26.871341"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mScore Create (0.2ms)[0m  [1m[32mINSERT INTO "scores" ("session_id", "tutor_id", "score_type", "value", "components", "computed_at", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["session_id", nil], ["tutor_id", 219], ["score_type", "fsrs"], ["value", "20.0"], ["components", "{}"], ["computed_at", "2025-11-05 15:36:26.871728"], ["created_at", "2025-11-05 15:36:26.871822"], ["updated_at", "2025-11-05 15:36:26.871822"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTutor Load (0.1ms)[0m  [1m[34mSELECT "tutors".* FROM "tutors" ORDER BY "tutors"."id" ASC LIMIT $1[0m  [["LIMIT", 1000]]
+  [1m[36mScore Load (0.1ms)[0m  [1m[34mSELECT "scores".* FROM "scores" WHERE "scores"."tutor_id" = $1 AND "scores"."score_type" = $2 ORDER BY "scores"."computed_at" DESC LIMIT $3[0m  [["tutor_id", 219], ["score_type", "fsrs"], ["LIMIT", 1]]
+  [1m[36mScore Load (0.1ms)[0m  [1m[34mSELECT "scores".* FROM "scores" WHERE "scores"."tutor_id" = $1 AND "scores"."score_type" = $2 ORDER BY "scores"."computed_at" DESC LIMIT $3[0m  [["tutor_id", 219], ["score_type", "ths"], ["LIMIT", 1]]
+  [1m[36mScore Load (0.1ms)[0m  [1m[34mSELECT "scores".* FROM "scores" WHERE "scores"."tutor_id" = $1 AND "scores"."score_type" = $2 ORDER BY "scores"."computed_at" DESC LIMIT $3[0m  [["tutor_id", 219], ["score_type", "tcrs"], ["LIMIT", 1]]
+  [1m[36mAlert Load (0.1ms)[0m  [1m[34mSELECT "alerts".* FROM "alerts" WHERE "alerts"."tutor_id" = $1 AND "alerts"."alert_type" = $2 AND "alerts"."status" = $3 LIMIT $4[0m  [["tutor_id", 219], ["alert_type", "poor_first_session"], ["status", "open"], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mAlert Update (0.2ms)[0m  [1m[33mUPDATE "alerts" SET "status" = $1, "resolved_at" = $2, "metadata" = $3, "updated_at" = $4 WHERE "alerts"."id" = $5[0m  [["status", "resolved"], ["resolved_at", "2025-11-05 15:36:26.873159"], ["metadata", "{\"resolved_at\":\"2025-11-05T15:36:26.873Z\",\"auto_resolved\":true}"], ["updated_at", "2025-11-05 15:36:26.873252"], ["id", 79]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mAlert Load (0.1ms)[0m  [1m[34mSELECT "alerts".* FROM "alerts" WHERE "alerts"."tutor_id" = $1 AND "alerts"."alert_type" = $2 AND "alerts"."status" = $3 LIMIT $4[0m  [["tutor_id", 219], ["alert_type", "high_reliability_risk"], ["status", "open"], ["LIMIT", 1]]
+  [1m[36mAlert Load (0.0ms)[0m  [1m[34mSELECT "alerts".* FROM "alerts" WHERE "alerts"."tutor_id" = $1 AND "alerts"."alert_type" = $2 AND "alerts"."status" = $3 LIMIT $4[0m  [["tutor_id", 219], ["alert_type", "churn_risk"], ["status", "open"], ["LIMIT", 1]]
+  [1m[36mAlert Load (0.1ms)[0m  [1m[34mSELECT "alerts".* FROM "alerts" WHERE "alerts"."id" = $1 LIMIT $2[0m  [["id", 79], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTutor Create (0.2ms)[0m  [1m[32mINSERT INTO "tutors" ("name", "email", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", "Alice Smith"], ["email", "[FILTERED]"], ["created_at", "2025-11-05 15:36:26.875136"], ["updated_at", "2025-11-05 15:36:26.875136"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mAlert Create (0.2ms)[0m  [1m[32mINSERT INTO "alerts" ("tutor_id", "alert_type", "severity", "status", "triggered_at", "resolved_at", "metadata", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING "id"[0m  [["tutor_id", 220], ["alert_type", "high_reliability_risk"], ["severity", "high"], ["status", "open"], ["triggered_at", "2025-11-05 14:36:26.875556"], ["resolved_at", nil], ["metadata", "{}"], ["created_at", "2025-11-05 15:36:26.875684"], ["updated_at", "2025-11-05 15:36:26.875684"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mScore Create (0.2ms)[0m  [1m[32mINSERT INTO "scores" ("session_id", "tutor_id", "score_type", "value", "components", "computed_at", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["session_id", nil], ["tutor_id", 220], ["score_type", "ths"], ["value", "60.0"], ["components", "{}"], ["computed_at", "2025-11-05 15:36:26.876087"], ["created_at", "2025-11-05 15:36:26.876200"], ["updated_at", "2025-11-05 15:36:26.876200"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTutor Load (0.1ms)[0m  [1m[34mSELECT "tutors".* FROM "tutors" ORDER BY "tutors"."id" ASC LIMIT $1[0m  [["LIMIT", 1000]]
+  [1m[36mScore Load (0.1ms)[0m  [1m[34mSELECT "scores".* FROM "scores" WHERE "scores"."tutor_id" = $1 AND "scores"."score_type" = $2 ORDER BY "scores"."computed_at" DESC LIMIT $3[0m  [["tutor_id", 220], ["score_type", "fsrs"], ["LIMIT", 1]]
+  [1m[36mScore Load (0.1ms)[0m  [1m[34mSELECT "scores".* FROM "scores" WHERE "scores"."tutor_id" = $1 AND "scores"."score_type" = $2 ORDER BY "scores"."computed_at" DESC LIMIT $3[0m  [["tutor_id", 220], ["score_type", "ths"], ["LIMIT", 1]]
+  [1m[36mScore Load (0.1ms)[0m  [1m[34mSELECT "scores".* FROM "scores" WHERE "scores"."tutor_id" = $1 AND "scores"."score_type" = $2 ORDER BY "scores"."computed_at" DESC LIMIT $3[0m  [["tutor_id", 220], ["score_type", "tcrs"], ["LIMIT", 1]]
+  [1m[36mAlert Load (0.1ms)[0m  [1m[34mSELECT "alerts".* FROM "alerts" WHERE "alerts"."tutor_id" = $1 AND "alerts"."alert_type" = $2 AND "alerts"."status" = $3 LIMIT $4[0m  [["tutor_id", 220], ["alert_type", "poor_first_session"], ["status", "open"], ["LIMIT", 1]]
+  [1m[36mAlert Load (0.1ms)[0m  [1m[34mSELECT "alerts".* FROM "alerts" WHERE "alerts"."tutor_id" = $1 AND "alerts"."alert_type" = $2 AND "alerts"."status" = $3 LIMIT $4[0m  [["tutor_id", 220], ["alert_type", "high_reliability_risk"], ["status", "open"], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mAlert Update (0.3ms)[0m  [1m[33mUPDATE "alerts" SET "status" = $1, "resolved_at" = $2, "metadata" = $3, "updated_at" = $4 WHERE "alerts"."id" = $5[0m  [["status", "resolved"], ["resolved_at", "2025-11-05 15:36:26.877751"], ["metadata", "{\"resolved_at\":\"2025-11-05T15:36:26.877Z\",\"auto_resolved\":true}"], ["updated_at", "2025-11-05 15:36:26.877826"], ["id", 80]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mAlert Load (0.1ms)[0m  [1m[34mSELECT "alerts".* FROM "alerts" WHERE "alerts"."tutor_id" = $1 AND "alerts"."alert_type" = $2 AND "alerts"."status" = $3 LIMIT $4[0m  [["tutor_id", 220], ["alert_type", "churn_risk"], ["status", "open"], ["LIMIT", 1]]
+  [1m[36mAlert Load (0.1ms)[0m  [1m[34mSELECT "alerts".* FROM "alerts" WHERE "alerts"."id" = $1 LIMIT $2[0m  [["id", 80], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTutor Create (0.1ms)[0m  [1m[32mINSERT INTO "tutors" ("name", "email", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", "Alice Smith"], ["email", "[FILTERED]"], ["created_at", "2025-11-05 15:36:26.879246"], ["updated_at", "2025-11-05 15:36:26.879246"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mAlert Create (0.2ms)[0m  [1m[32mINSERT INTO "alerts" ("tutor_id", "alert_type", "severity", "status", "triggered_at", "resolved_at", "metadata", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING "id"[0m  [["tutor_id", 221], ["alert_type", "churn_risk"], ["severity", "high"], ["status", "open"], ["triggered_at", "2025-11-05 14:36:26.879582"], ["resolved_at", nil], ["metadata", "{}"], ["created_at", "2025-11-05 15:36:26.879668"], ["updated_at", "2025-11-05 15:36:26.879668"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mScore Create (0.2ms)[0m  [1m[32mINSERT INTO "scores" ("session_id", "tutor_id", "score_type", "value", "components", "computed_at", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["session_id", nil], ["tutor_id", 221], ["score_type", "tcrs"], ["value", "0.4"], ["components", "{}"], ["computed_at", "2025-11-05 15:36:26.880030"], ["created_at", "2025-11-05 15:36:26.880116"], ["updated_at", "2025-11-05 15:36:26.880116"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTutor Load (0.1ms)[0m  [1m[34mSELECT "tutors".* FROM "tutors" ORDER BY "tutors"."id" ASC LIMIT $1[0m  [["LIMIT", 1000]]
+  [1m[36mScore Load (0.1ms)[0m  [1m[34mSELECT "scores".* FROM "scores" WHERE "scores"."tutor_id" = $1 AND "scores"."score_type" = $2 ORDER BY "scores"."computed_at" DESC LIMIT $3[0m  [["tutor_id", 221], ["score_type", "fsrs"], ["LIMIT", 1]]
+  [1m[36mScore Load (0.1ms)[0m  [1m[34mSELECT "scores".* FROM "scores" WHERE "scores"."tutor_id" = $1 AND "scores"."score_type" = $2 ORDER BY "scores"."computed_at" DESC LIMIT $3[0m  [["tutor_id", 221], ["score_type", "ths"], ["LIMIT", 1]]
+  [1m[36mScore Load (0.1ms)[0m  [1m[34mSELECT "scores".* FROM "scores" WHERE "scores"."tutor_id" = $1 AND "scores"."score_type" = $2 ORDER BY "scores"."computed_at" DESC LIMIT $3[0m  [["tutor_id", 221], ["score_type", "tcrs"], ["LIMIT", 1]]
+  [1m[36mAlert Load (0.1ms)[0m  [1m[34mSELECT "alerts".* FROM "alerts" WHERE "alerts"."tutor_id" = $1 AND "alerts"."alert_type" = $2 AND "alerts"."status" = $3 LIMIT $4[0m  [["tutor_id", 221], ["alert_type", "poor_first_session"], ["status", "open"], ["LIMIT", 1]]
+  [1m[36mAlert Load (0.1ms)[0m  [1m[34mSELECT "alerts".* FROM "alerts" WHERE "alerts"."tutor_id" = $1 AND "alerts"."alert_type" = $2 AND "alerts"."status" = $3 LIMIT $4[0m  [["tutor_id", 221], ["alert_type", "high_reliability_risk"], ["status", "open"], ["LIMIT", 1]]
+  [1m[36mAlert Load (0.1ms)[0m  [1m[34mSELECT "alerts".* FROM "alerts" WHERE "alerts"."tutor_id" = $1 AND "alerts"."alert_type" = $2 AND "alerts"."status" = $3 LIMIT $4[0m  [["tutor_id", 221], ["alert_type", "churn_risk"], ["status", "open"], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mAlert Update (0.2ms)[0m  [1m[33mUPDATE "alerts" SET "status" = $1, "resolved_at" = $2, "metadata" = $3, "updated_at" = $4 WHERE "alerts"."id" = $5[0m  [["status", "resolved"], ["resolved_at", "2025-11-05 15:36:26.881629"], ["metadata", "{\"resolved_at\":\"2025-11-05T15:36:26.881Z\",\"auto_resolved\":true}"], ["updated_at", "2025-11-05 15:36:26.881715"], ["id", 81]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mAlert Load (0.1ms)[0m  [1m[34mSELECT "alerts".* FROM "alerts" WHERE "alerts"."id" = $1 LIMIT $2[0m  [["id", 81], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTutor Create (0.2ms)[0m  [1m[32mINSERT INTO "tutors" ("name", "email", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", "Alice Smith"], ["email", "[FILTERED]"], ["created_at", "2025-11-05 15:36:26.883122"], ["updated_at", "2025-11-05 15:36:26.883122"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mScore Create (0.3ms)[0m  [1m[32mINSERT INTO "scores" ("session_id", "tutor_id", "score_type", "value", "components", "computed_at", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["session_id", nil], ["tutor_id", 222], ["score_type", "fsrs"], ["value", "20.0"], ["components", "{}"], ["computed_at", "2025-11-05 15:36:26.883551"], ["created_at", "2025-11-05 15:36:26.883663"], ["updated_at", "2025-11-05 15:36:26.883663"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mScore Create (0.2ms)[0m  [1m[32mINSERT INTO "scores" ("session_id", "tutor_id", "score_type", "value", "components", "computed_at", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["session_id", nil], ["tutor_id", 222], ["score_type", "ths"], ["value", "80.0"], ["components", "{}"], ["computed_at", "2025-11-05 15:36:26.884219"], ["created_at", "2025-11-05 15:36:26.884310"], ["updated_at", "2025-11-05 15:36:26.884310"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mScore Create (0.2ms)[0m  [1m[32mINSERT INTO "scores" ("session_id", "tutor_id", "score_type", "value", "components", "computed_at", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["session_id", nil], ["tutor_id", 222], ["score_type", "tcrs"], ["value", "0.2"], ["components", "{}"], ["computed_at", "2025-11-05 15:36:26.884698"], ["created_at", "2025-11-05 15:36:26.884770"], ["updated_at", "2025-11-05 15:36:26.884770"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mAlert Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "alerts"[0m
+  [1m[36mTutor Load (0.1ms)[0m  [1m[34mSELECT "tutors".* FROM "tutors" ORDER BY "tutors"."id" ASC LIMIT $1[0m  [["LIMIT", 1000]]
+  [1m[36mScore Load (0.1ms)[0m  [1m[34mSELECT "scores".* FROM "scores" WHERE "scores"."tutor_id" = $1 AND "scores"."score_type" = $2 ORDER BY "scores"."computed_at" DESC LIMIT $3[0m  [["tutor_id", 222], ["score_type", "fsrs"], ["LIMIT", 1]]
+  [1m[36mScore Load (0.1ms)[0m  [1m[34mSELECT "scores".* FROM "scores" WHERE "scores"."tutor_id" = $1 AND "scores"."score_type" = $2 ORDER BY "scores"."computed_at" DESC LIMIT $3[0m  [["tutor_id", 222], ["score_type", "ths"], ["LIMIT", 1]]
+  [1m[36mScore Load (0.1ms)[0m  [1m[34mSELECT "scores".* FROM "scores" WHERE "scores"."tutor_id" = $1 AND "scores"."score_type" = $2 ORDER BY "scores"."computed_at" DESC LIMIT $3[0m  [["tutor_id", 222], ["score_type", "tcrs"], ["LIMIT", 1]]
+  [1m[36mAlert Load (0.1ms)[0m  [1m[34mSELECT "alerts".* FROM "alerts" WHERE "alerts"."tutor_id" = $1 AND "alerts"."alert_type" = $2 AND "alerts"."status" = $3 LIMIT $4[0m  [["tutor_id", 222], ["alert_type", "poor_first_session"], ["status", "open"], ["LIMIT", 1]]
+  [1m[36mAlert Load (0.0ms)[0m  [1m[34mSELECT "alerts".* FROM "alerts" WHERE "alerts"."tutor_id" = $1 AND "alerts"."alert_type" = $2 AND "alerts"."status" = $3 LIMIT $4[0m  [["tutor_id", 222], ["alert_type", "high_reliability_risk"], ["status", "open"], ["LIMIT", 1]]
+  [1m[36mAlert Load (0.1ms)[0m  [1m[34mSELECT "alerts".* FROM "alerts" WHERE "alerts"."tutor_id" = $1 AND "alerts"."alert_type" = $2 AND "alerts"."status" = $3 LIMIT $4[0m  [["tutor_id", 222], ["alert_type", "churn_risk"], ["status", "open"], ["LIMIT", 1]]
+  [1m[36mAlert Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "alerts"[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mROLLBACK[0m

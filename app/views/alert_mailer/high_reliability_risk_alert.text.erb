@@ -1,0 +1,29 @@
+⚠️ HIGH RELIABILITY RISK ALERT
+
+Tutor: <%= @tutor.name %> (<%= @tutor.email %>)
+Alert Triggered: <%= @alert.triggered_at.strftime('%B %d, %Y at %I:%M %p') %>
+
+==========================================
+
+TUTOR HEALTH SCORE (THS) - 7 Day Average: <%= @ths_score %> / 100
+(Lower score = More risk)
+
+Why this matters:
+This tutor's reliability metrics over the past 7 days have dropped below acceptable thresholds. This includes patterns like lateness, session duration shortfalls, or technical issues.
+
+==========================================
+
+RECOMMENDED ACTIONS:
+  • Review recent session patterns (timing, duration, tech issues)
+  • Check in with <%= @tutor.name %> about any personal/technical challenges
+  • Provide resources or support to address reliability issues
+  • Set clear expectations for session quality standards
+  • Monitor for improvement over the next 7 days
+
+==========================================
+
+View full details in the Admin Dashboard:
+<%= @admin_dashboard_url %>
+
+This is an automated alert from the Tutor Quality Scoring System.
+

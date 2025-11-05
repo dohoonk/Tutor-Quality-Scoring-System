@@ -54,7 +54,7 @@ class AlertService
       )
     else
       # Create new alert
-      Alert.create!(
+      alert = Alert.create!(
         tutor: tutor,
         alert_type: alert_type,
         severity: severity,
@@ -66,7 +66,29 @@ class AlertService
           score_components: score.components
         }
       )
+      
+      # Send email notification for new alert
+      send_alert_email(alert)
     end
+  end
+  
+  def send_alert_email(alert)
+    # Get admin email from ENV or use default
+    admin_email = ENV.fetch('ADMIN_EMAIL', 'admin@example.com')
+    
+    # Send appropriate email based on alert type
+    case alert.alert_type
+    when 'poor_first_session'
+      AlertMailer.poor_first_session_alert(alert, admin_email).deliver_later
+    when 'high_reliability_risk'
+      AlertMailer.high_reliability_risk_alert(alert, admin_email).deliver_later
+    when 'churn_risk'
+      AlertMailer.churn_risk_alert(alert, admin_email).deliver_later
+    end
+  rescue StandardError => e
+    # Log error but don't fail the alert creation
+    Rails.logger.error "Failed to send alert email: #{e.message}"
+    Rails.logger.error e.backtrace.join("\n")
   end
 
   def resolve_alert_if_exists(tutor, alert_type)
