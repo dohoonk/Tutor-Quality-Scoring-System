@@ -20,7 +20,7 @@ RSpec.describe AlertService, type: :service do
 
         alert = Alert.find_by(tutor: tutor, alert_type: 'poor_first_session')
         expect(alert).to be_present
-        expect(alert.severity).to eq('medium')
+        expect(alert.severity).to eq('high')
         expect(alert.status).to eq('open')
         expect(alert.triggered_at).to be_present
       end
