@@ -5,6 +5,9 @@ import react from '@vitejs/plugin-react-swc'
 export default defineConfig({
   plugins: [
     RubyPlugin(),
-    react(),
+    react({
+      // Disable Fast Refresh to avoid preamble detection issues
+      plugins: [],
+    }),
   ],
 })
