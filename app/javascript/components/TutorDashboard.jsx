@@ -468,7 +468,20 @@ const TutorDashboard = ({ tutorId }) => {
         <section className="mb-6 md:mb-8 animate-slide-in-up" style={{ animationDelay: '0.1s' }}>
           <h2 className="text-xl md:text-2xl font-semibold mb-4">Performance Summary</h2>
           <div className="bg-white rounded-lg shadow-md p-4 md:p-6 hover-lift">
-            <p className="text-gray-700 mb-4 leading-relaxed">{performanceSummary.summary}</p>
+            {/* Performance Summary Banner */}
+            <div className="bg-gradient-to-r from-blue-50 to-indigo-50 border-l-4 border-blue-500 rounded-lg p-4 md:p-5 mb-4">
+              <div className="flex items-start gap-3">
+                <div className="flex-shrink-0 mt-0.5">
+                  <svg className="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                  </svg>
+                </div>
+                <div className="flex-1">
+                  <h3 className="text-base md:text-lg font-semibold text-blue-900 mb-1">Performance Update</h3>
+                  <p className="text-sm md:text-base text-gray-700 leading-relaxed">{performanceSummary.summary}</p>
+                </div>
+              </div>
+            </div>
             
             {/* SQS Trend Visualization */}
             {sessionList.length > 0 && (() => {
