@@ -21,6 +21,22 @@ Rails.application.routes.draw do
       get ":id/performance_summary", to: "tutors#performance_summary"
       get ":id/session_list", to: "tutors#session_list"
     end
+
+    namespace :admin do
+      namespace :tutors do
+        get "risk_list", to: "tutors#risk_list"
+      end
+      
+      namespace :tutor do
+        get ":id/metrics", to: "tutors#metrics"
+        get ":id/fsrs_history", to: "tutors#fsrs_history"
+        get ":id/intervention_log", to: "tutors#intervention_log"
+      end
+
+      namespace :alerts do
+        post ":id/update_status", to: "alerts#update_status"
+      end
+    end
   end
 
   # Sidekiq dashboard (require authentication in production)
