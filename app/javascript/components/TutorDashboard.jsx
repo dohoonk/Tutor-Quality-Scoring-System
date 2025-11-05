@@ -30,8 +30,8 @@ const Tooltip = ({ text, children }) => {
 }
 
 const TutorDashboard = ({ tutorId }) => {
-  const [fsrsLatest, setFsrsLatest] = useState(null)
-  const [fsrsHistory, setFsrsHistory] = useState([])
+  const [fsqsLatest, setFsqsLatest] = useState(null)
+  const [fsqsHistory, setFsqsHistory] = useState([])
   const [performanceSummary, setPerformanceSummary] = useState(null)
   const [sessionList, setSessionList] = useState([])
   const [loading, setLoading] = useState(true)
@@ -44,21 +44,21 @@ const TutorDashboard = ({ tutorId }) => {
       setLoading(true)
       try {
         // Fetch all data in parallel
-        const [fsrsLatestRes, fsrsHistoryRes, performanceSummaryRes, sessionListRes] = await Promise.all([
-          fetch(`/api/tutor/${tutorId}/fsrs_latest`).catch(() => null),
-          fetch(`/api/tutor/${tutorId}/fsrs_history`).catch(() => null),
+        const [fsqsLatestRes, fsqsHistoryRes, performanceSummaryRes, sessionListRes] = await Promise.all([
+          fetch(`/api/tutor/${tutorId}/fsqs_latest`).catch(() => null),
+          fetch(`/api/tutor/${tutorId}/fsqs_history`).catch(() => null),
           fetch(`/api/tutor/${tutorId}/performance_summary`).catch(() => null),
           fetch(`/api/tutor/${tutorId}/session_list`).catch(() => null)
         ])
 
-        if (fsrsLatestRes?.ok) {
-          const data = await fsrsLatestRes.json()
-          setFsrsLatest(data)
+        if (fsqsLatestRes?.ok) {
+          const data = await fsqsLatestRes.json()
+          setFsqsLatest(data)
         }
 
-        if (fsrsHistoryRes?.ok) {
-          const data = await fsrsHistoryRes.json()
-          setFsrsHistory(data)
+        if (fsqsHistoryRes?.ok) {
+          const data = await fsqsHistoryRes.json()
+          setFsqsHistory(data)
         }
 
         if (performanceSummaryRes?.ok) {
@@ -81,9 +81,10 @@ const TutorDashboard = ({ tutorId }) => {
   }, [tutorId])
 
   const getScoreLabel = (score, scoreType) => {
-    if (scoreType === 'fsrs') {
-      if (score >= 50) return { label: 'Risk', color: 'red' }
-      if (score >= 30) return { label: 'Warning', color: 'yellow' }
+    if (scoreType === 'fsqs') {
+      // FSQS: Higher is better (0-100 scale)
+      if (score <= 50) return { label: 'Low Quality', color: 'red' }
+      if (score <= 70) return { label: 'Fair', color: 'yellow' }
       return { label: 'Good', color: 'green' }
     } else if (scoreType === 'sqs') {
       if (score < 60) return { label: 'Risk', color: 'red' }
@@ -124,65 +125,65 @@ const TutorDashboard = ({ tutorId }) => {
     )
   }
 
-  const avgFsrs = calculateAverage(fsrsHistory)
-  const improvement = calculateImprovement(fsrsHistory)
-  const fsrsLabel = fsrsLatest ? getScoreLabel(fsrsLatest.score, 'fsrs') : null
+  const avgFsqs = calculateAverage(fsqsHistory)
+  const improvement = calculateImprovement(fsqsHistory)
+  const fsqsLabel = fsqsLatest ? getScoreLabel(fsqsLatest.score, 'fsqs') : null
 
   return (
     <div className="p-6 max-w-7xl mx-auto">
       <h1 className="text-3xl font-bold mb-6">Tutor Dashboard</h1>
 
-      {/* FSRS Feedback Section */}
-      {fsrsLatest && (
+      {/* FSQS Feedback Section */}
+      {fsqsLatest && (
         <div className="mb-8">
           <h2 className="text-2xl font-semibold mb-4">First Session Quality Feedback</h2>
           
           <div className="bg-white rounded-lg shadow-md p-6 mb-4">
             <div className="grid grid-cols-2 gap-4 mb-6">
-              {/* FSRS Indicator */}
+              {/* FSQS Indicator */}
               <div className="border-r pr-4">
                 <div className="text-sm text-gray-600 mb-1">
-                  FSRS Score
-                  <Tooltip text="First Session Risk Score measures the quality of your initial sessions with new students. A lower score (0-29) indicates strong rapport-building, clear goal-setting, and encouraging communication. Scores of 30+ suggest areas to improve such as reducing confusion, using positive language, or providing better session structure." />
+                  FSQS Score
+                  <Tooltip text="First Session Quality Score measures the quality of your initial sessions with new students. A higher score (70-100) indicates strong rapport-building, clear goal-setting, and encouraging communication. Scores below 50 suggest areas to improve such as reducing confusion, using positive language, or providing better session structure." />
                 </div>
                 <div className="flex items-center gap-2">
-                  <span className="text-3xl font-bold">{fsrsLatest.score}</span>
+                  <span className="text-3xl font-bold">{fsqsLatest.score}</span>
                   <span className={`px-3 py-1 rounded-full text-sm font-medium ${
-                    fsrsLabel?.color === 'red' ? 'bg-red-100 text-red-800' :
-                    fsrsLabel?.color === 'yellow' ? 'bg-yellow-100 text-yellow-800' :
+                    fsqsLabel?.color === 'red' ? 'bg-red-100 text-red-800' :
+                    fsqsLabel?.color === 'yellow' ? 'bg-yellow-100 text-yellow-800' :
                     'bg-green-100 text-green-800'
                   }`}>
-                    {fsrsLabel?.label}
+                    {fsqsLabel?.label}
                   </span>
                 </div>
               </div>
 
-              {/* FSRS Trend Summary */}
+              {/* FSQS Trend Summary */}
               <div>
                 <div className="text-sm text-gray-600 mb-1">
-                  Average FSRS (Last 5)
-                  <Tooltip text="This shows your average First Session Risk Score across your last 5 first sessions with new students. The trend indicator (↑ or ↓) compares your recent performance to earlier sessions. A downward trend (↓) is positive and means your first sessions are improving over time, while an upward trend (↑) suggests increased risk patterns." />
+                  Average FSQS (Last 5)
+                  <Tooltip text="This shows your average First Session Quality Score across your last 5 first sessions with new students. The trend indicator (↑ or ↓) compares your recent performance to earlier sessions. An upward trend (↑) is positive and means your first sessions are improving over time, while a downward trend (↓) suggests declining quality." />
                 </div>
                 <div className="flex items-center gap-3">
-                  <span className="text-3xl font-bold">{avgFsrs}</span>
+                  <span className="text-3xl font-bold">{avgFsqs}</span>
                   
                   {/* Sparkline */}
-                  {fsrsHistory.length > 0 && (
+                  {fsqsHistory.length > 0 && (
                     <svg width="80" height="30" className="flex-shrink-0">
                       <polyline
                         fill="none"
-                        stroke={improvement > 0 ? '#DC2626' : '#10B981'}
+                        stroke={improvement > 0 ? '#10B981' : '#DC2626'}
                         strokeWidth="2"
-                        points={fsrsHistory.slice(0, 5).reverse().map((item, index) => {
+                        points={fsqsHistory.slice(0, 5).reverse().map((item, index) => {
                           const x = (index / 4) * 80
-                          const maxScore = Math.max(...fsrsHistory.slice(0, 5).map(h => h.score || 0), 50)
+                          const maxScore = Math.max(...fsqsHistory.slice(0, 5).map(h => h.score || 0), 100)
                           const y = 30 - ((item.score || 0) / maxScore) * 25
                           return `${x},${y}`
                         }).join(' ')}
                       />
-                      {fsrsHistory.slice(0, 5).reverse().map((item, index) => {
+                      {fsqsHistory.slice(0, 5).reverse().map((item, index) => {
                         const x = (index / 4) * 80
-                        const maxScore = Math.max(...fsrsHistory.slice(0, 5).map(h => h.score || 0), 50)
+                        const maxScore = Math.max(...fsqsHistory.slice(0, 5).map(h => h.score || 0), 100)
                         const y = 30 - ((item.score || 0) / maxScore) * 25
                         return (
                           <circle
@@ -190,7 +191,7 @@ const TutorDashboard = ({ tutorId }) => {
                             cx={x}
                             cy={y}
                             r="2"
-                            fill={improvement > 0 ? '#DC2626' : '#10B981'}
+                            fill={improvement > 0 ? '#10B981' : '#DC2626'}
                           />
                         )
                       })}
@@ -199,7 +200,7 @@ const TutorDashboard = ({ tutorId }) => {
                   
                   {improvement && (
                     <span className={`text-sm font-medium ${
-                      improvement > 0 ? 'text-red-600' : 'text-green-600'
+                      improvement > 0 ? 'text-green-600' : 'text-red-600'
                     }`}>
                       {improvement > 0 ? '↑' : '↓'} {Math.abs(improvement)}%
                     </span>
@@ -209,27 +210,27 @@ const TutorDashboard = ({ tutorId }) => {
             </div>
 
             {/* What Went Well */}
-            {fsrsLatest.feedback?.what_went_well && (
+            {fsqsLatest.feedback?.what_went_well && (
               <div className="mb-4">
                 <h3 className="text-lg font-semibold text-green-700 mb-2">✓ What Went Well</h3>
-                <p className="text-gray-700">{fsrsLatest.feedback.what_went_well}</p>
+                <p className="text-gray-700">{fsqsLatest.feedback.what_went_well}</p>
               </div>
             )}
 
             {/* One Improvement Idea */}
-            {fsrsLatest.feedback?.improvement_idea && (
+            {fsqsLatest.feedback?.improvement_idea && (
               <div>
                 <h3 className="text-lg font-semibold text-blue-700 mb-2">💡 One Improvement Idea</h3>
-                <p className="text-gray-700">{fsrsLatest.feedback.improvement_idea}</p>
+                <p className="text-gray-700">{fsqsLatest.feedback.improvement_idea}</p>
               </div>
             )}
           </div>
 
-          {/* FSRS Trend Sparkline */}
-          {fsrsHistory.length > 0 && (
+          {/* FSQS Trend Sparkline */}
+          {fsqsHistory.length > 0 && (
             <div className="bg-white rounded-lg shadow-md p-6 mb-4">
               <div className="flex justify-between items-center mb-4">
-                <h3 className="text-lg font-semibold">FSRS Trend</h3>
+                <h3 className="text-lg font-semibold">FSQS Trend</h3>
                 <button
                   onClick={() => setShowPastSessions(!showPastSessions)}
                   className="text-blue-600 hover:text-blue-800 text-sm font-medium"
@@ -240,10 +241,10 @@ const TutorDashboard = ({ tutorId }) => {
               
               {/* Simple Sparkline (using bars) */}
               <div className="flex items-end gap-2 h-24 mb-4">
-                {fsrsHistory.map((item, index) => {
-                  const maxScore = Math.max(...fsrsHistory.map(h => h.score || 0), 50)
+                {fsqsHistory.map((item, index) => {
+                  const maxScore = Math.max(...fsqsHistory.map(h => h.score || 0), 100)
                   const height = ((item.score || 0) / maxScore) * 100
-                  const color = item.score >= 50 ? 'bg-red-500' : item.score >= 30 ? 'bg-yellow-500' : 'bg-green-500'
+                  const color = item.score <= 50 ? 'bg-red-500' : item.score <= 70 ? 'bg-yellow-500' : 'bg-green-500'
                   return (
                     <div key={index} className="flex-1 flex flex-col items-center">
                       <div
@@ -257,9 +258,9 @@ const TutorDashboard = ({ tutorId }) => {
               </div>
 
               <div className="text-sm text-gray-600">
-                Average: {avgFsrs} | {improvement && (
-                  <span className={improvement > 0 ? 'text-red-600' : 'text-green-600'}>
-                    {improvement > 0 ? 'Worsening' : 'Improving'} by {Math.abs(improvement)}% vs previous period
+                Average: {avgFsqs} | {improvement && (
+                  <span className={improvement > 0 ? 'text-green-600' : 'text-red-600'}>
+                    {improvement > 0 ? 'Improving' : 'Declining'} by {Math.abs(improvement)}% vs previous period
                   </span>
                 )}
               </div>
@@ -280,13 +281,13 @@ const TutorDashboard = ({ tutorId }) => {
                   </button>
                 </div>
                 <div className="space-y-4">
-                  {fsrsHistory.map((item, index) => (
+                  {fsqsHistory.map((item, index) => (
                     <div key={index} className="border rounded-lg p-4">
                       <div className="flex justify-between items-center mb-2">
                         <span className="font-medium">{item.student_name || 'Unknown Student'}</span>
                         <span className={`px-2 py-1 rounded text-sm ${
-                          item.score >= 50 ? 'bg-red-100 text-red-800' :
-                          item.score >= 30 ? 'bg-yellow-100 text-yellow-800' :
+                          item.score <= 50 ? 'bg-red-100 text-red-800' :
+                          item.score <= 70 ? 'bg-yellow-100 text-yellow-800' :
                           'bg-green-100 text-green-800'
                         }`}>
                           {item.score}
@@ -370,7 +371,7 @@ const TutorDashboard = ({ tutorId }) => {
                   SQS
                 </th>
                 <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                  FSRS Tag
+                  FSQS Tag
                 </th>
                 <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                   Notes
@@ -409,13 +410,13 @@ const TutorDashboard = ({ tutorId }) => {
                         )}
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap text-sm">
-                        {session.first_session && session.fsrs ? (
+                        {session.first_session && session.fsqs ? (
                           <span className={`px-2 py-1 rounded text-sm ${
-                            session.fsrs >= 50 ? 'bg-red-100 text-red-800' :
-                            session.fsrs >= 30 ? 'bg-yellow-100 text-yellow-800' :
+                            session.fsqs <= 50 ? 'bg-red-100 text-red-800' :
+                            session.fsqs <= 70 ? 'bg-yellow-100 text-yellow-800' :
                             'bg-green-100 text-green-800'
                           }`}>
-                            FSRS: {session.fsrs}
+                            FSQS: {session.fsqs}
                           </span>
                         ) : (
                           <span className="text-gray-400">—</span>

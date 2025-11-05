@@ -83,12 +83,13 @@ const AdminDashboard = ({ adminId }) => {
     return sortDirection === 'asc' ? aVal - bVal : bVal - aVal
   })
 
-  const getRiskBadge = (fsrs, ths, tcrs) => {
+  const getRiskBadge = (fsqs, ths, tcrs) => {
     const badges = []
     
-    if (fsrs !== null && fsrs >= 50) {
-      badges.push({ label: 'First Session Risk', color: 'red' })
-    } else if (fsrs !== null && fsrs >= 30) {
+    // FSQS: Higher is better (0-100 scale)
+    if (fsqs !== null && fsqs <= 50) {
+      badges.push({ label: 'Low First Session Quality', color: 'red' })
+    } else if (fsqs !== null && fsqs <= 70) {
       badges.push({ label: 'First Session Warning', color: 'yellow' })
     }
     
@@ -153,11 +154,11 @@ const AdminDashboard = ({ adminId }) => {
                 </th>
                 <th 
                   className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider cursor-pointer hover:bg-gray-100"
-                  onClick={() => handleSort('fsrs')}
+                  onClick={() => handleSort('fsqs')}
                 >
                   <div className="flex items-center">
-                    FSRS
-                    <SortIcon column="fsrs" />
+                    FSQS
+                    <SortIcon column="fsqs" />
                   </div>
                 </th>
                 <th 
@@ -195,7 +196,7 @@ const AdminDashboard = ({ adminId }) => {
                 </tr>
               ) : (
                 sortedTutorList.map((tutor) => {
-                  const badges = getRiskBadge(tutor.fsrs, tutor.ths, tutor.tcrs)
+                  const badges = getRiskBadge(tutor.fsqs, tutor.ths, tutor.tcrs)
                   return (
                     <tr key={tutor.id} className={selectedTutor === tutor.id ? 'bg-blue-50' : ''}>
                       <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
@@ -218,7 +219,7 @@ const AdminDashboard = ({ adminId }) => {
                         </div>
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
-                        {tutor.fsrs !== null ? tutor.fsrs.toFixed(1) : 'N/A'}
+                        {tutor.fsqs !== null ? tutor.fsqs.toFixed(1) : 'N/A'}
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
                         {tutor.ths !== null ? tutor.ths.toFixed(1) : 'N/A'}
@@ -268,19 +269,19 @@ const AdminDashboard = ({ adminId }) => {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
-            {/* FSRS Card */}
+            {/* FSQS Card */}
             <div className="bg-white rounded-lg shadow-md p-6">
-              <h3 className="text-lg font-semibold mb-2">First Session Risk Score</h3>
+              <h3 className="text-lg font-semibold mb-2">First Session Quality Score</h3>
               <div className="text-3xl font-bold mb-2">
-                {tutorMetrics.fsrs !== null ? tutorMetrics.fsrs.toFixed(1) : 'N/A'}
+                {tutorMetrics.fsqs !== null ? tutorMetrics.fsqs.toFixed(1) : 'N/A'}
               </div>
               <div className={`text-sm ${
-                tutorMetrics.fsrs >= 50 ? 'text-red-600' :
-                tutorMetrics.fsrs >= 30 ? 'text-yellow-600' :
+                tutorMetrics.fsqs <= 50 ? 'text-red-600' :
+                tutorMetrics.fsqs <= 70 ? 'text-yellow-600' :
                 'text-green-600'
               }`}>
-                {tutorMetrics.fsrs >= 50 ? '⚠️ High Risk' :
-                 tutorMetrics.fsrs >= 30 ? '⚠️ Warning' :
+                {tutorMetrics.fsqs <= 50 ? '⚠️ Low Quality' :
+                 tutorMetrics.fsqs <= 70 ? '⚠️ Fair' :
                  '✓ Good'}
               </div>
             </div>
