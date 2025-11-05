@@ -6,7 +6,8 @@ import {
   EmptyFSQSState, 
   ErrorState,
   AccessibleButton,
-  MobileTable
+  MobileTable,
+  LineChart
 } from './ui'
 
 // Tooltip Component with improved accessibility
@@ -270,23 +271,28 @@ const TutorDashboard = ({ tutorId }) => {
                 </AccessibleButton>
               </div>
               
-              {/* Bar Chart */}
-              <div className="flex items-end gap-1 md:gap-2 h-24 mb-4">
-                {fsqsHistory.map((item, index) => {
-                  const maxScore = Math.max(...fsqsHistory.map(h => h.score || 0), 100)
-                  const height = ((item.score || 0) / maxScore) * 100
-                  const color = item.score <= 50 ? 'bg-red-500' : item.score <= 70 ? 'bg-yellow-500' : 'bg-green-500'
-                  return (
-                    <div key={index} className="flex-1 flex flex-col items-center group">
-                      <div
-                        className={`w-full ${color} rounded-t transition-all hover:opacity-80`}
-                        style={{ height: `${height}%` }}
-                        title={`Score: ${item.score}`}
-                        aria-label={`Session ${index + 1}: Score ${item.score}`}
-                      />
-                    </div>
-                  )
-                })}
+              {/* Line Chart */}
+              <div className="mb-4">
+                <LineChart
+                  data={fsqsHistory.map((item, index) => ({
+                    value: item.score || 0,
+                    label: item.student_name || `Session ${index + 1}`,
+                    date: item.date ? formatDate(item.date) : null
+                  }))}
+                  height={200}
+                  showGrid={true}
+                  showThresholds={true}
+                  thresholds={[
+                    { value: 50, color: 'red' },
+                    { value: 70, color: 'yellow' }
+                  ]}
+                  color={improvement && improvement > 0 ? '#10B981' : '#DC2626'}
+                  showPoints={true}
+                  showTooltip={true}
+                  formatValue={(v) => Math.round(v)}
+                  maxValue={100}
+                  minValue={0}
+                />
               </div>
 
               <div className="text-sm text-gray-600">

@@ -12,3 +12,6 @@ export { default as MobileSearchableTable } from './MobileSearchableTable'
 export { default as MobileMetricCard, MobileMetricGrid } from './MobileMetricCard'
 export { default as MobileNav } from './MobileNav'
 
+// Chart Components
+export { default as LineChart } from './LineChart'
+
