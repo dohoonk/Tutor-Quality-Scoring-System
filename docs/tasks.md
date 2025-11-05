@@ -167,41 +167,36 @@
 ---
 
 ## EPIC 7 — Reliability & Churn Jobs (TDD Approach)
-### Daily Aggregation Job
-- [ ] Write TutorDailyAggregationJob tests (TDD: write test → see fail → build job → see pass)
-- [ ] Create TutorDailyAggregationJob
-- [ ] Compute tutor_daily_aggregates for completed sessions
-- [ ] Calculate: sessions_completed, reschedules_tutor_initiated, no_shows, avg_lateness_min
-- [ ] Schedule: every 10 minutes
-- [ ] Refresh tutor_stats_7d materialized view after aggregation
 
-### THS (Tutor Health Score) Job
-- [ ] Write TutorHealthScoreJob tests (TDD: write test → see fail → build job → see pass)
-- [ ] Create TutorHealthScoreJob
-- [ ] Compute from tutor_stats_7d:
-  - [ ] Tutor-initiated reschedule rate (7d)
-  - [ ] No-show count (7d)
-  - [ ] Behavioral lateness trend (only repeated patterns)
-  - [ ] Quality recovery signals from recent sessions
-- [ ] Calculate THS score (0-100)
-- [ ] Apply label thresholds (<55 = high risk, 55-75 = monitor, >75 = stable)
-- [ ] Write to scores table
-- [ ] Schedule: every 10 minutes (after aggregation)
+### ✅ COMPLETED FOR MVP:
 
-### TCRS (Tutor Churn Risk Score) Job
-- [ ] Write TutorChurnRiskScoreJob tests (TDD: write test → see fail → build job → see pass)
-- [ ] Create TutorChurnRiskScoreJob
-- [ ] Compute from tutor_stats_14d:
-  - [ ] Availability drop vs previous 14d period
-  - [ ] Completed sessions drop significantly
-  - [ ] Tutor-initiated reschedules rise
-  - [ ] Any no-shows in 14d window
-  - [ ] Repeat student rate (14d)
-- [ ] Calculate TCRS score (0-1 scale)
-- [ ] Apply thresholds (≥0.6 = Support Check-In, 0.3-0.59 = Monitor, <0.3 = Stable)
-- [ ] Optionally cache in tutor_churn_scores table
-- [ ] Refresh tutor_stats_14d materialized view
-- [ ] Schedule: every 10 minutes (after aggregation)
+### Daily Aggregation Job (POST-MVP - Deferred)
+- [ ] Write TutorDailyAggregationJob tests (POST-MVP)
+- [ ] Create TutorDailyAggregationJob (POST-MVP)
+- [ ] Compute tutor_daily_aggregates for completed sessions (POST-MVP)
+- [ ] Calculate: sessions_completed, reschedules_tutor_initiated, no_shows, avg_lateness_min (POST-MVP)
+- [ ] Schedule: every 10 minutes (POST-MVP)
+- [ ] Refresh tutor_stats_7d materialized view after aggregation (POST-MVP)
+- **Note:** Deferred pending materialized views implementation
+
+### THS (Tutor Health Score) Job (POST-MVP - Deferred)
+- [ ] Write TutorHealthScoreJob tests (POST-MVP)
+- [ ] Create TutorHealthScoreJob (POST-MVP)
+- [ ] Compute from tutor_stats_7d (POST-MVP)
+- [ ] Calculate THS score (0-100) (POST-MVP)
+- [ ] Apply label thresholds (<55 = high risk, 55-75 = monitor, >75 = stable) (POST-MVP)
+- [ ] Write to scores table (POST-MVP)
+- [ ] Schedule: every 10 minutes (POST-MVP)
+- **Note:** Deferred pending tutor_stats_7d materialized view
+
+### TCRS (Tutor Churn Risk Score) Job (POST-MVP - Deferred)
+- [ ] Write TutorChurnRiskScoreJob tests (POST-MVP)
+- [ ] Create TutorChurnRiskScoreJob (POST-MVP)
+- [ ] Compute from tutor_stats_14d (POST-MVP)
+- [ ] Calculate TCRS score (0-1 scale) (POST-MVP)
+- [ ] Apply thresholds (≥0.6 = Support Check-In, 0.3-0.59 = Monitor, <0.3 = Stable) (POST-MVP)
+- [ ] Schedule: every 10 minutes (POST-MVP)
+- **Note:** Deferred pending tutor_stats_14d materialized view
 
 ### Scoring Job
 - [x] Write SessionScoringJob tests (TDD: write test → see fail → build job → see pass)
@@ -210,7 +205,17 @@
 - [x] Compute SQS for all completed sessions
 - [x] Compute FSRS for first_session_for_student = true (if transcript available)
 - [x] Write scores to scores table
-- [ ] Schedule: every 5 minutes (will do in Job Scheduling Configuration)
+- [x] Schedule: every 5 minutes
+
+### Alert Job
+- [x] Write AlertJob tests (TDD: write test → see fail → build job → see pass)
+- [x] Create AlertJob (uses AlertService)
+- [x] Evaluate FSRS thresholds (≥50 = poor first session alert)
+- [x] Evaluate THS thresholds (<55 = high reliability risk alert)
+- [x] Evaluate TCRS thresholds (≥0.6 = churn risk alert)
+- [x] Prevent duplicate alerts (keeps existing alerts open)
+- [x] Auto-resolve alerts when conditions improve
+- [x] Schedule: every 10 minutes
 
 ### Job Scheduling Configuration
 - [x] Configure sidekiq-scheduler
