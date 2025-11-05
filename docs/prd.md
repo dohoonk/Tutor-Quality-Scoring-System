@@ -89,6 +89,11 @@ Stores all computed scores with breakdown components.
 Tracks open risk cases and interventions.
 - Fields: tutor_id, alert_type, severity, status, triggered_at, resolved_at, metadata (jsonb)
 - Types: poor_first_session, high_reliability_risk, churn_risk
+- **Alert Behavior:**
+  - Alerts are evaluated every 10 minutes via AlertJob
+  - **No duplicate alerts:** If an alert already exists for a condition and the condition persists, the existing alert remains open (no new alert is created)
+  - **Auto-resolve:** Alerts are automatically resolved when conditions improve (e.g., FSRS drops below 50, THS rises above 55, TCRS drops below 0.6)
+  - Only one open alert per alert_type per tutor at any given time
 
 ---
 
@@ -210,7 +215,7 @@ Sessions → TutorDailyAggregationJob (every 10 min) → tutor_daily_aggregates
 | TutorDailyAggregationJob | every 10 min | Update daily aggregates |
 | TutorHealthScoreJob | every 10 min | Compute THS from 7d window |
 | TutorChurnRiskScoreJob | every 10 min | Compute TCRS from 14d window |
-| AlertJob | every 10 min | Generate/resolve alerts based on thresholds |
+| AlertJob | every 10 min | Generate/resolve alerts based on thresholds (no duplicates - keeps existing alerts open if condition persists) |
 
 End‑to‑insight SLA: ≤ 60 minutes.
 
