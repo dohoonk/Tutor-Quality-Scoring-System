@@ -18,8 +18,10 @@
     <link rel="apple-touch-icon" href="/icon.png">
 
     <%# Includes Tailwind CSS and application stylesheets %>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5, user-scalable=yes">
     <%= stylesheet_link_tag "tailwind", "data-turbo-track": "reload" %>
     <%= stylesheet_link_tag "animations", "data-turbo-track": "reload" %>
+    <%= stylesheet_link_tag "mobile", "data-turbo-track": "reload" %>
     <%= stylesheet_link_tag :app, "data-turbo-track": "reload" %>
     <%= javascript_importmap_tags %>
     <%= vite_client_tag %>
@@ -36,8 +38,8 @@
 
   </head>
 
-  <body>
-    <main class="container mx-auto mt-28 px-5 flex">
+  <body class="bg-gray-50">
+    <main class="min-h-screen">
       <%= yield %>
     </main>
   </body>

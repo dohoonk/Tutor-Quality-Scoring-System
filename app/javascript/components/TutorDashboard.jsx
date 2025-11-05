@@ -5,7 +5,8 @@ import {
   EmptySessionState, 
   EmptyFSQSState, 
   ErrorState,
-  AccessibleButton
+  AccessibleButton,
+  MobileTable
 } from './ui'
 
 // Tooltip Component with improved accessibility
@@ -410,86 +411,75 @@ const TutorDashboard = ({ tutorId }) => {
       {/* Recent Sessions Table */}
       <section className="mb-6 md:mb-8 animate-slide-in-up" style={{ animationDelay: '0.2s' }}>
         <h2 className="text-xl md:text-2xl font-semibold mb-4">Recent Sessions</h2>
-        <div className="bg-white rounded-lg shadow-md overflow-hidden">
-          <div className="overflow-x-auto">
-            <table className="min-w-full divide-y divide-gray-200">
-              <thead className="bg-gray-50">
-                <tr>
-                  <th scope="col" className="px-4 md:px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                    Date
-                  </th>
-                  <th scope="col" className="px-4 md:px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                    Student
-                  </th>
-                  <th scope="col" className="px-4 md:px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                    SQS
-                  </th>
-                  <th scope="col" className="px-4 md:px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                    FSQS Tag
-                  </th>
-                  <th scope="col" className="px-4 md:px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                    Notes
-                  </th>
-                </tr>
-              </thead>
-              <tbody className="bg-white divide-y divide-gray-200">
-                {sessionList.length === 0 ? (
-                  <tr>
-                    <td colSpan="5" className="px-6 py-8">
-                      <EmptySessionState />
-                    </td>
-                  </tr>
-                ) : (
-                  sessionList.map((session) => {
-                    const sqsLabel = session.sqs ? getScoreLabel(session.sqs, 'sqs') : null
+        <div className="bg-white md:rounded-lg md:shadow-md overflow-hidden">
+          <MobileTable
+            data={sessionList}
+            keyExtractor={(session) => session.id}
+            emptyState={<EmptySessionState />}
+            columns={[
+              {
+                key: 'date',
+                label: 'Date',
+                render: (session) => (
+                  <span className="whitespace-nowrap">{formatDate(session.date)}</span>
+                )
+              },
+              {
+                key: 'student_name',
+                label: 'Student',
+                render: (session) => session.student_name
+              },
+              {
+                key: 'sqs',
+                label: 'SQS',
+                render: (session) => {
+                  if (!session.sqs) return <span className="text-gray-400">N/A</span>
+                  const sqsLabel = getScoreLabel(session.sqs, 'sqs')
+                  return (
+                    <span className={`inline-flex px-2 py-1 rounded text-xs sm:text-sm font-medium transition-colors ${
+                      sqsLabel?.color === 'red' ? 'bg-red-100 text-red-800' :
+                      sqsLabel?.color === 'yellow' ? 'bg-yellow-100 text-yellow-800' :
+                      'bg-green-100 text-green-800'
+                    }`}>
+                      {session.sqs} ({sqsLabel?.label})
+                    </span>
+                  )
+                }
+              },
+              {
+                key: 'fsqs',
+                label: 'FSQS Tag',
+                render: (session) => {
+                  if (session.first_session && session.fsqs) {
                     return (
-                      <tr key={session.id} className="hover:bg-gray-50 transition-colors">
-                        <td className="px-4 md:px-6 py-4 whitespace-nowrap text-sm text-gray-900">
-                          {formatDate(session.date)}
-                        </td>
-                        <td className="px-4 md:px-6 py-4 whitespace-nowrap text-sm text-gray-900">
-                          {session.student_name}
-                        </td>
-                        <td className="px-4 md:px-6 py-4 whitespace-nowrap text-sm">
-                          {session.sqs ? (
-                            <span className={`px-2 py-1 rounded text-sm font-medium transition-colors ${
-                              sqsLabel?.color === 'red' ? 'bg-red-100 text-red-800' :
-                              sqsLabel?.color === 'yellow' ? 'bg-yellow-100 text-yellow-800' :
-                              'bg-green-100 text-green-800'
-                            }`}>
-                              {session.sqs} ({sqsLabel?.label})
-                            </span>
-                          ) : (
-                            <span className="text-gray-400">N/A</span>
-                          )}
-                        </td>
-                        <td className="px-4 md:px-6 py-4 whitespace-nowrap text-sm">
-                          {session.first_session && session.fsqs ? (
-                            <span className={`px-2 py-1 rounded text-sm font-medium transition-colors ${
-                              session.fsqs <= 50 ? 'bg-red-100 text-red-800' :
-                              session.fsqs <= 70 ? 'bg-yellow-100 text-yellow-800' :
-                              'bg-green-100 text-green-800'
-                            }`}>
-                              FSQS: {session.fsqs}
-                            </span>
-                          ) : (
-                            <span className="text-gray-400">—</span>
-                          )}
-                        </td>
-                        <td className="px-4 md:px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                          {session.first_session ? (
-                            <span className="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-purple-100 text-purple-800">
-                              First Session
-                            </span>
-                          ) : '—'}
-                        </td>
-                      </tr>
+                      <span className={`inline-flex px-2 py-1 rounded text-xs sm:text-sm font-medium transition-colors ${
+                        session.fsqs <= 50 ? 'bg-red-100 text-red-800' :
+                        session.fsqs <= 70 ? 'bg-yellow-100 text-yellow-800' :
+                        'bg-green-100 text-green-800'
+                      }`}>
+                        FSQS: {session.fsqs}
+                      </span>
                     )
-                  })
-                )}
-              </tbody>
-            </table>
-          </div>
+                  }
+                  return <span className="text-gray-400">—</span>
+                }
+              },
+              {
+                key: 'notes',
+                label: 'Notes',
+                render: (session) => {
+                  if (session.first_session) {
+                    return (
+                      <span className="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-purple-100 text-purple-800">
+                        First Session
+                      </span>
+                    )
+                  }
+                  return '—'
+                }
+              }
+            ]}
+          />
         </div>
       </section>
     </div>
