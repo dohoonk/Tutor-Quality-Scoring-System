@@ -31,7 +31,8 @@ class FirstSessionQualityScoreService
     }
 
     # FSQS: Start at 100 (perfect) and subtract penalties (higher is better)
-    score = MAX_SCORE - components.values.sum
+    raw_score = MAX_SCORE - components.values.sum
+    score = [[raw_score, 0].max, 100].min # Clamp between 0 and 100
     feedback = generate_feedback(components, score)
 
     {
