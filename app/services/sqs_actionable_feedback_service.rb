@@ -15,8 +15,13 @@ class SqsActionableFeedbackService
     # Analyze deductions
     deductions = analyze_deductions(sqs_scores)
 
-    # Check if all sessions were perfect (no deductions)
-    if deductions[:total_sessions_with_deductions] == 0
+    # Check if all sessions were perfect (score = 100 and no deductions)
+    perfect_sessions = sqs_scores.count do |score|
+      score.value.to_f >= 100 && 
+      (score.components || {}).values.all? { |v| v.to_f == 0 || v.nil? }
+    end
+    
+    if perfect_sessions == sqs_scores.count && deductions[:total_sessions_with_deductions] == 0
       return {
         perfect: true,
         message: "You're doing a fantastic job! All your last 10 sessions had perfect scores with no issues.",
