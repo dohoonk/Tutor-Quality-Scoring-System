@@ -10580,3 +10580,1511 @@ Processing by Api::Admin::Tutors::TutorsController#risk_list as */*
 Completed 200 OK in 44ms (Views: 0.1ms | ActiveRecord: 8.5ms (57 queries, 0 cached) | GC: 2.4ms)
 
 
+Started GET "/admin/1" for ::1 at 2025-11-05 10:52:46 -0600
+Processing by AdminsController#show as HTML
+  Parameters: {"id"=>"1"}
+  Rendering layout layouts/application.html.erb
+  Rendering admins/show.html.erb within layouts/application
+  Rendered admins/show.html.erb within layouts/application (Duration: 0.3ms | GC: 0.2ms)
+  Rendered layout layouts/application.html.erb (Duration: 1.5ms | GC: 0.2ms)
+Completed 200 OK in 14ms (Views: 1.7ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.2ms)
+
+
+Started GET "/.well-known/appspecific/com.chrome.devtools.json" for ::1 at 2025-11-05 10:52:46 -0600
+  
+ActionController::RoutingError (No route matches [GET] "/.well-known/appspecific/com.chrome.devtools.json"):
+  
+Started GET "/api/admin/tutors/risk_list" for ::1 at 2025-11-05 10:52:46 -0600
+Processing by Api::Admin::Tutors::TutorsController#risk_list as */*
+  [1m[36mTutor Load (0.3ms)[0m  [1m[34mSELECT "tutors".* FROM "tutors" /*action='risk_list',application='TutorInsights',controller='tutors'*/[0m
+  ↳ app/controllers/api/admin/tutors/tutors_controller.rb:8:in `map'
+  [1m[36mScore Load (0.3ms)[0m  [1m[34mSELECT "scores".* FROM "scores" WHERE "scores"."tutor_id" = 1 AND "scores"."score_type" = 'fsrs' ORDER BY "scores"."computed_at" DESC LIMIT 1 /*action='risk_list',application='TutorInsights',controller='tutors'*/[0m
+  ↳ app/controllers/api/admin/tutors/tutors_controller.rb:10:in `block in risk_list'
+  [1m[36mScore Load (0.2ms)[0m  [1m[34mSELECT "scores".* FROM "scores" WHERE "scores"."tutor_id" = 1 AND "scores"."score_type" = 'ths' ORDER BY "scores"."computed_at" DESC LIMIT 1 /*action='risk_list',application='TutorInsights',controller='tutors'*/[0m
+  ↳ app/controllers/api/admin/tutors/tutors_controller.rb:11:in `block in risk_list'
+  [1m[36mScore Load (0.1ms)[0m  [1m[34mSELECT "scores".* FROM "scores" WHERE "scores"."tutor_id" = 1 AND "scores"."score_type" = 'tcrs' ORDER BY "scores"."computed_at" DESC LIMIT 1 /*action='risk_list',application='TutorInsights',controller='tutors'*/[0m
+  ↳ app/controllers/api/admin/tutors/tutors_controller.rb:12:in `block in risk_list'
+  [1m[36mAlert Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "alerts" WHERE "alerts"."tutor_id" = 1 AND "alerts"."status" = 'open' /*action='risk_list',application='TutorInsights',controller='tutors'*/[0m
+  ↳ app/controllers/api/admin/tutors/tutors_controller.rb:15:in `block in risk_list'
+  [1m[36mScore Load (0.1ms)[0m  [1m[34mSELECT "scores".* FROM "scores" WHERE "scores"."tutor_id" = 2 AND "scores"."score_type" = 'fsrs' ORDER BY "scores"."computed_at" DESC LIMIT 1 /*action='risk_list',application='TutorInsights',controller='tutors'*/[0m
+  ↳ app/controllers/api/admin/tutors/tutors_controller.rb:10:in `block in risk_list'
+  [1m[36mScore Load (0.1ms)[0m  [1m[34mSELECT "scores".* FROM "scores" WHERE "scores"."tutor_id" = 2 AND "scores"."score_type" = 'ths' ORDER BY "scores"."computed_at" DESC LIMIT 1 /*action='risk_list',application='TutorInsights',controller='tutors'*/[0m
+  ↳ app/controllers/api/admin/tutors/tutors_controller.rb:11:in `block in risk_list'
+  [1m[36mScore Load (0.2ms)[0m  [1m[34mSELECT "scores".* FROM "scores" WHERE "scores"."tutor_id" = 2 AND "scores"."score_type" = 'tcrs' ORDER BY "scores"."computed_at" DESC LIMIT 1 /*action='risk_list',application='TutorInsights',controller='tutors'*/[0m
+  ↳ app/controllers/api/admin/tutors/tutors_controller.rb:12:in `block in risk_list'
+  [1m[36mAlert Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "alerts" WHERE "alerts"."tutor_id" = 2 AND "alerts"."status" = 'open' /*action='risk_list',application='TutorInsights',controller='tutors'*/[0m
+  ↳ app/controllers/api/admin/tutors/tutors_controller.rb:15:in `block in risk_list'
+  [1m[36mScore Load (0.1ms)[0m  [1m[34mSELECT "scores".* FROM "scores" WHERE "scores"."tutor_id" = 3 AND "scores"."score_type" = 'fsrs' ORDER BY "scores"."computed_at" DESC LIMIT 1 /*action='risk_list',application='TutorInsights',controller='tutors'*/[0m
+  ↳ app/controllers/api/admin/tutors/tutors_controller.rb:10:in `block in risk_list'
+  [1m[36mScore Load (0.1ms)[0m  [1m[34mSELECT "scores".* FROM "scores" WHERE "scores"."tutor_id" = 3 AND "scores"."score_type" = 'ths' ORDER BY "scores"."computed_at" DESC LIMIT 1 /*action='risk_list',application='TutorInsights',controller='tutors'*/[0m
+  ↳ app/controllers/api/admin/tutors/tutors_controller.rb:11:in `block in risk_list'
+  [1m[36mScore Load (0.1ms)[0m  [1m[34mSELECT "scores".* FROM "scores" WHERE "scores"."tutor_id" = 3 AND "scores"."score_type" = 'tcrs' ORDER BY "scores"."computed_at" DESC LIMIT 1 /*action='risk_list',application='TutorInsights',controller='tutors'*/[0m
+  ↳ app/controllers/api/admin/tutors/tutors_controller.rb:12:in `block in risk_list'
+  [1m[36mAlert Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "alerts" WHERE "alerts"."tutor_id" = 3 AND "alerts"."status" = 'open' /*action='risk_list',application='TutorInsights',controller='tutors'*/[0m
+  ↳ app/controllers/api/admin/tutors/tutors_controller.rb:15:in `block in risk_list'
+  [1m[36mScore Load (0.2ms)[0m  [1m[34mSELECT "scores".* FROM "scores" WHERE "scores"."tutor_id" = 4 AND "scores"."score_type" = 'fsrs' ORDER BY "scores"."computed_at" DESC LIMIT 1 /*action='risk_list',application='TutorInsights',controller='tutors'*/[0m
+  ↳ app/controllers/api/admin/tutors/tutors_controller.rb:10:in `block in risk_list'
+  [1m[36mScore Load (0.2ms)[0m  [1m[34mSELECT "scores".* FROM "scores" WHERE "scores"."tutor_id" = 4 AND "scores"."score_type" = 'ths' ORDER BY "scores"."computed_at" DESC LIMIT 1 /*action='risk_list',application='TutorInsights',controller='tutors'*/[0m
+  ↳ app/controllers/api/admin/tutors/tutors_controller.rb:11:in `block in risk_list'
+  [1m[36mScore Load (0.2ms)[0m  [1m[34mSELECT "scores".* FROM "scores" WHERE "scores"."tutor_id" = 4 AND "scores"."score_type" = 'tcrs' ORDER BY "scores"."computed_at" DESC LIMIT 1 /*action='risk_list',application='TutorInsights',controller='tutors'*/[0m
+  ↳ app/controllers/api/admin/tutors/tutors_controller.rb:12:in `block in risk_list'
+  [1m[36mAlert Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "alerts" WHERE "alerts"."tutor_id" = 4 AND "alerts"."status" = 'open' /*action='risk_list',application='TutorInsights',controller='tutors'*/[0m
+  ↳ app/controllers/api/admin/tutors/tutors_controller.rb:15:in `block in risk_list'
+  [1m[36mScore Load (0.2ms)[0m  [1m[34mSELECT "scores".* FROM "scores" WHERE "scores"."tutor_id" = 5 AND "scores"."score_type" = 'fsrs' ORDER BY "scores"."computed_at" DESC LIMIT 1 /*action='risk_list',application='TutorInsights',controller='tutors'*/[0m
+  ↳ app/controllers/api/admin/tutors/tutors_controller.rb:10:in `block in risk_list'
+  [1m[36mScore Load (0.2ms)[0m  [1m[34mSELECT "scores".* FROM "scores" WHERE "scores"."tutor_id" = 5 AND "scores"."score_type" = 'ths' ORDER BY "scores"."computed_at" DESC LIMIT 1 /*action='risk_list',application='TutorInsights',controller='tutors'*/[0m
+  ↳ app/controllers/api/admin/tutors/tutors_controller.rb:11:in `block in risk_list'
+  [1m[36mScore Load (0.1ms)[0m  [1m[34mSELECT "scores".* FROM "scores" WHERE "scores"."tutor_id" = 5 AND "scores"."score_type" = 'tcrs' ORDER BY "scores"."computed_at" DESC LIMIT 1 /*action='risk_list',application='TutorInsights',controller='tutors'*/[0m
+  ↳ app/controllers/api/admin/tutors/tutors_controller.rb:12:in `block in risk_list'
+  [1m[36mAlert Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "alerts" WHERE "alerts"."tutor_id" = 5 AND "alerts"."status" = 'open' /*action='risk_list',application='TutorInsights',controller='tutors'*/[0m
+  ↳ app/controllers/api/admin/tutors/tutors_controller.rb:15:in `block in risk_list'
+  [1m[36mScore Load (0.2ms)[0m  [1m[34mSELECT "scores".* FROM "scores" WHERE "scores"."tutor_id" = 6 AND "scores"."score_type" = 'fsrs' ORDER BY "scores"."computed_at" DESC LIMIT 1 /*action='risk_list',application='TutorInsights',controller='tutors'*/[0m
+  ↳ app/controllers/api/admin/tutors/tutors_controller.rb:10:in `block in risk_list'
+  [1m[36mScore Load (0.2ms)[0m  [1m[34mSELECT "scores".* FROM "scores" WHERE "scores"."tutor_id" = 6 AND "scores"."score_type" = 'ths' ORDER BY "scores"."computed_at" DESC LIMIT 1 /*action='risk_list',application='TutorInsights',controller='tutors'*/[0m
+  ↳ app/controllers/api/admin/tutors/tutors_controller.rb:11:in `block in risk_list'
+  [1m[36mScore Load (0.1ms)[0m  [1m[34mSELECT "scores".* FROM "scores" WHERE "scores"."tutor_id" = 6 AND "scores"."score_type" = 'tcrs' ORDER BY "scores"."computed_at" DESC LIMIT 1 /*action='risk_list',application='TutorInsights',controller='tutors'*/[0m
+  ↳ app/controllers/api/admin/tutors/tutors_controller.rb:12:in `block in risk_list'
+  [1m[36mAlert Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "alerts" WHERE "alerts"."tutor_id" = 6 AND "alerts"."status" = 'open' /*action='risk_list',application='TutorInsights',controller='tutors'*/[0m
+  ↳ app/controllers/api/admin/tutors/tutors_controller.rb:15:in `block in risk_list'
+  [1m[36mScore Load (0.1ms)[0m  [1m[34mSELECT "scores".* FROM "scores" WHERE "scores"."tutor_id" = 7 AND "scores"."score_type" = 'fsrs' ORDER BY "scores"."computed_at" DESC LIMIT 1 /*action='risk_list',application='TutorInsights',controller='tutors'*/[0m
+  ↳ app/controllers/api/admin/tutors/tutors_controller.rb:10:in `block in risk_list'
+  [1m[36mScore Load (0.1ms)[0m  [1m[34mSELECT "scores".* FROM "scores" WHERE "scores"."tutor_id" = 7 AND "scores"."score_type" = 'ths' ORDER BY "scores"."computed_at" DESC LIMIT 1 /*action='risk_list',application='TutorInsights',controller='tutors'*/[0m
+  ↳ app/controllers/api/admin/tutors/tutors_controller.rb:11:in `block in risk_list'
+  [1m[36mScore Load (0.1ms)[0m  [1m[34mSELECT "scores".* FROM "scores" WHERE "scores"."tutor_id" = 7 AND "scores"."score_type" = 'tcrs' ORDER BY "scores"."computed_at" DESC LIMIT 1 /*action='risk_list',application='TutorInsights',controller='tutors'*/[0m
+  ↳ app/controllers/api/admin/tutors/tutors_controller.rb:12:in `block in risk_list'
+  [1m[36mAlert Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "alerts" WHERE "alerts"."tutor_id" = 7 AND "alerts"."status" = 'open' /*action='risk_list',application='TutorInsights',controller='tutors'*/[0m
+  ↳ app/controllers/api/admin/tutors/tutors_controller.rb:15:in `block in risk_list'
+  [1m[36mScore Load (0.1ms)[0m  [1m[34mSELECT "scores".* FROM "scores" WHERE "scores"."tutor_id" = 8 AND "scores"."score_type" = 'fsrs' ORDER BY "scores"."computed_at" DESC LIMIT 1 /*action='risk_list',application='TutorInsights',controller='tutors'*/[0m
+  ↳ app/controllers/api/admin/tutors/tutors_controller.rb:10:in `block in risk_list'
+  [1m[36mScore Load (0.2ms)[0m  [1m[34mSELECT "scores".* FROM "scores" WHERE "scores"."tutor_id" = 8 AND "scores"."score_type" = 'ths' ORDER BY "scores"."computed_at" DESC LIMIT 1 /*action='risk_list',application='TutorInsights',controller='tutors'*/[0m
+  ↳ app/controllers/api/admin/tutors/tutors_controller.rb:11:in `block in risk_list'
+  [1m[36mScore Load (0.1ms)[0m  [1m[34mSELECT "scores".* FROM "scores" WHERE "scores"."tutor_id" = 8 AND "scores"."score_type" = 'tcrs' ORDER BY "scores"."computed_at" DESC LIMIT 1 /*action='risk_list',application='TutorInsights',controller='tutors'*/[0m
+  ↳ app/controllers/api/admin/tutors/tutors_controller.rb:12:in `block in risk_list'
+  [1m[36mAlert Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "alerts" WHERE "alerts"."tutor_id" = 8 AND "alerts"."status" = 'open' /*action='risk_list',application='TutorInsights',controller='tutors'*/[0m
+  ↳ app/controllers/api/admin/tutors/tutors_controller.rb:15:in `block in risk_list'
+  [1m[36mScore Load (0.1ms)[0m  [1m[34mSELECT "scores".* FROM "scores" WHERE "scores"."tutor_id" = 9 AND "scores"."score_type" = 'fsrs' ORDER BY "scores"."computed_at" DESC LIMIT 1 /*action='risk_list',application='TutorInsights',controller='tutors'*/[0m
+  ↳ app/controllers/api/admin/tutors/tutors_controller.rb:10:in `block in risk_list'
+  [1m[36mScore Load (0.1ms)[0m  [1m[34mSELECT "scores".* FROM "scores" WHERE "scores"."tutor_id" = 9 AND "scores"."score_type" = 'ths' ORDER BY "scores"."computed_at" DESC LIMIT 1 /*action='risk_list',application='TutorInsights',controller='tutors'*/[0m
+  ↳ app/controllers/api/admin/tutors/tutors_controller.rb:11:in `block in risk_list'
+  [1m[36mScore Load (0.2ms)[0m  [1m[34mSELECT "scores".* FROM "scores" WHERE "scores"."tutor_id" = 9 AND "scores"."score_type" = 'tcrs' ORDER BY "scores"."computed_at" DESC LIMIT 1 /*action='risk_list',application='TutorInsights',controller='tutors'*/[0m
+  ↳ app/controllers/api/admin/tutors/tutors_controller.rb:12:in `block in risk_list'
+  [1m[36mAlert Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "alerts" WHERE "alerts"."tutor_id" = 9 AND "alerts"."status" = 'open' /*action='risk_list',application='TutorInsights',controller='tutors'*/[0m
+  ↳ app/controllers/api/admin/tutors/tutors_controller.rb:15:in `block in risk_list'
+  [1m[36mScore Load (0.2ms)[0m  [1m[34mSELECT "scores".* FROM "scores" WHERE "scores"."tutor_id" = 10 AND "scores"."score_type" = 'fsrs' ORDER BY "scores"."computed_at" DESC LIMIT 1 /*action='risk_list',application='TutorInsights',controller='tutors'*/[0m
+  ↳ app/controllers/api/admin/tutors/tutors_controller.rb:10:in `block in risk_list'
+  [1m[36mScore Load (0.2ms)[0m  [1m[34mSELECT "scores".* FROM "scores" WHERE "scores"."tutor_id" = 10 AND "scores"."score_type" = 'ths' ORDER BY "scores"."computed_at" DESC LIMIT 1 /*action='risk_list',application='TutorInsights',controller='tutors'*/[0m
+  ↳ app/controllers/api/admin/tutors/tutors_controller.rb:11:in `block in risk_list'
+  [1m[36mScore Load (0.2ms)[0m  [1m[34mSELECT "scores".* FROM "scores" WHERE "scores"."tutor_id" = 10 AND "scores"."score_type" = 'tcrs' ORDER BY "scores"."computed_at" DESC LIMIT 1 /*action='risk_list',application='TutorInsights',controller='tutors'*/[0m
+  ↳ app/controllers/api/admin/tutors/tutors_controller.rb:12:in `block in risk_list'
+  [1m[36mAlert Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "alerts" WHERE "alerts"."tutor_id" = 10 AND "alerts"."status" = 'open' /*action='risk_list',application='TutorInsights',controller='tutors'*/[0m
+  ↳ app/controllers/api/admin/tutors/tutors_controller.rb:15:in `block in risk_list'
+  [1m[36mScore Load (0.2ms)[0m  [1m[34mSELECT "scores".* FROM "scores" WHERE "scores"."tutor_id" = 11 AND "scores"."score_type" = 'fsrs' ORDER BY "scores"."computed_at" DESC LIMIT 1 /*action='risk_list',application='TutorInsights',controller='tutors'*/[0m
+  ↳ app/controllers/api/admin/tutors/tutors_controller.rb:10:in `block in risk_list'
+  [1m[36mScore Load (0.1ms)[0m  [1m[34mSELECT "scores".* FROM "scores" WHERE "scores"."tutor_id" = 11 AND "scores"."score_type" = 'ths' ORDER BY "scores"."computed_at" DESC LIMIT 1 /*action='risk_list',application='TutorInsights',controller='tutors'*/[0m
+  ↳ app/controllers/api/admin/tutors/tutors_controller.rb:11:in `block in risk_list'
+  [1m[36mScore Load (0.2ms)[0m  [1m[34mSELECT "scores".* FROM "scores" WHERE "scores"."tutor_id" = 11 AND "scores"."score_type" = 'tcrs' ORDER BY "scores"."computed_at" DESC LIMIT 1 /*action='risk_list',application='TutorInsights',controller='tutors'*/[0m
+  ↳ app/controllers/api/admin/tutors/tutors_controller.rb:12:in `block in risk_list'
+  [1m[36mAlert Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "alerts" WHERE "alerts"."tutor_id" = 11 AND "alerts"."status" = 'open' /*action='risk_list',application='TutorInsights',controller='tutors'*/[0m
+  ↳ app/controllers/api/admin/tutors/tutors_controller.rb:15:in `block in risk_list'
+  [1m[36mScore Load (0.2ms)[0m  [1m[34mSELECT "scores".* FROM "scores" WHERE "scores"."tutor_id" = 12 AND "scores"."score_type" = 'fsrs' ORDER BY "scores"."computed_at" DESC LIMIT 1 /*action='risk_list',application='TutorInsights',controller='tutors'*/[0m
+  ↳ app/controllers/api/admin/tutors/tutors_controller.rb:10:in `block in risk_list'
+  [1m[36mScore Load (0.1ms)[0m  [1m[34mSELECT "scores".* FROM "scores" WHERE "scores"."tutor_id" = 12 AND "scores"."score_type" = 'ths' ORDER BY "scores"."computed_at" DESC LIMIT 1 /*action='risk_list',application='TutorInsights',controller='tutors'*/[0m
+  ↳ app/controllers/api/admin/tutors/tutors_controller.rb:11:in `block in risk_list'
+  [1m[36mScore Load (0.1ms)[0m  [1m[34mSELECT "scores".* FROM "scores" WHERE "scores"."tutor_id" = 12 AND "scores"."score_type" = 'tcrs' ORDER BY "scores"."computed_at" DESC LIMIT 1 /*action='risk_list',application='TutorInsights',controller='tutors'*/[0m
+  ↳ app/controllers/api/admin/tutors/tutors_controller.rb:12:in `block in risk_list'
+  [1m[36mAlert Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "alerts" WHERE "alerts"."tutor_id" = 12 AND "alerts"."status" = 'open' /*action='risk_list',application='TutorInsights',controller='tutors'*/[0m
+  ↳ app/controllers/api/admin/tutors/tutors_controller.rb:15:in `block in risk_list'
+  [1m[36mScore Load (0.2ms)[0m  [1m[34mSELECT "scores".* FROM "scores" WHERE "scores"."tutor_id" = 13 AND "scores"."score_type" = 'fsrs' ORDER BY "scores"."computed_at" DESC LIMIT 1 /*action='risk_list',application='TutorInsights',controller='tutors'*/[0m
+  ↳ app/controllers/api/admin/tutors/tutors_controller.rb:10:in `block in risk_list'
+  [1m[36mScore Load (0.2ms)[0m  [1m[34mSELECT "scores".* FROM "scores" WHERE "scores"."tutor_id" = 13 AND "scores"."score_type" = 'ths' ORDER BY "scores"."computed_at" DESC LIMIT 1 /*action='risk_list',application='TutorInsights',controller='tutors'*/[0m
+  ↳ app/controllers/api/admin/tutors/tutors_controller.rb:11:in `block in risk_list'
+  [1m[36mScore Load (0.2ms)[0m  [1m[34mSELECT "scores".* FROM "scores" WHERE "scores"."tutor_id" = 13 AND "scores"."score_type" = 'tcrs' ORDER BY "scores"."computed_at" DESC LIMIT 1 /*action='risk_list',application='TutorInsights',controller='tutors'*/[0m
+  ↳ app/controllers/api/admin/tutors/tutors_controller.rb:12:in `block in risk_list'
+  [1m[36mAlert Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "alerts" WHERE "alerts"."tutor_id" = 13 AND "alerts"."status" = 'open' /*action='risk_list',application='TutorInsights',controller='tutors'*/[0m
+  ↳ app/controllers/api/admin/tutors/tutors_controller.rb:15:in `block in risk_list'
+  [1m[36mScore Load (0.2ms)[0m  [1m[34mSELECT "scores".* FROM "scores" WHERE "scores"."tutor_id" = 14 AND "scores"."score_type" = 'fsrs' ORDER BY "scores"."computed_at" DESC LIMIT 1 /*action='risk_list',application='TutorInsights',controller='tutors'*/[0m
+  ↳ app/controllers/api/admin/tutors/tutors_controller.rb:10:in `block in risk_list'
+  [1m[36mScore Load (0.2ms)[0m  [1m[34mSELECT "scores".* FROM "scores" WHERE "scores"."tutor_id" = 14 AND "scores"."score_type" = 'ths' ORDER BY "scores"."computed_at" DESC LIMIT 1 /*action='risk_list',application='TutorInsights',controller='tutors'*/[0m
+  ↳ app/controllers/api/admin/tutors/tutors_controller.rb:11:in `block in risk_list'
+  [1m[36mScore Load (0.1ms)[0m  [1m[34mSELECT "scores".* FROM "scores" WHERE "scores"."tutor_id" = 14 AND "scores"."score_type" = 'tcrs' ORDER BY "scores"."computed_at" DESC LIMIT 1 /*action='risk_list',application='TutorInsights',controller='tutors'*/[0m
+  ↳ app/controllers/api/admin/tutors/tutors_controller.rb:12:in `block in risk_list'
+  [1m[36mAlert Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "alerts" WHERE "alerts"."tutor_id" = 14 AND "alerts"."status" = 'open' /*action='risk_list',application='TutorInsights',controller='tutors'*/[0m
+  ↳ app/controllers/api/admin/tutors/tutors_controller.rb:15:in `block in risk_list'
+Completed 200 OK in 50ms (Views: 0.1ms | ActiveRecord: 8.1ms (57 queries, 0 cached) | GC: 2.3ms)
+
+
+Started GET "/admin/1" for ::1 at 2025-11-05 10:53:31 -0600
+Processing by AdminsController#show as HTML
+  Parameters: {"id"=>"1"}
+  Rendering layout layouts/application.html.erb
+  Rendering admins/show.html.erb within layouts/application
+  Rendered admins/show.html.erb within layouts/application (Duration: 0.1ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 2.4ms | GC: 0.1ms)
+Completed 200 OK in 19ms (Views: 3.0ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.1ms)
+
+
+Started GET "/.well-known/appspecific/com.chrome.devtools.json" for ::1 at 2025-11-05 10:53:31 -0600
+  
+ActionController::RoutingError (No route matches [GET] "/.well-known/appspecific/com.chrome.devtools.json"):
+  
+Started GET "/api/admin/tutors/risk_list" for ::1 at 2025-11-05 10:53:31 -0600
+Processing by Api::Admin::Tutors::TutorsController#risk_list as */*
+  [1m[36mTutor Load (0.3ms)[0m  [1m[34mSELECT "tutors".* FROM "tutors" /*action='risk_list',application='TutorInsights',controller='tutors'*/[0m
+  ↳ app/controllers/api/admin/tutors/tutors_controller.rb:8:in `map'
+  [1m[36mScore Load (0.2ms)[0m  [1m[34mSELECT "scores".* FROM "scores" WHERE "scores"."tutor_id" = 1 AND "scores"."score_type" = 'fsrs' ORDER BY "scores"."computed_at" DESC LIMIT 1 /*action='risk_list',application='TutorInsights',controller='tutors'*/[0m
+  ↳ app/controllers/api/admin/tutors/tutors_controller.rb:10:in `block in risk_list'
+  [1m[36mScore Load (0.1ms)[0m  [1m[34mSELECT "scores".* FROM "scores" WHERE "scores"."tutor_id" = 1 AND "scores"."score_type" = 'ths' ORDER BY "scores"."computed_at" DESC LIMIT 1 /*action='risk_list',application='TutorInsights',controller='tutors'*/[0m
+  ↳ app/controllers/api/admin/tutors/tutors_controller.rb:11:in `block in risk_list'
+  [1m[36mScore Load (0.1ms)[0m  [1m[34mSELECT "scores".* FROM "scores" WHERE "scores"."tutor_id" = 1 AND "scores"."score_type" = 'tcrs' ORDER BY "scores"."computed_at" DESC LIMIT 1 /*action='risk_list',application='TutorInsights',controller='tutors'*/[0m
+  ↳ app/controllers/api/admin/tutors/tutors_controller.rb:12:in `block in risk_list'
+  [1m[36mAlert Count (0.2ms)[0m  [1m[34mSELECT COUNT(*) FROM "alerts" WHERE "alerts"."tutor_id" = 1 AND "alerts"."status" = 'open' /*action='risk_list',application='TutorInsights',controller='tutors'*/[0m
+  ↳ app/controllers/api/admin/tutors/tutors_controller.rb:15:in `block in risk_list'
+  [1m[36mScore Load (0.2ms)[0m  [1m[34mSELECT "scores".* FROM "scores" WHERE "scores"."tutor_id" = 2 AND "scores"."score_type" = 'fsrs' ORDER BY "scores"."computed_at" DESC LIMIT 1 /*action='risk_list',application='TutorInsights',controller='tutors'*/[0m
+  ↳ app/controllers/api/admin/tutors/tutors_controller.rb:10:in `block in risk_list'
+  [1m[36mScore Load (0.2ms)[0m  [1m[34mSELECT "scores".* FROM "scores" WHERE "scores"."tutor_id" = 2 AND "scores"."score_type" = 'ths' ORDER BY "scores"."computed_at" DESC LIMIT 1 /*action='risk_list',application='TutorInsights',controller='tutors'*/[0m
+  ↳ app/controllers/api/admin/tutors/tutors_controller.rb:11:in `block in risk_list'
+  [1m[36mScore Load (0.2ms)[0m  [1m[34mSELECT "scores".* FROM "scores" WHERE "scores"."tutor_id" = 2 AND "scores"."score_type" = 'tcrs' ORDER BY "scores"."computed_at" DESC LIMIT 1 /*action='risk_list',application='TutorInsights',controller='tutors'*/[0m
+  ↳ app/controllers/api/admin/tutors/tutors_controller.rb:12:in `block in risk_list'
+  [1m[36mAlert Count (0.2ms)[0m  [1m[34mSELECT COUNT(*) FROM "alerts" WHERE "alerts"."tutor_id" = 2 AND "alerts"."status" = 'open' /*action='risk_list',application='TutorInsights',controller='tutors'*/[0m
+  ↳ app/controllers/api/admin/tutors/tutors_controller.rb:15:in `block in risk_list'
+  [1m[36mScore Load (0.2ms)[0m  [1m[34mSELECT "scores".* FROM "scores" WHERE "scores"."tutor_id" = 3 AND "scores"."score_type" = 'fsrs' ORDER BY "scores"."computed_at" DESC LIMIT 1 /*action='risk_list',application='TutorInsights',controller='tutors'*/[0m
+  ↳ app/controllers/api/admin/tutors/tutors_controller.rb:10:in `block in risk_list'
+  [1m[36mScore Load (0.2ms)[0m  [1m[34mSELECT "scores".* FROM "scores" WHERE "scores"."tutor_id" = 3 AND "scores"."score_type" = 'ths' ORDER BY "scores"."computed_at" DESC LIMIT 1 /*action='risk_list',application='TutorInsights',controller='tutors'*/[0m
+  ↳ app/controllers/api/admin/tutors/tutors_controller.rb:11:in `block in risk_list'
+  [1m[36mScore Load (0.2ms)[0m  [1m[34mSELECT "scores".* FROM "scores" WHERE "scores"."tutor_id" = 3 AND "scores"."score_type" = 'tcrs' ORDER BY "scores"."computed_at" DESC LIMIT 1 /*action='risk_list',application='TutorInsights',controller='tutors'*/[0m
+  ↳ app/controllers/api/admin/tutors/tutors_controller.rb:12:in `block in risk_list'
+  [1m[36mAlert Count (0.2ms)[0m  [1m[34mSELECT COUNT(*) FROM "alerts" WHERE "alerts"."tutor_id" = 3 AND "alerts"."status" = 'open' /*action='risk_list',application='TutorInsights',controller='tutors'*/[0m
+  ↳ app/controllers/api/admin/tutors/tutors_controller.rb:15:in `block in risk_list'
+  [1m[36mScore Load (0.2ms)[0m  [1m[34mSELECT "scores".* FROM "scores" WHERE "scores"."tutor_id" = 4 AND "scores"."score_type" = 'fsrs' ORDER BY "scores"."computed_at" DESC LIMIT 1 /*action='risk_list',application='TutorInsights',controller='tutors'*/[0m
+  ↳ app/controllers/api/admin/tutors/tutors_controller.rb:10:in `block in risk_list'
+  [1m[36mScore Load (0.1ms)[0m  [1m[34mSELECT "scores".* FROM "scores" WHERE "scores"."tutor_id" = 4 AND "scores"."score_type" = 'ths' ORDER BY "scores"."computed_at" DESC LIMIT 1 /*action='risk_list',application='TutorInsights',controller='tutors'*/[0m
+  ↳ app/controllers/api/admin/tutors/tutors_controller.rb:11:in `block in risk_list'
+  [1m[36mScore Load (0.1ms)[0m  [1m[34mSELECT "scores".* FROM "scores" WHERE "scores"."tutor_id" = 4 AND "scores"."score_type" = 'tcrs' ORDER BY "scores"."computed_at" DESC LIMIT 1 /*action='risk_list',application='TutorInsights',controller='tutors'*/[0m
+  ↳ app/controllers/api/admin/tutors/tutors_controller.rb:12:in `block in risk_list'
+  [1m[36mAlert Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "alerts" WHERE "alerts"."tutor_id" = 4 AND "alerts"."status" = 'open' /*action='risk_list',application='TutorInsights',controller='tutors'*/[0m
+  ↳ app/controllers/api/admin/tutors/tutors_controller.rb:15:in `block in risk_list'
+  [1m[36mScore Load (0.2ms)[0m  [1m[34mSELECT "scores".* FROM "scores" WHERE "scores"."tutor_id" = 5 AND "scores"."score_type" = 'fsrs' ORDER BY "scores"."computed_at" DESC LIMIT 1 /*action='risk_list',application='TutorInsights',controller='tutors'*/[0m
+  ↳ app/controllers/api/admin/tutors/tutors_controller.rb:10:in `block in risk_list'
+  [1m[36mScore Load (0.1ms)[0m  [1m[34mSELECT "scores".* FROM "scores" WHERE "scores"."tutor_id" = 5 AND "scores"."score_type" = 'ths' ORDER BY "scores"."computed_at" DESC LIMIT 1 /*action='risk_list',application='TutorInsights',controller='tutors'*/[0m
+  ↳ app/controllers/api/admin/tutors/tutors_controller.rb:11:in `block in risk_list'
+  [1m[36mScore Load (0.1ms)[0m  [1m[34mSELECT "scores".* FROM "scores" WHERE "scores"."tutor_id" = 5 AND "scores"."score_type" = 'tcrs' ORDER BY "scores"."computed_at" DESC LIMIT 1 /*action='risk_list',application='TutorInsights',controller='tutors'*/[0m
+  ↳ app/controllers/api/admin/tutors/tutors_controller.rb:12:in `block in risk_list'
+  [1m[36mAlert Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "alerts" WHERE "alerts"."tutor_id" = 5 AND "alerts"."status" = 'open' /*action='risk_list',application='TutorInsights',controller='tutors'*/[0m
+  ↳ app/controllers/api/admin/tutors/tutors_controller.rb:15:in `block in risk_list'
+  [1m[36mScore Load (0.2ms)[0m  [1m[34mSELECT "scores".* FROM "scores" WHERE "scores"."tutor_id" = 6 AND "scores"."score_type" = 'fsrs' ORDER BY "scores"."computed_at" DESC LIMIT 1 /*action='risk_list',application='TutorInsights',controller='tutors'*/[0m
+  ↳ app/controllers/api/admin/tutors/tutors_controller.rb:10:in `block in risk_list'
+  [1m[36mScore Load (0.1ms)[0m  [1m[34mSELECT "scores".* FROM "scores" WHERE "scores"."tutor_id" = 6 AND "scores"."score_type" = 'ths' ORDER BY "scores"."computed_at" DESC LIMIT 1 /*action='risk_list',application='TutorInsights',controller='tutors'*/[0m
+  ↳ app/controllers/api/admin/tutors/tutors_controller.rb:11:in `block in risk_list'
+  [1m[36mScore Load (0.2ms)[0m  [1m[34mSELECT "scores".* FROM "scores" WHERE "scores"."tutor_id" = 6 AND "scores"."score_type" = 'tcrs' ORDER BY "scores"."computed_at" DESC LIMIT 1 /*action='risk_list',application='TutorInsights',controller='tutors'*/[0m
+  ↳ app/controllers/api/admin/tutors/tutors_controller.rb:12:in `block in risk_list'
+  [1m[36mAlert Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "alerts" WHERE "alerts"."tutor_id" = 6 AND "alerts"."status" = 'open' /*action='risk_list',application='TutorInsights',controller='tutors'*/[0m
+  ↳ app/controllers/api/admin/tutors/tutors_controller.rb:15:in `block in risk_list'
+  [1m[36mScore Load (0.2ms)[0m  [1m[34mSELECT "scores".* FROM "scores" WHERE "scores"."tutor_id" = 7 AND "scores"."score_type" = 'fsrs' ORDER BY "scores"."computed_at" DESC LIMIT 1 /*action='risk_list',application='TutorInsights',controller='tutors'*/[0m
+  ↳ app/controllers/api/admin/tutors/tutors_controller.rb:10:in `block in risk_list'
+  [1m[36mScore Load (0.2ms)[0m  [1m[34mSELECT "scores".* FROM "scores" WHERE "scores"."tutor_id" = 7 AND "scores"."score_type" = 'ths' ORDER BY "scores"."computed_at" DESC LIMIT 1 /*action='risk_list',application='TutorInsights',controller='tutors'*/[0m
+  ↳ app/controllers/api/admin/tutors/tutors_controller.rb:11:in `block in risk_list'
+  [1m[36mScore Load (0.2ms)[0m  [1m[34mSELECT "scores".* FROM "scores" WHERE "scores"."tutor_id" = 7 AND "scores"."score_type" = 'tcrs' ORDER BY "scores"."computed_at" DESC LIMIT 1 /*action='risk_list',application='TutorInsights',controller='tutors'*/[0m
+  ↳ app/controllers/api/admin/tutors/tutors_controller.rb:12:in `block in risk_list'
+  [1m[36mAlert Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "alerts" WHERE "alerts"."tutor_id" = 7 AND "alerts"."status" = 'open' /*action='risk_list',application='TutorInsights',controller='tutors'*/[0m
+  ↳ app/controllers/api/admin/tutors/tutors_controller.rb:15:in `block in risk_list'
+  [1m[36mScore Load (0.2ms)[0m  [1m[34mSELECT "scores".* FROM "scores" WHERE "scores"."tutor_id" = 8 AND "scores"."score_type" = 'fsrs' ORDER BY "scores"."computed_at" DESC LIMIT 1 /*action='risk_list',application='TutorInsights',controller='tutors'*/[0m
+  ↳ app/controllers/api/admin/tutors/tutors_controller.rb:10:in `block in risk_list'
+  [1m[36mScore Load (0.1ms)[0m  [1m[34mSELECT "scores".* FROM "scores" WHERE "scores"."tutor_id" = 8 AND "scores"."score_type" = 'ths' ORDER BY "scores"."computed_at" DESC LIMIT 1 /*action='risk_list',application='TutorInsights',controller='tutors'*/[0m
+  ↳ app/controllers/api/admin/tutors/tutors_controller.rb:11:in `block in risk_list'
+  [1m[36mScore Load (0.1ms)[0m  [1m[34mSELECT "scores".* FROM "scores" WHERE "scores"."tutor_id" = 8 AND "scores"."score_type" = 'tcrs' ORDER BY "scores"."computed_at" DESC LIMIT 1 /*action='risk_list',application='TutorInsights',controller='tutors'*/[0m
+  ↳ app/controllers/api/admin/tutors/tutors_controller.rb:12:in `block in risk_list'
+  [1m[36mAlert Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "alerts" WHERE "alerts"."tutor_id" = 8 AND "alerts"."status" = 'open' /*action='risk_list',application='TutorInsights',controller='tutors'*/[0m
+  ↳ app/controllers/api/admin/tutors/tutors_controller.rb:15:in `block in risk_list'
+  [1m[36mScore Load (0.1ms)[0m  [1m[34mSELECT "scores".* FROM "scores" WHERE "scores"."tutor_id" = 9 AND "scores"."score_type" = 'fsrs' ORDER BY "scores"."computed_at" DESC LIMIT 1 /*action='risk_list',application='TutorInsights',controller='tutors'*/[0m
+  ↳ app/controllers/api/admin/tutors/tutors_controller.rb:10:in `block in risk_list'
+  [1m[36mScore Load (0.1ms)[0m  [1m[34mSELECT "scores".* FROM "scores" WHERE "scores"."tutor_id" = 9 AND "scores"."score_type" = 'ths' ORDER BY "scores"."computed_at" DESC LIMIT 1 /*action='risk_list',application='TutorInsights',controller='tutors'*/[0m
+  ↳ app/controllers/api/admin/tutors/tutors_controller.rb:11:in `block in risk_list'
+  [1m[36mScore Load (0.1ms)[0m  [1m[34mSELECT "scores".* FROM "scores" WHERE "scores"."tutor_id" = 9 AND "scores"."score_type" = 'tcrs' ORDER BY "scores"."computed_at" DESC LIMIT 1 /*action='risk_list',application='TutorInsights',controller='tutors'*/[0m
+  ↳ app/controllers/api/admin/tutors/tutors_controller.rb:12:in `block in risk_list'
+  [1m[36mAlert Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "alerts" WHERE "alerts"."tutor_id" = 9 AND "alerts"."status" = 'open' /*action='risk_list',application='TutorInsights',controller='tutors'*/[0m
+  ↳ app/controllers/api/admin/tutors/tutors_controller.rb:15:in `block in risk_list'
+  [1m[36mScore Load (0.1ms)[0m  [1m[34mSELECT "scores".* FROM "scores" WHERE "scores"."tutor_id" = 10 AND "scores"."score_type" = 'fsrs' ORDER BY "scores"."computed_at" DESC LIMIT 1 /*action='risk_list',application='TutorInsights',controller='tutors'*/[0m
+  ↳ app/controllers/api/admin/tutors/tutors_controller.rb:10:in `block in risk_list'
+  [1m[36mScore Load (0.1ms)[0m  [1m[34mSELECT "scores".* FROM "scores" WHERE "scores"."tutor_id" = 10 AND "scores"."score_type" = 'ths' ORDER BY "scores"."computed_at" DESC LIMIT 1 /*action='risk_list',application='TutorInsights',controller='tutors'*/[0m
+  ↳ app/controllers/api/admin/tutors/tutors_controller.rb:11:in `block in risk_list'
+  [1m[36mScore Load (0.2ms)[0m  [1m[34mSELECT "scores".* FROM "scores" WHERE "scores"."tutor_id" = 10 AND "scores"."score_type" = 'tcrs' ORDER BY "scores"."computed_at" DESC LIMIT 1 /*action='risk_list',application='TutorInsights',controller='tutors'*/[0m
+  ↳ app/controllers/api/admin/tutors/tutors_controller.rb:12:in `block in risk_list'
+  [1m[36mAlert Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "alerts" WHERE "alerts"."tutor_id" = 10 AND "alerts"."status" = 'open' /*action='risk_list',application='TutorInsights',controller='tutors'*/[0m
+  ↳ app/controllers/api/admin/tutors/tutors_controller.rb:15:in `block in risk_list'
+  [1m[36mScore Load (0.1ms)[0m  [1m[34mSELECT "scores".* FROM "scores" WHERE "scores"."tutor_id" = 11 AND "scores"."score_type" = 'fsrs' ORDER BY "scores"."computed_at" DESC LIMIT 1 /*action='risk_list',application='TutorInsights',controller='tutors'*/[0m
+  ↳ app/controllers/api/admin/tutors/tutors_controller.rb:10:in `block in risk_list'
+  [1m[36mScore Load (0.2ms)[0m  [1m[34mSELECT "scores".* FROM "scores" WHERE "scores"."tutor_id" = 11 AND "scores"."score_type" = 'ths' ORDER BY "scores"."computed_at" DESC LIMIT 1 /*action='risk_list',application='TutorInsights',controller='tutors'*/[0m
+  ↳ app/controllers/api/admin/tutors/tutors_controller.rb:11:in `block in risk_list'
+  [1m[36mScore Load (0.2ms)[0m  [1m[34mSELECT "scores".* FROM "scores" WHERE "scores"."tutor_id" = 11 AND "scores"."score_type" = 'tcrs' ORDER BY "scores"."computed_at" DESC LIMIT 1 /*action='risk_list',application='TutorInsights',controller='tutors'*/[0m
+  ↳ app/controllers/api/admin/tutors/tutors_controller.rb:12:in `block in risk_list'
+  [1m[36mAlert Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "alerts" WHERE "alerts"."tutor_id" = 11 AND "alerts"."status" = 'open' /*action='risk_list',application='TutorInsights',controller='tutors'*/[0m
+  ↳ app/controllers/api/admin/tutors/tutors_controller.rb:15:in `block in risk_list'
+  [1m[36mScore Load (0.2ms)[0m  [1m[34mSELECT "scores".* FROM "scores" WHERE "scores"."tutor_id" = 12 AND "scores"."score_type" = 'fsrs' ORDER BY "scores"."computed_at" DESC LIMIT 1 /*action='risk_list',application='TutorInsights',controller='tutors'*/[0m
+  ↳ app/controllers/api/admin/tutors/tutors_controller.rb:10:in `block in risk_list'
+  [1m[36mScore Load (0.1ms)[0m  [1m[34mSELECT "scores".* FROM "scores" WHERE "scores"."tutor_id" = 12 AND "scores"."score_type" = 'ths' ORDER BY "scores"."computed_at" DESC LIMIT 1 /*action='risk_list',application='TutorInsights',controller='tutors'*/[0m
+  ↳ app/controllers/api/admin/tutors/tutors_controller.rb:11:in `block in risk_list'
+  [1m[36mScore Load (0.2ms)[0m  [1m[34mSELECT "scores".* FROM "scores" WHERE "scores"."tutor_id" = 12 AND "scores"."score_type" = 'tcrs' ORDER BY "scores"."computed_at" DESC LIMIT 1 /*action='risk_list',application='TutorInsights',controller='tutors'*/[0m
+  ↳ app/controllers/api/admin/tutors/tutors_controller.rb:12:in `block in risk_list'
+  [1m[36mAlert Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "alerts" WHERE "alerts"."tutor_id" = 12 AND "alerts"."status" = 'open' /*action='risk_list',application='TutorInsights',controller='tutors'*/[0m
+  ↳ app/controllers/api/admin/tutors/tutors_controller.rb:15:in `block in risk_list'
+  [1m[36mScore Load (0.2ms)[0m  [1m[34mSELECT "scores".* FROM "scores" WHERE "scores"."tutor_id" = 13 AND "scores"."score_type" = 'fsrs' ORDER BY "scores"."computed_at" DESC LIMIT 1 /*action='risk_list',application='TutorInsights',controller='tutors'*/[0m
+  ↳ app/controllers/api/admin/tutors/tutors_controller.rb:10:in `block in risk_list'
+  [1m[36mScore Load (0.1ms)[0m  [1m[34mSELECT "scores".* FROM "scores" WHERE "scores"."tutor_id" = 13 AND "scores"."score_type" = 'ths' ORDER BY "scores"."computed_at" DESC LIMIT 1 /*action='risk_list',application='TutorInsights',controller='tutors'*/[0m
+  ↳ app/controllers/api/admin/tutors/tutors_controller.rb:11:in `block in risk_list'
+  [1m[36mScore Load (0.1ms)[0m  [1m[34mSELECT "scores".* FROM "scores" WHERE "scores"."tutor_id" = 13 AND "scores"."score_type" = 'tcrs' ORDER BY "scores"."computed_at" DESC LIMIT 1 /*action='risk_list',application='TutorInsights',controller='tutors'*/[0m
+  ↳ app/controllers/api/admin/tutors/tutors_controller.rb:12:in `block in risk_list'
+  [1m[36mAlert Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "alerts" WHERE "alerts"."tutor_id" = 13 AND "alerts"."status" = 'open' /*action='risk_list',application='TutorInsights',controller='tutors'*/[0m
+  ↳ app/controllers/api/admin/tutors/tutors_controller.rb:15:in `block in risk_list'
+  [1m[36mScore Load (0.1ms)[0m  [1m[34mSELECT "scores".* FROM "scores" WHERE "scores"."tutor_id" = 14 AND "scores"."score_type" = 'fsrs' ORDER BY "scores"."computed_at" DESC LIMIT 1 /*action='risk_list',application='TutorInsights',controller='tutors'*/[0m
+  ↳ app/controllers/api/admin/tutors/tutors_controller.rb:10:in `block in risk_list'
+  [1m[36mScore Load (0.1ms)[0m  [1m[34mSELECT "scores".* FROM "scores" WHERE "scores"."tutor_id" = 14 AND "scores"."score_type" = 'ths' ORDER BY "scores"."computed_at" DESC LIMIT 1 /*action='risk_list',application='TutorInsights',controller='tutors'*/[0m
+  ↳ app/controllers/api/admin/tutors/tutors_controller.rb:11:in `block in risk_list'
+  [1m[36mScore Load (0.1ms)[0m  [1m[34mSELECT "scores".* FROM "scores" WHERE "scores"."tutor_id" = 14 AND "scores"."score_type" = 'tcrs' ORDER BY "scores"."computed_at" DESC LIMIT 1 /*action='risk_list',application='TutorInsights',controller='tutors'*/[0m
+  ↳ app/controllers/api/admin/tutors/tutors_controller.rb:12:in `block in risk_list'
+  [1m[36mAlert Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "alerts" WHERE "alerts"."tutor_id" = 14 AND "alerts"."status" = 'open' /*action='risk_list',application='TutorInsights',controller='tutors'*/[0m
+  ↳ app/controllers/api/admin/tutors/tutors_controller.rb:15:in `block in risk_list'
+Completed 200 OK in 58ms (Views: 0.1ms | ActiveRecord: 16.4ms (57 queries, 0 cached) | GC: 3.4ms)
+
+
+✓ Sidekiq schedule configuration loaded: session_scoring, alert_evaluation, tutor_daily_aggregation, tutor_health_score, tutor_churn_risk_score
+Started GET "/admin/1" for ::1 at 2025-11-05 10:54:32 -0600
+  [1m[36mActiveRecord::SchemaMigration Load (0.5ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='TutorInsights'*/[0m
+  
+ActiveRecord::PendingMigrationError (
+
+Migrations are pending. To resolve this issue, run:
+
+        bin/rails db:migrate
+
+You have 1 pending migration:
+
+db/migrate/20251105165351_migrate_fsrs_to_fsqs.rb
+
+
+):
+  
+activerecord (8.0.4) lib/active_record/migration.rb:742:in `check_pending_migrations'
+activerecord (8.0.4) lib/active_record/migration.rb:659:in `block (2 levels) in call'
+activesupport (8.0.4) lib/active_support/file_update_checker.rb:85:in `execute'
+activesupport (8.0.4) lib/active_support/file_update_checker.rb:95:in `execute_if_updated'
+activerecord (8.0.4) lib/active_record/migration.rb:666:in `block in call'
+activerecord (8.0.4) lib/active_record/migration.rb:656:in `synchronize'
+activerecord (8.0.4) lib/active_record/migration.rb:656:in `call'
+actionpack (8.0.4) lib/action_dispatch/middleware/callbacks.rb:31:in `block in call'
+activesupport (8.0.4) lib/active_support/callbacks.rb:100:in `run_callbacks'
+actionpack (8.0.4) lib/action_dispatch/middleware/callbacks.rb:30:in `call'
+actionpack (8.0.4) lib/action_dispatch/middleware/executor.rb:16:in `call'
+actionpack (8.0.4) lib/action_dispatch/middleware/actionable_exceptions.rb:18:in `call'
+actionpack (8.0.4) lib/action_dispatch/middleware/debug_exceptions.rb:31:in `call'
+web-console (4.2.1) lib/web_console/middleware.rb:132:in `call_app'
+web-console (4.2.1) lib/web_console/middleware.rb:28:in `block in call'
+web-console (4.2.1) lib/web_console/middleware.rb:17:in `catch'
+web-console (4.2.1) lib/web_console/middleware.rb:17:in `call'
+actionpack (8.0.4) lib/action_dispatch/middleware/show_exceptions.rb:32:in `call'
+railties (8.0.4) lib/rails/rack/logger.rb:41:in `call_app'
+railties (8.0.4) lib/rails/rack/logger.rb:29:in `call'
+actionpack (8.0.4) lib/action_dispatch/middleware/remote_ip.rb:96:in `call'
+actionpack (8.0.4) lib/action_dispatch/middleware/request_id.rb:34:in `call'
+rack (3.2.4) lib/rack/method_override.rb:28:in `call'
+rack (3.2.4) lib/rack/runtime.rb:24:in `call'
+actionpack (8.0.4) lib/action_dispatch/middleware/server_timing.rb:61:in `block in call'
+actionpack (8.0.4) lib/action_dispatch/middleware/server_timing.rb:26:in `collect_events'
+actionpack (8.0.4) lib/action_dispatch/middleware/server_timing.rb:60:in `call'
+actionpack (8.0.4) lib/action_dispatch/middleware/executor.rb:16:in `call'
+propshaft (1.3.1) lib/propshaft/server.rb:37:in `call'
+actionpack (8.0.4) lib/action_dispatch/middleware/static.rb:27:in `call'
+rack (3.2.4) lib/rack/sendfile.rb:131:in `call'
+actionpack (8.0.4) lib/action_dispatch/middleware/host_authorization.rb:143:in `call'
+vite_ruby (3.9.2) lib/vite_ruby/dev_server_proxy.rb:22:in `perform_request'
+rack-proxy (0.7.7) lib/rack/proxy.rb:87:in `call'
+railties (8.0.4) lib/rails/engine.rb:535:in `call'
+puma (7.1.0) lib/puma/configuration.rb:300:in `call'
+puma (7.1.0) lib/puma/request.rb:101:in `block in handle_request'
+puma (7.1.0) lib/puma/thread_pool.rb:355:in `with_force_shutdown'
+puma (7.1.0) lib/puma/request.rb:100:in `handle_request'
+puma (7.1.0) lib/puma/server.rb:503:in `process_client'
+puma (7.1.0) lib/puma/server.rb:262:in `block in run'
+puma (7.1.0) lib/puma/thread_pool.rb:182:in `block in spawn_thread'
+Started GET "/.well-known/appspecific/com.chrome.devtools.json" for ::1 at 2025-11-05 10:54:32 -0600
+Started GET "/favicon.ico" for ::1 at 2025-11-05 10:54:32 -0600
+  [1m[36mActiveRecord::SchemaMigration Load (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='TutorInsights'*/[0m
+  
+ActiveRecord::PendingMigrationError (
+
+Migrations are pending. To resolve this issue, run:
+
+        bin/rails db:migrate
+
+You have 1 pending migration:
+
+db/migrate/20251105165351_migrate_fsrs_to_fsqs.rb
+
+
+):
+  
+activerecord (8.0.4) lib/active_record/migration.rb:742:in `check_pending_migrations'
+activerecord (8.0.4) lib/active_record/migration.rb:659:in `block (2 levels) in call'
+activesupport (8.0.4) lib/active_support/file_update_checker.rb:85:in `execute'
+activerecord (8.0.4) lib/active_record/migration.rb:664:in `block in call'
+activerecord (8.0.4) lib/active_record/migration.rb:656:in `synchronize'
+activerecord (8.0.4) lib/active_record/migration.rb:656:in `call'
+actionpack (8.0.4) lib/action_dispatch/middleware/callbacks.rb:31:in `block in call'
+activesupport (8.0.4) lib/active_support/callbacks.rb:100:in `run_callbacks'
+actionpack (8.0.4) lib/action_dispatch/middleware/callbacks.rb:30:in `call'
+actionpack (8.0.4) lib/action_dispatch/middleware/executor.rb:16:in `call'
+actionpack (8.0.4) lib/action_dispatch/middleware/actionable_exceptions.rb:18:in `call'
+actionpack (8.0.4) lib/action_dispatch/middleware/debug_exceptions.rb:31:in `call'
+web-console (4.2.1) lib/web_console/middleware.rb:132:in `call_app'
+web-console (4.2.1) lib/web_console/middleware.rb:28:in `block in call'
+web-console (4.2.1) lib/web_console/middleware.rb:17:in `catch'
+web-console (4.2.1) lib/web_console/middleware.rb:17:in `call'
+actionpack (8.0.4) lib/action_dispatch/middleware/show_exceptions.rb:32:in `call'
+railties (8.0.4) lib/rails/rack/logger.rb:41:in `call_app'
+railties (8.0.4) lib/rails/rack/logger.rb:29:in `call'
+actionpack (8.0.4) lib/action_dispatch/middleware/remote_ip.rb:96:in `call'
+actionpack (8.0.4) lib/action_dispatch/middleware/request_id.rb:34:in `call'
+rack (3.2.4) lib/rack/method_override.rb:28:in `call'
+rack (3.2.4) lib/rack/runtime.rb:24:in `call'
+actionpack (8.0.4) lib/action_dispatch/middleware/server_timing.rb:61:in `block in call'
+actionpack (8.0.4) lib/action_dispatch/middleware/server_timing.rb:26:in `collect_events'
+actionpack (8.0.4) lib/action_dispatch/middleware/server_timing.rb:60:in `call'
+actionpack (8.0.4) lib/action_dispatch/middleware/executor.rb:16:in `call'
+propshaft (1.3.1) lib/propshaft/server.rb:37:in `call'
+actionpack (8.0.4) lib/action_dispatch/middleware/static.rb:27:in `call'
+rack (3.2.4) lib/rack/sendfile.rb:131:in `call'
+actionpack (8.0.4) lib/action_dispatch/middleware/host_authorization.rb:143:in `call'
+vite_ruby (3.9.2) lib/vite_ruby/dev_server_proxy.rb:22:in `perform_request'
+rack-proxy (0.7.7) lib/rack/proxy.rb:87:in `call'
+railties (8.0.4) lib/rails/engine.rb:535:in `call'
+puma (7.1.0) lib/puma/configuration.rb:300:in `call'
+puma (7.1.0) lib/puma/request.rb:101:in `block in handle_request'
+puma (7.1.0) lib/puma/thread_pool.rb:355:in `with_force_shutdown'
+puma (7.1.0) lib/puma/request.rb:100:in `handle_request'
+puma (7.1.0) lib/puma/server.rb:503:in `process_client'
+puma (7.1.0) lib/puma/server.rb:262:in `block in run'
+puma (7.1.0) lib/puma/thread_pool.rb:182:in `block in spawn_thread'
+  [1m[36mActiveRecord::SchemaMigration Load (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='TutorInsights'*/[0m
+  
+ActiveRecord::PendingMigrationError (
+
+Migrations are pending. To resolve this issue, run:
+
+        bin/rails db:migrate
+
+You have 1 pending migration:
+
+db/migrate/20251105165351_migrate_fsrs_to_fsqs.rb
+
+
+):
+  
+activerecord (8.0.4) lib/active_record/migration.rb:742:in `check_pending_migrations'
+activerecord (8.0.4) lib/active_record/migration.rb:659:in `block (2 levels) in call'
+activesupport (8.0.4) lib/active_support/file_update_checker.rb:85:in `execute'
+activerecord (8.0.4) lib/active_record/migration.rb:664:in `block in call'
+activerecord (8.0.4) lib/active_record/migration.rb:656:in `synchronize'
+activerecord (8.0.4) lib/active_record/migration.rb:656:in `call'
+actionpack (8.0.4) lib/action_dispatch/middleware/callbacks.rb:31:in `block in call'
+activesupport (8.0.4) lib/active_support/callbacks.rb:100:in `run_callbacks'
+actionpack (8.0.4) lib/action_dispatch/middleware/callbacks.rb:30:in `call'
+actionpack (8.0.4) lib/action_dispatch/middleware/executor.rb:16:in `call'
+actionpack (8.0.4) lib/action_dispatch/middleware/actionable_exceptions.rb:18:in `call'
+actionpack (8.0.4) lib/action_dispatch/middleware/debug_exceptions.rb:31:in `call'
+web-console (4.2.1) lib/web_console/middleware.rb:132:in `call_app'
+web-console (4.2.1) lib/web_console/middleware.rb:28:in `block in call'
+web-console (4.2.1) lib/web_console/middleware.rb:17:in `catch'
+web-console (4.2.1) lib/web_console/middleware.rb:17:in `call'
+actionpack (8.0.4) lib/action_dispatch/middleware/show_exceptions.rb:32:in `call'
+railties (8.0.4) lib/rails/rack/logger.rb:41:in `call_app'
+railties (8.0.4) lib/rails/rack/logger.rb:29:in `call'
+actionpack (8.0.4) lib/action_dispatch/middleware/remote_ip.rb:96:in `call'
+actionpack (8.0.4) lib/action_dispatch/middleware/request_id.rb:34:in `call'
+rack (3.2.4) lib/rack/method_override.rb:28:in `call'
+rack (3.2.4) lib/rack/runtime.rb:24:in `call'
+actionpack (8.0.4) lib/action_dispatch/middleware/server_timing.rb:61:in `block in call'
+actionpack (8.0.4) lib/action_dispatch/middleware/server_timing.rb:26:in `collect_events'
+actionpack (8.0.4) lib/action_dispatch/middleware/server_timing.rb:60:in `call'
+actionpack (8.0.4) lib/action_dispatch/middleware/executor.rb:16:in `call'
+propshaft (1.3.1) lib/propshaft/server.rb:37:in `call'
+actionpack (8.0.4) lib/action_dispatch/middleware/static.rb:27:in `call'
+rack (3.2.4) lib/rack/sendfile.rb:131:in `call'
+actionpack (8.0.4) lib/action_dispatch/middleware/host_authorization.rb:143:in `call'
+vite_ruby (3.9.2) lib/vite_ruby/dev_server_proxy.rb:22:in `perform_request'
+rack-proxy (0.7.7) lib/rack/proxy.rb:87:in `call'
+railties (8.0.4) lib/rails/engine.rb:535:in `call'
+puma (7.1.0) lib/puma/configuration.rb:300:in `call'
+puma (7.1.0) lib/puma/request.rb:101:in `block in handle_request'
+puma (7.1.0) lib/puma/thread_pool.rb:355:in `with_force_shutdown'
+puma (7.1.0) lib/puma/request.rb:100:in `handle_request'
+puma (7.1.0) lib/puma/server.rb:503:in `process_client'
+puma (7.1.0) lib/puma/server.rb:262:in `block in run'
+puma (7.1.0) lib/puma/thread_pool.rb:182:in `block in spawn_thread'
+Started GET "/.well-known/appspecific/com.chrome.devtools.json" for ::1 at 2025-11-05 10:54:36 -0600
+Started GET "/api/tutor/1/performance_summary" for ::1 at 2025-11-05 10:54:36 -0600
+Started GET "/api/tutor/1/fsrs_latest" for ::1 at 2025-11-05 10:54:36 -0600
+  [1m[36mActiveRecord::SchemaMigration Load (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='TutorInsights'*/[0m
+  
+ActiveRecord::PendingMigrationError (
+
+Migrations are pending. To resolve this issue, run:
+
+        bin/rails db:migrate
+
+You have 1 pending migration:
+
+db/migrate/20251105165351_migrate_fsrs_to_fsqs.rb
+
+
+):
+  
+activerecord (8.0.4) lib/active_record/migration.rb:742:in `check_pending_migrations'
+activerecord (8.0.4) lib/active_record/migration.rb:659:in `block (2 levels) in call'
+activesupport (8.0.4) lib/active_support/file_update_checker.rb:85:in `execute'
+activerecord (8.0.4) lib/active_record/migration.rb:664:in `block in call'
+activerecord (8.0.4) lib/active_record/migration.rb:656:in `synchronize'
+activerecord (8.0.4) lib/active_record/migration.rb:656:in `call'
+actionpack (8.0.4) lib/action_dispatch/middleware/callbacks.rb:31:in `block in call'
+activesupport (8.0.4) lib/active_support/callbacks.rb:100:in `run_callbacks'
+actionpack (8.0.4) lib/action_dispatch/middleware/callbacks.rb:30:in `call'
+actionpack (8.0.4) lib/action_dispatch/middleware/executor.rb:16:in `call'
+actionpack (8.0.4) lib/action_dispatch/middleware/actionable_exceptions.rb:18:in `call'
+actionpack (8.0.4) lib/action_dispatch/middleware/debug_exceptions.rb:31:in `call'
+web-console (4.2.1) lib/web_console/middleware.rb:132:in `call_app'
+web-console (4.2.1) lib/web_console/middleware.rb:28:in `block in call'
+web-console (4.2.1) lib/web_console/middleware.rb:17:in `catch'
+web-console (4.2.1) lib/web_console/middleware.rb:17:in `call'
+actionpack (8.0.4) lib/action_dispatch/middleware/show_exceptions.rb:32:in `call'
+railties (8.0.4) lib/rails/rack/logger.rb:41:in `call_app'
+railties (8.0.4) lib/rails/rack/logger.rb:29:in `call'
+actionpack (8.0.4) lib/action_dispatch/middleware/remote_ip.rb:96:in `call'
+actionpack (8.0.4) lib/action_dispatch/middleware/request_id.rb:34:in `call'
+rack (3.2.4) lib/rack/method_override.rb:28:in `call'
+rack (3.2.4) lib/rack/runtime.rb:24:in `call'
+actionpack (8.0.4) lib/action_dispatch/middleware/server_timing.rb:61:in `block in call'
+actionpack (8.0.4) lib/action_dispatch/middleware/server_timing.rb:26:in `collect_events'
+actionpack (8.0.4) lib/action_dispatch/middleware/server_timing.rb:60:in `call'
+actionpack (8.0.4) lib/action_dispatch/middleware/executor.rb:16:in `call'
+propshaft (1.3.1) lib/propshaft/server.rb:37:in `call'
+actionpack (8.0.4) lib/action_dispatch/middleware/static.rb:27:in `call'
+rack (3.2.4) lib/rack/sendfile.rb:131:in `call'
+actionpack (8.0.4) lib/action_dispatch/middleware/host_authorization.rb:143:in `call'
+vite_ruby (3.9.2) lib/vite_ruby/dev_server_proxy.rb:22:in `perform_request'
+rack-proxy (0.7.7) lib/rack/proxy.rb:87:in `call'
+railties (8.0.4) lib/rails/engine.rb:535:in `call'
+puma (7.1.0) lib/puma/configuration.rb:300:in `call'
+puma (7.1.0) lib/puma/request.rb:101:in `block in handle_request'
+puma (7.1.0) lib/puma/thread_pool.rb:355:in `with_force_shutdown'
+puma (7.1.0) lib/puma/request.rb:100:in `handle_request'
+puma (7.1.0) lib/puma/server.rb:503:in `process_client'
+puma (7.1.0) lib/puma/server.rb:262:in `block in run'
+puma (7.1.0) lib/puma/thread_pool.rb:182:in `block in spawn_thread'
+  [1m[36mActiveRecord::SchemaMigration Load (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='TutorInsights'*/[0m
+  
+ActiveRecord::PendingMigrationError (
+
+Migrations are pending. To resolve this issue, run:
+
+        bin/rails db:migrate
+
+You have 1 pending migration:
+
+db/migrate/20251105165351_migrate_fsrs_to_fsqs.rb
+
+
+):
+  
+activerecord (8.0.4) lib/active_record/migration.rb:742:in `check_pending_migrations'
+activerecord (8.0.4) lib/active_record/migration.rb:659:in `block (2 levels) in call'
+activesupport (8.0.4) lib/active_support/file_update_checker.rb:85:in `execute'
+activerecord (8.0.4) lib/active_record/migration.rb:664:in `block in call'
+activerecord (8.0.4) lib/active_record/migration.rb:656:in `synchronize'
+activerecord (8.0.4) lib/active_record/migration.rb:656:in `call'
+actionpack (8.0.4) lib/action_dispatch/middleware/callbacks.rb:31:in `block in call'
+activesupport (8.0.4) lib/active_support/callbacks.rb:100:in `run_callbacks'
+actionpack (8.0.4) lib/action_dispatch/middleware/callbacks.rb:30:in `call'
+actionpack (8.0.4) lib/action_dispatch/middleware/executor.rb:16:in `call'
+actionpack (8.0.4) lib/action_dispatch/middleware/actionable_exceptions.rb:18:in `call'
+actionpack (8.0.4) lib/action_dispatch/middleware/debug_exceptions.rb:31:in `call'
+web-console (4.2.1) lib/web_console/middleware.rb:132:in `call_app'
+web-console (4.2.1) lib/web_console/middleware.rb:28:in `block in call'
+web-console (4.2.1) lib/web_console/middleware.rb:17:in `catch'
+web-console (4.2.1) lib/web_console/middleware.rb:17:in `call'
+actionpack (8.0.4) lib/action_dispatch/middleware/show_exceptions.rb:32:in `call'
+railties (8.0.4) lib/rails/rack/logger.rb:41:in `call_app'
+railties (8.0.4) lib/rails/rack/logger.rb:29:in `call'
+actionpack (8.0.4) lib/action_dispatch/middleware/remote_ip.rb:96:in `call'
+actionpack (8.0.4) lib/action_dispatch/middleware/request_id.rb:34:in `call'
+rack (3.2.4) lib/rack/method_override.rb:28:in `call'
+rack (3.2.4) lib/rack/runtime.rb:24:in `call'
+actionpack (8.0.4) lib/action_dispatch/middleware/server_timing.rb:61:in `block in call'
+actionpack (8.0.4) lib/action_dispatch/middleware/server_timing.rb:26:in `collect_events'
+actionpack (8.0.4) lib/action_dispatch/middleware/server_timing.rb:60:in `call'
+actionpack (8.0.4) lib/action_dispatch/middleware/executor.rb:16:in `call'
+propshaft (1.3.1) lib/propshaft/server.rb:37:in `call'
+actionpack (8.0.4) lib/action_dispatch/middleware/static.rb:27:in `call'
+rack (3.2.4) lib/rack/sendfile.rb:131:in `call'
+actionpack (8.0.4) lib/action_dispatch/middleware/host_authorization.rb:143:in `call'
+vite_ruby (3.9.2) lib/vite_ruby/dev_server_proxy.rb:22:in `perform_request'
+rack-proxy (0.7.7) lib/rack/proxy.rb:87:in `call'
+railties (8.0.4) lib/rails/engine.rb:535:in `call'
+puma (7.1.0) lib/puma/configuration.rb:300:in `call'
+puma (7.1.0) lib/puma/request.rb:101:in `block in handle_request'
+puma (7.1.0) lib/puma/thread_pool.rb:355:in `with_force_shutdown'
+puma (7.1.0) lib/puma/request.rb:100:in `handle_request'
+puma (7.1.0) lib/puma/server.rb:503:in `process_client'
+puma (7.1.0) lib/puma/server.rb:262:in `block in run'
+puma (7.1.0) lib/puma/thread_pool.rb:182:in `block in spawn_thread'
+  [1m[36mActiveRecord::SchemaMigration Load (0.6ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='TutorInsights'*/[0m
+  
+ActiveRecord::PendingMigrationError (
+
+Migrations are pending. To resolve this issue, run:
+
+        bin/rails db:migrate
+
+You have 1 pending migration:
+
+db/migrate/20251105165351_migrate_fsrs_to_fsqs.rb
+
+
+):
+  
+activerecord (8.0.4) lib/active_record/migration.rb:742:in `check_pending_migrations'
+activerecord (8.0.4) lib/active_record/migration.rb:659:in `block (2 levels) in call'
+activesupport (8.0.4) lib/active_support/file_update_checker.rb:85:in `execute'
+activerecord (8.0.4) lib/active_record/migration.rb:664:in `block in call'
+activerecord (8.0.4) lib/active_record/migration.rb:656:in `synchronize'
+activerecord (8.0.4) lib/active_record/migration.rb:656:in `call'
+actionpack (8.0.4) lib/action_dispatch/middleware/callbacks.rb:31:in `block in call'
+activesupport (8.0.4) lib/active_support/callbacks.rb:100:in `run_callbacks'
+actionpack (8.0.4) lib/action_dispatch/middleware/callbacks.rb:30:in `call'
+actionpack (8.0.4) lib/action_dispatch/middleware/executor.rb:16:in `call'
+actionpack (8.0.4) lib/action_dispatch/middleware/actionable_exceptions.rb:18:in `call'
+actionpack (8.0.4) lib/action_dispatch/middleware/debug_exceptions.rb:31:in `call'
+web-console (4.2.1) lib/web_console/middleware.rb:132:in `call_app'
+web-console (4.2.1) lib/web_console/middleware.rb:28:in `block in call'
+web-console (4.2.1) lib/web_console/middleware.rb:17:in `catch'
+web-console (4.2.1) lib/web_console/middleware.rb:17:in `call'
+actionpack (8.0.4) lib/action_dispatch/middleware/show_exceptions.rb:32:in `call'
+railties (8.0.4) lib/rails/rack/logger.rb:41:in `call_app'
+railties (8.0.4) lib/rails/rack/logger.rb:29:in `call'
+actionpack (8.0.4) lib/action_dispatch/middleware/remote_ip.rb:96:in `call'
+actionpack (8.0.4) lib/action_dispatch/middleware/request_id.rb:34:in `call'
+rack (3.2.4) lib/rack/method_override.rb:28:in `call'
+rack (3.2.4) lib/rack/runtime.rb:24:in `call'
+actionpack (8.0.4) lib/action_dispatch/middleware/server_timing.rb:61:in `block in call'
+actionpack (8.0.4) lib/action_dispatch/middleware/server_timing.rb:26:in `collect_events'
+actionpack (8.0.4) lib/action_dispatch/middleware/server_timing.rb:60:in `call'
+actionpack (8.0.4) lib/action_dispatch/middleware/executor.rb:16:in `call'
+propshaft (1.3.1) lib/propshaft/server.rb:37:in `call'
+actionpack (8.0.4) lib/action_dispatch/middleware/static.rb:27:in `call'
+rack (3.2.4) lib/rack/sendfile.rb:131:in `call'
+actionpack (8.0.4) lib/action_dispatch/middleware/host_authorization.rb:143:in `call'
+vite_ruby (3.9.2) lib/vite_ruby/dev_server_proxy.rb:22:in `perform_request'
+rack-proxy (0.7.7) lib/rack/proxy.rb:87:in `call'
+railties (8.0.4) lib/rails/engine.rb:535:in `call'
+puma (7.1.0) lib/puma/configuration.rb:300:in `call'
+puma (7.1.0) lib/puma/request.rb:101:in `block in handle_request'
+puma (7.1.0) lib/puma/thread_pool.rb:355:in `with_force_shutdown'
+puma (7.1.0) lib/puma/request.rb:100:in `handle_request'
+puma (7.1.0) lib/puma/server.rb:503:in `process_client'
+puma (7.1.0) lib/puma/server.rb:262:in `block in run'
+puma (7.1.0) lib/puma/thread_pool.rb:182:in `block in spawn_thread'
+Started GET "/api/tutor/1/session_list" for ::1 at 2025-11-05 10:54:36 -0600
+Started GET "/api/tutor/1/fsrs_history" for ::1 at 2025-11-05 10:54:36 -0600
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='TutorInsights'*/[0m
+  
+ActiveRecord::PendingMigrationError (
+
+Migrations are pending. To resolve this issue, run:
+
+        bin/rails db:migrate
+
+You have 1 pending migration:
+
+db/migrate/20251105165351_migrate_fsrs_to_fsqs.rb
+
+
+):
+  
+activerecord (8.0.4) lib/active_record/migration.rb:742:in `check_pending_migrations'
+activerecord (8.0.4) lib/active_record/migration.rb:659:in `block (2 levels) in call'
+activesupport (8.0.4) lib/active_support/file_update_checker.rb:85:in `execute'
+activerecord (8.0.4) lib/active_record/migration.rb:664:in `block in call'
+activerecord (8.0.4) lib/active_record/migration.rb:656:in `synchronize'
+activerecord (8.0.4) lib/active_record/migration.rb:656:in `call'
+actionpack (8.0.4) lib/action_dispatch/middleware/callbacks.rb:31:in `block in call'
+activesupport (8.0.4) lib/active_support/callbacks.rb:100:in `run_callbacks'
+actionpack (8.0.4) lib/action_dispatch/middleware/callbacks.rb:30:in `call'
+actionpack (8.0.4) lib/action_dispatch/middleware/executor.rb:16:in `call'
+actionpack (8.0.4) lib/action_dispatch/middleware/actionable_exceptions.rb:18:in `call'
+actionpack (8.0.4) lib/action_dispatch/middleware/debug_exceptions.rb:31:in `call'
+web-console (4.2.1) lib/web_console/middleware.rb:132:in `call_app'
+web-console (4.2.1) lib/web_console/middleware.rb:28:in `block in call'
+web-console (4.2.1) lib/web_console/middleware.rb:17:in `catch'
+web-console (4.2.1) lib/web_console/middleware.rb:17:in `call'
+actionpack (8.0.4) lib/action_dispatch/middleware/show_exceptions.rb:32:in `call'
+railties (8.0.4) lib/rails/rack/logger.rb:41:in `call_app'
+railties (8.0.4) lib/rails/rack/logger.rb:29:in `call'
+actionpack (8.0.4) lib/action_dispatch/middleware/remote_ip.rb:96:in `call'
+actionpack (8.0.4) lib/action_dispatch/middleware/request_id.rb:34:in `call'
+rack (3.2.4) lib/rack/method_override.rb:28:in `call'
+rack (3.2.4) lib/rack/runtime.rb:24:in `call'
+actionpack (8.0.4) lib/action_dispatch/middleware/server_timing.rb:61:in `block in call'
+actionpack (8.0.4) lib/action_dispatch/middleware/server_timing.rb:26:in `collect_events'
+actionpack (8.0.4) lib/action_dispatch/middleware/server_timing.rb:60:in `call'
+actionpack (8.0.4) lib/action_dispatch/middleware/executor.rb:16:in `call'
+propshaft (1.3.1) lib/propshaft/server.rb:37:in `call'
+actionpack (8.0.4) lib/action_dispatch/middleware/static.rb:27:in `call'
+rack (3.2.4) lib/rack/sendfile.rb:131:in `call'
+actionpack (8.0.4) lib/action_dispatch/middleware/host_authorization.rb:143:in `call'
+vite_ruby (3.9.2) lib/vite_ruby/dev_server_proxy.rb:22:in `perform_request'
+rack-proxy (0.7.7) lib/rack/proxy.rb:87:in `call'
+railties (8.0.4) lib/rails/engine.rb:535:in `call'
+puma (7.1.0) lib/puma/configuration.rb:300:in `call'
+puma (7.1.0) lib/puma/request.rb:101:in `block in handle_request'
+puma (7.1.0) lib/puma/thread_pool.rb:355:in `with_force_shutdown'
+puma (7.1.0) lib/puma/request.rb:100:in `handle_request'
+puma (7.1.0) lib/puma/server.rb:503:in `process_client'
+puma (7.1.0) lib/puma/server.rb:262:in `block in run'
+puma (7.1.0) lib/puma/thread_pool.rb:182:in `block in spawn_thread'
+  [1m[36mActiveRecord::SchemaMigration Load (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='TutorInsights'*/[0m
+  
+ActiveRecord::PendingMigrationError (
+
+Migrations are pending. To resolve this issue, run:
+
+        bin/rails db:migrate
+
+You have 1 pending migration:
+
+db/migrate/20251105165351_migrate_fsrs_to_fsqs.rb
+
+
+):
+  
+activerecord (8.0.4) lib/active_record/migration.rb:742:in `check_pending_migrations'
+activerecord (8.0.4) lib/active_record/migration.rb:659:in `block (2 levels) in call'
+activesupport (8.0.4) lib/active_support/file_update_checker.rb:85:in `execute'
+activerecord (8.0.4) lib/active_record/migration.rb:664:in `block in call'
+activerecord (8.0.4) lib/active_record/migration.rb:656:in `synchronize'
+activerecord (8.0.4) lib/active_record/migration.rb:656:in `call'
+actionpack (8.0.4) lib/action_dispatch/middleware/callbacks.rb:31:in `block in call'
+activesupport (8.0.4) lib/active_support/callbacks.rb:100:in `run_callbacks'
+actionpack (8.0.4) lib/action_dispatch/middleware/callbacks.rb:30:in `call'
+actionpack (8.0.4) lib/action_dispatch/middleware/executor.rb:16:in `call'
+actionpack (8.0.4) lib/action_dispatch/middleware/actionable_exceptions.rb:18:in `call'
+actionpack (8.0.4) lib/action_dispatch/middleware/debug_exceptions.rb:31:in `call'
+web-console (4.2.1) lib/web_console/middleware.rb:132:in `call_app'
+web-console (4.2.1) lib/web_console/middleware.rb:28:in `block in call'
+web-console (4.2.1) lib/web_console/middleware.rb:17:in `catch'
+web-console (4.2.1) lib/web_console/middleware.rb:17:in `call'
+actionpack (8.0.4) lib/action_dispatch/middleware/show_exceptions.rb:32:in `call'
+railties (8.0.4) lib/rails/rack/logger.rb:41:in `call_app'
+railties (8.0.4) lib/rails/rack/logger.rb:29:in `call'
+actionpack (8.0.4) lib/action_dispatch/middleware/remote_ip.rb:96:in `call'
+actionpack (8.0.4) lib/action_dispatch/middleware/request_id.rb:34:in `call'
+rack (3.2.4) lib/rack/method_override.rb:28:in `call'
+rack (3.2.4) lib/rack/runtime.rb:24:in `call'
+actionpack (8.0.4) lib/action_dispatch/middleware/server_timing.rb:61:in `block in call'
+actionpack (8.0.4) lib/action_dispatch/middleware/server_timing.rb:26:in `collect_events'
+actionpack (8.0.4) lib/action_dispatch/middleware/server_timing.rb:60:in `call'
+actionpack (8.0.4) lib/action_dispatch/middleware/executor.rb:16:in `call'
+propshaft (1.3.1) lib/propshaft/server.rb:37:in `call'
+actionpack (8.0.4) lib/action_dispatch/middleware/static.rb:27:in `call'
+rack (3.2.4) lib/rack/sendfile.rb:131:in `call'
+actionpack (8.0.4) lib/action_dispatch/middleware/host_authorization.rb:143:in `call'
+vite_ruby (3.9.2) lib/vite_ruby/dev_server_proxy.rb:22:in `perform_request'
+rack-proxy (0.7.7) lib/rack/proxy.rb:87:in `call'
+railties (8.0.4) lib/rails/engine.rb:535:in `call'
+puma (7.1.0) lib/puma/configuration.rb:300:in `call'
+puma (7.1.0) lib/puma/request.rb:101:in `block in handle_request'
+puma (7.1.0) lib/puma/thread_pool.rb:355:in `with_force_shutdown'
+puma (7.1.0) lib/puma/request.rb:100:in `handle_request'
+puma (7.1.0) lib/puma/server.rb:503:in `process_client'
+puma (7.1.0) lib/puma/server.rb:262:in `block in run'
+puma (7.1.0) lib/puma/thread_pool.rb:182:in `block in spawn_thread'
+Started GET "/tutor/1" for ::1 at 2025-11-05 10:54:38 -0600
+  [1m[36mActiveRecord::SchemaMigration Load (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='TutorInsights'*/[0m
+  
+ActiveRecord::PendingMigrationError (
+
+Migrations are pending. To resolve this issue, run:
+
+        bin/rails db:migrate
+
+You have 1 pending migration:
+
+db/migrate/20251105165351_migrate_fsrs_to_fsqs.rb
+
+
+):
+  
+activerecord (8.0.4) lib/active_record/migration.rb:742:in `check_pending_migrations'
+activerecord (8.0.4) lib/active_record/migration.rb:659:in `block (2 levels) in call'
+activesupport (8.0.4) lib/active_support/file_update_checker.rb:85:in `execute'
+activerecord (8.0.4) lib/active_record/migration.rb:664:in `block in call'
+activerecord (8.0.4) lib/active_record/migration.rb:656:in `synchronize'
+activerecord (8.0.4) lib/active_record/migration.rb:656:in `call'
+actionpack (8.0.4) lib/action_dispatch/middleware/callbacks.rb:31:in `block in call'
+activesupport (8.0.4) lib/active_support/callbacks.rb:100:in `run_callbacks'
+actionpack (8.0.4) lib/action_dispatch/middleware/callbacks.rb:30:in `call'
+actionpack (8.0.4) lib/action_dispatch/middleware/executor.rb:16:in `call'
+actionpack (8.0.4) lib/action_dispatch/middleware/actionable_exceptions.rb:18:in `call'
+actionpack (8.0.4) lib/action_dispatch/middleware/debug_exceptions.rb:31:in `call'
+web-console (4.2.1) lib/web_console/middleware.rb:132:in `call_app'
+web-console (4.2.1) lib/web_console/middleware.rb:28:in `block in call'
+web-console (4.2.1) lib/web_console/middleware.rb:17:in `catch'
+web-console (4.2.1) lib/web_console/middleware.rb:17:in `call'
+actionpack (8.0.4) lib/action_dispatch/middleware/show_exceptions.rb:32:in `call'
+railties (8.0.4) lib/rails/rack/logger.rb:41:in `call_app'
+railties (8.0.4) lib/rails/rack/logger.rb:29:in `call'
+actionpack (8.0.4) lib/action_dispatch/middleware/remote_ip.rb:96:in `call'
+actionpack (8.0.4) lib/action_dispatch/middleware/request_id.rb:34:in `call'
+rack (3.2.4) lib/rack/method_override.rb:28:in `call'
+rack (3.2.4) lib/rack/runtime.rb:24:in `call'
+actionpack (8.0.4) lib/action_dispatch/middleware/server_timing.rb:61:in `block in call'
+actionpack (8.0.4) lib/action_dispatch/middleware/server_timing.rb:26:in `collect_events'
+actionpack (8.0.4) lib/action_dispatch/middleware/server_timing.rb:60:in `call'
+actionpack (8.0.4) lib/action_dispatch/middleware/executor.rb:16:in `call'
+propshaft (1.3.1) lib/propshaft/server.rb:37:in `call'
+actionpack (8.0.4) lib/action_dispatch/middleware/static.rb:27:in `call'
+rack (3.2.4) lib/rack/sendfile.rb:131:in `call'
+actionpack (8.0.4) lib/action_dispatch/middleware/host_authorization.rb:143:in `call'
+vite_ruby (3.9.2) lib/vite_ruby/dev_server_proxy.rb:22:in `perform_request'
+rack-proxy (0.7.7) lib/rack/proxy.rb:87:in `call'
+railties (8.0.4) lib/rails/engine.rb:535:in `call'
+puma (7.1.0) lib/puma/configuration.rb:300:in `call'
+puma (7.1.0) lib/puma/request.rb:101:in `block in handle_request'
+puma (7.1.0) lib/puma/thread_pool.rb:355:in `with_force_shutdown'
+puma (7.1.0) lib/puma/request.rb:100:in `handle_request'
+puma (7.1.0) lib/puma/server.rb:503:in `process_client'
+puma (7.1.0) lib/puma/server.rb:262:in `block in run'
+puma (7.1.0) lib/puma/thread_pool.rb:182:in `block in spawn_thread'
+Started GET "/.well-known/appspecific/com.chrome.devtools.json" for ::1 at 2025-11-05 10:54:38 -0600
+Started GET "/favicon.ico" for ::1 at 2025-11-05 10:54:38 -0600
+  [1m[36mActiveRecord::SchemaMigration Load (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='TutorInsights'*/[0m
+  
+ActiveRecord::PendingMigrationError (
+
+Migrations are pending. To resolve this issue, run:
+
+        bin/rails db:migrate
+
+You have 1 pending migration:
+
+db/migrate/20251105165351_migrate_fsrs_to_fsqs.rb
+
+
+):
+  
+activerecord (8.0.4) lib/active_record/migration.rb:742:in `check_pending_migrations'
+activerecord (8.0.4) lib/active_record/migration.rb:659:in `block (2 levels) in call'
+activesupport (8.0.4) lib/active_support/file_update_checker.rb:85:in `execute'
+activerecord (8.0.4) lib/active_record/migration.rb:664:in `block in call'
+activerecord (8.0.4) lib/active_record/migration.rb:656:in `synchronize'
+activerecord (8.0.4) lib/active_record/migration.rb:656:in `call'
+actionpack (8.0.4) lib/action_dispatch/middleware/callbacks.rb:31:in `block in call'
+activesupport (8.0.4) lib/active_support/callbacks.rb:100:in `run_callbacks'
+actionpack (8.0.4) lib/action_dispatch/middleware/callbacks.rb:30:in `call'
+actionpack (8.0.4) lib/action_dispatch/middleware/executor.rb:16:in `call'
+actionpack (8.0.4) lib/action_dispatch/middleware/actionable_exceptions.rb:18:in `call'
+actionpack (8.0.4) lib/action_dispatch/middleware/debug_exceptions.rb:31:in `call'
+web-console (4.2.1) lib/web_console/middleware.rb:132:in `call_app'
+web-console (4.2.1) lib/web_console/middleware.rb:28:in `block in call'
+web-console (4.2.1) lib/web_console/middleware.rb:17:in `catch'
+web-console (4.2.1) lib/web_console/middleware.rb:17:in `call'
+actionpack (8.0.4) lib/action_dispatch/middleware/show_exceptions.rb:32:in `call'
+railties (8.0.4) lib/rails/rack/logger.rb:41:in `call_app'
+railties (8.0.4) lib/rails/rack/logger.rb:29:in `call'
+actionpack (8.0.4) lib/action_dispatch/middleware/remote_ip.rb:96:in `call'
+actionpack (8.0.4) lib/action_dispatch/middleware/request_id.rb:34:in `call'
+rack (3.2.4) lib/rack/method_override.rb:28:in `call'
+rack (3.2.4) lib/rack/runtime.rb:24:in `call'
+actionpack (8.0.4) lib/action_dispatch/middleware/server_timing.rb:61:in `block in call'
+actionpack (8.0.4) lib/action_dispatch/middleware/server_timing.rb:26:in `collect_events'
+actionpack (8.0.4) lib/action_dispatch/middleware/server_timing.rb:60:in `call'
+actionpack (8.0.4) lib/action_dispatch/middleware/executor.rb:16:in `call'
+propshaft (1.3.1) lib/propshaft/server.rb:37:in `call'
+actionpack (8.0.4) lib/action_dispatch/middleware/static.rb:27:in `call'
+rack (3.2.4) lib/rack/sendfile.rb:131:in `call'
+actionpack (8.0.4) lib/action_dispatch/middleware/host_authorization.rb:143:in `call'
+vite_ruby (3.9.2) lib/vite_ruby/dev_server_proxy.rb:22:in `perform_request'
+rack-proxy (0.7.7) lib/rack/proxy.rb:87:in `call'
+railties (8.0.4) lib/rails/engine.rb:535:in `call'
+puma (7.1.0) lib/puma/configuration.rb:300:in `call'
+puma (7.1.0) lib/puma/request.rb:101:in `block in handle_request'
+puma (7.1.0) lib/puma/thread_pool.rb:355:in `with_force_shutdown'
+puma (7.1.0) lib/puma/request.rb:100:in `handle_request'
+puma (7.1.0) lib/puma/server.rb:503:in `process_client'
+puma (7.1.0) lib/puma/server.rb:262:in `block in run'
+puma (7.1.0) lib/puma/thread_pool.rb:182:in `block in spawn_thread'
+  [1m[36mActiveRecord::SchemaMigration Load (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='TutorInsights'*/[0m
+  
+ActiveRecord::PendingMigrationError (
+
+Migrations are pending. To resolve this issue, run:
+
+        bin/rails db:migrate
+
+You have 1 pending migration:
+
+db/migrate/20251105165351_migrate_fsrs_to_fsqs.rb
+
+
+):
+  
+activerecord (8.0.4) lib/active_record/migration.rb:742:in `check_pending_migrations'
+activerecord (8.0.4) lib/active_record/migration.rb:659:in `block (2 levels) in call'
+activesupport (8.0.4) lib/active_support/file_update_checker.rb:85:in `execute'
+activerecord (8.0.4) lib/active_record/migration.rb:664:in `block in call'
+activerecord (8.0.4) lib/active_record/migration.rb:656:in `synchronize'
+activerecord (8.0.4) lib/active_record/migration.rb:656:in `call'
+actionpack (8.0.4) lib/action_dispatch/middleware/callbacks.rb:31:in `block in call'
+activesupport (8.0.4) lib/active_support/callbacks.rb:100:in `run_callbacks'
+actionpack (8.0.4) lib/action_dispatch/middleware/callbacks.rb:30:in `call'
+actionpack (8.0.4) lib/action_dispatch/middleware/executor.rb:16:in `call'
+actionpack (8.0.4) lib/action_dispatch/middleware/actionable_exceptions.rb:18:in `call'
+actionpack (8.0.4) lib/action_dispatch/middleware/debug_exceptions.rb:31:in `call'
+web-console (4.2.1) lib/web_console/middleware.rb:132:in `call_app'
+web-console (4.2.1) lib/web_console/middleware.rb:28:in `block in call'
+web-console (4.2.1) lib/web_console/middleware.rb:17:in `catch'
+web-console (4.2.1) lib/web_console/middleware.rb:17:in `call'
+actionpack (8.0.4) lib/action_dispatch/middleware/show_exceptions.rb:32:in `call'
+railties (8.0.4) lib/rails/rack/logger.rb:41:in `call_app'
+railties (8.0.4) lib/rails/rack/logger.rb:29:in `call'
+actionpack (8.0.4) lib/action_dispatch/middleware/remote_ip.rb:96:in `call'
+actionpack (8.0.4) lib/action_dispatch/middleware/request_id.rb:34:in `call'
+rack (3.2.4) lib/rack/method_override.rb:28:in `call'
+rack (3.2.4) lib/rack/runtime.rb:24:in `call'
+actionpack (8.0.4) lib/action_dispatch/middleware/server_timing.rb:61:in `block in call'
+actionpack (8.0.4) lib/action_dispatch/middleware/server_timing.rb:26:in `collect_events'
+actionpack (8.0.4) lib/action_dispatch/middleware/server_timing.rb:60:in `call'
+actionpack (8.0.4) lib/action_dispatch/middleware/executor.rb:16:in `call'
+propshaft (1.3.1) lib/propshaft/server.rb:37:in `call'
+actionpack (8.0.4) lib/action_dispatch/middleware/static.rb:27:in `call'
+rack (3.2.4) lib/rack/sendfile.rb:131:in `call'
+actionpack (8.0.4) lib/action_dispatch/middleware/host_authorization.rb:143:in `call'
+vite_ruby (3.9.2) lib/vite_ruby/dev_server_proxy.rb:22:in `perform_request'
+rack-proxy (0.7.7) lib/rack/proxy.rb:87:in `call'
+railties (8.0.4) lib/rails/engine.rb:535:in `call'
+puma (7.1.0) lib/puma/configuration.rb:300:in `call'
+puma (7.1.0) lib/puma/request.rb:101:in `block in handle_request'
+puma (7.1.0) lib/puma/thread_pool.rb:355:in `with_force_shutdown'
+puma (7.1.0) lib/puma/request.rb:100:in `handle_request'
+puma (7.1.0) lib/puma/server.rb:503:in `process_client'
+puma (7.1.0) lib/puma/server.rb:262:in `block in run'
+puma (7.1.0) lib/puma/thread_pool.rb:182:in `block in spawn_thread'
+✓ Sidekiq schedule configuration loaded: session_scoring, alert_evaluation, tutor_daily_aggregation, tutor_health_score, tutor_churn_risk_score
+✓ Sidekiq schedule configuration loaded: session_scoring, alert_evaluation, tutor_daily_aggregation, tutor_health_score, tutor_churn_risk_score
+  [1m[35m (0.0ms)[0m  [1m[34mSELECT pg_try_advisory_lock(5566294069690052160) /*application='TutorInsights'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='TutorInsights'*/[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.4ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = 'environment' ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1 /*application='TutorInsights'*/[0m
+Migrating to MigrateFsrsToFsqs (20251105165351)
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN /*application='TutorInsights'*/[0m
+  [1m[36mScore Load (0.3ms)[0m  [1m[34mSELECT "scores".* FROM "scores" WHERE "scores"."score_type" = 'fsrs' ORDER BY "scores"."id" ASC LIMIT 1000 /*application='TutorInsights'*/[0m
+  [1m[36mScore Update (0.3ms)[0m  [1m[33mUPDATE "scores" SET "score_type" = 'fsqs', "value" = 100.0, "updated_at" = '2025-11-05 17:00:58.304443' WHERE "scores"."id" = 2 /*application='TutorInsights'*/[0m
+  [1m[36mScore Update (0.1ms)[0m  [1m[33mUPDATE "scores" SET "score_type" = 'fsqs', "value" = 100.0, "updated_at" = '2025-11-05 17:00:58.305344' WHERE "scores"."id" = 4 /*application='TutorInsights'*/[0m
+  [1m[36mScore Update (0.4ms)[0m  [1m[33mUPDATE "scores" SET "score_type" = 'fsqs', "value" = 100.0, "updated_at" = '2025-11-05 17:00:58.305843' WHERE "scores"."id" = 6 /*application='TutorInsights'*/[0m
+  [1m[36mScore Update (0.1ms)[0m  [1m[33mUPDATE "scores" SET "score_type" = 'fsqs', "value" = 100.0, "updated_at" = '2025-11-05 17:00:58.306556' WHERE "scores"."id" = 8 /*application='TutorInsights'*/[0m
+  [1m[36mScore Update (0.1ms)[0m  [1m[33mUPDATE "scores" SET "score_type" = 'fsqs', "value" = 100.0, "updated_at" = '2025-11-05 17:00:58.306933' WHERE "scores"."id" = 10 /*application='TutorInsights'*/[0m
+  [1m[36mScore Update (0.1ms)[0m  [1m[33mUPDATE "scores" SET "score_type" = 'fsqs', "value" = 70.83, "updated_at" = '2025-11-05 17:00:58.307281' WHERE "scores"."id" = 194 /*application='TutorInsights'*/[0m
+  [1m[36mScore Update (0.5ms)[0m  [1m[33mUPDATE "scores" SET "score_type" = 'fsqs', "value" = 62.5, "updated_at" = '2025-11-05 17:00:58.307645' WHERE "scores"."id" = 229 /*application='TutorInsights'*/[0m
+  [1m[36mScore Update (0.1ms)[0m  [1m[33mUPDATE "scores" SET "score_type" = 'fsqs', "value" = 54.17, "updated_at" = '2025-11-05 17:00:58.308462' WHERE "scores"."id" = 239 /*application='TutorInsights'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.1ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20251105165351') RETURNING "version" /*application='TutorInsights'*/[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mCOMMIT /*application='TutorInsights'*/[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT pg_advisory_unlock(5566294069690052160) /*application='TutorInsights'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='TutorInsights'*/[0m
+✓ Sidekiq schedule configuration loaded: session_scoring, alert_evaluation, tutor_daily_aggregation, tutor_health_score, tutor_churn_risk_score
+  [1m[36mScore Count (0.5ms)[0m  [1m[34mSELECT COUNT(*) FROM "scores" WHERE "scores"."score_type" = 'fsqs' /*application='TutorInsights'*/[0m
+  [1m[36mScore Count (1.4ms)[0m  [1m[34mSELECT COUNT(*) FROM "scores" WHERE "scores"."score_type" = 'fsrs' /*application='TutorInsights'*/[0m
+  [1m[36mScore Load (0.6ms)[0m  [1m[34mSELECT "scores".* FROM "scores" WHERE "scores"."score_type" = 'fsqs' ORDER BY "scores"."id" ASC LIMIT 1 /*application='TutorInsights'*/[0m
+  [1m[36mSession Load (1.3ms)[0m  [1m[34mSELECT "sessions".* FROM "sessions" INNER JOIN "session_transcripts" ON "session_transcripts"."session_id" = "sessions"."id" WHERE "sessions"."first_session_for_student" = TRUE ORDER BY "sessions"."id" ASC LIMIT 1 /*application='TutorInsights'*/[0m
+  [1m[36mSessionTranscript Load (0.5ms)[0m  [1m[34mSELECT "session_transcripts".* FROM "session_transcripts" WHERE "session_transcripts"."session_id" = 1 LIMIT 1 /*application='TutorInsights'*/[0m
+  [1m[36mTutor Load (0.5ms)[0m  [1m[34mSELECT "tutors".* FROM "tutors" WHERE "tutors"."id" = 4 LIMIT 1 /*application='TutorInsights'*/[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN /*application='TutorInsights'*/[0m
+  [1m[36mScore Create (1.5ms)[0m  [1m[32mINSERT INTO "scores" ("session_id", "tutor_id", "score_type", "value", "components", "computed_at", "created_at", "updated_at") VALUES (1, 4, 'fsqs', 75.0, '{"confusion_phrases":0,"word_share_imbalance":0,"missing_goal_setting":0,"missing_encouragement":0,"negative_phrasing":0,"missing_closing_summary":15,"tech_lateness_disruption":10,"score":75,"feedback":{"what_went_well":"Student showed good understanding with minimal confusion. Good balance of tutor and student participation. Goal-setting question was asked early in the session. Encouragement phrases were used throughout. Positive, supportive language was maintained","improvement_idea":"Missing closing summary - help student understand what was covered and next steps","breakdown":{"confusion_phrases":0,"word_share_imbalance":0,"missing_goal_setting":0,"missing_encouragement":0,"negative_phrasing":0,"missing_closing_summary":15,"tech_lateness_disruption":10}}}', '2025-11-05 17:02:43.211610', '2025-11-05 17:02:43.212506', '2025-11-05 17:02:43.212506') RETURNING "id" /*application='TutorInsights'*/[0m
+  [1m[36mTRANSACTION (1.8ms)[0m  [1m[35mCOMMIT /*application='TutorInsights'*/[0m
+✓ Sidekiq schedule configuration loaded: session_scoring, alert_evaluation, tutor_daily_aggregation, tutor_health_score, tutor_churn_risk_score
+✓ Sidekiq schedule configuration loaded: session_scoring, alert_evaluation, tutor_daily_aggregation, tutor_health_score, tutor_churn_risk_score
+Started GET "/api/tutor/1/fsqs_latest" for ::1 at 2025-11-05 11:03:04 -0600
+  [1m[36mActiveRecord::SchemaMigration Load (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='TutorInsights'*/[0m
+Processing by Api::Tutor::TutorsController#fsqs_latest as */*
+  Parameters: {"id"=>"1"}
+  [1m[36mTutor Load (0.2ms)[0m  [1m[34mSELECT "tutors".* FROM "tutors" WHERE "tutors"."id" = 1 LIMIT 1 /*action='fsqs_latest',application='TutorInsights',controller='tutors'*/[0m
+  ↳ app/controllers/api/tutor/tutors_controller.rb:5:in `fsqs_latest'
+  [1m[36mScore Load (0.3ms)[0m  [1m[34mSELECT "scores".* FROM "scores" WHERE "scores"."tutor_id" = 1 AND "scores"."score_type" = 'fsqs' ORDER BY "scores"."computed_at" DESC LIMIT 1 /*action='fsqs_latest',application='TutorInsights',controller='tutors'*/[0m
+  ↳ app/controllers/api/tutor/tutors_controller.rb:10:in `fsqs_latest'
+Completed 200 OK in 61ms (Views: 0.1ms | ActiveRecord: 4.2ms (2 queries, 0 cached) | GC: 7.0ms)
+
+
+Started GET "/api/tutor/1/fsqs_history" for ::1 at 2025-11-05 11:03:09 -0600
+Processing by Api::Tutor::TutorsController#fsqs_history as */*
+  Parameters: {"id"=>"1"}
+  [1m[36mTutor Load (0.7ms)[0m  [1m[34mSELECT "tutors".* FROM "tutors" WHERE "tutors"."id" = 1 LIMIT 1 /*action='fsqs_history',application='TutorInsights',controller='tutors'*/[0m
+  ↳ app/controllers/api/tutor/tutors_controller.rb:23:in `fsqs_history'
+  [1m[36mScore Load (0.5ms)[0m  [1m[34mSELECT "scores".* FROM "scores" WHERE "scores"."tutor_id" = 1 AND "scores"."score_type" = 'fsqs' ORDER BY "scores"."computed_at" DESC LIMIT 5 /*action='fsqs_history',application='TutorInsights',controller='tutors'*/[0m
+  ↳ app/controllers/api/tutor/tutors_controller.rb:31:in `map'
+  [1m[36mSession Load (0.8ms)[0m  [1m[34mSELECT "sessions".* FROM "sessions" WHERE "sessions"."id" IN (303, 302, 301, 300) /*action='fsqs_history',application='TutorInsights',controller='tutors'*/[0m
+  ↳ app/controllers/api/tutor/tutors_controller.rb:31:in `map'
+  [1m[36mStudent Load (0.4ms)[0m  [1m[34mSELECT "students".* FROM "students" WHERE "students"."id" = 25 LIMIT 1 /*action='fsqs_history',application='TutorInsights',controller='tutors'*/[0m
+  ↳ app/controllers/api/tutor/tutors_controller.rb:35:in `block in fsqs_history'
+  [1m[36mStudent Load (0.1ms)[0m  [1m[34mSELECT "students".* FROM "students" WHERE "students"."id" = 24 LIMIT 1 /*action='fsqs_history',application='TutorInsights',controller='tutors'*/[0m
+  ↳ app/controllers/api/tutor/tutors_controller.rb:35:in `block in fsqs_history'
+  [1m[36mStudent Load (0.2ms)[0m  [1m[34mSELECT "students".* FROM "students" WHERE "students"."id" = 23 LIMIT 1 /*action='fsqs_history',application='TutorInsights',controller='tutors'*/[0m
+  ↳ app/controllers/api/tutor/tutors_controller.rb:35:in `block in fsqs_history'
+  [1m[36mStudent Load (0.1ms)[0m  [1m[34mSELECT "students".* FROM "students" WHERE "students"."id" = 22 LIMIT 1 /*action='fsqs_history',application='TutorInsights',controller='tutors'*/[0m
+  ↳ app/controllers/api/tutor/tutors_controller.rb:35:in `block in fsqs_history'
+Completed 200 OK in 47ms (Views: 0.2ms | ActiveRecord: 12.1ms (7 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/api/admin/tutors/risk_list" for ::1 at 2025-11-05 11:03:14 -0600
+Processing by Api::Admin::Tutors::TutorsController#risk_list as */*
+  [1m[36mTutor Load (0.3ms)[0m  [1m[34mSELECT "tutors".* FROM "tutors" /*action='risk_list',application='TutorInsights',controller='tutors'*/[0m
+  ↳ app/controllers/api/admin/tutors/tutors_controller.rb:8:in `map'
+  [1m[36mScore Load (0.4ms)[0m  [1m[34mSELECT "scores".* FROM "scores" WHERE "scores"."tutor_id" = 1 AND "scores"."score_type" = 'fsqs' ORDER BY "scores"."computed_at" DESC LIMIT 1 /*action='risk_list',application='TutorInsights',controller='tutors'*/[0m
+  ↳ app/controllers/api/admin/tutors/tutors_controller.rb:10:in `block in risk_list'
+  [1m[36mScore Load (0.3ms)[0m  [1m[34mSELECT "scores".* FROM "scores" WHERE "scores"."tutor_id" = 1 AND "scores"."score_type" = 'ths' ORDER BY "scores"."computed_at" DESC LIMIT 1 /*action='risk_list',application='TutorInsights',controller='tutors'*/[0m
+  ↳ app/controllers/api/admin/tutors/tutors_controller.rb:11:in `block in risk_list'
+  [1m[36mScore Load (0.3ms)[0m  [1m[34mSELECT "scores".* FROM "scores" WHERE "scores"."tutor_id" = 1 AND "scores"."score_type" = 'tcrs' ORDER BY "scores"."computed_at" DESC LIMIT 1 /*action='risk_list',application='TutorInsights',controller='tutors'*/[0m
+  ↳ app/controllers/api/admin/tutors/tutors_controller.rb:12:in `block in risk_list'
+  [1m[36mAlert Count (0.7ms)[0m  [1m[34mSELECT COUNT(*) FROM "alerts" WHERE "alerts"."tutor_id" = 1 AND "alerts"."status" = 'open' /*action='risk_list',application='TutorInsights',controller='tutors'*/[0m
+  ↳ app/controllers/api/admin/tutors/tutors_controller.rb:15:in `block in risk_list'
+  [1m[36mScore Load (0.1ms)[0m  [1m[34mSELECT "scores".* FROM "scores" WHERE "scores"."tutor_id" = 2 AND "scores"."score_type" = 'fsqs' ORDER BY "scores"."computed_at" DESC LIMIT 1 /*action='risk_list',application='TutorInsights',controller='tutors'*/[0m
+  ↳ app/controllers/api/admin/tutors/tutors_controller.rb:10:in `block in risk_list'
+  [1m[36mScore Load (0.3ms)[0m  [1m[34mSELECT "scores".* FROM "scores" WHERE "scores"."tutor_id" = 2 AND "scores"."score_type" = 'ths' ORDER BY "scores"."computed_at" DESC LIMIT 1 /*action='risk_list',application='TutorInsights',controller='tutors'*/[0m
+  ↳ app/controllers/api/admin/tutors/tutors_controller.rb:11:in `block in risk_list'
+  [1m[36mScore Load (0.2ms)[0m  [1m[34mSELECT "scores".* FROM "scores" WHERE "scores"."tutor_id" = 2 AND "scores"."score_type" = 'tcrs' ORDER BY "scores"."computed_at" DESC LIMIT 1 /*action='risk_list',application='TutorInsights',controller='tutors'*/[0m
+  ↳ app/controllers/api/admin/tutors/tutors_controller.rb:12:in `block in risk_list'
+  [1m[36mAlert Count (0.2ms)[0m  [1m[34mSELECT COUNT(*) FROM "alerts" WHERE "alerts"."tutor_id" = 2 AND "alerts"."status" = 'open' /*action='risk_list',application='TutorInsights',controller='tutors'*/[0m
+  ↳ app/controllers/api/admin/tutors/tutors_controller.rb:15:in `block in risk_list'
+  [1m[36mScore Load (1.9ms)[0m  [1m[34mSELECT "scores".* FROM "scores" WHERE "scores"."tutor_id" = 3 AND "scores"."score_type" = 'fsqs' ORDER BY "scores"."computed_at" DESC LIMIT 1 /*action='risk_list',application='TutorInsights',controller='tutors'*/[0m
+  ↳ app/controllers/api/admin/tutors/tutors_controller.rb:10:in `block in risk_list'
+  [1m[36mScore Load (0.4ms)[0m  [1m[34mSELECT "scores".* FROM "scores" WHERE "scores"."tutor_id" = 3 AND "scores"."score_type" = 'ths' ORDER BY "scores"."computed_at" DESC LIMIT 1 /*action='risk_list',application='TutorInsights',controller='tutors'*/[0m
+  ↳ app/controllers/api/admin/tutors/tutors_controller.rb:11:in `block in risk_list'
+  [1m[36mScore Load (0.2ms)[0m  [1m[34mSELECT "scores".* FROM "scores" WHERE "scores"."tutor_id" = 3 AND "scores"."score_type" = 'tcrs' ORDER BY "scores"."computed_at" DESC LIMIT 1 /*action='risk_list',application='TutorInsights',controller='tutors'*/[0m
+  ↳ app/controllers/api/admin/tutors/tutors_controller.rb:12:in `block in risk_list'
+  [1m[36mAlert Count (0.2ms)[0m  [1m[34mSELECT COUNT(*) FROM "alerts" WHERE "alerts"."tutor_id" = 3 AND "alerts"."status" = 'open' /*action='risk_list',application='TutorInsights',controller='tutors'*/[0m
+  ↳ app/controllers/api/admin/tutors/tutors_controller.rb:15:in `block in risk_list'
+  [1m[36mScore Load (0.1ms)[0m  [1m[34mSELECT "scores".* FROM "scores" WHERE "scores"."tutor_id" = 4 AND "scores"."score_type" = 'fsqs' ORDER BY "scores"."computed_at" DESC LIMIT 1 /*action='risk_list',application='TutorInsights',controller='tutors'*/[0m
+  ↳ app/controllers/api/admin/tutors/tutors_controller.rb:10:in `block in risk_list'
+  [1m[36mScore Load (0.2ms)[0m  [1m[34mSELECT "scores".* FROM "scores" WHERE "scores"."tutor_id" = 4 AND "scores"."score_type" = 'ths' ORDER BY "scores"."computed_at" DESC LIMIT 1 /*action='risk_list',application='TutorInsights',controller='tutors'*/[0m
+  ↳ app/controllers/api/admin/tutors/tutors_controller.rb:11:in `block in risk_list'
+  [1m[36mScore Load (0.2ms)[0m  [1m[34mSELECT "scores".* FROM "scores" WHERE "scores"."tutor_id" = 4 AND "scores"."score_type" = 'tcrs' ORDER BY "scores"."computed_at" DESC LIMIT 1 /*action='risk_list',application='TutorInsights',controller='tutors'*/[0m
+  ↳ app/controllers/api/admin/tutors/tutors_controller.rb:12:in `block in risk_list'
+  [1m[36mAlert Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "alerts" WHERE "alerts"."tutor_id" = 4 AND "alerts"."status" = 'open' /*action='risk_list',application='TutorInsights',controller='tutors'*/[0m
+  ↳ app/controllers/api/admin/tutors/tutors_controller.rb:15:in `block in risk_list'
+  [1m[36mScore Load (0.2ms)[0m  [1m[34mSELECT "scores".* FROM "scores" WHERE "scores"."tutor_id" = 5 AND "scores"."score_type" = 'fsqs' ORDER BY "scores"."computed_at" DESC LIMIT 1 /*action='risk_list',application='TutorInsights',controller='tutors'*/[0m
+  ↳ app/controllers/api/admin/tutors/tutors_controller.rb:10:in `block in risk_list'
+  [1m[36mScore Load (0.2ms)[0m  [1m[34mSELECT "scores".* FROM "scores" WHERE "scores"."tutor_id" = 5 AND "scores"."score_type" = 'ths' ORDER BY "scores"."computed_at" DESC LIMIT 1 /*action='risk_list',application='TutorInsights',controller='tutors'*/[0m
+  ↳ app/controllers/api/admin/tutors/tutors_controller.rb:11:in `block in risk_list'
+  [1m[36mScore Load (0.2ms)[0m  [1m[34mSELECT "scores".* FROM "scores" WHERE "scores"."tutor_id" = 5 AND "scores"."score_type" = 'tcrs' ORDER BY "scores"."computed_at" DESC LIMIT 1 /*action='risk_list',application='TutorInsights',controller='tutors'*/[0m
+  ↳ app/controllers/api/admin/tutors/tutors_controller.rb:12:in `block in risk_list'
+  [1m[36mAlert Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "alerts" WHERE "alerts"."tutor_id" = 5 AND "alerts"."status" = 'open' /*action='risk_list',application='TutorInsights',controller='tutors'*/[0m
+  ↳ app/controllers/api/admin/tutors/tutors_controller.rb:15:in `block in risk_list'
+  [1m[36mScore Load (0.1ms)[0m  [1m[34mSELECT "scores".* FROM "scores" WHERE "scores"."tutor_id" = 6 AND "scores"."score_type" = 'fsqs' ORDER BY "scores"."computed_at" DESC LIMIT 1 /*action='risk_list',application='TutorInsights',controller='tutors'*/[0m
+  ↳ app/controllers/api/admin/tutors/tutors_controller.rb:10:in `block in risk_list'
+  [1m[36mScore Load (0.1ms)[0m  [1m[34mSELECT "scores".* FROM "scores" WHERE "scores"."tutor_id" = 6 AND "scores"."score_type" = 'ths' ORDER BY "scores"."computed_at" DESC LIMIT 1 /*action='risk_list',application='TutorInsights',controller='tutors'*/[0m
+  ↳ app/controllers/api/admin/tutors/tutors_controller.rb:11:in `block in risk_list'
+  [1m[36mScore Load (0.1ms)[0m  [1m[34mSELECT "scores".* FROM "scores" WHERE "scores"."tutor_id" = 6 AND "scores"."score_type" = 'tcrs' ORDER BY "scores"."computed_at" DESC LIMIT 1 /*action='risk_list',application='TutorInsights',controller='tutors'*/[0m
+  ↳ app/controllers/api/admin/tutors/tutors_controller.rb:12:in `block in risk_list'
+  [1m[36mAlert Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "alerts" WHERE "alerts"."tutor_id" = 6 AND "alerts"."status" = 'open' /*action='risk_list',application='TutorInsights',controller='tutors'*/[0m
+  ↳ app/controllers/api/admin/tutors/tutors_controller.rb:15:in `block in risk_list'
+  [1m[36mScore Load (0.1ms)[0m  [1m[34mSELECT "scores".* FROM "scores" WHERE "scores"."tutor_id" = 7 AND "scores"."score_type" = 'fsqs' ORDER BY "scores"."computed_at" DESC LIMIT 1 /*action='risk_list',application='TutorInsights',controller='tutors'*/[0m
+  ↳ app/controllers/api/admin/tutors/tutors_controller.rb:10:in `block in risk_list'
+  [1m[36mScore Load (0.1ms)[0m  [1m[34mSELECT "scores".* FROM "scores" WHERE "scores"."tutor_id" = 7 AND "scores"."score_type" = 'ths' ORDER BY "scores"."computed_at" DESC LIMIT 1 /*action='risk_list',application='TutorInsights',controller='tutors'*/[0m
+  ↳ app/controllers/api/admin/tutors/tutors_controller.rb:11:in `block in risk_list'
+  [1m[36mScore Load (0.1ms)[0m  [1m[34mSELECT "scores".* FROM "scores" WHERE "scores"."tutor_id" = 7 AND "scores"."score_type" = 'tcrs' ORDER BY "scores"."computed_at" DESC LIMIT 1 /*action='risk_list',application='TutorInsights',controller='tutors'*/[0m
+  ↳ app/controllers/api/admin/tutors/tutors_controller.rb:12:in `block in risk_list'
+  [1m[36mAlert Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "alerts" WHERE "alerts"."tutor_id" = 7 AND "alerts"."status" = 'open' /*action='risk_list',application='TutorInsights',controller='tutors'*/[0m
+  ↳ app/controllers/api/admin/tutors/tutors_controller.rb:15:in `block in risk_list'
+  [1m[36mScore Load (0.1ms)[0m  [1m[34mSELECT "scores".* FROM "scores" WHERE "scores"."tutor_id" = 8 AND "scores"."score_type" = 'fsqs' ORDER BY "scores"."computed_at" DESC LIMIT 1 /*action='risk_list',application='TutorInsights',controller='tutors'*/[0m
+  ↳ app/controllers/api/admin/tutors/tutors_controller.rb:10:in `block in risk_list'
+  [1m[36mScore Load (0.2ms)[0m  [1m[34mSELECT "scores".* FROM "scores" WHERE "scores"."tutor_id" = 8 AND "scores"."score_type" = 'ths' ORDER BY "scores"."computed_at" DESC LIMIT 1 /*action='risk_list',application='TutorInsights',controller='tutors'*/[0m
+  ↳ app/controllers/api/admin/tutors/tutors_controller.rb:11:in `block in risk_list'
+  [1m[36mScore Load (0.1ms)[0m  [1m[34mSELECT "scores".* FROM "scores" WHERE "scores"."tutor_id" = 8 AND "scores"."score_type" = 'tcrs' ORDER BY "scores"."computed_at" DESC LIMIT 1 /*action='risk_list',application='TutorInsights',controller='tutors'*/[0m
+  ↳ app/controllers/api/admin/tutors/tutors_controller.rb:12:in `block in risk_list'
+  [1m[36mAlert Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "alerts" WHERE "alerts"."tutor_id" = 8 AND "alerts"."status" = 'open' /*action='risk_list',application='TutorInsights',controller='tutors'*/[0m
+  ↳ app/controllers/api/admin/tutors/tutors_controller.rb:15:in `block in risk_list'
+  [1m[36mScore Load (0.2ms)[0m  [1m[34mSELECT "scores".* FROM "scores" WHERE "scores"."tutor_id" = 9 AND "scores"."score_type" = 'fsqs' ORDER BY "scores"."computed_at" DESC LIMIT 1 /*action='risk_list',application='TutorInsights',controller='tutors'*/[0m
+  ↳ app/controllers/api/admin/tutors/tutors_controller.rb:10:in `block in risk_list'
+  [1m[36mScore Load (0.2ms)[0m  [1m[34mSELECT "scores".* FROM "scores" WHERE "scores"."tutor_id" = 9 AND "scores"."score_type" = 'ths' ORDER BY "scores"."computed_at" DESC LIMIT 1 /*action='risk_list',application='TutorInsights',controller='tutors'*/[0m
+  ↳ app/controllers/api/admin/tutors/tutors_controller.rb:11:in `block in risk_list'
+  [1m[36mScore Load (0.2ms)[0m  [1m[34mSELECT "scores".* FROM "scores" WHERE "scores"."tutor_id" = 9 AND "scores"."score_type" = 'tcrs' ORDER BY "scores"."computed_at" DESC LIMIT 1 /*action='risk_list',application='TutorInsights',controller='tutors'*/[0m
+  ↳ app/controllers/api/admin/tutors/tutors_controller.rb:12:in `block in risk_list'
+  [1m[36mAlert Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "alerts" WHERE "alerts"."tutor_id" = 9 AND "alerts"."status" = 'open' /*action='risk_list',application='TutorInsights',controller='tutors'*/[0m
+  ↳ app/controllers/api/admin/tutors/tutors_controller.rb:15:in `block in risk_list'
+  [1m[36mScore Load (0.2ms)[0m  [1m[34mSELECT "scores".* FROM "scores" WHERE "scores"."tutor_id" = 10 AND "scores"."score_type" = 'fsqs' ORDER BY "scores"."computed_at" DESC LIMIT 1 /*action='risk_list',application='TutorInsights',controller='tutors'*/[0m
+  ↳ app/controllers/api/admin/tutors/tutors_controller.rb:10:in `block in risk_list'
+  [1m[36mScore Load (0.2ms)[0m  [1m[34mSELECT "scores".* FROM "scores" WHERE "scores"."tutor_id" = 10 AND "scores"."score_type" = 'ths' ORDER BY "scores"."computed_at" DESC LIMIT 1 /*action='risk_list',application='TutorInsights',controller='tutors'*/[0m
+  ↳ app/controllers/api/admin/tutors/tutors_controller.rb:11:in `block in risk_list'
+  [1m[36mScore Load (0.2ms)[0m  [1m[34mSELECT "scores".* FROM "scores" WHERE "scores"."tutor_id" = 10 AND "scores"."score_type" = 'tcrs' ORDER BY "scores"."computed_at" DESC LIMIT 1 /*action='risk_list',application='TutorInsights',controller='tutors'*/[0m
+  ↳ app/controllers/api/admin/tutors/tutors_controller.rb:12:in `block in risk_list'
+  [1m[36mAlert Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "alerts" WHERE "alerts"."tutor_id" = 10 AND "alerts"."status" = 'open' /*action='risk_list',application='TutorInsights',controller='tutors'*/[0m
+  ↳ app/controllers/api/admin/tutors/tutors_controller.rb:15:in `block in risk_list'
+  [1m[36mScore Load (0.1ms)[0m  [1m[34mSELECT "scores".* FROM "scores" WHERE "scores"."tutor_id" = 11 AND "scores"."score_type" = 'fsqs' ORDER BY "scores"."computed_at" DESC LIMIT 1 /*action='risk_list',application='TutorInsights',controller='tutors'*/[0m
+  ↳ app/controllers/api/admin/tutors/tutors_controller.rb:10:in `block in risk_list'
+  [1m[36mScore Load (0.2ms)[0m  [1m[34mSELECT "scores".* FROM "scores" WHERE "scores"."tutor_id" = 11 AND "scores"."score_type" = 'ths' ORDER BY "scores"."computed_at" DESC LIMIT 1 /*action='risk_list',application='TutorInsights',controller='tutors'*/[0m
+  ↳ app/controllers/api/admin/tutors/tutors_controller.rb:11:in `block in risk_list'
+  [1m[36mScore Load (0.2ms)[0m  [1m[34mSELECT "scores".* FROM "scores" WHERE "scores"."tutor_id" = 11 AND "scores"."score_type" = 'tcrs' ORDER BY "scores"."computed_at" DESC LIMIT 1 /*action='risk_list',application='TutorInsights',controller='tutors'*/[0m
+  ↳ app/controllers/api/admin/tutors/tutors_controller.rb:12:in `block in risk_list'
+  [1m[36mAlert Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "alerts" WHERE "alerts"."tutor_id" = 11 AND "alerts"."status" = 'open' /*action='risk_list',application='TutorInsights',controller='tutors'*/[0m
+  ↳ app/controllers/api/admin/tutors/tutors_controller.rb:15:in `block in risk_list'
+  [1m[36mScore Load (0.2ms)[0m  [1m[34mSELECT "scores".* FROM "scores" WHERE "scores"."tutor_id" = 12 AND "scores"."score_type" = 'fsqs' ORDER BY "scores"."computed_at" DESC LIMIT 1 /*action='risk_list',application='TutorInsights',controller='tutors'*/[0m
+  ↳ app/controllers/api/admin/tutors/tutors_controller.rb:10:in `block in risk_list'
+  [1m[36mScore Load (0.2ms)[0m  [1m[34mSELECT "scores".* FROM "scores" WHERE "scores"."tutor_id" = 12 AND "scores"."score_type" = 'ths' ORDER BY "scores"."computed_at" DESC LIMIT 1 /*action='risk_list',application='TutorInsights',controller='tutors'*/[0m
+  ↳ app/controllers/api/admin/tutors/tutors_controller.rb:11:in `block in risk_list'
+  [1m[36mScore Load (0.2ms)[0m  [1m[34mSELECT "scores".* FROM "scores" WHERE "scores"."tutor_id" = 12 AND "scores"."score_type" = 'tcrs' ORDER BY "scores"."computed_at" DESC LIMIT 1 /*action='risk_list',application='TutorInsights',controller='tutors'*/[0m
+  ↳ app/controllers/api/admin/tutors/tutors_controller.rb:12:in `block in risk_list'
+  [1m[36mAlert Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "alerts" WHERE "alerts"."tutor_id" = 12 AND "alerts"."status" = 'open' /*action='risk_list',application='TutorInsights',controller='tutors'*/[0m
+  ↳ app/controllers/api/admin/tutors/tutors_controller.rb:15:in `block in risk_list'
+  [1m[36mScore Load (0.1ms)[0m  [1m[34mSELECT "scores".* FROM "scores" WHERE "scores"."tutor_id" = 13 AND "scores"."score_type" = 'fsqs' ORDER BY "scores"."computed_at" DESC LIMIT 1 /*action='risk_list',application='TutorInsights',controller='tutors'*/[0m
+  ↳ app/controllers/api/admin/tutors/tutors_controller.rb:10:in `block in risk_list'
+  [1m[36mScore Load (0.1ms)[0m  [1m[34mSELECT "scores".* FROM "scores" WHERE "scores"."tutor_id" = 13 AND "scores"."score_type" = 'ths' ORDER BY "scores"."computed_at" DESC LIMIT 1 /*action='risk_list',application='TutorInsights',controller='tutors'*/[0m
+  ↳ app/controllers/api/admin/tutors/tutors_controller.rb:11:in `block in risk_list'
+  [1m[36mScore Load (0.3ms)[0m  [1m[34mSELECT "scores".* FROM "scores" WHERE "scores"."tutor_id" = 13 AND "scores"."score_type" = 'tcrs' ORDER BY "scores"."computed_at" DESC LIMIT 1 /*action='risk_list',application='TutorInsights',controller='tutors'*/[0m
+  ↳ app/controllers/api/admin/tutors/tutors_controller.rb:12:in `block in risk_list'
+  [1m[36mAlert Count (0.2ms)[0m  [1m[34mSELECT COUNT(*) FROM "alerts" WHERE "alerts"."tutor_id" = 13 AND "alerts"."status" = 'open' /*action='risk_list',application='TutorInsights',controller='tutors'*/[0m
+  ↳ app/controllers/api/admin/tutors/tutors_controller.rb:15:in `block in risk_list'
+  [1m[36mScore Load (0.2ms)[0m  [1m[34mSELECT "scores".* FROM "scores" WHERE "scores"."tutor_id" = 14 AND "scores"."score_type" = 'fsqs' ORDER BY "scores"."computed_at" DESC LIMIT 1 /*action='risk_list',application='TutorInsights',controller='tutors'*/[0m
+  ↳ app/controllers/api/admin/tutors/tutors_controller.rb:10:in `block in risk_list'
+  [1m[36mScore Load (0.2ms)[0m  [1m[34mSELECT "scores".* FROM "scores" WHERE "scores"."tutor_id" = 14 AND "scores"."score_type" = 'ths' ORDER BY "scores"."computed_at" DESC LIMIT 1 /*action='risk_list',application='TutorInsights',controller='tutors'*/[0m
+  ↳ app/controllers/api/admin/tutors/tutors_controller.rb:11:in `block in risk_list'
+  [1m[36mScore Load (0.2ms)[0m  [1m[34mSELECT "scores".* FROM "scores" WHERE "scores"."tutor_id" = 14 AND "scores"."score_type" = 'tcrs' ORDER BY "scores"."computed_at" DESC LIMIT 1 /*action='risk_list',application='TutorInsights',controller='tutors'*/[0m
+  ↳ app/controllers/api/admin/tutors/tutors_controller.rb:12:in `block in risk_list'
+  [1m[36mAlert Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "alerts" WHERE "alerts"."tutor_id" = 14 AND "alerts"."status" = 'open' /*action='risk_list',application='TutorInsights',controller='tutors'*/[0m
+  ↳ app/controllers/api/admin/tutors/tutors_controller.rb:15:in `block in risk_list'
+Completed 200 OK in 57ms (Views: 0.1ms | ActiveRecord: 14.8ms (57 queries, 0 cached) | GC: 7.2ms)
+
+
+✓ Sidekiq schedule configuration loaded: session_scoring, alert_evaluation, tutor_daily_aggregation, tutor_health_score, tutor_churn_risk_score
+  [1m[36mTutor Load (0.3ms)[0m  [1m[34mSELECT "tutors".* FROM "tutors" ORDER BY "tutors"."id" ASC LIMIT 1 /*application='TutorInsights'*/[0m
+  [1m[36mSession Load (1.3ms)[0m  [1m[34mSELECT "sessions".* FROM "sessions" WHERE "sessions"."tutor_id" = 1 AND "sessions"."first_session_for_student" = TRUE ORDER BY "sessions"."id" ASC LIMIT 1 /*application='TutorInsights'*/[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN /*application='TutorInsights'*/[0m
+  [1m[36mScore Create (2.2ms)[0m  [1m[32mINSERT INTO "scores" ("session_id", "tutor_id", "score_type", "value", "components", "computed_at", "created_at", "updated_at") VALUES (57, 1, 'fsqs', 40.0, '{}', '2025-11-05 17:03:31.556258', '2025-11-05 17:03:31.564714', '2025-11-05 17:03:31.564714') RETURNING "id" /*application='TutorInsights'*/[0m
+  [1m[36mTRANSACTION (0.7ms)[0m  [1m[35mCOMMIT /*application='TutorInsights'*/[0m
+  [1m[36mScore Load (2.5ms)[0m  [1m[34mSELECT "scores".* FROM "scores" WHERE "scores"."tutor_id" = 1 AND "scores"."score_type" = 'fsqs' ORDER BY "scores"."computed_at" DESC LIMIT 1 /*application='TutorInsights'*/[0m
+  [1m[36mScore Load (0.3ms)[0m  [1m[34mSELECT "scores".* FROM "scores" WHERE "scores"."tutor_id" = 1 AND "scores"."score_type" = 'ths' ORDER BY "scores"."computed_at" DESC LIMIT 1 /*application='TutorInsights'*/[0m
+  [1m[36mScore Load (0.2ms)[0m  [1m[34mSELECT "scores".* FROM "scores" WHERE "scores"."tutor_id" = 1 AND "scores"."score_type" = 'tcrs' ORDER BY "scores"."computed_at" DESC LIMIT 1 /*application='TutorInsights'*/[0m
+  [1m[36mAlert Load (0.5ms)[0m  [1m[34mSELECT "alerts".* FROM "alerts" WHERE "alerts"."tutor_id" = 1 AND "alerts"."alert_type" = 'low_first_session_quality' AND "alerts"."status" = 'open' LIMIT 1 /*application='TutorInsights'*/[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN /*application='TutorInsights'*/[0m
+  [1m[36mAlert Create (1.0ms)[0m  [1m[32mINSERT INTO "alerts" ("tutor_id", "alert_type", "severity", "status", "triggered_at", "resolved_at", "metadata", "created_at", "updated_at") VALUES (1, 'low_first_session_quality', 'high', 'open', '2025-11-05 17:03:36.761111', NULL, '{"score_value":"40.0","score_computed_at":"2025-11-05T17:03:31.556Z","score_components":{}}', '2025-11-05 17:03:36.767176', '2025-11-05 17:03:36.767176') RETURNING "id" /*application='TutorInsights'*/[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mCOMMIT /*application='TutorInsights'*/[0m
+[ActiveJob] Enqueued ActionMailer::MailDeliveryJob (Job ID: 2514b0c5-8cdf-4fe8-8262-8abee63176e0) to Sidekiq(default) with arguments: "AlertMailer", "low_first_session_quality_alert", "deliver_now", {:args=>[#<GlobalID:0x000000012627a598 @uri=#<URI::GID gid://tutor-insights/Alert/5>>, "admin@example.com"]}
+[ActiveJob] ↳ app/services/alert_service.rb:82:in `send_alert_email'
+  [1m[36mAlert Load (0.4ms)[0m  [1m[34mSELECT "alerts".* FROM "alerts" WHERE "alerts"."tutor_id" = 1 AND "alerts"."alert_type" = 'high_reliability_risk' AND "alerts"."status" = 'open' LIMIT 1 /*application='TutorInsights'*/[0m
+  [1m[36mAlert Load (0.2ms)[0m  [1m[34mSELECT "alerts".* FROM "alerts" WHERE "alerts"."tutor_id" = 1 AND "alerts"."alert_type" = 'churn_risk' AND "alerts"."status" = 'open' LIMIT 1 /*application='TutorInsights'*/[0m
+  [1m[36mAlert Load (0.9ms)[0m  [1m[34mSELECT "alerts".* FROM "alerts" WHERE "alerts"."tutor_id" = 1 AND "alerts"."alert_type" = 'low_first_session_quality' AND "alerts"."status" = 'open' ORDER BY "alerts"."id" DESC LIMIT 1 /*application='TutorInsights'*/[0m
+  [1m[36mTutor Load (0.6ms)[0m  [1m[34mSELECT "tutors".* FROM "tutors" ORDER BY "tutors"."id" ASC LIMIT 1 /*application='TutorInsights'*/[0m
+  [1m[36mAlert Load (0.7ms)[0m  [1m[34mSELECT "alerts".* FROM "alerts" WHERE "alerts"."alert_type" = 'low_first_session_quality' ORDER BY "alerts"."id" DESC LIMIT 1 /*application='TutorInsights'*/[0m
+  [1m[36mTutor Load (0.6ms)[0m  [1m[34mSELECT "tutors".* FROM "tutors" WHERE "tutors"."id" = 1 LIMIT 1 /*application='TutorInsights'*/[0m
+  Rendering layout layouts/mailer.html.erb
+  Rendering alert_mailer/low_first_session_quality_alert.html.erb within layouts/mailer
+  Rendered alert_mailer/low_first_session_quality_alert.html.erb within layouts/mailer (Duration: 0.4ms | GC: 0.0ms)
+  Rendered layout layouts/mailer.html.erb (Duration: 0.6ms | GC: 0.0ms)
+  Rendering layout layouts/mailer.text.erb
+  Rendering alert_mailer/low_first_session_quality_alert.text.erb within layouts/mailer
+  Rendered alert_mailer/low_first_session_quality_alert.text.erb within layouts/mailer (Duration: 0.2ms | GC: 0.0ms)
+  Rendered layout layouts/mailer.text.erb (Duration: 0.3ms | GC: 0.0ms)
+AlertMailer#low_first_session_quality_alert: processed outbound mail in 42.2ms
+Delivered mail 690b838a9b642_cda210f42889b@MacBook-Pro-2.local.mail (13.3ms)
+Date: Wed, 05 Nov 2025 11:04:10 -0600
+From: noreply@tutor-insights.com
+To: test@example.com
+Message-ID: <690b838a9b642_cda210f42889b@MacBook-Pro-2.local.mail>
+Subject: =?UTF-8?Q?=F0=9F=9A=A8_Alert:_Low_First_Session_Quality_Detected?=
+MIME-Version: 1.0
+Content-Type: multipart/alternative;
+ boundary="--==_mimepart_690b838a9aec7_cda210f42873b";
+ charset=UTF-8
+Content-Transfer-Encoding: 7bit
+
+
+----==_mimepart_690b838a9aec7_cda210f42873b
+Content-Type: text/plain;
+ charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
+
+=F0=9F=9A=A8 LOW FIRST SESSION QUALITY ALERT
+
+Tutor: Alice Johnson (alice.johnson@example.com)
+Alert Triggered: November 05, 2025 at 05:03 PM
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+
+FIRST SESSION QUALITY SCORE (FSQS): 40.0 / 100
+(Higher score =3D Better quality)
+
+Why this matters:
+This tutor's recent first session with a student showed concerning patter=
+ns that could impact student retention and experience.
+
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+
+RECOMMENDED ACTIONS:
+  =E2=80=A2 Review the session transcript for specific patterns
+  =E2=80=A2 Schedule a coaching conversation with Alice Johnson
+  =E2=80=A2 Share best practices for first sessions (goal-setting, encour=
+agement, clear closing)
+  =E2=80=A2 Monitor next few sessions for improvement
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+
+View full details in the Admin Dashboard:
+http://localhost:3000/admin/1
+
+This is an automated alert from the Tutor Quality Scoring System.
+
+
+
+----==_mimepart_690b838a9aec7_cda210f42873b
+Content-Type: text/html;
+ charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
+
+<!-- BEGIN app/views/layouts/mailer.html.erb --><!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv=3D"Content-Type" content=3D"text/html; charset=3Dutf=
+-8">
+    <style>
+      /* Email styles need to be inline */
+    </style>
+  </head>
+
+  <body>
+    <!-- BEGIN app/views/alert_mailer/low_first_session_quality_alert.htm=
+l.erb --><!DOCTYPE html>
+<html>
+  <head>
+    <meta content=3D'text/html; charset=3DUTF-8' http-equiv=3D'Content-Ty=
+pe' />
+    <style>
+      body {
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Robot=
+o, 'Helvetica Neue', Arial, sans-serif;
+        line-height: 1.6;
+        color: #333;
+        max-width: 600px;
+        margin: 0 auto;
+        padding: 20px;
+      }
+      .header {
+        background: #fee2e2;
+        border-left: 4px solid #dc2626;
+        padding: 20px;
+        margin-bottom: 20px;
+      }
+      .header h1 {
+        margin: 0 0 10px 0;
+        color: #991b1b;
+        font-size: 24px;
+      }
+      .content {
+        background: #f9fafb;
+        padding: 20px;
+        border-radius: 8px;
+        margin-bottom: 20px;
+      }
+      .score-card {
+        background: white;
+        padding: 15px;
+        border-radius: 6px;
+        margin: 15px 0;
+        border: 1px solid #e5e7eb;
+      }
+      .score-value {
+        font-size: 32px;
+        font-weight: bold;
+        color: #dc2626;
+      }
+      .components {
+        background: #fef2f2;
+        padding: 10px;
+        border-radius: 4px;
+        margin-top: 10px;
+        font-size: 14px;
+      }
+      .cta-button {
+        display: inline-block;
+        background: #2563eb;
+        color: white;
+        padding: 12px 24px;
+        text-decoration: none;
+        border-radius: 6px;
+        font-weight: 600;
+        margin-top: 15px;
+      }
+      .cta-button:hover {
+        background: #1d4ed8;
+      }
+      .footer {
+        margin-top: 30px;
+        padding-top: 20px;
+        border-top: 1px solid #e5e7eb;
+        font-size: 14px;
+        color: #6b7280;
+      }
+    </style>
+  </head>
+  <body>
+    <div class=3D"header">
+      <h1>=F0=9F=9A=A8 Low First Session Quality Alert</h1>
+      <p><strong>Tutor:</strong> Alice Johnson (alice.johnson@example.com=
+)</p>
+      <p><strong>Alert Triggered:</strong> November 05, 2025 at 05:03 PM<=
+/p>
+    </div>
+
+    <div class=3D"content">
+      <h2>First Session Quality Score (FSQS)</h2>
+      <div class=3D"score-card">
+        <div class=3D"score-value">40.0</div>
+        <p style=3D"margin: 5px 0 0 0; color: #6b7280;">out of 100 (Highe=
+r =3D Better Quality)</p>
+      </div>
+
+      <p><strong>Why this matters:</strong> This tutor's recent first ses=
+sion with a student showed concerning patterns that could impact student =
+retention and experience.</p>
+
+
+      <h3>Recommended Actions</h3>
+      <ul>
+        <li>Review the session transcript for specific patterns</li>
+        <li>Schedule a coaching conversation with Alice Johnson</li>
+        <li>Share best practices for first sessions (goal-setting, encour=
+agement, clear closing)</li>
+        <li>Monitor next few sessions for improvement</li>
+      </ul>
+
+      <a href=3D"http://localhost:3000/admin/1" class=3D"cta-button">View=
+ Admin Dashboard =E2=86=92</a>
+    </div>
+
+    <div class=3D"footer">
+      <p>This is an automated alert from the Tutor Quality Scoring System=
+.</p>
+      <p>To manage alert settings or unsubscribe, visit your admin dashbo=
+ard.</p>
+    </div>
+  </body>
+</html>
+
+<!-- END app/views/alert_mailer/low_first_session_quality_alert.html.erb =
+-->
+  </body>
+</html>
+<!-- END app/views/layouts/mailer.html.erb -->=
+
+----==_mimepart_690b838a9aec7_cda210f42873b--
+
+  Rendering layout layouts/mailer.html.erb
+  Rendering alert_mailer/low_first_session_quality_alert.html.erb within layouts/mailer
+  Rendered alert_mailer/low_first_session_quality_alert.html.erb within layouts/mailer (Duration: 0.1ms | GC: 0.0ms)
+  Rendered layout layouts/mailer.html.erb (Duration: 0.4ms | GC: 0.0ms)
+  Rendering layout layouts/mailer.text.erb
+  Rendering alert_mailer/low_first_session_quality_alert.text.erb within layouts/mailer
+  Rendered alert_mailer/low_first_session_quality_alert.text.erb within layouts/mailer (Duration: 0.1ms | GC: 0.0ms)
+  Rendered layout layouts/mailer.text.erb (Duration: 0.1ms | GC: 0.0ms)
+AlertMailer#low_first_session_quality_alert: processed outbound mail in 3.4ms
+Delivered mail 690b839216406_cda210f4290f7@MacBook-Pro-2.local.mail (13.0ms)
+Date: Wed, 05 Nov 2025 11:04:18 -0600
+From: noreply@tutor-insights.com
+To: test@example.com
+Message-ID: <690b839216406_cda210f4290f7@MacBook-Pro-2.local.mail>
+Subject: =?UTF-8?Q?=F0=9F=9A=A8_Alert:_Low_First_Session_Quality_Detected?=
+MIME-Version: 1.0
+Content-Type: multipart/alternative;
+ boundary="--==_mimepart_690b839215c5f_cda210f4289e5";
+ charset=UTF-8
+Content-Transfer-Encoding: 7bit
+
+
+----==_mimepart_690b839215c5f_cda210f4289e5
+Content-Type: text/plain;
+ charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
+
+=F0=9F=9A=A8 LOW FIRST SESSION QUALITY ALERT
+
+Tutor: Alice Johnson (alice.johnson@example.com)
+Alert Triggered: November 05, 2025 at 05:03 PM
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+
+FIRST SESSION QUALITY SCORE (FSQS): 40.0 / 100
+(Higher score =3D Better quality)
+
+Why this matters:
+This tutor's recent first session with a student showed concerning patter=
+ns that could impact student retention and experience.
+
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+
+RECOMMENDED ACTIONS:
+  =E2=80=A2 Review the session transcript for specific patterns
+  =E2=80=A2 Schedule a coaching conversation with Alice Johnson
+  =E2=80=A2 Share best practices for first sessions (goal-setting, encour=
+agement, clear closing)
+  =E2=80=A2 Monitor next few sessions for improvement
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+
+View full details in the Admin Dashboard:
+http://localhost:3000/admin/1
+
+This is an automated alert from the Tutor Quality Scoring System.
+
+
+
+----==_mimepart_690b839215c5f_cda210f4289e5
+Content-Type: text/html;
+ charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
+
+<!-- BEGIN app/views/layouts/mailer.html.erb --><!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv=3D"Content-Type" content=3D"text/html; charset=3Dutf=
+-8">
+    <style>
+      /* Email styles need to be inline */
+    </style>
+  </head>
+
+  <body>
+    <!-- BEGIN app/views/alert_mailer/low_first_session_quality_alert.htm=
+l.erb --><!DOCTYPE html>
+<html>
+  <head>
+    <meta content=3D'text/html; charset=3DUTF-8' http-equiv=3D'Content-Ty=
+pe' />
+    <style>
+      body {
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Robot=
+o, 'Helvetica Neue', Arial, sans-serif;
+        line-height: 1.6;
+        color: #333;
+        max-width: 600px;
+        margin: 0 auto;
+        padding: 20px;
+      }
+      .header {
+        background: #fee2e2;
+        border-left: 4px solid #dc2626;
+        padding: 20px;
+        margin-bottom: 20px;
+      }
+      .header h1 {
+        margin: 0 0 10px 0;
+        color: #991b1b;
+        font-size: 24px;
+      }
+      .content {
+        background: #f9fafb;
+        padding: 20px;
+        border-radius: 8px;
+        margin-bottom: 20px;
+      }
+      .score-card {
+        background: white;
+        padding: 15px;
+        border-radius: 6px;
+        margin: 15px 0;
+        border: 1px solid #e5e7eb;
+      }
+      .score-value {
+        font-size: 32px;
+        font-weight: bold;
+        color: #dc2626;
+      }
+      .components {
+        background: #fef2f2;
+        padding: 10px;
+        border-radius: 4px;
+        margin-top: 10px;
+        font-size: 14px;
+      }
+      .cta-button {
+        display: inline-block;
+        background: #2563eb;
+        color: white;
+        padding: 12px 24px;
+        text-decoration: none;
+        border-radius: 6px;
+        font-weight: 600;
+        margin-top: 15px;
+      }
+      .cta-button:hover {
+        background: #1d4ed8;
+      }
+      .footer {
+        margin-top: 30px;
+        padding-top: 20px;
+        border-top: 1px solid #e5e7eb;
+        font-size: 14px;
+        color: #6b7280;
+      }
+    </style>
+  </head>
+  <body>
+    <div class=3D"header">
+      <h1>=F0=9F=9A=A8 Low First Session Quality Alert</h1>
+      <p><strong>Tutor:</strong> Alice Johnson (alice.johnson@example.com=
+)</p>
+      <p><strong>Alert Triggered:</strong> November 05, 2025 at 05:03 PM<=
+/p>
+    </div>
+
+    <div class=3D"content">
+      <h2>First Session Quality Score (FSQS)</h2>
+      <div class=3D"score-card">
+        <div class=3D"score-value">40.0</div>
+        <p style=3D"margin: 5px 0 0 0; color: #6b7280;">out of 100 (Highe=
+r =3D Better Quality)</p>
+      </div>
+
+      <p><strong>Why this matters:</strong> This tutor's recent first ses=
+sion with a student showed concerning patterns that could impact student =
+retention and experience.</p>
+
+
+      <h3>Recommended Actions</h3>
+      <ul>
+        <li>Review the session transcript for specific patterns</li>
+        <li>Schedule a coaching conversation with Alice Johnson</li>
+        <li>Share best practices for first sessions (goal-setting, encour=
+agement, clear closing)</li>
+        <li>Monitor next few sessions for improvement</li>
+      </ul>
+
+      <a href=3D"http://localhost:3000/admin/1" class=3D"cta-button">View=
+ Admin Dashboard =E2=86=92</a>
+    </div>
+
+    <div class=3D"footer">
+      <p>This is an automated alert from the Tutor Quality Scoring System=
+.</p>
+      <p>To manage alert settings or unsubscribe, visit your admin dashbo=
+ard.</p>
+    </div>
+  </body>
+</html>
+
+<!-- END app/views/alert_mailer/low_first_session_quality_alert.html.erb =
+-->
+  </body>
+</html>
+<!-- END app/views/layouts/mailer.html.erb -->=
+
+----==_mimepart_690b839215c5f_cda210f4289e5--
+
