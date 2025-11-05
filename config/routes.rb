@@ -13,6 +13,10 @@ Rails.application.routes.draw do
   get "tutor/:id", to: "tutors#show", as: :tutor_dashboard
   get "admin/:id", to: "admins#show", as: :admin_dashboard
 
+  # Sidekiq dashboard (require authentication in production)
+  require "sidekiq/web"
+  mount Sidekiq::Web => "/sidekiq"
+
   # Defines the root path route ("/")
   # root "posts#index"
 end

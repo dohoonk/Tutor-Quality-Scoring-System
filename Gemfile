@@ -67,3 +67,7 @@ end
 gem "dotenv-rails", "~> 3.1"
 
 gem "vite_rails", "~> 3.0"
+
+gem "sidekiq", "~> 8.0"
+
+gem "sidekiq-scheduler", "~> 6.0"

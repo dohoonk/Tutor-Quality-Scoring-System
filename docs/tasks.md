@@ -8,10 +8,10 @@
 - [x] Add Vite + React (`bundle add vite_rails && rails vite:install`)
 - [x] Confirm React mounts to `/tutor/:id` and `/admin/:id`
 
-- [ ] Add Sidekiq + Redis
-- [ ] Set `queue_adapter = :sidekiq`
-- [ ] Mount Sidekiq dashboard route
-- [ ] Add sidekiq-scheduler gem for scheduled jobs
+- [x] Add Sidekiq + Redis
+- [x] Set `queue_adapter = :sidekiq`
+- [x] Mount Sidekiq dashboard route
+- [x] Add sidekiq-scheduler gem for scheduled jobs
 
 ---
 
