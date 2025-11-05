@@ -13,6 +13,16 @@ Rails.application.routes.draw do
   get "tutor/:id", to: "tutors#show", as: :tutor_dashboard
   get "admin/:id", to: "admins#show", as: :admin_dashboard
 
+  # API routes
+  namespace :api do
+    namespace :tutor do
+      get ":id/fsrs_latest", to: "tutors#fsrs_latest"
+      get ":id/fsrs_history", to: "tutors#fsrs_history"
+      get ":id/performance_summary", to: "tutors#performance_summary"
+      get ":id/session_list", to: "tutors#session_list"
+    end
+  end
+
   # Sidekiq dashboard (require authentication in production)
   require "sidekiq/web"
   mount Sidekiq::Web => "/sidekiq"

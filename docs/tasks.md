@@ -100,10 +100,14 @@
 - [x] Create React route `/tutor/:id`
 
 ### API Endpoints (TDD: write request specs → see fail → build endpoints → see pass)
-- [ ] `GET /api/tutor/:id/fsrs_latest` - Most recent FSRS with feedback
-- [ ] `GET /api/tutor/:id/fsrs_history` - Last 5 first-sessions with FSRS
-- [ ] `GET /api/tutor/:id/performance_summary` - AI-generated summary (template-based for MVP)
-- [ ] `GET /api/tutor/:id/session_list` - Recent sessions with SQS values
+- [x] Write API endpoint tests (TDD: write test → see fail → build endpoint → see pass) for `GET /api/tutor/:id/fsrs_latest`
+- [x] `GET /api/tutor/:id/fsrs_latest` - Most recent FSRS with feedback
+- [x] Write API endpoint tests (TDD: write test → see fail → build endpoint → see pass) for `GET /api/tutor/:id/fsrs_history`
+- [x] `GET /api/tutor/:id/fsrs_history` - Last 5 first-sessions with FSRS
+- [x] Write API endpoint tests (TDD: write test → see fail → build endpoint → see pass) for `GET /api/tutor/:id/performance_summary`
+- [x] `GET /api/tutor/:id/performance_summary` - AI-generated summary (template-based for MVP)
+- [x] Write API endpoint tests (TDD: write test → see fail → build endpoint → see pass) for `GET /api/tutor/:id/session_list`
+- [x] `GET /api/tutor/:id/session_list` - Recent sessions with SQS values
 
 ### FSRS Feedback Section (top)
 - [ ] Fetch most recent FSRS via `/api/tutor/:id/fsrs_latest`
