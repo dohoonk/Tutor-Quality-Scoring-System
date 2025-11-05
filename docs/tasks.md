@@ -139,8 +139,8 @@
 - [x] Create React route `/admin/:id`
 
 ### API Endpoints (TDD: write request specs → see fail → build endpoints → see pass)
-- [ ] Write API endpoint tests (TDD: write test → see fail → build endpoint → see pass) for `GET /api/admin/tutors/risk_list`
-- [ ] `GET /api/admin/tutors/risk_list` - Sorted list with FSRS + THS + TCRS
+- [x] Write API endpoint tests (TDD: write test → see fail → build endpoint → see pass) for `GET /api/admin/tutors/risk_list`
+- [x] `GET /api/admin/tutors/risk_list` - Sorted list with FSRS + THS + TCRS
 - [ ] `GET /api/admin/tutor/:id/metrics` - Full metrics breakdown
 - [ ] `GET /api/admin/tutor/:id/fsrs_history` - FSRS history for tutor
 - [ ] `GET /api/admin/tutor/:id/intervention_log` - Past interventions
