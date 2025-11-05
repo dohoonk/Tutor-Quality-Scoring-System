@@ -2,7 +2,7 @@
 
 ## EPIC 1 — Project Setup
 - [x] Create Rails app (`rails new tutor-insights --database=postgresql --css=tailwind`)
-- [ ] Configure Postgres & run `db:create db:migrate`
+- [x] Configure Postgres & run `db:create db:migrate`
 - [ ] Add dotenv-rails for env mgmt
 
 - [ ] Add Vite + React (`bundle add vite_rails && rails vite:install`)
