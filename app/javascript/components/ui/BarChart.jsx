@@ -40,12 +40,25 @@ const BarChart = ({
     )
   }
 
-  // Calculate chart dimensions
-  const padding = { top: 20, right: 20, bottom: 50, left: 40 }
+  // Calculate chart dimensions - responsive padding based on height
+  // Larger charts (desktop) get more padding for better text spacing
+  const isLargeChart = height >= 400
+  const padding = isLargeChart 
+    ? { top: 30, right: 30, bottom: 60, left: 50 }  // More space for desktop
+    : { top: 20, right: 20, bottom: 50, left: 40 }  // Mobile
   const chartWidth = 800 // Fixed width for viewBox, scales responsively
   const chartHeight = height
   const innerWidth = chartWidth - padding.left - padding.right
   const innerHeight = chartHeight - padding.top - padding.bottom
+  
+  // Responsive font sizes based on chart height
+  const fontSize = {
+    yAxis: isLargeChart ? 12 : 10,
+    barValue: isLargeChart ? 14 : 11,
+    xAxis: isLargeChart ? 12 : 10,
+    tooltip: isLargeChart ? 13 : 11,
+    tooltipLabel: isLargeChart ? 10 : 9
+  }
 
   // Get value range
   const values = data.map(d => d.value || 0)
@@ -148,10 +161,10 @@ const BarChart = ({
               strokeDasharray="4 4"
             />
             <text
-              x={padding.left - 5}
-              y={line.y + 4}
+              x={padding.left - 8}
+              y={line.y + 5}
               textAnchor="end"
-              fontSize="10"
+              fontSize={fontSize.yAxis}
               fill="#6b7280"
             >
               {line.value}
@@ -195,9 +208,9 @@ const BarChart = ({
               {bar.height > 20 && (
                 <text
                   x={bar.x + bar.width / 2}
-                  y={bar.y - 5}
+                  y={bar.y - 8}
                   textAnchor="middle"
-                  fontSize="11"
+                  fontSize={fontSize.barValue}
                   fill={bar.color}
                   fontWeight="600"
                 >
@@ -210,19 +223,19 @@ const BarChart = ({
                 <g>
                   {/* Tooltip background */}
                   <rect
-                    x={bar.x + bar.width / 2 - 40}
-                    y={bar.y - 35}
-                    width="80"
-                    height="25"
+                    x={bar.x + bar.width / 2 - (isLargeChart ? 50 : 40)}
+                    y={bar.y - (isLargeChart ? 45 : 35)}
+                    width={isLargeChart ? "100" : "80"}
+                    height={isLargeChart ? "30" : "25"}
                     rx="4"
                     fill="rgba(0, 0, 0, 0.8)"
                   />
                   {/* Tooltip text */}
                   <text
                     x={bar.x + bar.width / 2}
-                    y={bar.y - 18}
+                    y={bar.y - 20}
                     textAnchor="middle"
-                    fontSize="11"
+                    fontSize={fontSize.tooltip}
                     fill="white"
                     fontWeight="bold"
                   >
@@ -234,7 +247,7 @@ const BarChart = ({
                       x={bar.x + bar.width / 2}
                       y={bar.y - 8}
                       textAnchor="middle"
-                      fontSize="9"
+                      fontSize={fontSize.tooltipLabel}
                       fill="#d1d5db"
                     >
                       {bar.label}
@@ -251,9 +264,9 @@ const BarChart = ({
               {/* X-axis label */}
               <text
                 x={bar.x + bar.width / 2}
-                y={innerHeight + padding.top + 15}
+                y={innerHeight + padding.top + (isLargeChart ? 20 : 15)}
                 textAnchor="middle"
-                fontSize="10"
+                fontSize={fontSize.xAxis}
                 fill="#6b7280"
                 className="truncate"
               >
