@@ -323,7 +323,7 @@ const TutorDashboard = ({ tutorId }) => {
 
                 {/* Right: Educational Content (Desktop only) */}
                 <div className="hidden md:block">
-                  <div className="h-full flex flex-col justify-center space-y-4">
+                  <div className="flex flex-col space-y-4" style={{ paddingTop: isDesktop ? '30px' : '0' }}>
                     {/* Why FSQS Matters */}
                     <div className="bg-blue-50 rounded-lg p-4 border-l-4 border-blue-500">
                       <h4 className="text-lg font-semibold text-blue-900 mb-2 flex items-center gap-2">
