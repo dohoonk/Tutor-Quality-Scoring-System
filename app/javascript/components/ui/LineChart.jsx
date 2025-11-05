@@ -40,9 +40,9 @@ const LineChart = ({
     )
   }
 
-  // Calculate chart dimensions
+  // Calculate chart dimensions (use fixed width for SVG, responsive via viewBox)
   const padding = { top: 20, right: 20, bottom: 30, left: 40 }
-  const chartWidth = 100 // Percentage-based for responsiveness
+  const chartWidth = 800 // Fixed width for viewBox, scales responsively
   const chartHeight = height
   const innerWidth = chartWidth - padding.left - padding.right
   const innerHeight = chartHeight - padding.top - padding.bottom
