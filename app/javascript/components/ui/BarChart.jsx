@@ -54,7 +54,11 @@ const BarChart = ({
 
   // Calculate bar dimensions
   const barCount = data.length
-  const barWidth = Math.max(20, (innerWidth / barCount) * 0.6) // 60% of available space
+  // Use a more reasonable bar width: smaller percentage for fewer bars, cap at max width
+  const maxBarWidth = 80 // Maximum bar width for desktop
+  const minBarWidth = 20 // Minimum bar width for mobile
+  const calculatedWidth = (innerWidth / barCount) * 0.4 // 40% of available space per bar
+  const barWidth = Math.max(minBarWidth, Math.min(maxBarWidth, calculatedWidth))
   const barSpacing = (innerWidth - (barWidth * barCount)) / (barCount + 1)
 
   // Default color function
