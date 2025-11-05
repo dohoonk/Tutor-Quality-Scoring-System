@@ -348,30 +348,30 @@
 - [ ] Update alert service specs:
   - [ ] Invert threshold expectations
 
-### Task 11.7: Update Documentation
-- [ ] Update `docs/prd.md`:
-  - [ ] Replace all FSQS references with FSQS
-  - [ ] Update scoring explanation (100 = perfect, 0 = worst)
-  - [ ] Update threshold descriptions
-- [ ] Update `docs/architecture.md`:
-  - [ ] Rename service references
-  - [ ] Update API endpoint documentation
-  - [ ] Update scoring system explanation
-- [ ] Update `docs/PROJECT_SUMMARY.md`:
-  - [ ] Update FSQS description
-  - [ ] Update metrics explanation
-- [ ] Update `docs/tasks.md`:
-  - [ ] Update EPIC 4 task descriptions (historical record)
-- [ ] Update `docs/DEMO_GUIDE.md`:
-  - [ ] Update demo profile scores to reflect 0-100 scale
-  - [ ] Update script explanations
-- [ ] Update `docs/MANUAL_TESTING.md`:
-  - [ ] Update test procedures for FSQS
-  - [ ] Update expected values
-- [ ] Update `docs/EMAIL_NOTIFICATIONS.md`:
-  - [ ] Update threshold explanations
-  - [ ] Update alert type descriptions
-- [ ] Update README.md if it contains FSQS references
+### Task 11.7: Update Documentation ✅
+- [x] Update `docs/prd.md`:
+  - [x] Replace all FSQS references with FSQS
+  - [x] Update scoring explanation (100 = perfect, 0 = worst)
+  - [x] Update threshold descriptions
+- [x] Update `docs/architecture.md`:
+  - [x] Rename service references
+  - [x] Update API endpoint documentation
+  - [x] Update scoring system explanation
+- [x] Update `docs/PROJECT_SUMMARY.md`:
+  - [x] Update FSQS description
+  - [x] Update metrics explanation
+- [x] Update `docs/tasks.md`:
+  - [x] Update EPIC 4 task descriptions (historical record)
+- [x] Update `docs/DEMO_GUIDE.md`:
+  - [x] Update demo profile scores to reflect 0-100 scale
+  - [x] Update script explanations
+- [x] Update `docs/MANUAL_TESTING.md`:
+  - [x] Update test procedures for FSQS
+  - [x] Update expected values
+- [x] Update `docs/EMAIL_NOTIFICATIONS.md`:
+  - [x] Update threshold explanations
+  - [x] Update alert type descriptions
+- [x] Update README.md if it contains FSQS references (no references found)
 
 ### Task 11.8: Clean Up Legacy Code ✅
 - [x] Remove or update legacy `compute_fsrs` method in SessionScoringJob (replaced with service call)
