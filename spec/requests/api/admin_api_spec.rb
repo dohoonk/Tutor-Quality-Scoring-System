@@ -194,9 +194,12 @@ RSpec.describe 'Admin API', type: :request do
     
     it 'updates alert status' do
       # TODO: Will implement after defining alert update structure
-      post "/api/admin/alerts/#{alert.id}/update_status", params: { status: 'in_progress' }
+      post "/api/admin/alerts/#{alert.id}/update_status", params: { status: 'acknowledged' }
       
       expect(response).to have_http_status(:ok)
+      
+      json = JSON.parse(response.body)
+      expect(json['status']).to eq('acknowledged')
     end
   end
 end
