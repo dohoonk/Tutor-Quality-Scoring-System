@@ -2,11 +2,11 @@
 
 require 'rails_helper'
 
-RSpec.describe AIActionableFeedbackService do
+RSpec.describe AiActionableFeedbackService do
   let(:tutor) { Tutor.create!(name: 'Alice Smith', email: 'alice@example.com') }
   let(:student1) { Student.create!(name: 'John Doe', email: 'john@example.com') }
   let(:student2) { Student.create!(name: 'Jane Smith', email: 'jane@example.com') }
-  let(:service) { AIActionableFeedbackService.new(tutor, 'encouragement') }
+  let(:service) { AiActionableFeedbackService.new(tutor, 'encouragement') }
 
   describe '#generate_feedback' do
     context 'with valid sessions and transcripts' do

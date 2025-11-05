@@ -97,7 +97,7 @@ module Api
         actionable_item_type = params[:actionable_item_type]
         return render json: { error: 'actionable_item_type is required' }, status: :bad_request unless actionable_item_type.present?
 
-        service = AIActionableFeedbackService.new(tutor, actionable_item_type)
+        service = ::AiActionableFeedbackService.new(tutor, actionable_item_type)
         feedback = service.generate_feedback
 
         if feedback[:error] == 'rate_limit_exceeded'

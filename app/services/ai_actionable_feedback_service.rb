@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class AIActionableFeedbackService
+class AiActionableFeedbackService
   RATE_LIMIT_PER_DAY = 5
   CACHE_EXPIRY = 24.hours
 
