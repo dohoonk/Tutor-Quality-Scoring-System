@@ -216,10 +216,10 @@
 - [ ] Configure sidekiq-scheduler
 - [ ] Set up recurring jobs:
   - [ ] SessionScoringJob: every 5 min
-  - [ ] TutorDailyAggregationJob: every 10 min
-  - [ ] TutorHealthScoreJob: every 10 min (after aggregation)
-  - [ ] TutorChurnRiskScoreJob: every 10 min (after aggregation)
   - [ ] AlertJob: every 10 min
+  - [ ] TutorDailyAggregationJob: every 10 min (deferred - requires materialized views)
+  - [ ] TutorHealthScoreJob: every 10 min (deferred - requires tutor_stats_7d view)
+  - [ ] TutorChurnRiskScoreJob: every 10 min (deferred - requires tutor_stats_14d view)
 
 ---
 

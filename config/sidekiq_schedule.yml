@@ -1,0 +1,35 @@
+# Sidekiq Scheduler Configuration
+# Recurring background jobs for the Tutor Quality Scoring System
+
+session_scoring:
+  cron: '*/5 * * * *'  # Every 5 minutes
+  class: SessionScoringJob
+  queue: default
+  description: "Computes SQS and FSRS scores for completed sessions"
+
+alert_evaluation:
+  cron: '*/10 * * * *'  # Every 10 minutes
+  class: AlertJob
+  queue: default
+  description: "Evaluates tutor scores and creates/resolves alerts based on thresholds"
+
+# Future jobs (currently deferred pending materialized view implementation):
+# 
+# tutor_daily_aggregation:
+#   cron: '*/10 * * * *'  # Every 10 minutes
+#   class: TutorDailyAggregationJob
+#   queue: default
+#   description: "Aggregates daily tutor metrics for rolling windows"
+# 
+# tutor_health_score:
+#   cron: '*/10 * * * *'  # Every 10 minutes
+#   class: TutorHealthScoreJob
+#   queue: default
+#   description: "Computes THS (7-day health score) from tutor_stats_7d"
+# 
+# tutor_churn_risk_score:
+#   cron: '*/10 * * * *'  # Every 10 minutes
+#   class: TutorChurnRiskScoreJob
+#   queue: default
+#   description: "Computes TCRS (14-day churn risk) from tutor_stats_14d"
+
