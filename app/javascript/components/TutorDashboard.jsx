@@ -62,6 +62,7 @@ const TutorDashboard = ({ tutorId }) => {
   const [fsqsHistory, setFsqsHistory] = useState([])
   const [performanceSummary, setPerformanceSummary] = useState(null)
   const [sessionList, setSessionList] = useState([])
+  const [sqsActionableFeedback, setSqsActionableFeedback] = useState(null)
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(null)
   const [showPastSessions, setShowPastSessions] = useState(false)
@@ -75,11 +76,12 @@ const TutorDashboard = ({ tutorId }) => {
       
       try {
         // Fetch all data in parallel
-        const [fsqsLatestRes, fsqsHistoryRes, performanceSummaryRes, sessionListRes] = await Promise.all([
+        const [fsqsLatestRes, fsqsHistoryRes, performanceSummaryRes, sessionListRes, sqsActionableFeedbackRes] = await Promise.all([
           fetch(`/api/tutor/${tutorId}/fsqs_latest`).catch(() => null),
           fetch(`/api/tutor/${tutorId}/fsqs_history`).catch(() => null),
           fetch(`/api/tutor/${tutorId}/performance_summary`).catch(() => null),
-          fetch(`/api/tutor/${tutorId}/session_list`).catch(() => null)
+          fetch(`/api/tutor/${tutorId}/session_list`).catch(() => null),
+          fetch(`/api/tutor/${tutorId}/sqs_actionable_feedback`).catch(() => null)
         ])
 
         if (fsqsLatestRes?.ok) {
@@ -100,6 +102,11 @@ const TutorDashboard = ({ tutorId }) => {
         if (sessionListRes?.ok) {
           const data = await sessionListRes.json()
           setSessionList(data)
+        }
+
+        if (sqsActionableFeedbackRes?.ok) {
+          const data = await sqsActionableFeedbackRes.json()
+          setSqsActionableFeedback(data)
         }
       } catch (err) {
         console.error('Error fetching data:', err)
@@ -597,6 +604,65 @@ const TutorDashboard = ({ tutorId }) => {
                 </div>
               )
             })()}
+
+            {/* Actionable Items Section */}
+            {sqsActionableFeedback && (
+              <div className="mt-6">
+                <h3 className="text-lg font-semibold mb-4">Actionable Items</h3>
+                {sqsActionableFeedback.perfect ? (
+                  <div className="bg-gradient-to-r from-green-50 to-emerald-50 rounded-lg p-6 md:p-8 border-l-4 border-green-500">
+                    <div className="flex flex-col md:flex-row items-center md:items-start gap-4">
+                      <div className="text-6xl md:text-8xl">🎉</div>
+                      <div className="flex-1">
+                        <h4 className="text-xl md:text-2xl font-bold text-green-900 mb-2">
+                          Fantastic Job!
+                        </h4>
+                        <p className="text-base md:text-lg text-gray-700 leading-relaxed">
+                          {sqsActionableFeedback.message}
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                ) : (
+                  <div className="space-y-4">
+                    {sqsActionableFeedback.items.map((item, index) => (
+                      <div
+                        key={index}
+                        className={`rounded-lg p-4 md:p-5 border-l-4 ${
+                          item.priority === 'high'
+                            ? 'bg-red-50 border-red-500'
+                            : 'bg-yellow-50 border-yellow-500'
+                        } animate-slide-in-up`}
+                        style={{ animationDelay: `${index * 0.1}s` }}
+                      >
+                        <div className="flex items-start gap-3">
+                          <div className="text-3xl flex-shrink-0">{item.icon}</div>
+                          <div className="flex-1">
+                            <div className="flex items-center gap-2 mb-2">
+                              <h4 className="text-lg font-semibold text-gray-900">
+                                {item.title}
+                              </h4>
+                              {item.priority === 'high' && (
+                                <span className="px-2 py-1 bg-red-100 text-red-800 rounded text-xs font-medium">
+                                  High Priority
+                                </span>
+                              )}
+                            </div>
+                            <p className="text-sm md:text-base text-gray-700 mb-3 leading-relaxed">
+                              {item.description}
+                            </p>
+                            <div className="bg-white rounded-lg p-3 border border-gray-200">
+                              <p className="text-sm font-medium text-gray-900 mb-1">💡 Action:</p>
+                              <p className="text-sm text-gray-700 leading-relaxed">{item.action}</p>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                )}
+              </div>
+            )}
           </div>
         </section>
       )}

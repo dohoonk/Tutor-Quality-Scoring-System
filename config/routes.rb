@@ -20,6 +20,7 @@ Rails.application.routes.draw do
       get ":id/fsqs_history", to: "tutors#fsqs_history"
       get ":id/performance_summary", to: "tutors#performance_summary"
       get ":id/session_list", to: "tutors#session_list"
+      get ":id/sqs_actionable_feedback", to: "tutors#sqs_actionable_feedback"
     end
 
     namespace :admin do

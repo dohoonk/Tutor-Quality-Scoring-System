@@ -79,6 +79,16 @@ module Api
 
         render json: session_list
       end
+
+      def sqs_actionable_feedback
+        tutor = ::Tutor.find_by(id: params[:id])
+        return render json: { error: 'Tutor not found' }, status: :not_found unless tutor
+
+        service = SqsActionableFeedbackService.new(tutor)
+        feedback = service.generate_feedback
+
+        render json: feedback
+      end
     end
   end
 end
