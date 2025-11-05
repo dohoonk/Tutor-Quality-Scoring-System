@@ -367,8 +367,3 @@ const TutorDashboard = ({ tutorId }) => {
 }
 
 export default TutorDashboard
-
-// Fast Refresh preamble placeholder
-if (import.meta.hot) {
-  import.meta.hot.accept()
-}
