@@ -141,10 +141,10 @@
 ### API Endpoints (TDD: write request specs → see fail → build endpoints → see pass)
 - [x] Write API endpoint tests (TDD: write test → see fail → build endpoint → see pass) for `GET /api/admin/tutors/risk_list`
 - [x] `GET /api/admin/tutors/risk_list` - Sorted list with FSRS + THS + TCRS
-- [ ] `GET /api/admin/tutor/:id/metrics` - Full metrics breakdown
-- [ ] `GET /api/admin/tutor/:id/fsrs_history` - FSRS history for tutor
-- [ ] `GET /api/admin/tutor/:id/intervention_log` - Past interventions
-- [ ] `POST /api/admin/alerts/:id/update_status` - Update alert status
+- [x] `GET /api/admin/tutor/:id/metrics` - Full metrics breakdown
+- [x] `GET /api/admin/tutor/:id/fsrs_history` - FSRS history for tutor
+- [x] `GET /api/admin/tutor/:id/intervention_log` - Past interventions
+- [x] `POST /api/admin/alerts/:id/update_status` - Update alert status
 
 ### Risk Overview Table
 - [ ] Fetch tutors via `/api/admin/tutors/risk_list`
