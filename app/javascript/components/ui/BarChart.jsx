@@ -270,7 +270,7 @@ const BarChart = ({
                 fill="#6b7280"
                 className="truncate"
               >
-                {bar.date || bar.label || `#${idx + 1}`}
+                {bar.label || bar.date || `#${idx + 1}`}
               </text>
             </g>
           )
