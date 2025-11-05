@@ -1903,3 +1903,390 @@ Migrating to AddRefreshFunctionsForMaterializedViews (20251105072137)
   [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
   [1m[36mScore Load (0.4ms)[0m  [1m[34mSELECT "scores".* FROM "scores" WHERE "scores"."session_id" = $1 AND "scores"."score_type" = $2 LIMIT $3[0m  [["session_id", 52], ["score_type", "sqs"], ["LIMIT", 1]]
   [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.3ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "schema_sha1"]]
+  [1m[36mActiveRecord::SchemaMigration Load (0.3ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.3ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "schema_sha1"]]
+  [1m[36mActiveRecord::SchemaMigration Load (0.3ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+[dotenv] Saved a snapshot of [32mENV[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTutor Create (0.3ms)[0m  [1m[32mINSERT INTO "tutors" ("name", "email", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", "Test Tutor"], ["email", "[FILTERED]"], ["created_at", "2025-11-05 07:30:38.224980"], ["updated_at", "2025-11-05 07:30:38.224980"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mStudent Create (0.2ms)[0m  [1m[32mINSERT INTO "students" ("name", "email", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", "Test Student"], ["email", "[FILTERED]"], ["created_at", "2025-11-05 07:30:38.227802"], ["updated_at", "2025-11-05 07:30:38.227802"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mSession Create (0.5ms)[0m  [1m[32mINSERT INTO "sessions" ("tutor_id", "student_id", "scheduled_start_at", "actual_start_at", "scheduled_end_at", "actual_end_at", "status", "reschedule_initiator", "tech_issue", "first_session_for_student", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12) RETURNING "id"[0m  [["tutor_id", 53], ["student_id", 53], ["scheduled_start_at", "2025-11-05 06:30:38.228237"], ["actual_start_at", "2025-11-05 06:30:38.228244"], ["scheduled_end_at", "2025-11-05 07:30:38.228247"], ["actual_end_at", "2025-11-05 07:30:38.228248"], ["status", "completed"], ["reschedule_initiator", nil], ["tech_issue", nil], ["first_session_for_student", false], ["created_at", "2025-11-05 07:30:38.232549"], ["updated_at", "2025-11-05 07:30:38.232549"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTutor Create (0.2ms)[0m  [1m[32mINSERT INTO "tutors" ("name", "email", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", "Test Tutor"], ["email", "[FILTERED]"], ["created_at", "2025-11-05 07:30:38.237498"], ["updated_at", "2025-11-05 07:30:38.237498"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mStudent Create (0.1ms)[0m  [1m[32mINSERT INTO "students" ("name", "email", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", "Test Student"], ["email", "[FILTERED]"], ["created_at", "2025-11-05 07:30:38.238001"], ["updated_at", "2025-11-05 07:30:38.238001"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mSession Create (0.2ms)[0m  [1m[32mINSERT INTO "sessions" ("tutor_id", "student_id", "scheduled_start_at", "actual_start_at", "scheduled_end_at", "actual_end_at", "status", "reschedule_initiator", "tech_issue", "first_session_for_student", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12) RETURNING "id"[0m  [["tutor_id", 54], ["student_id", 54], ["scheduled_start_at", "2025-11-05 06:30:38.238290"], ["actual_start_at", "2025-11-05 06:30:38.238296"], ["scheduled_end_at", "2025-11-05 07:30:38.238299"], ["actual_end_at", "2025-11-05 07:30:38.238299"], ["status", "completed"], ["reschedule_initiator", nil], ["tech_issue", nil], ["first_session_for_student", true], ["created_at", "2025-11-05 07:30:38.238425"], ["updated_at", "2025-11-05 07:30:38.238425"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mSessionTranscript Load (0.2ms)[0m  [1m[34mSELECT "session_transcripts".* FROM "session_transcripts" WHERE "session_transcripts"."session_id" = $1 LIMIT $2[0m  [["session_id", 54], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTutor Create (0.1ms)[0m  [1m[32mINSERT INTO "tutors" ("name", "email", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", "Test Tutor"], ["email", "[FILTERED]"], ["created_at", "2025-11-05 07:30:38.244326"], ["updated_at", "2025-11-05 07:30:38.244326"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mStudent Create (0.1ms)[0m  [1m[32mINSERT INTO "students" ("name", "email", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", "Test Student"], ["email", "[FILTERED]"], ["created_at", "2025-11-05 07:30:38.244690"], ["updated_at", "2025-11-05 07:30:38.244690"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mSession Create (0.1ms)[0m  [1m[32mINSERT INTO "sessions" ("tutor_id", "student_id", "scheduled_start_at", "actual_start_at", "scheduled_end_at", "actual_end_at", "status", "reschedule_initiator", "tech_issue", "first_session_for_student", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12) RETURNING "id"[0m  [["tutor_id", 55], ["student_id", 55], ["scheduled_start_at", "2025-11-05 06:30:38.244928"], ["actual_start_at", "2025-11-05 06:30:38.244933"], ["scheduled_end_at", "2025-11-05 07:30:38.244935"], ["actual_end_at", "2025-11-05 07:30:38.244935"], ["status", "completed"], ["reschedule_initiator", nil], ["tech_issue", nil], ["first_session_for_student", true], ["created_at", "2025-11-05 07:30:38.245036"], ["updated_at", "2025-11-05 07:30:38.245036"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mSessionTranscript Create (0.5ms)[0m  [1m[32mINSERT INTO "session_transcripts" ("session_id", "payload", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["session_id", 55], ["payload", "{\"text\":\"Some transcript without speakers\"}"], ["created_at", "2025-11-05 07:30:38.246494"], ["updated_at", "2025-11-05 07:30:38.246494"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTutor Create (0.1ms)[0m  [1m[32mINSERT INTO "tutors" ("name", "email", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", "Test Tutor"], ["email", "[FILTERED]"], ["created_at", "2025-11-05 07:30:38.248011"], ["updated_at", "2025-11-05 07:30:38.248011"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mStudent Create (0.1ms)[0m  [1m[32mINSERT INTO "students" ("name", "email", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", "Test Student"], ["email", "[FILTERED]"], ["created_at", "2025-11-05 07:30:38.248341"], ["updated_at", "2025-11-05 07:30:38.248341"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mSession Create (0.1ms)[0m  [1m[32mINSERT INTO "sessions" ("tutor_id", "student_id", "scheduled_start_at", "actual_start_at", "scheduled_end_at", "actual_end_at", "status", "reschedule_initiator", "tech_issue", "first_session_for_student", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12) RETURNING "id"[0m  [["tutor_id", 56], ["student_id", 56], ["scheduled_start_at", "2025-11-05 06:30:38.248587"], ["actual_start_at", "2025-11-05 06:30:38.248592"], ["scheduled_end_at", "2025-11-05 07:30:38.248594"], ["actual_end_at", "2025-11-05 07:30:38.248595"], ["status", "completed"], ["reschedule_initiator", nil], ["tech_issue", false], ["first_session_for_student", true], ["created_at", "2025-11-05 07:30:38.248693"], ["updated_at", "2025-11-05 07:30:38.248693"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mSessionTranscript Create (0.1ms)[0m  [1m[32mINSERT INTO "session_transcripts" ("session_id", "payload", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["session_id", 56], ["payload", "{\"speakers\":[{\"speaker\":\"tutor\",\"text\":\"Hello! What are your goals for today?\",\"words\":7},{\"speaker\":\"student\",\"text\":\"I want to learn math\",\"words\":5},{\"speaker\":\"tutor\",\"text\":\"Great! You are doing well. Keep it up!\",\"words\":8},{\"speaker\":\"student\",\"text\":\"Thank you\",\"words\":2},{\"speaker\":\"tutor\",\"text\":\"Let us summarize what we covered today and plan next steps\",\"words\":12}],\"metadata\":{\"total_words_tutor\":27,\"total_words_student\":7}}"], ["created_at", "2025-11-05 07:30:38.249120"], ["updated_at", "2025-11-05 07:30:38.249120"]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTutor Create (0.2ms)[0m  [1m[32mINSERT INTO "tutors" ("name", "email", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", "Test Tutor"], ["email", "[FILTERED]"], ["created_at", "2025-11-05 07:30:38.251085"], ["updated_at", "2025-11-05 07:30:38.251085"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mStudent Create (0.1ms)[0m  [1m[32mINSERT INTO "students" ("name", "email", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", "Test Student"], ["email", "[FILTERED]"], ["created_at", "2025-11-05 07:30:38.251544"], ["updated_at", "2025-11-05 07:30:38.251544"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mSession Create (0.3ms)[0m  [1m[32mINSERT INTO "sessions" ("tutor_id", "student_id", "scheduled_start_at", "actual_start_at", "scheduled_end_at", "actual_end_at", "status", "reschedule_initiator", "tech_issue", "first_session_for_student", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12) RETURNING "id"[0m  [["tutor_id", 57], ["student_id", 57], ["scheduled_start_at", "2025-11-05 06:30:38.251831"], ["actual_start_at", "2025-11-05 06:30:38.251836"], ["scheduled_end_at", "2025-11-05 07:30:38.251838"], ["actual_end_at", "2025-11-05 07:30:38.251838"], ["status", "completed"], ["reschedule_initiator", nil], ["tech_issue", false], ["first_session_for_student", true], ["created_at", "2025-11-05 07:30:38.251943"], ["updated_at", "2025-11-05 07:30:38.251943"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mSessionTranscript Create (0.2ms)[0m  [1m[32mINSERT INTO "session_transcripts" ("session_id", "payload", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["session_id", 57], ["payload", "{\"speakers\":[{\"speaker\":\"tutor\",\"text\":\"Hello\",\"words\":1},{\"speaker\":\"student\",\"text\":\"I do not understand\",\"words\":4},{\"speaker\":\"tutor\",\"text\":\"Let me explain\",\"words\":3},{\"speaker\":\"student\",\"text\":\"I am confused about this\",\"words\":5},{\"speaker\":\"tutor\",\"text\":\"OK\",\"words\":1},{\"speaker\":\"student\",\"text\":\"I do not get it\",\"words\":5}]}"], ["created_at", "2025-11-05 07:30:38.252547"], ["updated_at", "2025-11-05 07:30:38.252547"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTutor Create (0.1ms)[0m  [1m[32mINSERT INTO "tutors" ("name", "email", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", "Test Tutor"], ["email", "[FILTERED]"], ["created_at", "2025-11-05 07:30:38.253484"], ["updated_at", "2025-11-05 07:30:38.253484"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mStudent Create (0.1ms)[0m  [1m[32mINSERT INTO "students" ("name", "email", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", "Test Student"], ["email", "[FILTERED]"], ["created_at", "2025-11-05 07:30:38.253803"], ["updated_at", "2025-11-05 07:30:38.253803"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mSession Create (0.2ms)[0m  [1m[32mINSERT INTO "sessions" ("tutor_id", "student_id", "scheduled_start_at", "actual_start_at", "scheduled_end_at", "actual_end_at", "status", "reschedule_initiator", "tech_issue", "first_session_for_student", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12) RETURNING "id"[0m  [["tutor_id", 58], ["student_id", 58], ["scheduled_start_at", "2025-11-05 06:30:38.254139"], ["actual_start_at", "2025-11-05 06:30:38.254144"], ["scheduled_end_at", "2025-11-05 07:30:38.254146"], ["actual_end_at", "2025-11-05 07:30:38.254146"], ["status", "completed"], ["reschedule_initiator", nil], ["tech_issue", false], ["first_session_for_student", true], ["created_at", "2025-11-05 07:30:38.254243"], ["updated_at", "2025-11-05 07:30:38.254243"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mSessionTranscript Create (0.2ms)[0m  [1m[32mINSERT INTO "session_transcripts" ("session_id", "payload", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["session_id", 58], ["payload", "{\"speakers\":[{\"speaker\":\"tutor\",\"text\":\"Let us talk about many different topics and concepts\",\"words\":10},{\"speaker\":\"student\",\"text\":\"OK\",\"words\":1},{\"speaker\":\"tutor\",\"text\":\"We will cover algebra geometry and calculus\",\"words\":7},{\"speaker\":\"student\",\"text\":\"Yes\",\"words\":1}],\"metadata\":{\"total_words_tutor\":17,\"total_words_student\":2}}"], ["created_at", "2025-11-05 07:30:38.254796"], ["updated_at", "2025-11-05 07:30:38.254796"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTutor Create (0.1ms)[0m  [1m[32mINSERT INTO "tutors" ("name", "email", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", "Test Tutor"], ["email", "[FILTERED]"], ["created_at", "2025-11-05 07:30:38.255740"], ["updated_at", "2025-11-05 07:30:38.255740"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mStudent Create (0.1ms)[0m  [1m[32mINSERT INTO "students" ("name", "email", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", "Test Student"], ["email", "[FILTERED]"], ["created_at", "2025-11-05 07:30:38.256115"], ["updated_at", "2025-11-05 07:30:38.256115"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mSession Create (0.1ms)[0m  [1m[32mINSERT INTO "sessions" ("tutor_id", "student_id", "scheduled_start_at", "actual_start_at", "scheduled_end_at", "actual_end_at", "status", "reschedule_initiator", "tech_issue", "first_session_for_student", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12) RETURNING "id"[0m  [["tutor_id", 59], ["student_id", 59], ["scheduled_start_at", "2025-11-05 06:30:38.256408"], ["actual_start_at", "2025-11-05 06:30:38.256413"], ["scheduled_end_at", "2025-11-05 07:30:38.256415"], ["actual_end_at", "2025-11-05 07:30:38.256416"], ["status", "completed"], ["reschedule_initiator", nil], ["tech_issue", false], ["first_session_for_student", true], ["created_at", "2025-11-05 07:30:38.256513"], ["updated_at", "2025-11-05 07:30:38.256513"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mSessionTranscript Create (0.2ms)[0m  [1m[32mINSERT INTO "session_transcripts" ("session_id", "payload", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["session_id", 59], ["payload", "{\"speakers\":[{\"speaker\":\"tutor\",\"text\":\"Hello, how are you?\",\"words\":4},{\"speaker\":\"student\",\"text\":\"I am fine\",\"words\":3},{\"speaker\":\"tutor\",\"text\":\"Let us start working\",\"words\":4}]}"], ["created_at", "2025-11-05 07:30:38.257001"], ["updated_at", "2025-11-05 07:30:38.257001"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTutor Create (0.1ms)[0m  [1m[32mINSERT INTO "tutors" ("name", "email", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", "Test Tutor"], ["email", "[FILTERED]"], ["created_at", "2025-11-05 07:30:38.258083"], ["updated_at", "2025-11-05 07:30:38.258083"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mStudent Create (0.1ms)[0m  [1m[32mINSERT INTO "students" ("name", "email", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", "Test Student"], ["email", "[FILTERED]"], ["created_at", "2025-11-05 07:30:38.258484"], ["updated_at", "2025-11-05 07:30:38.258484"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mSession Create (0.2ms)[0m  [1m[32mINSERT INTO "sessions" ("tutor_id", "student_id", "scheduled_start_at", "actual_start_at", "scheduled_end_at", "actual_end_at", "status", "reschedule_initiator", "tech_issue", "first_session_for_student", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12) RETURNING "id"[0m  [["tutor_id", 60], ["student_id", 60], ["scheduled_start_at", "2025-11-05 06:30:38.258793"], ["actual_start_at", "2025-11-05 06:30:38.258799"], ["scheduled_end_at", "2025-11-05 07:30:38.258801"], ["actual_end_at", "2025-11-05 07:30:38.258802"], ["status", "completed"], ["reschedule_initiator", nil], ["tech_issue", false], ["first_session_for_student", true], ["created_at", "2025-11-05 07:30:38.258896"], ["updated_at", "2025-11-05 07:30:38.258896"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mSessionTranscript Create (0.2ms)[0m  [1m[32mINSERT INTO "session_transcripts" ("session_id", "payload", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["session_id", 60], ["payload", "{\"speakers\":[{\"speaker\":\"tutor\",\"text\":\"What are your goals?\",\"words\":4},{\"speaker\":\"student\",\"text\":\"I want to learn\",\"words\":4},{\"speaker\":\"tutor\",\"text\":\"OK, let us proceed\",\"words\":4}]}"], ["created_at", "2025-11-05 07:30:38.259456"], ["updated_at", "2025-11-05 07:30:38.259456"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTutor Create (0.1ms)[0m  [1m[32mINSERT INTO "tutors" ("name", "email", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", "Test Tutor"], ["email", "[FILTERED]"], ["created_at", "2025-11-05 07:30:38.260496"], ["updated_at", "2025-11-05 07:30:38.260496"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mStudent Create (0.1ms)[0m  [1m[32mINSERT INTO "students" ("name", "email", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", "Test Student"], ["email", "[FILTERED]"], ["created_at", "2025-11-05 07:30:38.260861"], ["updated_at", "2025-11-05 07:30:38.260861"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mSession Create (0.2ms)[0m  [1m[32mINSERT INTO "sessions" ("tutor_id", "student_id", "scheduled_start_at", "actual_start_at", "scheduled_end_at", "actual_end_at", "status", "reschedule_initiator", "tech_issue", "first_session_for_student", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12) RETURNING "id"[0m  [["tutor_id", 61], ["student_id", 61], ["scheduled_start_at", "2025-11-05 06:30:38.261199"], ["actual_start_at", "2025-11-05 06:30:38.261204"], ["scheduled_end_at", "2025-11-05 07:30:38.261205"], ["actual_end_at", "2025-11-05 07:30:38.261206"], ["status", "completed"], ["reschedule_initiator", nil], ["tech_issue", false], ["first_session_for_student", true], ["created_at", "2025-11-05 07:30:38.261288"], ["updated_at", "2025-11-05 07:30:38.261288"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mSessionTranscript Create (0.1ms)[0m  [1m[32mINSERT INTO "session_transcripts" ("session_id", "payload", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["session_id", 61], ["payload", "{\"speakers\":[{\"speaker\":\"tutor\",\"text\":\"You are wrong\",\"words\":3},{\"speaker\":\"tutor\",\"text\":\"That is not correct\",\"words\":4},{\"speaker\":\"tutor\",\"text\":\"You failed to understand\",\"words\":4}]}"], ["created_at", "2025-11-05 07:30:38.261830"], ["updated_at", "2025-11-05 07:30:38.261830"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTutor Create (0.1ms)[0m  [1m[32mINSERT INTO "tutors" ("name", "email", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", "Test Tutor"], ["email", "[FILTERED]"], ["created_at", "2025-11-05 07:30:38.262680"], ["updated_at", "2025-11-05 07:30:38.262680"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mStudent Create (0.1ms)[0m  [1m[32mINSERT INTO "students" ("name", "email", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", "Test Student"], ["email", "[FILTERED]"], ["created_at", "2025-11-05 07:30:38.263015"], ["updated_at", "2025-11-05 07:30:38.263015"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mSession Create (0.1ms)[0m  [1m[32mINSERT INTO "sessions" ("tutor_id", "student_id", "scheduled_start_at", "actual_start_at", "scheduled_end_at", "actual_end_at", "status", "reschedule_initiator", "tech_issue", "first_session_for_student", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12) RETURNING "id"[0m  [["tutor_id", 62], ["student_id", 62], ["scheduled_start_at", "2025-11-05 06:30:38.263284"], ["actual_start_at", "2025-11-05 06:30:38.263288"], ["scheduled_end_at", "2025-11-05 07:30:38.263289"], ["actual_end_at", "2025-11-05 07:30:38.263290"], ["status", "completed"], ["reschedule_initiator", nil], ["tech_issue", false], ["first_session_for_student", true], ["created_at", "2025-11-05 07:30:38.263366"], ["updated_at", "2025-11-05 07:30:38.263366"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mSessionTranscript Create (0.1ms)[0m  [1m[32mINSERT INTO "session_transcripts" ("session_id", "payload", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["session_id", 62], ["payload", "{\"speakers\":[{\"speaker\":\"tutor\",\"text\":\"What are your goals?\",\"words\":4},{\"speaker\":\"student\",\"text\":\"I want to learn\",\"words\":4},{\"speaker\":\"tutor\",\"text\":\"Great, see you later\",\"words\":4}]}"], ["created_at", "2025-11-05 07:30:38.263832"], ["updated_at", "2025-11-05 07:30:38.263832"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTutor Create (0.1ms)[0m  [1m[32mINSERT INTO "tutors" ("name", "email", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", "Test Tutor"], ["email", "[FILTERED]"], ["created_at", "2025-11-05 07:30:38.264678"], ["updated_at", "2025-11-05 07:30:38.264678"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mStudent Create (0.2ms)[0m  [1m[32mINSERT INTO "students" ("name", "email", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", "Test Student"], ["email", "[FILTERED]"], ["created_at", "2025-11-05 07:30:38.265012"], ["updated_at", "2025-11-05 07:30:38.265012"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mSession Create (0.2ms)[0m  [1m[32mINSERT INTO "sessions" ("tutor_id", "student_id", "scheduled_start_at", "actual_start_at", "scheduled_end_at", "actual_end_at", "status", "reschedule_initiator", "tech_issue", "first_session_for_student", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12) RETURNING "id"[0m  [["tutor_id", 63], ["student_id", 63], ["scheduled_start_at", "2025-11-05 06:30:38.265349"], ["actual_start_at", "2025-11-05 06:40:38.265353"], ["scheduled_end_at", "2025-11-05 07:30:38.265361"], ["actual_end_at", "2025-11-05 07:30:38.265362"], ["status", "completed"], ["reschedule_initiator", nil], ["tech_issue", true], ["first_session_for_student", true], ["created_at", "2025-11-05 07:30:38.265447"], ["updated_at", "2025-11-05 07:30:38.265447"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mSessionTranscript Create (0.1ms)[0m  [1m[32mINSERT INTO "session_transcripts" ("session_id", "payload", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["session_id", 63], ["payload", "{\"speakers\":[{\"speaker\":\"tutor\",\"text\":\"Hello\",\"words\":1}]}"], ["created_at", "2025-11-05 07:30:38.265967"], ["updated_at", "2025-11-05 07:30:38.265967"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTutor Create (0.2ms)[0m  [1m[32mINSERT INTO "tutors" ("name", "email", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", "Test Tutor"], ["email", "[FILTERED]"], ["created_at", "2025-11-05 07:30:38.266888"], ["updated_at", "2025-11-05 07:30:38.266888"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mStudent Create (0.1ms)[0m  [1m[32mINSERT INTO "students" ("name", "email", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", "Test Student"], ["email", "[FILTERED]"], ["created_at", "2025-11-05 07:30:38.267353"], ["updated_at", "2025-11-05 07:30:38.267353"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mSession Create (0.2ms)[0m  [1m[32mINSERT INTO "sessions" ("tutor_id", "student_id", "scheduled_start_at", "actual_start_at", "scheduled_end_at", "actual_end_at", "status", "reschedule_initiator", "tech_issue", "first_session_for_student", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12) RETURNING "id"[0m  [["tutor_id", 64], ["student_id", 64], ["scheduled_start_at", "2025-11-05 06:30:38.267714"], ["actual_start_at", "2025-11-05 06:35:38.267719"], ["scheduled_end_at", "2025-11-05 07:30:38.267724"], ["actual_end_at", "2025-11-05 07:30:38.267725"], ["status", "completed"], ["reschedule_initiator", nil], ["tech_issue", true], ["first_session_for_student", true], ["created_at", "2025-11-05 07:30:38.267822"], ["updated_at", "2025-11-05 07:30:38.267822"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mSessionTranscript Create (0.2ms)[0m  [1m[32mINSERT INTO "session_transcripts" ("session_id", "payload", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["session_id", 64], ["payload", "{\"speakers\":[{\"speaker\":\"tutor\",\"text\":\"Hello\",\"words\":1},{\"speaker\":\"student\",\"text\":\"I do not understand\",\"words\":4},{\"speaker\":\"student\",\"text\":\"I am confused\",\"words\":3},{\"speaker\":\"student\",\"text\":\"I do not get it\",\"words\":5},{\"speaker\":\"tutor\",\"text\":\"You are wrong\",\"words\":3},{\"speaker\":\"tutor\",\"text\":\"That is incorrect\",\"words\":3},{\"speaker\":\"tutor\",\"text\":\"You failed\",\"words\":2},{\"speaker\":\"tutor\",\"text\":\"OK bye\",\"words\":2}],\"metadata\":{\"total_words_tutor\":11,\"total_words_student\":12}}"], ["created_at", "2025-11-05 07:30:38.268419"], ["updated_at", "2025-11-05 07:30:38.268419"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTutor Create (0.2ms)[0m  [1m[32mINSERT INTO "tutors" ("name", "email", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", "Test Tutor"], ["email", "[FILTERED]"], ["created_at", "2025-11-05 07:30:38.270074"], ["updated_at", "2025-11-05 07:30:38.270074"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mStudent Create (0.1ms)[0m  [1m[32mINSERT INTO "students" ("name", "email", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", "Test Student"], ["email", "[FILTERED]"], ["created_at", "2025-11-05 07:30:38.270493"], ["updated_at", "2025-11-05 07:30:38.270493"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mSession Create (0.2ms)[0m  [1m[32mINSERT INTO "sessions" ("tutor_id", "student_id", "scheduled_start_at", "actual_start_at", "scheduled_end_at", "actual_end_at", "status", "reschedule_initiator", "tech_issue", "first_session_for_student", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12) RETURNING "id"[0m  [["tutor_id", 65], ["student_id", 65], ["scheduled_start_at", "2025-11-05 06:30:38.270795"], ["actual_start_at", "2025-11-05 06:30:38.270799"], ["scheduled_end_at", "2025-11-05 07:30:38.270801"], ["actual_end_at", "2025-11-05 07:30:38.270802"], ["status", "completed"], ["reschedule_initiator", nil], ["tech_issue", false], ["first_session_for_student", true], ["created_at", "2025-11-05 07:30:38.270895"], ["updated_at", "2025-11-05 07:30:38.270895"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mSessionTranscript Create (0.1ms)[0m  [1m[32mINSERT INTO "session_transcripts" ("session_id", "payload", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["session_id", 65], ["payload", "{\"speakers\":[{\"speaker\":\"tutor\",\"text\":\"What are your goals?\",\"words\":4},{\"speaker\":\"student\",\"text\":\"I want to learn\",\"words\":4},{\"speaker\":\"tutor\",\"text\":\"Great! You are doing well. Let us summarize what we covered\",\"words\":10}]}"], ["created_at", "2025-11-05 07:30:38.271446"], ["updated_at", "2025-11-05 07:30:38.271446"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mScore Create (0.9ms)[0m  [1m[32mINSERT INTO "scores" ("session_id", "tutor_id", "score_type", "value", "components", "computed_at", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["session_id", 65], ["tutor_id", 65], ["score_type", "fsrs"], ["value", "20.0"], ["components", "{\"confusion_phrases\":0,\"word_share_imbalance\":20,\"missing_goal_setting\":0,\"missing_encouragement\":0,\"negative_phrasing\":0,\"missing_closing_summary\":0,\"tech_lateness_disruption\":0,\"score\":20,\"feedback\":{\"what_went_well\":\"Student showed good understanding with minimal confusion. Goal-setting question was asked early in the session. Encouragement phrases were used throughout. Positive, supportive language was maintained. Session ended with clear summary and next steps\",\"improvement_idea\":\"Word share imbalance - student should have more opportunities to speak\",\"breakdown\":{\"confusion_phrases\":0,\"word_share_imbalance\":20,\"missing_goal_setting\":0,\"missing_encouragement\":0,\"negative_phrasing\":0,\"missing_closing_summary\":0,\"tech_lateness_disruption\":0}}}"], ["computed_at", "2025-11-05 07:30:38.272686"], ["created_at", "2025-11-05 07:30:38.276551"], ["updated_at", "2025-11-05 07:30:38.276551"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mScore Load (0.4ms)[0m  [1m[34mSELECT "scores".* FROM "scores" WHERE "scores"."session_id" = $1 AND "scores"."score_type" = $2 LIMIT $3[0m  [["session_id", 65], ["score_type", "fsrs"], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.4ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "schema_sha1"]]
+  [1m[36mActiveRecord::SchemaMigration Load (0.3ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+[dotenv] Saved a snapshot of [32mENV[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTutor Create (0.3ms)[0m  [1m[32mINSERT INTO "tutors" ("name", "email", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", "Test Tutor"], ["email", "[FILTERED]"], ["created_at", "2025-11-05 07:31:02.661702"], ["updated_at", "2025-11-05 07:31:02.661702"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mStudent Create (0.2ms)[0m  [1m[32mINSERT INTO "students" ("name", "email", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", "Test Student"], ["email", "[FILTERED]"], ["created_at", "2025-11-05 07:31:02.664953"], ["updated_at", "2025-11-05 07:31:02.664953"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mSession Create (1.1ms)[0m  [1m[32mINSERT INTO "sessions" ("tutor_id", "student_id", "scheduled_start_at", "actual_start_at", "scheduled_end_at", "actual_end_at", "status", "reschedule_initiator", "tech_issue", "first_session_for_student", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12) RETURNING "id"[0m  [["tutor_id", 66], ["student_id", 66], ["scheduled_start_at", "2025-11-05 06:31:02.665524"], ["actual_start_at", "2025-11-05 06:31:02.665531"], ["scheduled_end_at", "2025-11-05 07:31:02.665534"], ["actual_end_at", "2025-11-05 07:31:02.665534"], ["status", "completed"], ["reschedule_initiator", nil], ["tech_issue", false], ["first_session_for_student", true], ["created_at", "2025-11-05 07:31:02.669511"], ["updated_at", "2025-11-05 07:31:02.669511"]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mSessionTranscript Create (0.7ms)[0m  [1m[32mINSERT INTO "session_transcripts" ("session_id", "payload", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["session_id", 66], ["payload", "{\"speakers\":[{\"speaker\":\"tutor\",\"text\":\"Hello! What are your goals for today?\",\"words\":7},{\"speaker\":\"student\",\"text\":\"I want to learn math\",\"words\":5},{\"speaker\":\"tutor\",\"text\":\"Great! You are doing well. Keep it up!\",\"words\":8},{\"speaker\":\"student\",\"text\":\"Thank you\",\"words\":2},{\"speaker\":\"tutor\",\"text\":\"Let us summarize what we covered today and plan next steps\",\"words\":12}],\"metadata\":{\"total_words_tutor\":27,\"total_words_student\":7}}"], ["created_at", "2025-11-05 07:31:02.675175"], ["updated_at", "2025-11-05 07:31:02.675175"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.3ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "schema_sha1"]]
+  [1m[36mActiveRecord::SchemaMigration Load (0.3ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+[dotenv] Saved a snapshot of [32mENV[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTutor Create (0.5ms)[0m  [1m[32mINSERT INTO "tutors" ("name", "email", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", "Test Tutor"], ["email", "[FILTERED]"], ["created_at", "2025-11-05 07:31:47.935628"], ["updated_at", "2025-11-05 07:31:47.935628"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mStudent Create (0.2ms)[0m  [1m[32mINSERT INTO "students" ("name", "email", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", "Test Student"], ["email", "[FILTERED]"], ["created_at", "2025-11-05 07:31:47.938572"], ["updated_at", "2025-11-05 07:31:47.938572"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mSession Create (0.7ms)[0m  [1m[32mINSERT INTO "sessions" ("tutor_id", "student_id", "scheduled_start_at", "actual_start_at", "scheduled_end_at", "actual_end_at", "status", "reschedule_initiator", "tech_issue", "first_session_for_student", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12) RETURNING "id"[0m  [["tutor_id", 67], ["student_id", 67], ["scheduled_start_at", "2025-11-05 06:31:47.939230"], ["actual_start_at", "2025-11-05 06:31:47.939238"], ["scheduled_end_at", "2025-11-05 07:31:47.939240"], ["actual_end_at", "2025-11-05 07:31:47.939241"], ["status", "completed"], ["reschedule_initiator", nil], ["tech_issue", nil], ["first_session_for_student", false], ["created_at", "2025-11-05 07:31:47.943485"], ["updated_at", "2025-11-05 07:31:47.943485"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTutor Create (0.1ms)[0m  [1m[32mINSERT INTO "tutors" ("name", "email", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", "Test Tutor"], ["email", "[FILTERED]"], ["created_at", "2025-11-05 07:31:47.949012"], ["updated_at", "2025-11-05 07:31:47.949012"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mStudent Create (0.1ms)[0m  [1m[32mINSERT INTO "students" ("name", "email", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", "Test Student"], ["email", "[FILTERED]"], ["created_at", "2025-11-05 07:31:47.949430"], ["updated_at", "2025-11-05 07:31:47.949430"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mSession Create (0.2ms)[0m  [1m[32mINSERT INTO "sessions" ("tutor_id", "student_id", "scheduled_start_at", "actual_start_at", "scheduled_end_at", "actual_end_at", "status", "reschedule_initiator", "tech_issue", "first_session_for_student", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12) RETURNING "id"[0m  [["tutor_id", 68], ["student_id", 68], ["scheduled_start_at", "2025-11-05 06:31:47.949724"], ["actual_start_at", "2025-11-05 06:31:47.949731"], ["scheduled_end_at", "2025-11-05 07:31:47.949733"], ["actual_end_at", "2025-11-05 07:31:47.949734"], ["status", "completed"], ["reschedule_initiator", nil], ["tech_issue", nil], ["first_session_for_student", true], ["created_at", "2025-11-05 07:31:47.949848"], ["updated_at", "2025-11-05 07:31:47.949848"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mSessionTranscript Load (0.2ms)[0m  [1m[34mSELECT "session_transcripts".* FROM "session_transcripts" WHERE "session_transcripts"."session_id" = $1 LIMIT $2[0m  [["session_id", 68], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTutor Create (0.1ms)[0m  [1m[32mINSERT INTO "tutors" ("name", "email", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", "Test Tutor"], ["email", "[FILTERED]"], ["created_at", "2025-11-05 07:31:47.955014"], ["updated_at", "2025-11-05 07:31:47.955014"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mStudent Create (0.1ms)[0m  [1m[32mINSERT INTO "students" ("name", "email", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", "Test Student"], ["email", "[FILTERED]"], ["created_at", "2025-11-05 07:31:47.955486"], ["updated_at", "2025-11-05 07:31:47.955486"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mSession Create (0.1ms)[0m  [1m[32mINSERT INTO "sessions" ("tutor_id", "student_id", "scheduled_start_at", "actual_start_at", "scheduled_end_at", "actual_end_at", "status", "reschedule_initiator", "tech_issue", "first_session_for_student", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12) RETURNING "id"[0m  [["tutor_id", 69], ["student_id", 69], ["scheduled_start_at", "2025-11-05 06:31:47.955771"], ["actual_start_at", "2025-11-05 06:31:47.955776"], ["scheduled_end_at", "2025-11-05 07:31:47.955780"], ["actual_end_at", "2025-11-05 07:31:47.955780"], ["status", "completed"], ["reschedule_initiator", nil], ["tech_issue", nil], ["first_session_for_student", true], ["created_at", "2025-11-05 07:31:47.955898"], ["updated_at", "2025-11-05 07:31:47.955898"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mSessionTranscript Create (0.3ms)[0m  [1m[32mINSERT INTO "session_transcripts" ("session_id", "payload", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["session_id", 69], ["payload", "{\"text\":\"Some transcript without speakers\"}"], ["created_at", "2025-11-05 07:31:47.957297"], ["updated_at", "2025-11-05 07:31:47.957297"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTutor Create (0.1ms)[0m  [1m[32mINSERT INTO "tutors" ("name", "email", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", "Test Tutor"], ["email", "[FILTERED]"], ["created_at", "2025-11-05 07:31:47.958314"], ["updated_at", "2025-11-05 07:31:47.958314"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mStudent Create (0.1ms)[0m  [1m[32mINSERT INTO "students" ("name", "email", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", "Test Student"], ["email", "[FILTERED]"], ["created_at", "2025-11-05 07:31:47.958658"], ["updated_at", "2025-11-05 07:31:47.958658"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mSession Create (0.1ms)[0m  [1m[32mINSERT INTO "sessions" ("tutor_id", "student_id", "scheduled_start_at", "actual_start_at", "scheduled_end_at", "actual_end_at", "status", "reschedule_initiator", "tech_issue", "first_session_for_student", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12) RETURNING "id"[0m  [["tutor_id", 70], ["student_id", 70], ["scheduled_start_at", "2025-11-05 06:31:47.958945"], ["actual_start_at", "2025-11-05 06:31:47.958950"], ["scheduled_end_at", "2025-11-05 07:31:47.958952"], ["actual_end_at", "2025-11-05 07:31:47.958952"], ["status", "completed"], ["reschedule_initiator", nil], ["tech_issue", false], ["first_session_for_student", true], ["created_at", "2025-11-05 07:31:47.959065"], ["updated_at", "2025-11-05 07:31:47.959065"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mSessionTranscript Create (0.4ms)[0m  [1m[32mINSERT INTO "session_transcripts" ("session_id", "payload", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["session_id", 70], ["payload", "{\"speakers\":[{\"speaker\":\"tutor\",\"text\":\"Hello! What are your goals for today?\",\"words\":7},{\"speaker\":\"student\",\"text\":\"I want to learn math and improve my skills\",\"words\":8},{\"speaker\":\"tutor\",\"text\":\"Great! You are doing well. Keep it up!\",\"words\":8},{\"speaker\":\"student\",\"text\":\"Thank you for your help\",\"words\":5},{\"speaker\":\"tutor\",\"text\":\"Let us summarize what we covered today and plan next steps\",\"words\":12}],\"metadata\":{\"total_words_tutor\":27,\"total_words_student\":13}}"], ["created_at", "2025-11-05 07:31:47.959539"], ["updated_at", "2025-11-05 07:31:47.959539"]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTutor Create (0.2ms)[0m  [1m[32mINSERT INTO "tutors" ("name", "email", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", "Test Tutor"], ["email", "[FILTERED]"], ["created_at", "2025-11-05 07:31:47.961368"], ["updated_at", "2025-11-05 07:31:47.961368"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mStudent Create (0.1ms)[0m  [1m[32mINSERT INTO "students" ("name", "email", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", "Test Student"], ["email", "[FILTERED]"], ["created_at", "2025-11-05 07:31:47.961882"], ["updated_at", "2025-11-05 07:31:47.961882"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mSession Create (0.2ms)[0m  [1m[32mINSERT INTO "sessions" ("tutor_id", "student_id", "scheduled_start_at", "actual_start_at", "scheduled_end_at", "actual_end_at", "status", "reschedule_initiator", "tech_issue", "first_session_for_student", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12) RETURNING "id"[0m  [["tutor_id", 71], ["student_id", 71], ["scheduled_start_at", "2025-11-05 06:31:47.962239"], ["actual_start_at", "2025-11-05 06:31:47.962244"], ["scheduled_end_at", "2025-11-05 07:31:47.962246"], ["actual_end_at", "2025-11-05 07:31:47.962246"], ["status", "completed"], ["reschedule_initiator", nil], ["tech_issue", false], ["first_session_for_student", true], ["created_at", "2025-11-05 07:31:47.962358"], ["updated_at", "2025-11-05 07:31:47.962358"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mSessionTranscript Create (0.2ms)[0m  [1m[32mINSERT INTO "session_transcripts" ("session_id", "payload", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["session_id", 71], ["payload", "{\"speakers\":[{\"speaker\":\"tutor\",\"text\":\"Hello\",\"words\":1},{\"speaker\":\"student\",\"text\":\"I do not understand\",\"words\":4},{\"speaker\":\"tutor\",\"text\":\"Let me explain\",\"words\":3},{\"speaker\":\"student\",\"text\":\"I am confused about this\",\"words\":5},{\"speaker\":\"tutor\",\"text\":\"OK\",\"words\":1},{\"speaker\":\"student\",\"text\":\"I do not get it\",\"words\":5}]}"], ["created_at", "2025-11-05 07:31:47.962963"], ["updated_at", "2025-11-05 07:31:47.962963"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTutor Create (0.2ms)[0m  [1m[32mINSERT INTO "tutors" ("name", "email", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", "Test Tutor"], ["email", "[FILTERED]"], ["created_at", "2025-11-05 07:31:47.964208"], ["updated_at", "2025-11-05 07:31:47.964208"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mStudent Create (0.2ms)[0m  [1m[32mINSERT INTO "students" ("name", "email", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", "Test Student"], ["email", "[FILTERED]"], ["created_at", "2025-11-05 07:31:47.964728"], ["updated_at", "2025-11-05 07:31:47.964728"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mSession Create (0.2ms)[0m  [1m[32mINSERT INTO "sessions" ("tutor_id", "student_id", "scheduled_start_at", "actual_start_at", "scheduled_end_at", "actual_end_at", "status", "reschedule_initiator", "tech_issue", "first_session_for_student", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12) RETURNING "id"[0m  [["tutor_id", 72], ["student_id", 72], ["scheduled_start_at", "2025-11-05 06:31:47.965088"], ["actual_start_at", "2025-11-05 06:31:47.965093"], ["scheduled_end_at", "2025-11-05 07:31:47.965108"], ["actual_end_at", "2025-11-05 07:31:47.965109"], ["status", "completed"], ["reschedule_initiator", nil], ["tech_issue", false], ["first_session_for_student", true], ["created_at", "2025-11-05 07:31:47.965234"], ["updated_at", "2025-11-05 07:31:47.965234"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mSessionTranscript Create (0.2ms)[0m  [1m[32mINSERT INTO "session_transcripts" ("session_id", "payload", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["session_id", 72], ["payload", "{\"speakers\":[{\"speaker\":\"tutor\",\"text\":\"Let us talk about many different topics and concepts\",\"words\":10},{\"speaker\":\"student\",\"text\":\"OK\",\"words\":1},{\"speaker\":\"tutor\",\"text\":\"We will cover algebra geometry and calculus\",\"words\":7},{\"speaker\":\"student\",\"text\":\"Yes\",\"words\":1}],\"metadata\":{\"total_words_tutor\":17,\"total_words_student\":2}}"], ["created_at", "2025-11-05 07:31:47.965867"], ["updated_at", "2025-11-05 07:31:47.965867"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTutor Create (0.1ms)[0m  [1m[32mINSERT INTO "tutors" ("name", "email", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", "Test Tutor"], ["email", "[FILTERED]"], ["created_at", "2025-11-05 07:31:47.966856"], ["updated_at", "2025-11-05 07:31:47.966856"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mStudent Create (0.1ms)[0m  [1m[32mINSERT INTO "students" ("name", "email", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", "Test Student"], ["email", "[FILTERED]"], ["created_at", "2025-11-05 07:31:47.967233"], ["updated_at", "2025-11-05 07:31:47.967233"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mSession Create (0.2ms)[0m  [1m[32mINSERT INTO "sessions" ("tutor_id", "student_id", "scheduled_start_at", "actual_start_at", "scheduled_end_at", "actual_end_at", "status", "reschedule_initiator", "tech_issue", "first_session_for_student", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12) RETURNING "id"[0m  [["tutor_id", 73], ["student_id", 73], ["scheduled_start_at", "2025-11-05 06:31:47.967563"], ["actual_start_at", "2025-11-05 06:31:47.967567"], ["scheduled_end_at", "2025-11-05 07:31:47.967569"], ["actual_end_at", "2025-11-05 07:31:47.967569"], ["status", "completed"], ["reschedule_initiator", nil], ["tech_issue", false], ["first_session_for_student", true], ["created_at", "2025-11-05 07:31:47.967655"], ["updated_at", "2025-11-05 07:31:47.967655"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mSessionTranscript Create (0.2ms)[0m  [1m[32mINSERT INTO "session_transcripts" ("session_id", "payload", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["session_id", 73], ["payload", "{\"speakers\":[{\"speaker\":\"tutor\",\"text\":\"Hello, how are you?\",\"words\":4},{\"speaker\":\"student\",\"text\":\"I am fine\",\"words\":3},{\"speaker\":\"tutor\",\"text\":\"Let us start working\",\"words\":4}]}"], ["created_at", "2025-11-05 07:31:47.968163"], ["updated_at", "2025-11-05 07:31:47.968163"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTutor Create (0.1ms)[0m  [1m[32mINSERT INTO "tutors" ("name", "email", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", "Test Tutor"], ["email", "[FILTERED]"], ["created_at", "2025-11-05 07:31:47.969144"], ["updated_at", "2025-11-05 07:31:47.969144"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mStudent Create (0.2ms)[0m  [1m[32mINSERT INTO "students" ("name", "email", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", "Test Student"], ["email", "[FILTERED]"], ["created_at", "2025-11-05 07:31:47.969536"], ["updated_at", "2025-11-05 07:31:47.969536"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mSession Create (0.2ms)[0m  [1m[32mINSERT INTO "sessions" ("tutor_id", "student_id", "scheduled_start_at", "actual_start_at", "scheduled_end_at", "actual_end_at", "status", "reschedule_initiator", "tech_issue", "first_session_for_student", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12) RETURNING "id"[0m  [["tutor_id", 74], ["student_id", 74], ["scheduled_start_at", "2025-11-05 06:31:47.969931"], ["actual_start_at", "2025-11-05 06:31:47.969936"], ["scheduled_end_at", "2025-11-05 07:31:47.969938"], ["actual_end_at", "2025-11-05 07:31:47.969939"], ["status", "completed"], ["reschedule_initiator", nil], ["tech_issue", false], ["first_session_for_student", true], ["created_at", "2025-11-05 07:31:47.970031"], ["updated_at", "2025-11-05 07:31:47.970031"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mSessionTranscript Create (0.2ms)[0m  [1m[32mINSERT INTO "session_transcripts" ("session_id", "payload", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["session_id", 74], ["payload", "{\"speakers\":[{\"speaker\":\"tutor\",\"text\":\"What are your goals?\",\"words\":4},{\"speaker\":\"student\",\"text\":\"I want to learn\",\"words\":4},{\"speaker\":\"tutor\",\"text\":\"OK, let us proceed\",\"words\":4}]}"], ["created_at", "2025-11-05 07:31:47.970569"], ["updated_at", "2025-11-05 07:31:47.970569"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTutor Create (0.1ms)[0m  [1m[32mINSERT INTO "tutors" ("name", "email", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", "Test Tutor"], ["email", "[FILTERED]"], ["created_at", "2025-11-05 07:31:47.971557"], ["updated_at", "2025-11-05 07:31:47.971557"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mStudent Create (0.1ms)[0m  [1m[32mINSERT INTO "students" ("name", "email", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", "Test Student"], ["email", "[FILTERED]"], ["created_at", "2025-11-05 07:31:47.971948"], ["updated_at", "2025-11-05 07:31:47.971948"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mSession Create (0.3ms)[0m  [1m[32mINSERT INTO "sessions" ("tutor_id", "student_id", "scheduled_start_at", "actual_start_at", "scheduled_end_at", "actual_end_at", "status", "reschedule_initiator", "tech_issue", "first_session_for_student", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12) RETURNING "id"[0m  [["tutor_id", 75], ["student_id", 75], ["scheduled_start_at", "2025-11-05 06:31:47.972277"], ["actual_start_at", "2025-11-05 06:31:47.972281"], ["scheduled_end_at", "2025-11-05 07:31:47.972283"], ["actual_end_at", "2025-11-05 07:31:47.972283"], ["status", "completed"], ["reschedule_initiator", nil], ["tech_issue", false], ["first_session_for_student", true], ["created_at", "2025-11-05 07:31:47.972387"], ["updated_at", "2025-11-05 07:31:47.972387"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mSessionTranscript Create (0.6ms)[0m  [1m[32mINSERT INTO "session_transcripts" ("session_id", "payload", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["session_id", 75], ["payload", "{\"speakers\":[{\"speaker\":\"tutor\",\"text\":\"You are wrong\",\"words\":3},{\"speaker\":\"tutor\",\"text\":\"That is not correct\",\"words\":4},{\"speaker\":\"tutor\",\"text\":\"You failed to understand\",\"words\":4}]}"], ["created_at", "2025-11-05 07:31:47.973031"], ["updated_at", "2025-11-05 07:31:47.973031"]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTutor Create (0.2ms)[0m  [1m[32mINSERT INTO "tutors" ("name", "email", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", "Test Tutor"], ["email", "[FILTERED]"], ["created_at", "2025-11-05 07:31:47.974650"], ["updated_at", "2025-11-05 07:31:47.974650"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mStudent Create (0.1ms)[0m  [1m[32mINSERT INTO "students" ("name", "email", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", "Test Student"], ["email", "[FILTERED]"], ["created_at", "2025-11-05 07:31:47.975142"], ["updated_at", "2025-11-05 07:31:47.975142"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mSession Create (0.2ms)[0m  [1m[32mINSERT INTO "sessions" ("tutor_id", "student_id", "scheduled_start_at", "actual_start_at", "scheduled_end_at", "actual_end_at", "status", "reschedule_initiator", "tech_issue", "first_session_for_student", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12) RETURNING "id"[0m  [["tutor_id", 76], ["student_id", 76], ["scheduled_start_at", "2025-11-05 06:31:47.975473"], ["actual_start_at", "2025-11-05 06:31:47.975479"], ["scheduled_end_at", "2025-11-05 07:31:47.975481"], ["actual_end_at", "2025-11-05 07:31:47.975481"], ["status", "completed"], ["reschedule_initiator", nil], ["tech_issue", false], ["first_session_for_student", true], ["created_at", "2025-11-05 07:31:47.975600"], ["updated_at", "2025-11-05 07:31:47.975600"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mSessionTranscript Create (0.2ms)[0m  [1m[32mINSERT INTO "session_transcripts" ("session_id", "payload", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["session_id", 76], ["payload", "{\"speakers\":[{\"speaker\":\"tutor\",\"text\":\"What are your goals?\",\"words\":4},{\"speaker\":\"student\",\"text\":\"I want to learn\",\"words\":4},{\"speaker\":\"tutor\",\"text\":\"Great, see you later\",\"words\":4}]}"], ["created_at", "2025-11-05 07:31:47.976148"], ["updated_at", "2025-11-05 07:31:47.976148"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTutor Create (0.2ms)[0m  [1m[32mINSERT INTO "tutors" ("name", "email", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", "Test Tutor"], ["email", "[FILTERED]"], ["created_at", "2025-11-05 07:31:47.977286"], ["updated_at", "2025-11-05 07:31:47.977286"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mStudent Create (0.1ms)[0m  [1m[32mINSERT INTO "students" ("name", "email", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", "Test Student"], ["email", "[FILTERED]"], ["created_at", "2025-11-05 07:31:47.977811"], ["updated_at", "2025-11-05 07:31:47.977811"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mSession Create (0.2ms)[0m  [1m[32mINSERT INTO "sessions" ("tutor_id", "student_id", "scheduled_start_at", "actual_start_at", "scheduled_end_at", "actual_end_at", "status", "reschedule_initiator", "tech_issue", "first_session_for_student", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12) RETURNING "id"[0m  [["tutor_id", 77], ["student_id", 77], ["scheduled_start_at", "2025-11-05 06:31:47.978124"], ["actual_start_at", "2025-11-05 06:41:47.978130"], ["scheduled_end_at", "2025-11-05 07:31:47.978141"], ["actual_end_at", "2025-11-05 07:31:47.978142"], ["status", "completed"], ["reschedule_initiator", nil], ["tech_issue", true], ["first_session_for_student", true], ["created_at", "2025-11-05 07:31:47.978292"], ["updated_at", "2025-11-05 07:31:47.978292"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mSessionTranscript Create (0.2ms)[0m  [1m[32mINSERT INTO "session_transcripts" ("session_id", "payload", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["session_id", 77], ["payload", "{\"speakers\":[{\"speaker\":\"tutor\",\"text\":\"Hello\",\"words\":1}]}"], ["created_at", "2025-11-05 07:31:47.978844"], ["updated_at", "2025-11-05 07:31:47.978844"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTutor Create (0.2ms)[0m  [1m[32mINSERT INTO "tutors" ("name", "email", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", "Test Tutor"], ["email", "[FILTERED]"], ["created_at", "2025-11-05 07:31:47.980170"], ["updated_at", "2025-11-05 07:31:47.980170"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mStudent Create (0.1ms)[0m  [1m[32mINSERT INTO "students" ("name", "email", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", "Test Student"], ["email", "[FILTERED]"], ["created_at", "2025-11-05 07:31:47.980688"], ["updated_at", "2025-11-05 07:31:47.980688"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mSession Create (0.2ms)[0m  [1m[32mINSERT INTO "sessions" ("tutor_id", "student_id", "scheduled_start_at", "actual_start_at", "scheduled_end_at", "actual_end_at", "status", "reschedule_initiator", "tech_issue", "first_session_for_student", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12) RETURNING "id"[0m  [["tutor_id", 78], ["student_id", 78], ["scheduled_start_at", "2025-11-05 06:31:47.981018"], ["actual_start_at", "2025-11-05 06:36:47.981024"], ["scheduled_end_at", "2025-11-05 07:31:47.981030"], ["actual_end_at", "2025-11-05 07:31:47.981031"], ["status", "completed"], ["reschedule_initiator", nil], ["tech_issue", true], ["first_session_for_student", true], ["created_at", "2025-11-05 07:31:47.981157"], ["updated_at", "2025-11-05 07:31:47.981157"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mSessionTranscript Create (0.2ms)[0m  [1m[32mINSERT INTO "session_transcripts" ("session_id", "payload", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["session_id", 78], ["payload", "{\"speakers\":[{\"speaker\":\"tutor\",\"text\":\"Hello\",\"words\":1},{\"speaker\":\"student\",\"text\":\"I do not understand\",\"words\":4},{\"speaker\":\"student\",\"text\":\"I am confused\",\"words\":3},{\"speaker\":\"student\",\"text\":\"I do not get it\",\"words\":5},{\"speaker\":\"tutor\",\"text\":\"You are wrong\",\"words\":3},{\"speaker\":\"tutor\",\"text\":\"That is incorrect\",\"words\":3},{\"speaker\":\"tutor\",\"text\":\"You failed\",\"words\":2},{\"speaker\":\"tutor\",\"text\":\"OK bye\",\"words\":2}],\"metadata\":{\"total_words_tutor\":11,\"total_words_student\":12}}"], ["created_at", "2025-11-05 07:31:47.981735"], ["updated_at", "2025-11-05 07:31:47.981735"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTutor Create (0.1ms)[0m  [1m[32mINSERT INTO "tutors" ("name", "email", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", "Test Tutor"], ["email", "[FILTERED]"], ["created_at", "2025-11-05 07:31:47.982892"], ["updated_at", "2025-11-05 07:31:47.982892"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mStudent Create (0.1ms)[0m  [1m[32mINSERT INTO "students" ("name", "email", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", "Test Student"], ["email", "[FILTERED]"], ["created_at", "2025-11-05 07:31:47.983284"], ["updated_at", "2025-11-05 07:31:47.983284"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mSession Create (0.2ms)[0m  [1m[32mINSERT INTO "sessions" ("tutor_id", "student_id", "scheduled_start_at", "actual_start_at", "scheduled_end_at", "actual_end_at", "status", "reschedule_initiator", "tech_issue", "first_session_for_student", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12) RETURNING "id"[0m  [["tutor_id", 79], ["student_id", 79], ["scheduled_start_at", "2025-11-05 06:31:47.983610"], ["actual_start_at", "2025-11-05 06:31:47.983615"], ["scheduled_end_at", "2025-11-05 07:31:47.983617"], ["actual_end_at", "2025-11-05 07:31:47.983617"], ["status", "completed"], ["reschedule_initiator", nil], ["tech_issue", false], ["first_session_for_student", true], ["created_at", "2025-11-05 07:31:47.983710"], ["updated_at", "2025-11-05 07:31:47.983710"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mSessionTranscript Create (0.2ms)[0m  [1m[32mINSERT INTO "session_transcripts" ("session_id", "payload", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["session_id", 79], ["payload", "{\"speakers\":[{\"speaker\":\"tutor\",\"text\":\"What are your goals?\",\"words\":4},{\"speaker\":\"student\",\"text\":\"I want to learn\",\"words\":4},{\"speaker\":\"tutor\",\"text\":\"Great! You are doing well. Let us summarize what we covered\",\"words\":10}]}"], ["created_at", "2025-11-05 07:31:47.984327"], ["updated_at", "2025-11-05 07:31:47.984327"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mScore Create (1.0ms)[0m  [1m[32mINSERT INTO "scores" ("session_id", "tutor_id", "score_type", "value", "components", "computed_at", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["session_id", 79], ["tutor_id", 79], ["score_type", "fsrs"], ["value", "20.0"], ["components", "{\"confusion_phrases\":0,\"word_share_imbalance\":20,\"missing_goal_setting\":0,\"missing_encouragement\":0,\"negative_phrasing\":0,\"missing_closing_summary\":0,\"tech_lateness_disruption\":0,\"score\":20,\"feedback\":{\"what_went_well\":\"Student showed good understanding with minimal confusion. Goal-setting question was asked early in the session. Encouragement phrases were used throughout. Positive, supportive language was maintained. Session ended with clear summary and next steps\",\"improvement_idea\":\"Word share imbalance - student should have more opportunities to speak\",\"breakdown\":{\"confusion_phrases\":0,\"word_share_imbalance\":20,\"missing_goal_setting\":0,\"missing_encouragement\":0,\"negative_phrasing\":0,\"missing_closing_summary\":0,\"tech_lateness_disruption\":0}}}"], ["computed_at", "2025-11-05 07:31:47.985382"], ["created_at", "2025-11-05 07:31:47.989293"], ["updated_at", "2025-11-05 07:31:47.989293"]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mScore Load (0.5ms)[0m  [1m[34mSELECT "scores".* FROM "scores" WHERE "scores"."session_id" = $1 AND "scores"."score_type" = $2 LIMIT $3[0m  [["session_id", 79], ["score_type", "fsrs"], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mROLLBACK[0m

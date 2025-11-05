@@ -67,21 +67,21 @@
 - [x] Write score to `scores` table with components breakdown
 
 ### FSRS (First Session Risk Score)
-- [ ] Write FSRS service tests (TDD: write test → see fail → build service → see pass)
-- [ ] Detect confusion phrases (>=3 instances in student turns) → +20
-- [ ] Compute tutor vs student word share (tutor >75% of words) → +20
-- [ ] Detect missing goal-setting question early in session → +25
-- [ ] Detect missing encouragement phrases → +15
-- [ ] Detect negative phrasing streak → +10
-- [ ] Detect missing closing summary or next steps → +20
-- [ ] Apply tech/lateness disruption penalty → +10 if present
-- [ ] Calculate final FSRS (sum of risk points)
-- [ ] Generate structured feedback payload:
-  - [ ] "What went well" (positive signals)
-  - [ ] "One improvement idea" (highest-impact issue)
-  - [ ] Breakdown by component
-- [ ] Write FSRS to `scores` table (only for first_session_for_student = true)
-- [ ] Skip FSRS if transcript lacks speaker diarization
+- [x] Write FSRS service tests (TDD: write test → see fail → build service → see pass)
+- [x] Detect confusion phrases (>=3 instances in student turns) → +20
+- [x] Compute tutor vs student word share (tutor >75% of words) → +20
+- [x] Detect missing goal-setting question early in session → +25
+- [x] Detect missing encouragement phrases → +15
+- [x] Detect negative phrasing streak → +10
+- [x] Detect missing closing summary or next steps → +20
+- [x] Apply tech/lateness disruption penalty → +10 if present
+- [x] Calculate final FSRS (sum of risk points)
+- [x] Generate structured feedback payload:
+  - [x] "What went well" (positive signals)
+  - [x] "One improvement idea" (highest-impact issue)
+  - [x] Breakdown by component
+- [x] Write FSRS to `scores` table (only for first_session_for_student = true)
+- [x] Skip FSRS if transcript lacks speaker diarization
 
 ### Alert Generation
 - [ ] Write AlertService tests (TDD: write test → see fail → build service → see pass)
