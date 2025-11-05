@@ -501,81 +501,79 @@ const TutorDashboard = ({ tutorId }) => {
                     <Tooltip text="Session Quality Score (SQS) tracks the operational quality of your sessions, focusing on punctuality, session duration, and technical reliability. Green bars (75+) indicate smooth sessions, yellow (60-75) shows minor issues, and red (<60) suggests significant problems." />
                   </h3>
                   
-                  {/* Desktop: Side-by-side layout (Metrics left, Chart right) */}
-                  <div className="md:grid md:grid-cols-2 md:gap-6">
-                    {/* Left: Metrics */}
-                    <div className="mb-4 md:mb-0">
-                      <div className="flex flex-col md:flex-row gap-4">
-                        {/* Total Average */}
-                        {(() => {
-                          const totalAvgNum = parseFloat(totalAvg)
-                          const totalLabel = getScoreLabel(totalAvgNum, 'sqs')
-                          const isRed = totalLabel.color === 'red'
-                          const isYellow = totalLabel.color === 'yellow'
-                          const isGreen = totalLabel.color === 'green'
-                          
-                          return (
-                            <div className={`flex-1 rounded-lg p-4 border-l-4 ${
-                              isRed ? 'bg-red-50 border-red-500' :
-                              isYellow ? 'bg-yellow-50 border-yellow-500' :
-                              'bg-green-50 border-green-500'
-                            }`}>
-                              <div className={`text-sm font-medium mb-1 ${
-                                isRed ? 'text-red-700' :
-                                isYellow ? 'text-yellow-700' :
-                                'text-green-700'
-                              }`}>Total Average</div>
-                              <div className={`text-3xl font-bold ${
-                                isRed ? 'text-red-900' :
-                                isYellow ? 'text-yellow-900' :
-                                'text-green-900'
-                              }`}>{totalAvg}</div>
-                              <div className={`text-xs mt-1 ${
-                                isRed ? 'text-red-600' :
-                                isYellow ? 'text-yellow-600' :
-                                'text-green-600'
-                              }`}>{sessionsWithSqs.length} sessions</div>
-                            </div>
-                          )
-                        })()}
+                  {/* Metrics on top, Chart full width below */}
+                  <div className="space-y-4">
+                    {/* Metrics Row */}
+                    <div className="flex flex-col md:flex-row gap-4">
+                      {/* Total Average */}
+                      {(() => {
+                        const totalAvgNum = parseFloat(totalAvg)
+                        const totalLabel = getScoreLabel(totalAvgNum, 'sqs')
+                        const isRed = totalLabel.color === 'red'
+                        const isYellow = totalLabel.color === 'yellow'
+                        const isGreen = totalLabel.color === 'green'
                         
-                        {/* Last 10 Average */}
-                        {(() => {
-                          const last10AvgNum = parseFloat(last10Avg)
-                          const last10Label = getScoreLabel(last10AvgNum, 'sqs')
-                          const isRed = last10Label.color === 'red'
-                          const isYellow = last10Label.color === 'yellow'
-                          const isGreen = last10Label.color === 'green'
-                          
-                          return (
-                            <div className={`flex-1 rounded-lg p-4 border-l-4 ${
-                              isRed ? 'bg-red-50 border-red-500' :
-                              isYellow ? 'bg-yellow-50 border-yellow-500' :
-                              'bg-green-50 border-green-500'
-                            }`}>
-                              <div className={`text-sm font-medium mb-1 ${
-                                isRed ? 'text-red-700' :
-                                isYellow ? 'text-yellow-700' :
-                                'text-green-700'
-                              }`}>Last 10 Average</div>
-                              <div className={`text-3xl font-bold ${
-                                isRed ? 'text-red-900' :
-                                isYellow ? 'text-yellow-900' :
-                                'text-green-900'
-                              }`}>{last10Avg}</div>
-                              <div className={`text-xs mt-1 ${
-                                isRed ? 'text-red-600' :
-                                isYellow ? 'text-yellow-600' :
-                                'text-green-600'
-                              }`}>Last {last10Sessions.length} sessions</div>
-                            </div>
-                          )
-                        })()}
-                      </div>
+                        return (
+                          <div className={`flex-1 rounded-lg p-4 border-l-4 ${
+                            isRed ? 'bg-red-50 border-red-500' :
+                            isYellow ? 'bg-yellow-50 border-yellow-500' :
+                            'bg-green-50 border-green-500'
+                          }`}>
+                            <div className={`text-sm font-medium mb-1 ${
+                              isRed ? 'text-red-700' :
+                              isYellow ? 'text-yellow-700' :
+                              'text-green-700'
+                            }`}>Total Average</div>
+                            <div className={`text-3xl font-bold ${
+                              isRed ? 'text-red-900' :
+                              isYellow ? 'text-yellow-900' :
+                              'text-green-900'
+                            }`}>{totalAvg}</div>
+                            <div className={`text-xs mt-1 ${
+                              isRed ? 'text-red-600' :
+                              isYellow ? 'text-yellow-600' :
+                              'text-green-600'
+                            }`}>{sessionsWithSqs.length} sessions</div>
+                          </div>
+                        )
+                      })()}
+                      
+                      {/* Last 10 Average */}
+                      {(() => {
+                        const last10AvgNum = parseFloat(last10Avg)
+                        const last10Label = getScoreLabel(last10AvgNum, 'sqs')
+                        const isRed = last10Label.color === 'red'
+                        const isYellow = last10Label.color === 'yellow'
+                        const isGreen = last10Label.color === 'green'
+                        
+                        return (
+                          <div className={`flex-1 rounded-lg p-4 border-l-4 ${
+                            isRed ? 'bg-red-50 border-red-500' :
+                            isYellow ? 'bg-yellow-50 border-yellow-500' :
+                            'bg-green-50 border-green-500'
+                          }`}>
+                            <div className={`text-sm font-medium mb-1 ${
+                              isRed ? 'text-red-700' :
+                              isYellow ? 'text-yellow-700' :
+                              'text-green-700'
+                            }`}>Last 10 Average</div>
+                            <div className={`text-3xl font-bold ${
+                              isRed ? 'text-red-900' :
+                              isYellow ? 'text-yellow-900' :
+                              'text-green-900'
+                            }`}>{last10Avg}</div>
+                            <div className={`text-xs mt-1 ${
+                              isRed ? 'text-red-600' :
+                              isYellow ? 'text-yellow-600' :
+                              'text-green-600'
+                            }`}>Last {last10Sessions.length} sessions</div>
+                          </div>
+                        )
+                      })()}
                     </div>
                     
-                    {/* Right: Chart */}
-                    <div className="flex items-end gap-1 md:gap-2 h-32">
+                    {/* Chart - Full Width */}
+                    <div className="flex items-end gap-1 md:gap-2 h-32 w-full">
                       {sessionList.slice(0, 10).map((session, index) => {
                         if (!session.sqs) return null
                         const maxSqs = Math.max(...sessionList.map(s => s.sqs || 0), 100)
