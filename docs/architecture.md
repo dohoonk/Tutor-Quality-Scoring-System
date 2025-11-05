@@ -39,6 +39,8 @@ The system processes session data, computes scoring metrics, stores rolling aggr
   - TutorChurnRiskScoreService: Computes TCRS from 14d metrics
   - AlertService: Evaluates triggers and generates alerts
   - PerformanceSummaryService: Generates tutor performance summaries
+  - SqsActionableFeedbackService: Generates actionable items from last 10 SQS scores
+  - AIActionableFeedbackService: Generates AI-powered detailed feedback using last 5 session transcripts
 - **React Frontend**
   - `/tutor/:id` dashboard - Self-improvement focused
   - `/admin/:id` risk management dashboard - Operational triage
@@ -85,6 +87,8 @@ D --> N
 - `GET /api/tutor/:id/fsqs_history` - Last 5 first-sessions with FSQS scores
 - `GET /api/tutor/:id/performance_summary` - AI-generated performance summary
 - `GET /api/tutor/:id/session_list` - Recent sessions with SQS values
+- `GET /api/tutor/:id/sqs_actionable_feedback` - Actionable items based on last 10 SQS scores
+- `POST /api/tutor/:id/ai_feedback` - Get AI-powered detailed feedback for specific actionable item (uses last 5 session transcripts)
 
 ### Admin Dashboard (`/admin/:id`)
 - `GET /api/admin/tutors/risk_list` - Sorted list of tutors with risk metrics
@@ -196,6 +200,30 @@ Alerts auto-resolve when conditions improve.
   - "What went well" highlights
   - "One improvement suggestion"
 - Caching: Daily refresh per tutor
+
+## AI-Powered Actionable Feedback
+
+- Service: `AIActionableFeedbackService`
+- Approach: LLM-based analysis of session transcripts
+- Inputs: 
+  - Tutor ID
+  - Actionable item type (e.g., 'encouragement', 'confusion', 'goal_setting', 'word_share', etc.)
+  - Last 5 session transcripts with speaker diarization, student names, timestamps
+- Process:
+  1. Fetch last 5 completed sessions with transcripts
+  2. Extract relevant transcript data (speakers, metadata, session context)
+  3. Construct prompt with actionable item context and transcripts
+  4. Call LLM API (OpenAI GPT-4, Anthropic Claude, etc.)
+  5. Parse structured response into specific suggestions
+- Outputs: JSON with:
+  - 2-3 specific moments where issue occurred
+  - Student name and session context for each moment
+  - Exact suggestion phrase
+  - Why this would help
+- Caching: Results cached per tutor + actionable item for 24 hours
+- Rate Limiting: Max 5 requests per tutor per day
+- Error Handling: Fallback to generic feedback if LLM fails or times out
+- Performance: Async processing recommended (background job) with loading states in UI
 
 ## Notes for Implementation
 - Start with DB polling; event bus may be added post-MVP.

@@ -21,6 +21,7 @@ Rails.application.routes.draw do
       get ":id/performance_summary", to: "tutors#performance_summary"
       get ":id/session_list", to: "tutors#session_list"
       get ":id/sqs_actionable_feedback", to: "tutors#sqs_actionable_feedback"
+      post ":id/ai_feedback", to: "tutors#ai_feedback"
     end
 
     namespace :admin do

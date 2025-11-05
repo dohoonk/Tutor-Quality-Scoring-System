@@ -4,12 +4,12 @@ class SqsActionableFeedbackService
   end
 
   def generate_feedback
-    # Get last 10 SQS scores with components (ordered by session date, not computed_at)
-    # This ensures we're looking at the most recent 10 sessions chronologically
+    # Get last 5 SQS scores with components (ordered by session date, not computed_at)
+    # This ensures we're looking at the most recent 5 sessions chronologically
     sqs_scores = Score.where(tutor: @tutor, score_type: 'sqs')
                       .joins(:session)
                       .order('sessions.scheduled_start_at DESC')
-                      .limit(10)
+                      .limit(5)
                       .includes(:session)
 
     return { perfect: true, message: nil, items: [] } if sqs_scores.empty?
@@ -26,7 +26,7 @@ class SqsActionableFeedbackService
     if perfect_sessions == sqs_scores.count && deductions[:total_sessions_with_deductions] == 0
       return {
         perfect: true,
-        message: "You're doing a fantastic job! All your last 10 sessions had perfect scores with no issues.",
+        message: "You're doing a fantastic job! All your last 5 sessions had perfect scores with no issues.",
         items: []
       }
     end
@@ -162,7 +162,7 @@ class SqsActionableFeedbackService
         type: 'confusion',
         priority: deductions[:confusion_count] >= 5 ? 'high' : 'medium',
         title: 'Address Student Confusion',
-        description: "Students expressed confusion in #{deductions[:confusion_count]} out of 10 recent sessions.",
+            description: "Students expressed confusion in #{deductions[:confusion_count]} out of 5 recent sessions.",
         action: "When you notice confusion phrases like 'I don't understand', pause and clarify. Ask 'What part would you like me to explain differently?'",
         icon: '🤔'
       }
@@ -173,7 +173,7 @@ class SqsActionableFeedbackService
         type: 'word_share',
         priority: deductions[:word_share_count] >= 5 ? 'high' : 'medium',
         title: 'Balance Conversation',
-        description: "You spoke more than 75% of the time in #{deductions[:word_share_count]} out of 10 recent sessions.",
+            description: "You spoke more than 75% of the time in #{deductions[:word_share_count]} out of 5 recent sessions.",
         action: "Aim for 40-60% student speaking time. Ask open-ended questions, give students time to think, and let them explain their reasoning.",
         icon: '💬'
       }
@@ -184,7 +184,7 @@ class SqsActionableFeedbackService
         type: 'goal_setting',
         priority: deductions[:goal_setting_count] >= 5 ? 'high' : 'medium',
         title: 'Set Goals Early',
-        description: "You didn't ask about goals in the first few minutes of #{deductions[:goal_setting_count]} out of 10 recent sessions.",
+            description: "You didn't ask about goals in the first few minutes of #{deductions[:goal_setting_count]} out of 5 recent sessions.",
         action: "Start each session by asking 'What would you like to work on today?' or 'What are your goals for this session?' This helps focus the session.",
         icon: '🎯'
       }
@@ -195,7 +195,7 @@ class SqsActionableFeedbackService
         type: 'closing_summary',
         priority: deductions[:closing_summary_count] >= 5 ? 'high' : 'medium',
         title: 'Summarize at the End',
-        description: "You didn't provide a summary or next steps in #{deductions[:closing_summary_count]} out of 10 recent sessions.",
+            description: "You didn't provide a summary or next steps in #{deductions[:closing_summary_count]} out of 5 recent sessions.",
         action: "End each session with a brief recap: 'Today we covered X, Y, and Z. Next time we'll work on...' This helps students retain what they learned.",
         icon: '📝'
       }
@@ -206,7 +206,7 @@ class SqsActionableFeedbackService
         type: 'encouragement',
         priority: 'medium',
         title: 'Use More Encouragement',
-        description: "You didn't use encouragement phrases in #{deductions[:encouragement_count]} out of 10 recent sessions.",
+            description: "You didn't use encouragement phrases in #{deductions[:encouragement_count]} out of 5 recent sessions.",
         action: "Use phrases like 'Great question!', 'Well done!', or 'You're doing well!' throughout the session to build student confidence.",
         icon: '👍'
       }
@@ -217,7 +217,7 @@ class SqsActionableFeedbackService
         type: 'negative_phrasing',
         priority: 'medium',
         title: 'Use Positive Language',
-        description: "Negative phrasing was detected in #{deductions[:negative_phrasing_count]} out of 10 recent sessions.",
+            description: "Negative phrasing was detected in #{deductions[:negative_phrasing_count]} out of 5 recent sessions.",
         action: "Instead of 'That's wrong', try 'Let's try a different approach' or 'That's close, but let's think about...' Focus on constructive feedback.",
         icon: '✨'
       }
@@ -230,7 +230,7 @@ class SqsActionableFeedbackService
         type: 'lateness',
         priority: deductions[:lateness_count] >= 5 ? 'high' : 'medium',
         title: 'Start Sessions on Time',
-        description: "You were late to #{deductions[:lateness_count]} out of 10 recent sessions, averaging #{avg_lateness} minutes late.",
+            description: "You were late to #{deductions[:lateness_count]} out of 5 recent sessions, averaging #{avg_lateness} minutes late.",
         action: "Try setting a reminder 5 minutes before each session. Aim to join 2-3 minutes early to ensure you're ready when the student arrives.",
         icon: '⏰'
       }
@@ -253,7 +253,7 @@ class SqsActionableFeedbackService
         type: 'tech_issue',
         priority: deductions[:tech_issue_count] >= 3 ? 'high' : 'medium',
         title: 'Resolve Technical Issues',
-        description: "You experienced technical issues in #{deductions[:tech_issue_count]} out of 10 recent sessions.",
+            description: "You experienced technical issues in #{deductions[:tech_issue_count]} out of 5 recent sessions.",
         action: "Test your internet connection, camera, and microphone before each session. Have a backup plan ready if issues occur.",
         icon: '🔧'
       }

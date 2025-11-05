@@ -199,6 +199,8 @@ Sessions → TutorDailyAggregationJob (every 10 min) → tutor_daily_aggregates
 - `GET /api/tutor/:id/fsqs_history` - Last 5 first-sessions with FSQS
 - `GET /api/tutor/:id/performance_summary` - AI-generated summary
 - `GET /api/tutor/:id/session_list` - Recent sessions with SQS
+- `GET /api/tutor/:id/sqs_actionable_feedback` - Actionable items based on last 10 SQS scores
+- `POST /api/tutor/:id/ai_feedback` - Get AI-powered detailed feedback for specific actionable item (uses last 5 session transcripts)
 
 **Admin Dashboard (`/admin/:id`)**
 - `GET /api/admin/tutors/risk_list` - Sorted tutors with risk metrics
@@ -279,7 +281,70 @@ Admin Dashboard UI (`/admin/:id`)
 
 ---
 
-## 13) Out-of-Scope (Post-MVP)
+## 13) AI-Powered Detailed Feedback (Post-MVP Feature)
+
+### Overview
+Tutors can request AI-powered, contextual feedback on specific actionable items. The system analyzes the last 5 session transcripts using LLM to provide specific, moment-by-moment suggestions.
+
+### User Flow
+1. Tutor views Actionable Items section on dashboard
+2. For each actionable item, a "Get AI Feedback" button is available
+3. Clicking the button:
+   - Sends last 5 session transcripts (with student names and timestamps) to LLM
+   - Includes the actionable item context (e.g., "Use More Encouragement")
+   - LLM analyzes transcripts and provides specific feedback
+4. Feedback is displayed in a modal/expanded section with:
+   - 2-3 specific moments where the issue occurred
+   - Student name and session context for each moment
+   - Exact suggestion (e.g., "When John finished question 5, you could have said 'Great job!'")
+   - Why this would help
+
+### Technical Implementation
+- **Service**: `AIActionableFeedbackService`
+- **Input**: Tutor ID, actionable item type (e.g., 'encouragement', 'confusion', 'goal_setting')
+- **Process**:
+  1. Fetch last 5 completed sessions with transcripts
+  2. Extract transcripts with speaker diarization, student names, timestamps
+  3. Construct prompt with:
+     - Actionable item context
+     - Transcript data
+     - Instructions for specific, contextual feedback
+  4. Call LLM API (OpenAI, Anthropic, etc.)
+  5. Parse and return structured feedback
+- **Output**: JSON with specific suggestions, moments, and context
+- **Caching**: Results cached per tutor + actionable item for 24 hours
+- **Rate Limiting**: Max 5 requests per tutor per day
+- **Error Handling**: Fallback to generic feedback if LLM fails
+
+### Example Prompt Structure
+```
+You are analyzing tutoring session transcripts to provide specific, actionable feedback.
+
+Context:
+- Actionable Item: "Use More Encouragement"
+- Tutor has been flagged for not using encouragement phrases in recent sessions
+
+Last 5 Session Transcripts:
+[Insert transcripts with student names, timestamps, and speaker diarization]
+
+Instructions:
+1. Identify 2-3 specific moments across these sessions where the tutor should have used encouragement
+2. For each moment, provide:
+   - Student name
+   - Session date/time
+   - What the student did/said
+   - Specific encouragement phrase that would have been appropriate
+   - Why this would help
+3. Format as a clear, actionable list
+```
+
+### Benefits
+- **More actionable**: Specific moments vs. generic tips
+- **Personalized**: References actual students and sessions
+- **Contextual**: Uses actual conversation content
+- **Better learning**: Tutors see exactly what to change
+
+## 14) Out-of-Scope (Post-MVP)
 - ML prediction models
 - Automatic scheduling adjustments
 - Gamification in tutor dashboard

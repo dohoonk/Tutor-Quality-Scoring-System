@@ -241,6 +241,77 @@
 
 ---
 
+## EPIC 14 — AI-Powered Actionable Feedback
+
+**Goal:** Enable tutors to request AI-powered, contextual feedback on specific actionable items. The system analyzes the last 5 session transcripts using LLM to provide specific, moment-by-moment suggestions.
+
+### Task 14.1: Backend Service (TDD Approach)
+- [ ] Write AIActionableFeedbackService tests (TDD: write test → see fail → build service → see pass)
+- [ ] Create AIActionableFeedbackService:
+  - [ ] Accept tutor_id and actionable_item_type as parameters
+  - [ ] Fetch last 5 completed sessions with transcripts
+  - [ ] Extract transcript data (speakers, metadata, student names, timestamps)
+  - [ ] Construct prompt with actionable item context and transcripts
+  - [ ] Integrate with LLM API (OpenAI, Anthropic, etc.)
+  - [ ] Parse LLM response into structured JSON
+  - [ ] Handle errors gracefully (fallback to generic feedback)
+- [ ] Add caching mechanism (24 hours per tutor + actionable item)
+- [ ] Add rate limiting (max 5 requests per tutor per day)
+
+### Task 14.2: API Endpoint
+- [ ] Write API endpoint tests (TDD: write test → see fail → build endpoint → see pass)
+- [ ] Create `POST /api/tutor/:id/ai_feedback` endpoint:
+  - [ ] Accept `actionable_item_type` in request body
+  - [ ] Call AIActionableFeedbackService
+  - [ ] Return structured JSON response
+  - [ ] Handle rate limiting (return 429 if exceeded)
+  - [ ] Handle errors (return 500 with fallback message)
+
+### Task 14.3: Frontend Integration
+- [ ] Add "Get AI Feedback" button to each actionable item card
+- [ ] Create loading state for AI feedback request
+- [ ] Create modal/expanded section to display AI feedback:
+  - [ ] Show 2-3 specific moments with student names
+  - [ ] Display exact suggestions for each moment
+  - [ ] Show why each suggestion would help
+- [ ] Handle error states (show fallback message if LLM fails)
+- [ ] Add rate limit indicator (show remaining requests if applicable)
+
+### Task 14.4: LLM Integration
+- [ ] Choose LLM provider (OpenAI, Anthropic, etc.)
+- [ ] Add LLM API client gem/configuration
+- [ ] Design prompt template:
+  - [ ] Include actionable item context
+  - [ ] Format transcript data clearly
+  - [ ] Specify output format (structured JSON)
+  - [ ] Include examples of good feedback
+- [ ] Test prompt with sample transcripts
+- [ ] Add environment variables for API keys
+- [ ] Add prompt token counting/optimization
+
+### Task 14.5: Error Handling & Fallbacks
+- [ ] Implement timeout handling (e.g., 30 seconds)
+- [ ] Create fallback generic feedback messages per actionable item type
+- [ ] Log LLM errors for debugging
+- [ ] Handle rate limit errors gracefully
+- [ ] Handle invalid actionable item types
+
+### Task 14.6: Performance Optimization
+- [ ] Implement async processing (background job) if response time > 5 seconds
+- [ ] Add request queuing for rate-limited requests
+- [ ] Optimize transcript data sent to LLM (summarize if too large)
+- [ ] Add request deduplication (same tutor + item within 1 hour)
+
+### Task 14.7: Testing & Documentation
+- [ ] Write integration tests for full flow
+- [ ] Test with various actionable item types
+- [ ] Test error scenarios (API failures, timeouts, rate limits)
+- [ ] Update API documentation
+- [ ] Create user guide for AI feedback feature
+- [ ] Document prompt engineering decisions
+
+---
+
 ## EPIC 9 — Demo Polish
 - [x] Create narrative data profiles:
   - [x] Strong tutor (high SQS, low FSQS, stable THS/TCRS) - Sarah Excellence

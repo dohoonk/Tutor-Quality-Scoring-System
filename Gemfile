@@ -76,3 +76,6 @@ gem "sidekiq", "~> 8.0"
 gem "sidekiq-scheduler", "~> 6.0"
 
 gem "rspec-rails", "~> 8.0", :groups => [:development, :test]
+
+# OpenAI API client for AI-powered feedback
+gem "ruby-openai", "~> 7.0"

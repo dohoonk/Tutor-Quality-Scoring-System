@@ -89,6 +89,25 @@ module Api
 
         render json: feedback
       end
+
+      def ai_feedback
+        tutor = ::Tutor.find_by(id: params[:id])
+        return render json: { error: 'Tutor not found' }, status: :not_found unless tutor
+
+        actionable_item_type = params[:actionable_item_type]
+        return render json: { error: 'actionable_item_type is required' }, status: :bad_request unless actionable_item_type.present?
+
+        service = AIActionableFeedbackService.new(tutor, actionable_item_type)
+        feedback = service.generate_feedback
+
+        if feedback[:error] == 'rate_limit_exceeded'
+          render json: feedback, status: :too_many_requests
+        elsif feedback[:error]
+          render json: feedback, status: :unprocessable_entity
+        else
+          render json: feedback
+        end
+      end
     end
   end
 end

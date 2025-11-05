@@ -47,7 +47,7 @@ class PerformanceSummaryService
     @tutor.scores
       .where(score_type: 'sqs')
       .order(computed_at: :desc)
-      .limit(10)
+      .limit(5)
       .pluck(:value)
       .map(&:to_f)
   end
