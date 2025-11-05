@@ -5,7 +5,7 @@ import {
   EmptyAlertState, 
   ErrorState,
   AccessibleButton,
-  MobileTable
+  MobileSearchableTable
 } from './ui'
 
 const AdminDashboard = ({ adminId }) => {
@@ -16,8 +16,6 @@ const AdminDashboard = ({ adminId }) => {
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(null)
   const [detailLoading, setDetailLoading] = useState(false)
-  const [sortColumn, setSortColumn] = useState('risk_score')
-  const [sortDirection, setSortDirection] = useState('desc')
 
   useEffect(() => {
     fetchTutorList()
@@ -70,33 +68,6 @@ const AdminDashboard = ({ adminId }) => {
     }
   }
 
-  const handleSort = (column) => {
-    if (sortColumn === column) {
-      setSortDirection(sortDirection === 'asc' ? 'desc' : 'asc')
-    } else {
-      setSortColumn(column)
-      setSortDirection(column === 'name' ? 'asc' : 'desc')
-    }
-  }
-
-  const sortedTutorList = [...tutorList].sort((a, b) => {
-    let aVal = a[sortColumn]
-    let bVal = b[sortColumn]
-    
-    if (aVal === null || aVal === undefined) return 1
-    if (bVal === null || bVal === undefined) return -1
-    
-    if (sortColumn === 'name') {
-      aVal = aVal.toLowerCase()
-      bVal = bVal.toLowerCase()
-      return sortDirection === 'asc' 
-        ? aVal.localeCompare(bVal)
-        : bVal.localeCompare(aVal)
-    }
-    
-    return sortDirection === 'asc' ? aVal - bVal : bVal - aVal
-  })
-
   const getRiskBadge = (fsqs, ths, tcrs) => {
     const badges = []
     
@@ -125,13 +96,12 @@ const AdminDashboard = ({ adminId }) => {
     return badges
   }
 
-  const SortIcon = ({ column }) => {
-    if (sortColumn !== column) {
-      return <span className="ml-1 text-gray-400 transition-colors">⇅</span>
-    }
-    return sortDirection === 'asc' 
-      ? <span className="ml-1 text-gray-700 transition-colors">↑</span>
-      : <span className="ml-1 text-gray-700 transition-colors">↓</span>
+  // Get risk level for filtering
+  const getRiskLevel = (tutor) => {
+    const badges = getRiskBadge(tutor.fsqs, tutor.ths, tutor.tcrs)
+    if (badges.some(b => b.color === 'red')) return 'high'
+    if (badges.some(b => b.color === 'yellow')) return 'medium'
+    return 'low'
   }
 
   // Loading State
@@ -166,35 +136,51 @@ const AdminDashboard = ({ adminId }) => {
           <span className="text-sm text-gray-600">{tutorList.length} tutors</span>
         </div>
         
-        {/* Mobile Card View */}
-        <div className="md:hidden space-y-3">
-          {sortedTutorList.length === 0 ? (
-            <EmptyAlertState />
-          ) : (
-            sortedTutorList.map((tutor) => {
-              const badges = getRiskBadge(tutor.fsqs, tutor.ths, tutor.tcrs)
-              return (
-                <div 
-                  key={tutor.id}
-                  className={`bg-white border rounded-lg p-4 hover:shadow-md transition-shadow ${
-                    selectedTutor === tutor.id ? 'ring-2 ring-blue-500' : ''
-                  }`}
-                >
-                  {/* Header with name and view button */}
-                  <div className="flex justify-between items-start mb-3">
-                    <h3 className="font-semibold text-gray-900 flex-1">{tutor.name}</h3>
-                    <AccessibleButton
-                      onClick={() => selectTutor(tutor.id)}
-                      variant="primary"
-                      size="sm"
-                      ariaLabel={`View details for ${tutor.name}`}
-                    >
-                      View
-                    </AccessibleButton>
-                  </div>
-
-                  {/* Badges */}
-                  <div className="flex flex-wrap gap-1 mb-3">
+        <MobileSearchableTable
+          data={tutorList}
+          keyExtractor={(tutor) => tutor.id}
+          emptyState={<EmptyAlertState />}
+          searchableFields={['name']}
+          filters={[
+            {
+              key: 'risk_level',
+              label: 'Risk Level',
+              getValue: (tutor) => getRiskLevel(tutor),
+              options: [
+                { value: 'high', label: 'High Risk' },
+                { value: 'medium', label: 'Medium Risk' },
+                { value: 'low', label: 'Low Risk' }
+              ]
+            },
+            {
+              key: 'has_alerts',
+              label: 'Alerts',
+              options: [
+                { value: 'yes', label: 'Has Alerts' },
+                { value: 'no', label: 'No Alerts' }
+              ]
+            }
+          ]}
+          defaultSort={{ column: 'risk_score', direction: 'desc' }}
+          onRowClick={(tutor) => selectTutor(tutor.id)}
+          mobileBreakpoint="md"
+          columns={[
+            {
+              key: 'name',
+              label: 'Tutor Name',
+              sortable: true,
+              render: (tutor) => (
+                <span className="font-medium text-gray-900">{tutor.name}</span>
+              )
+            },
+            {
+              key: 'status',
+              label: 'Status',
+              sortable: false,
+              render: (tutor) => {
+                const badges = getRiskBadge(tutor.fsqs, tutor.ths, tutor.tcrs)
+                return (
+                  <div className="flex flex-wrap gap-1">
                     {badges.map((badge, idx) => (
                       <span
                         key={idx}
@@ -208,178 +194,79 @@ const AdminDashboard = ({ adminId }) => {
                       </span>
                     ))}
                   </div>
-
-                  {/* Scores */}
-                  <div className="grid grid-cols-2 gap-3 text-sm">
-                    <div>
-                      <span className="text-gray-600">FSQS:</span>
-                      <span className="ml-1 font-medium">{tutor.fsqs !== null ? tutor.fsqs.toFixed(1) : 'N/A'}</span>
-                    </div>
-                    <div>
-                      <span className="text-gray-600">THS:</span>
-                      <span className="ml-1 font-medium">{tutor.ths !== null ? tutor.ths.toFixed(1) : 'N/A'}</span>
-                    </div>
-                    <div>
-                      <span className="text-gray-600">TCRS:</span>
-                      <span className="ml-1 font-medium">{tutor.tcrs !== null ? tutor.tcrs.toFixed(2) : 'N/A'}</span>
-                    </div>
-                    <div>
-                      <span className="text-gray-600">Alerts:</span>
-                      <span className="ml-1">
-                        {tutor.alert_count > 0 ? (
-                          <span className="inline-flex items-center px-2 py-1 bg-red-100 text-red-800 rounded text-xs font-medium">
-                            {tutor.alert_count} open
-                          </span>
-                        ) : (
-                          <span className="text-gray-400">None</span>
-                        )}
-                      </span>
-                    </div>
-                  </div>
-                </div>
-              )
-            })
-          )}
-        </div>
-
-        {/* Desktop Table View */}
-        <div className="hidden md:block bg-white rounded-lg shadow-md overflow-hidden">
-          <div className="overflow-x-auto">
-            <table className="min-w-full divide-y divide-gray-200">
-              <thead className="bg-gray-50">
-                <tr>
-                  <th 
-                    scope="col"
-                    className="px-4 md:px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider cursor-pointer hover:bg-gray-100 transition-colors focus-ring"
-                    onClick={() => handleSort('name')}
-                    tabIndex={0}
-                    onKeyDown={(e) => e.key === 'Enter' && handleSort('name')}
-                    aria-sort={sortColumn === 'name' ? (sortDirection === 'asc' ? 'ascending' : 'descending') : 'none'}
-                  >
-                    <div className="flex items-center">
-                      Tutor Name
-                      <SortIcon column="name" />
-                    </div>
-                  </th>
-                  <th scope="col" className="px-4 md:px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                    Status
-                  </th>
-                  <th 
-                    scope="col"
-                    className="px-4 md:px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider cursor-pointer hover:bg-gray-100 transition-colors focus-ring"
-                    onClick={() => handleSort('fsqs')}
-                    tabIndex={0}
-                    onKeyDown={(e) => e.key === 'Enter' && handleSort('fsqs')}
-                  >
-                    <div className="flex items-center">
-                      FSQS
-                      <SortIcon column="fsqs" />
-                    </div>
-                  </th>
-                  <th 
-                    scope="col"
-                    className="px-4 md:px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider cursor-pointer hover:bg-gray-100 transition-colors focus-ring"
-                    onClick={() => handleSort('ths')}
-                    tabIndex={0}
-                    onKeyDown={(e) => e.key === 'Enter' && handleSort('ths')}
-                  >
-                    <div className="flex items-center">
-                      THS
-                      <SortIcon column="ths" />
-                    </div>
-                  </th>
-                  <th 
-                    scope="col"
-                    className="px-4 md:px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider cursor-pointer hover:bg-gray-100 transition-colors focus-ring"
-                    onClick={() => handleSort('tcrs')}
-                    tabIndex={0}
-                    onKeyDown={(e) => e.key === 'Enter' && handleSort('tcrs')}
-                  >
-                    <div className="flex items-center">
-                      TCRS
-                      <SortIcon column="tcrs" />
-                    </div>
-                  </th>
-                  <th scope="col" className="px-4 md:px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                    Alerts
-                  </th>
-                  <th scope="col" className="px-4 md:px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                    Actions
-                  </th>
-                </tr>
-              </thead>
-              <tbody className="bg-white divide-y divide-gray-200">
-                {sortedTutorList.length === 0 ? (
-                  <tr>
-                    <td colSpan="7" className="px-6 py-8">
-                      <EmptyAlertState />
-                    </td>
-                  </tr>
+                )
+              }
+            },
+            {
+              key: 'fsqs',
+              label: 'FSQS',
+              sortable: true,
+              render: (tutor) => (
+                tutor.fsqs !== null ? (
+                  <span>{tutor.fsqs.toFixed(1)}</span>
                 ) : (
-                  sortedTutorList.map((tutor) => {
-                    const badges = getRiskBadge(tutor.fsqs, tutor.ths, tutor.tcrs)
-                    return (
-                      <tr 
-                        key={tutor.id} 
-                        className={`hover:bg-gray-50 transition-colors ${
-                          selectedTutor === tutor.id ? 'bg-blue-50' : ''
-                        }`}
-                      >
-                        <td className="px-4 md:px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
-                          {tutor.name}
-                        </td>
-                        <td className="px-4 md:px-6 py-4 text-sm">
-                          <div className="flex flex-wrap gap-1">
-                            {badges.map((badge, idx) => (
-                              <span
-                                key={idx}
-                                className={`px-2 py-1 rounded text-xs font-medium transition-colors ${
-                                  badge.color === 'red' ? 'bg-red-100 text-red-800' :
-                                  badge.color === 'yellow' ? 'bg-yellow-100 text-yellow-800' :
-                                  'bg-green-100 text-green-800'
-                                }`}
-                              >
-                                {badge.label}
-                              </span>
-                            ))}
-                          </div>
-                        </td>
-                        <td className="px-4 md:px-6 py-4 whitespace-nowrap text-sm text-gray-900">
-                          {tutor.fsqs !== null ? tutor.fsqs.toFixed(1) : <span className="text-gray-400">N/A</span>}
-                        </td>
-                        <td className="px-4 md:px-6 py-4 whitespace-nowrap text-sm text-gray-900">
-                          {tutor.ths !== null ? tutor.ths.toFixed(1) : <span className="text-gray-400">N/A</span>}
-                        </td>
-                        <td className="px-4 md:px-6 py-4 whitespace-nowrap text-sm text-gray-900">
-                          {tutor.tcrs !== null ? tutor.tcrs.toFixed(2) : <span className="text-gray-400">N/A</span>}
-                        </td>
-                        <td className="px-4 md:px-6 py-4 whitespace-nowrap text-sm">
-                          {tutor.alert_count > 0 ? (
-                            <span className="inline-flex items-center px-2 py-1 bg-red-100 text-red-800 rounded text-xs font-medium">
-                              {tutor.alert_count} open
-                            </span>
-                          ) : (
-                            <span className="text-gray-400">—</span>
-                          )}
-                        </td>
-                        <td className="px-4 md:px-6 py-4 whitespace-nowrap text-sm">
-                          <AccessibleButton
-                            onClick={() => selectTutor(tutor.id)}
-                            variant="link"
-                            size="sm"
-                            ariaLabel={`View details for ${tutor.name}`}
-                          >
-                            View Details
-                          </AccessibleButton>
-                        </td>
-                      </tr>
-                    )
-                  })
-                )}
-              </tbody>
-            </table>
-          </div>
-        </div>
+                  <span className="text-gray-400">N/A</span>
+                )
+              )
+            },
+            {
+              key: 'ths',
+              label: 'THS',
+              sortable: true,
+              render: (tutor) => (
+                tutor.ths !== null ? (
+                  <span>{tutor.ths.toFixed(1)}</span>
+                ) : (
+                  <span className="text-gray-400">N/A</span>
+                )
+              )
+            },
+            {
+              key: 'tcrs',
+              label: 'TCRS',
+              sortable: true,
+              render: (tutor) => (
+                tutor.tcrs !== null ? (
+                  <span>{tutor.tcrs.toFixed(2)}</span>
+                ) : (
+                  <span className="text-gray-400">N/A</span>
+                )
+              )
+            },
+            {
+              key: 'alerts',
+              label: 'Alerts',
+              sortable: true,
+              render: (tutor) => (
+                tutor.alert_count > 0 ? (
+                  <span className="inline-flex items-center px-2 py-1 bg-red-100 text-red-800 rounded text-xs font-medium">
+                    {tutor.alert_count} open
+                  </span>
+                ) : (
+                  <span className="text-gray-400">—</span>
+                )
+              )
+            },
+            {
+              key: 'actions',
+              label: 'Actions',
+              sortable: false,
+              render: (tutor) => (
+                <AccessibleButton
+                  onClick={(e) => {
+                    e.stopPropagation()
+                    selectTutor(tutor.id)
+                  }}
+                  variant="link"
+                  size="sm"
+                  ariaLabel={`View details for ${tutor.name}`}
+                >
+                  View Details
+                </AccessibleButton>
+              )
+            }
+          ]}
+        />
       </section>
 
       {/* Tutor Detail Panel */}

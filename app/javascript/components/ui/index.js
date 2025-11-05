@@ -8,6 +8,7 @@ export { default as AccessibleButton } from './AccessibleButton'
 
 // Mobile-Optimized Components
 export { default as MobileTable } from './MobileTable'
+export { default as MobileSearchableTable } from './MobileSearchableTable'
 export { default as MobileMetricCard, MobileMetricGrid } from './MobileMetricCard'
 export { default as MobileNav } from './MobileNav'
 
