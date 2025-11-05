@@ -224,15 +224,15 @@
 ---
 
 ## EPIC 8 — Performance Summary Generation (TDD Approach)
-- [ ] Write PerformanceSummaryService tests (TDD: write test → see fail → build service → see pass)
-- [ ] Create PerformanceSummaryService
-- [ ] Template-based approach for MVP:
-  - [ ] Analyze recent SQS trends
-  - [ ] Identify patterns (improving, declining, stable)
-  - [ ] Generate encouraging, supportive text
-  - [ ] Highlight "What went well" and "One improvement suggestion"
-- [ ] Cache summary for tutor (refresh daily)
-- [ ] API endpoint: `GET /api/tutor/:id/performance_summary`
+- [x] Write PerformanceSummaryService tests (TDD: write test → see fail → build service → see pass)
+- [x] Create PerformanceSummaryService
+- [x] Template-based approach for MVP:
+  - [x] Analyze recent SQS trends
+  - [x] Identify patterns (improving, declining, stable)
+  - [x] Generate encouraging, supportive text
+  - [x] Highlight "What went well" and "One improvement suggestion"
+- [x] Integrated with existing API endpoint: `GET /api/tutor/:id/performance_summary`
+- [ ] Cache summary for tutor (refresh daily) - POST-MVP optimization
 
 ---
 
