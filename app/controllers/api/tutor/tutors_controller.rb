@@ -46,19 +46,11 @@ module Api
         tutor = ::Tutor.find_by(id: params[:id])
         return render json: { error: 'Tutor not found' }, status: :not_found unless tutor
 
-        # For MVP, use template-based summary (will be replaced with PerformanceSummaryService later)
-        recent_sqs = ::Score.where(tutor: tutor, score_type: 'sqs')
-                         .order(computed_at: :desc)
-                         .limit(10)
+        # Use PerformanceSummaryService for intelligent, trend-based summaries
+        service = PerformanceSummaryService.new(tutor)
+        summary_data = service.generate_summary
 
-        if recent_sqs.any?
-          avg_sqs = recent_sqs.average(:value).to_f.round(2)
-          summary = "Your recent session quality score is #{avg_sqs}. Keep up the great work!"
-        else
-          summary = "No recent sessions to analyze. Complete some sessions to see your performance summary."
-        end
-
-        render json: { summary: summary }
+        render json: summary_data
       end
 
       def session_list
