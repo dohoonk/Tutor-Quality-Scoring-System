@@ -18,7 +18,7 @@
 ## EPIC 2 — Models & Schema (TDD Approach)
 - [x] Set up RSpec for testing
 - [x] Create Tutor model (TDD: write test → see fail → build model → see pass)
-- [ ] Create Student model (TDD: write test → see fail → build model → see pass)
+- [x] Create Student model (TDD: write test → see fail → build model → see pass)
 - [ ] Create Session model with fields:
   - [ ] scheduled_start_at
   - [ ] actual_start_at
