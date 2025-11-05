@@ -46,13 +46,13 @@
 ---
 
 ## EPIC 3 — Seed Data Early
-- [ ] Create seed tutors (10)
-- [ ] Create seed students (20)
-- [ ] Generate ~150 sessions (mixed statuses)
-- [ ] Set first_session_for_student correctly
+- [x] Create seed tutors (10)
+- [x] Create seed students (20)
+- [x] Generate ~150 sessions (mixed statuses)
+- [x] Set first_session_for_student correctly
 
-- [ ] Add ~20 mock transcript payloads (with speaker diarization)
-- [ ] Create `rails db:reset && rails db:seed` script
+- [x] Add ~20 mock transcript payloads (with speaker diarization)
+- [x] Create `rails db:reset && rails db:seed` script (db:reset already includes seed)
 
 ---
 
