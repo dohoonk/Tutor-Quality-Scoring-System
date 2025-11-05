@@ -163,8 +163,40 @@ const TutorDashboard = ({ tutorId }) => {
                   Average FSRS (Last 5)
                   <Tooltip text="This shows your average First Session Risk Score across your last 5 first sessions with new students. The trend indicator (↑ or ↓) compares your recent performance to earlier sessions. A downward trend (↓) is positive and means your first sessions are improving over time, while an upward trend (↑) suggests increased risk patterns." />
                 </div>
-                <div className="flex items-center gap-2">
+                <div className="flex items-center gap-3">
                   <span className="text-3xl font-bold">{avgFsrs}</span>
+                  
+                  {/* Sparkline */}
+                  {fsrsHistory.length > 0 && (
+                    <svg width="80" height="30" className="flex-shrink-0">
+                      <polyline
+                        fill="none"
+                        stroke={improvement > 0 ? '#DC2626' : '#10B981'}
+                        strokeWidth="2"
+                        points={fsrsHistory.slice(0, 5).reverse().map((item, index) => {
+                          const x = (index / 4) * 80
+                          const maxScore = Math.max(...fsrsHistory.slice(0, 5).map(h => h.score || 0), 50)
+                          const y = 30 - ((item.score || 0) / maxScore) * 25
+                          return `${x},${y}`
+                        }).join(' ')}
+                      />
+                      {fsrsHistory.slice(0, 5).reverse().map((item, index) => {
+                        const x = (index / 4) * 80
+                        const maxScore = Math.max(...fsrsHistory.slice(0, 5).map(h => h.score || 0), 50)
+                        const y = 30 - ((item.score || 0) / maxScore) * 25
+                        return (
+                          <circle
+                            key={index}
+                            cx={x}
+                            cy={y}
+                            r="2"
+                            fill={improvement > 0 ? '#DC2626' : '#10B981'}
+                          />
+                        )
+                      })}
+                    </svg>
+                  )}
+                  
                   {improvement && (
                     <span className={`text-sm font-medium ${
                       improvement > 0 ? 'text-red-600' : 'text-green-600'
