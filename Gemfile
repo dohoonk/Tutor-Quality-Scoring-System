@@ -71,3 +71,5 @@ gem "vite_rails", "~> 3.0"
 gem "sidekiq", "~> 8.0"
 
 gem "sidekiq-scheduler", "~> 6.0"
+
+gem "rspec-rails", "~> 8.0", :groups => [:development, :test]
