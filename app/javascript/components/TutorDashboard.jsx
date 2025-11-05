@@ -297,7 +297,7 @@ const TutorDashboard = ({ tutorId }) => {
                     label: item.student_name || `Session ${index + 1}`,
                     date: item.date ? formatDate(item.date) : null
                   }))}
-                  height={isDesktop ? 360 : 280}
+                  height={isDesktop ? 471 : 280}
                   showGrid={true}
                   showThresholds={true}
                   thresholds={[
