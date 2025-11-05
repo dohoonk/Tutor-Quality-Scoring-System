@@ -1,5 +1,34 @@
 import React, { useState, useEffect } from 'react'
 
+// Simple Tooltip Component
+const Tooltip = ({ text, children }) => {
+  const [show, setShow] = useState(false)
+  
+  return (
+    <div className="relative inline-block">
+      <button
+        type="button"
+        onMouseEnter={() => setShow(true)}
+        onMouseLeave={() => setShow(false)}
+        onFocus={() => setShow(true)}
+        onBlur={() => setShow(false)}
+        className="ml-1 text-gray-400 hover:text-gray-600 cursor-help"
+        aria-label="More information"
+      >
+        <svg className="w-4 h-4 inline-block" fill="currentColor" viewBox="0 0 20 20">
+          <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clipRule="evenodd" />
+        </svg>
+      </button>
+      {show && (
+        <div className="absolute z-50 w-72 p-3 bg-gray-900 text-white text-sm rounded-lg shadow-lg -top-2 left-6 transform -translate-y-full">
+          <div className="absolute -bottom-2 left-2 w-0 h-0 border-l-8 border-r-8 border-t-8 border-transparent border-t-gray-900"></div>
+          {text}
+        </div>
+      )}
+    </div>
+  )
+}
+
 const TutorDashboard = ({ tutorId }) => {
   const [fsrsLatest, setFsrsLatest] = useState(null)
   const [fsrsHistory, setFsrsHistory] = useState([])
@@ -112,7 +141,10 @@ const TutorDashboard = ({ tutorId }) => {
             <div className="grid grid-cols-2 gap-4 mb-6">
               {/* FSRS Indicator */}
               <div className="border-r pr-4">
-                <div className="text-sm text-gray-600 mb-1">FSRS Score</div>
+                <div className="text-sm text-gray-600 mb-1">
+                  FSRS Score
+                  <Tooltip text="First Session Risk Score measures the quality of your initial sessions with new students. A lower score (0-29) indicates strong rapport-building, clear goal-setting, and encouraging communication. Scores of 30+ suggest areas to improve such as reducing confusion, using positive language, or providing better session structure." />
+                </div>
                 <div className="flex items-center gap-2">
                   <span className="text-3xl font-bold">{fsrsLatest.score}</span>
                   <span className={`px-3 py-1 rounded-full text-sm font-medium ${
@@ -127,7 +159,10 @@ const TutorDashboard = ({ tutorId }) => {
 
               {/* FSRS Trend Summary */}
               <div>
-                <div className="text-sm text-gray-600 mb-1">Average FSRS (Last 5)</div>
+                <div className="text-sm text-gray-600 mb-1">
+                  Average FSRS (Last 5)
+                  <Tooltip text="This shows your average First Session Risk Score across your last 5 first sessions with new students. The trend indicator (↑ or ↓) compares your recent performance to earlier sessions. A downward trend (↓) is positive and means your first sessions are improving over time, while an upward trend (↑) suggests increased risk patterns." />
+                </div>
                 <div className="flex items-center gap-2">
                   <span className="text-3xl font-bold">{avgFsrs}</span>
                   {improvement && (
@@ -257,7 +292,10 @@ const TutorDashboard = ({ tutorId }) => {
             {/* SQS Trend Visualization */}
             {sessionList.length > 0 && (
               <div className="mt-4">
-                <h3 className="text-lg font-semibold mb-2">SQS Trend</h3>
+                <h3 className="text-lg font-semibold mb-2">
+                  SQS Trend
+                  <Tooltip text="Session Quality Score (SQS) tracks the operational quality of your sessions, focusing on punctuality, session duration, and technical reliability. Each bar represents one session (0-100 scale). Green bars (75+) indicate smooth sessions, yellow (60-75) shows minor issues, and red (<60) suggests significant problems like lateness, shortened sessions, or technical difficulties. Consistent green bars demonstrate strong reliability." />
+                </h3>
                 <div className="flex items-end gap-2 h-32">
                   {sessionList.slice(0, 10).map((session, index) => {
                     if (!session.sqs) return null
