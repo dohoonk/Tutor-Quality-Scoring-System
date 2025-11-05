@@ -359,3 +359,543 @@ FOREIGN KEY ("tutor_id")
   [1m[36mSession Create (0.3ms)[0m  [1m[32mINSERT INTO "sessions" ("tutor_id", "student_id", "scheduled_start_at", "actual_start_at", "scheduled_end_at", "actual_end_at", "status", "reschedule_initiator", "tech_issue", "first_session_for_student", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12) RETURNING "id"[0m  [["tutor_id", 8], ["student_id", 8], ["scheduled_start_at", "2025-11-05 06:12:39.832544"], ["actual_start_at", "2025-11-05 06:12:39.832548"], ["scheduled_end_at", "2025-11-05 07:12:39.832549"], ["actual_end_at", "2025-11-05 07:12:39.832550"], ["status", "completed"], ["reschedule_initiator", nil], ["tech_issue", nil], ["first_session_for_student", nil], ["created_at", "2025-11-05 07:12:39.832626"], ["updated_at", "2025-11-05 07:12:39.832626"]]
   [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
   [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.6ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "schema_sha1"]]
+  [1m[36mActiveRecord::SchemaMigration Load (0.3ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+[dotenv] Saved a snapshot of [32mENV[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.3ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "schema_sha1"]]
+  [1m[36mActiveRecord::SchemaMigration Load (0.3ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.3ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "schema_sha1"]]
+  [1m[36mActiveRecord::SchemaMigration Load (0.4ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.7ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "environment"]]
+  [1m[36mActiveRecord::SchemaMigration Load (0.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.1ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "environment"]]
+  [1m[36mActiveRecord::SchemaMigration Load (0.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.0ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "environment"]]
+  [1m[35mSQL (0.0ms)[0m  [1m[35mSET search_path TO public[0m
+  [1m[35m (41.9ms)[0m  [1m[35mDROP DATABASE IF EXISTS "tutor_insights_test"[0m
+  [1m[35m (37.0ms)[0m  [1m[35mCREATE DATABASE "tutor_insights_test" ENCODING = 'unicode'[0m
+  [1m[35mSQL (13.5ms)[0m  [1m[35mCREATE EXTENSION IF NOT EXISTS "plpgsql" SCHEMA pg_catalog[0m
+  [1m[35m (0.1ms)[0m  [1m[35mDROP TABLE IF EXISTS "scores" CASCADE[0m
+  [1m[35m (1.6ms)[0m  [1m[35mCREATE TABLE "scores" ("id" bigserial primary key, "session_id" bigint, "tutor_id" bigint NOT NULL, "score_type" character varying NOT NULL, "value" decimal(10,2) NOT NULL, "components" jsonb DEFAULT '{}', "computed_at" timestamp(6) NOT NULL, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[35m (0.4ms)[0m  [1m[35mCREATE INDEX "index_scores_on_session_id" ON "scores" ("session_id")[0m
+  [1m[35m (0.3ms)[0m  [1m[35mCREATE INDEX "index_scores_on_tutor_id_and_score_type" ON "scores" ("tutor_id", "score_type")[0m
+  [1m[35m (0.3ms)[0m  [1m[35mCREATE INDEX "index_scores_on_tutor_id" ON "scores" ("tutor_id")[0m
+  [1m[35m (0.0ms)[0m  [1m[35mDROP TABLE IF EXISTS "session_transcripts" CASCADE[0m
+  [1m[35m (0.7ms)[0m  [1m[35mCREATE TABLE "session_transcripts" ("id" bigserial primary key, "session_id" bigint NOT NULL, "payload" jsonb, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[35m (0.3ms)[0m  [1m[35mCREATE INDEX "index_session_transcripts_on_session_id" ON "session_transcripts" ("session_id")[0m
+  [1m[35m (0.0ms)[0m  [1m[35mDROP TABLE IF EXISTS "sessions" CASCADE[0m
+  [1m[35m (0.8ms)[0m  [1m[35mCREATE TABLE "sessions" ("id" bigserial primary key, "tutor_id" bigint NOT NULL, "student_id" bigint NOT NULL, "scheduled_start_at" timestamp(6), "actual_start_at" timestamp(6), "scheduled_end_at" timestamp(6), "actual_end_at" timestamp(6), "status" character varying, "reschedule_initiator" character varying, "tech_issue" boolean, "first_session_for_student" boolean, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[35m (0.3ms)[0m  [1m[35mCREATE INDEX "index_sessions_on_student_id" ON "sessions" ("student_id")[0m
+  [1m[35m (0.3ms)[0m  [1m[35mCREATE INDEX "index_sessions_on_tutor_id_and_student_id" ON "sessions" ("tutor_id", "student_id")[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCREATE INDEX "index_sessions_on_tutor_id" ON "sessions" ("tutor_id")[0m
+  [1m[35m (0.0ms)[0m  [1m[35mDROP TABLE IF EXISTS "students" CASCADE[0m
+  [1m[35m (0.8ms)[0m  [1m[35mCREATE TABLE "students" ("id" bigserial primary key, "name" character varying, "email" character varying, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[35m (0.1ms)[0m  [1m[35mDROP TABLE IF EXISTS "tutors" CASCADE[0m
+  [1m[35m (0.7ms)[0m  [1m[35mCREATE TABLE "tutors" ("id" bigserial primary key, "name" character varying, "email" character varying, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[35m (0.7ms)[0m  [1m[35mALTER TABLE "scores" ADD CONSTRAINT "fk_rails_ec879015fd"
+FOREIGN KEY ("session_id")
+  REFERENCES "sessions" ("id")
+[0m
+  [1m[35m (0.2ms)[0m  [1m[35mALTER TABLE "scores" ADD CONSTRAINT "fk_rails_9ed4a6cf46"
+FOREIGN KEY ("tutor_id")
+  REFERENCES "tutors" ("id")
+[0m
+  [1m[35m (0.2ms)[0m  [1m[35mALTER TABLE "session_transcripts" ADD CONSTRAINT "fk_rails_23858c6baf"
+FOREIGN KEY ("session_id")
+  REFERENCES "sessions" ("id")
+[0m
+  [1m[35m (0.2ms)[0m  [1m[35mALTER TABLE "sessions" ADD CONSTRAINT "fk_rails_925087b242"
+FOREIGN KEY ("student_id")
+  REFERENCES "students" ("id")
+[0m
+  [1m[35m (0.1ms)[0m  [1m[35mALTER TABLE "sessions" ADD CONSTRAINT "fk_rails_dc91b3d7ea"
+FOREIGN KEY ("tutor_id")
+  REFERENCES "tutors" ("id")
+[0m
+  [1m[35m (0.7ms)[0m  [1m[35mCREATE TABLE "schema_migrations" ("version" character varying NOT NULL PRIMARY KEY)[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.1ms)[0m  [1m[32mINSERT INTO "schema_migrations" (version) VALUES (20251105071523)[0m
+  [1m[35m (0.1ms)[0m  [1m[32mINSERT INTO "schema_migrations" (version) VALUES
+(20251105071159),
+(20251105071010),
+(20251105070729),
+(20251105070618);[0m
+  [1m[35m (0.6ms)[0m  [1m[35mCREATE TABLE "ar_internal_metadata" ("key" character varying NOT NULL PRIMARY KEY, "value" character varying, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.2ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "environment"]]
+  [1m[36mActiveRecord::InternalMetadata Create (0.1ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES ('environment', 'test', '2025-11-05 07:15:49.759443', '2025-11-05 07:15:49.759444') RETURNING "key"[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.0ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "environment"]]
+  [1m[36mActiveRecord::InternalMetadata Load (0.0ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "schema_sha1"]]
+  [1m[36mActiveRecord::InternalMetadata Create (0.1ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES ('schema_sha1', '98492d63cee608cf35a084f8ee14493b32d7c3ce', '2025-11-05 07:15:49.759946', '2025-11-05 07:15:49.759947') RETURNING "key"[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.3ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+[dotenv] Saved a snapshot of [32mENV[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.8ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.3ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "schema_sha1"]]
+  [1m[36mActiveRecord::SchemaMigration Load (1.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+[dotenv] Saved a snapshot of [32mENV[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.3ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "schema_sha1"]]
+  [1m[36mActiveRecord::SchemaMigration Load (0.3ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.2ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "environment"]]
+  [1m[36mActiveRecord::SchemaMigration Load (0.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.1ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "environment"]]
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.1ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "environment"]]
+  [1m[35mSQL (0.0ms)[0m  [1m[35mSET search_path TO public[0m
+  [1m[35m (40.2ms)[0m  [1m[35mDROP DATABASE IF EXISTS "tutor_insights_test"[0m
+  [1m[35m (36.9ms)[0m  [1m[35mCREATE DATABASE "tutor_insights_test" ENCODING = 'unicode'[0m
+  [1m[35mSQL (14.2ms)[0m  [1m[35mCREATE EXTENSION IF NOT EXISTS "plpgsql" SCHEMA pg_catalog[0m
+  [1m[35m (0.0ms)[0m  [1m[35mDROP TABLE IF EXISTS "alerts" CASCADE[0m
+  [1m[35m (1.5ms)[0m  [1m[35mCREATE TABLE "alerts" ("id" bigserial primary key, "tutor_id" bigint NOT NULL, "alert_type" character varying NOT NULL, "severity" character varying NOT NULL, "status" character varying DEFAULT 'open' NOT NULL, "triggered_at" timestamp(6) NOT NULL, "resolved_at" timestamp(6), "metadata" jsonb DEFAULT '{}', "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[35m (0.3ms)[0m  [1m[35mCREATE INDEX "index_alerts_on_tutor_id" ON "alerts" ("tutor_id")[0m
+  [1m[35m (0.0ms)[0m  [1m[35mDROP TABLE IF EXISTS "scores" CASCADE[0m
+  [1m[35m (1.0ms)[0m  [1m[35mCREATE TABLE "scores" ("id" bigserial primary key, "session_id" bigint, "tutor_id" bigint NOT NULL, "score_type" character varying NOT NULL, "value" decimal(10,2) NOT NULL, "components" jsonb DEFAULT '{}', "computed_at" timestamp(6) NOT NULL, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[35m (0.3ms)[0m  [1m[35mCREATE INDEX "index_scores_on_session_id" ON "scores" ("session_id")[0m
+  [1m[35m (0.3ms)[0m  [1m[35mCREATE INDEX "index_scores_on_tutor_id_and_score_type" ON "scores" ("tutor_id", "score_type")[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCREATE INDEX "index_scores_on_tutor_id" ON "scores" ("tutor_id")[0m
+  [1m[35m (0.0ms)[0m  [1m[35mDROP TABLE IF EXISTS "session_transcripts" CASCADE[0m
+  [1m[35m (0.8ms)[0m  [1m[35mCREATE TABLE "session_transcripts" ("id" bigserial primary key, "session_id" bigint NOT NULL, "payload" jsonb, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[35m (0.3ms)[0m  [1m[35mCREATE INDEX "index_session_transcripts_on_session_id" ON "session_transcripts" ("session_id")[0m
+  [1m[35m (0.0ms)[0m  [1m[35mDROP TABLE IF EXISTS "sessions" CASCADE[0m
+  [1m[35m (0.8ms)[0m  [1m[35mCREATE TABLE "sessions" ("id" bigserial primary key, "tutor_id" bigint NOT NULL, "student_id" bigint NOT NULL, "scheduled_start_at" timestamp(6), "actual_start_at" timestamp(6), "scheduled_end_at" timestamp(6), "actual_end_at" timestamp(6), "status" character varying, "reschedule_initiator" character varying, "tech_issue" boolean, "first_session_for_student" boolean, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[35m (0.3ms)[0m  [1m[35mCREATE INDEX "index_sessions_on_student_id" ON "sessions" ("student_id")[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCREATE INDEX "index_sessions_on_tutor_id_and_student_id" ON "sessions" ("tutor_id", "student_id")[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCREATE INDEX "index_sessions_on_tutor_id" ON "sessions" ("tutor_id")[0m
+  [1m[35m (0.0ms)[0m  [1m[35mDROP TABLE IF EXISTS "students" CASCADE[0m
+  [1m[35m (0.6ms)[0m  [1m[35mCREATE TABLE "students" ("id" bigserial primary key, "name" character varying, "email" character varying, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[35m (0.1ms)[0m  [1m[35mDROP TABLE IF EXISTS "tutors" CASCADE[0m
+  [1m[35m (0.8ms)[0m  [1m[35mCREATE TABLE "tutors" ("id" bigserial primary key, "name" character varying, "email" character varying, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[35m (0.6ms)[0m  [1m[35mALTER TABLE "alerts" ADD CONSTRAINT "fk_rails_358027856a"
+FOREIGN KEY ("tutor_id")
+  REFERENCES "tutors" ("id")
+[0m
+  [1m[35m (0.4ms)[0m  [1m[35mALTER TABLE "scores" ADD CONSTRAINT "fk_rails_ec879015fd"
+FOREIGN KEY ("session_id")
+  REFERENCES "sessions" ("id")
+[0m
+  [1m[35m (0.2ms)[0m  [1m[35mALTER TABLE "scores" ADD CONSTRAINT "fk_rails_9ed4a6cf46"
+FOREIGN KEY ("tutor_id")
+  REFERENCES "tutors" ("id")
+[0m
+  [1m[35m (0.2ms)[0m  [1m[35mALTER TABLE "session_transcripts" ADD CONSTRAINT "fk_rails_23858c6baf"
+FOREIGN KEY ("session_id")
+  REFERENCES "sessions" ("id")
+[0m
+  [1m[35m (0.3ms)[0m  [1m[35mALTER TABLE "sessions" ADD CONSTRAINT "fk_rails_925087b242"
+FOREIGN KEY ("student_id")
+  REFERENCES "students" ("id")
+[0m
+  [1m[35m (0.2ms)[0m  [1m[35mALTER TABLE "sessions" ADD CONSTRAINT "fk_rails_dc91b3d7ea"
+FOREIGN KEY ("tutor_id")
+  REFERENCES "tutors" ("id")
+[0m
+  [1m[35m (0.8ms)[0m  [1m[35mCREATE TABLE "schema_migrations" ("version" character varying NOT NULL PRIMARY KEY)[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.1ms)[0m  [1m[32mINSERT INTO "schema_migrations" (version) VALUES (20251105071613)[0m
+  [1m[35m (0.1ms)[0m  [1m[32mINSERT INTO "schema_migrations" (version) VALUES
+(20251105071523),
+(20251105071159),
+(20251105071010),
+(20251105070729),
+(20251105070618);[0m
+  [1m[35m (0.7ms)[0m  [1m[35mCREATE TABLE "ar_internal_metadata" ("key" character varying NOT NULL PRIMARY KEY, "value" character varying, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.2ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "environment"]]
+  [1m[36mActiveRecord::InternalMetadata Create (0.1ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES ('environment', 'test', '2025-11-05 07:16:25.919056', '2025-11-05 07:16:25.919057') RETURNING "key"[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.1ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "environment"]]
+  [1m[36mActiveRecord::InternalMetadata Load (0.0ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "schema_sha1"]]
+  [1m[36mActiveRecord::InternalMetadata Create (0.1ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES ('schema_sha1', '64c49755e75d3ce756a1e5f66c91424bde204187', '2025-11-05 07:16:25.920346', '2025-11-05 07:16:25.920346') RETURNING "key"[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.3ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+[dotenv] Saved a snapshot of [32mENV[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.9ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "schema_sha1"]]
+  [1m[36mActiveRecord::SchemaMigration Load (0.8ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+[dotenv] Saved a snapshot of [32mENV[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.3ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "schema_sha1"]]
+  [1m[36mActiveRecord::SchemaMigration Load (0.3ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.2ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "environment"]]
+  [1m[36mActiveRecord::SchemaMigration Load (0.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.0ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "environment"]]
+  [1m[36mActiveRecord::SchemaMigration Load (0.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.0ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "environment"]]
+  [1m[35mSQL (0.0ms)[0m  [1m[35mSET search_path TO public[0m
+  [1m[35m (39.7ms)[0m  [1m[35mDROP DATABASE IF EXISTS "tutor_insights_test"[0m
+  [1m[35m (39.1ms)[0m  [1m[35mCREATE DATABASE "tutor_insights_test" ENCODING = 'unicode'[0m
+  [1m[35mSQL (14.8ms)[0m  [1m[35mCREATE EXTENSION IF NOT EXISTS "plpgsql" SCHEMA pg_catalog[0m
+  [1m[35m (0.0ms)[0m  [1m[35mDROP TABLE IF EXISTS "alerts" CASCADE[0m
+  [1m[35m (1.9ms)[0m  [1m[35mCREATE TABLE "alerts" ("id" bigserial primary key, "tutor_id" bigint NOT NULL, "alert_type" character varying NOT NULL, "severity" character varying NOT NULL, "status" character varying DEFAULT 'open' NOT NULL, "triggered_at" timestamp(6) NOT NULL, "resolved_at" timestamp(6), "metadata" jsonb DEFAULT '{}', "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[35m (0.3ms)[0m  [1m[35mCREATE INDEX "index_alerts_on_tutor_id" ON "alerts" ("tutor_id")[0m
+  [1m[35m (0.0ms)[0m  [1m[35mDROP TABLE IF EXISTS "scores" CASCADE[0m
+  [1m[35m (1.1ms)[0m  [1m[35mCREATE TABLE "scores" ("id" bigserial primary key, "session_id" bigint, "tutor_id" bigint NOT NULL, "score_type" character varying NOT NULL, "value" decimal(10,2) NOT NULL, "components" jsonb DEFAULT '{}', "computed_at" timestamp(6) NOT NULL, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[35m (0.3ms)[0m  [1m[35mCREATE INDEX "index_scores_on_session_id" ON "scores" ("session_id")[0m
+  [1m[35m (0.3ms)[0m  [1m[35mCREATE INDEX "index_scores_on_tutor_id_and_score_type" ON "scores" ("tutor_id", "score_type")[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCREATE INDEX "index_scores_on_tutor_id" ON "scores" ("tutor_id")[0m
+  [1m[35m (0.0ms)[0m  [1m[35mDROP TABLE IF EXISTS "session_transcripts" CASCADE[0m
+  [1m[35m (0.8ms)[0m  [1m[35mCREATE TABLE "session_transcripts" ("id" bigserial primary key, "session_id" bigint NOT NULL, "payload" jsonb, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[35m (0.4ms)[0m  [1m[35mCREATE INDEX "index_session_transcripts_on_session_id" ON "session_transcripts" ("session_id")[0m
+  [1m[35m (0.0ms)[0m  [1m[35mDROP TABLE IF EXISTS "sessions" CASCADE[0m
+  [1m[35m (0.7ms)[0m  [1m[35mCREATE TABLE "sessions" ("id" bigserial primary key, "tutor_id" bigint NOT NULL, "student_id" bigint NOT NULL, "scheduled_start_at" timestamp(6), "actual_start_at" timestamp(6), "scheduled_end_at" timestamp(6), "actual_end_at" timestamp(6), "status" character varying, "reschedule_initiator" character varying, "tech_issue" boolean, "first_session_for_student" boolean, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[35m (0.3ms)[0m  [1m[35mCREATE INDEX "index_sessions_on_student_id" ON "sessions" ("student_id")[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCREATE INDEX "index_sessions_on_tutor_id_and_student_id" ON "sessions" ("tutor_id", "student_id")[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCREATE INDEX "index_sessions_on_tutor_id" ON "sessions" ("tutor_id")[0m
+  [1m[35m (0.0ms)[0m  [1m[35mDROP TABLE IF EXISTS "students" CASCADE[0m
+  [1m[35m (0.8ms)[0m  [1m[35mCREATE TABLE "students" ("id" bigserial primary key, "name" character varying, "email" character varying, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[35m (0.1ms)[0m  [1m[35mDROP TABLE IF EXISTS "tutor_daily_aggregates" CASCADE[0m
+  [1m[35m (0.5ms)[0m  [1m[35mCREATE TABLE "tutor_daily_aggregates" ("id" bigserial primary key, "tutor_id" bigint NOT NULL, "date" date NOT NULL, "sessions_completed" integer DEFAULT 0, "reschedules_tutor_initiated" integer DEFAULT 0, "no_shows" integer DEFAULT 0, "avg_lateness_min" decimal(10,2) DEFAULT 0.0, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[35m (0.3ms)[0m  [1m[35mCREATE UNIQUE INDEX "index_tutor_daily_aggregates_on_tutor_id_and_date" ON "tutor_daily_aggregates" ("tutor_id", "date")[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCREATE INDEX "index_tutor_daily_aggregates_on_tutor_id" ON "tutor_daily_aggregates" ("tutor_id")[0m
+  [1m[35m (0.0ms)[0m  [1m[35mDROP TABLE IF EXISTS "tutors" CASCADE[0m
+  [1m[35m (0.9ms)[0m  [1m[35mCREATE TABLE "tutors" ("id" bigserial primary key, "name" character varying, "email" character varying, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[35m (0.7ms)[0m  [1m[35mALTER TABLE "alerts" ADD CONSTRAINT "fk_rails_358027856a"
+FOREIGN KEY ("tutor_id")
+  REFERENCES "tutors" ("id")
+[0m
+  [1m[35m (0.4ms)[0m  [1m[35mALTER TABLE "scores" ADD CONSTRAINT "fk_rails_ec879015fd"
+FOREIGN KEY ("session_id")
+  REFERENCES "sessions" ("id")
+[0m
+  [1m[35m (0.2ms)[0m  [1m[35mALTER TABLE "scores" ADD CONSTRAINT "fk_rails_9ed4a6cf46"
+FOREIGN KEY ("tutor_id")
+  REFERENCES "tutors" ("id")
+[0m
+  [1m[35m (0.4ms)[0m  [1m[35mALTER TABLE "session_transcripts" ADD CONSTRAINT "fk_rails_23858c6baf"
+FOREIGN KEY ("session_id")
+  REFERENCES "sessions" ("id")
+[0m
+  [1m[35m (0.2ms)[0m  [1m[35mALTER TABLE "sessions" ADD CONSTRAINT "fk_rails_925087b242"
+FOREIGN KEY ("student_id")
+  REFERENCES "students" ("id")
+[0m
+  [1m[35m (0.2ms)[0m  [1m[35mALTER TABLE "sessions" ADD CONSTRAINT "fk_rails_dc91b3d7ea"
+FOREIGN KEY ("tutor_id")
+  REFERENCES "tutors" ("id")
+[0m
+  [1m[35m (0.2ms)[0m  [1m[35mALTER TABLE "tutor_daily_aggregates" ADD CONSTRAINT "fk_rails_3fb4c3577f"
+FOREIGN KEY ("tutor_id")
+  REFERENCES "tutors" ("id")
+[0m
+  [1m[35m (0.6ms)[0m  [1m[35mCREATE TABLE "schema_migrations" ("version" character varying NOT NULL PRIMARY KEY)[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.1ms)[0m  [1m[32mINSERT INTO "schema_migrations" (version) VALUES (20251105071651)[0m
+  [1m[35m (0.1ms)[0m  [1m[32mINSERT INTO "schema_migrations" (version) VALUES
+(20251105071613),
+(20251105071523),
+(20251105071159),
+(20251105071010),
+(20251105070729),
+(20251105070618);[0m
+  [1m[35m (0.6ms)[0m  [1m[35mCREATE TABLE "ar_internal_metadata" ("key" character varying NOT NULL PRIMARY KEY, "value" character varying, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.1ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "environment"]]
+  [1m[36mActiveRecord::InternalMetadata Create (0.1ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES ('environment', 'test', '2025-11-05 07:17:06.184995', '2025-11-05 07:17:06.184995') RETURNING "key"[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.0ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "environment"]]
+  [1m[36mActiveRecord::InternalMetadata Load (0.0ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "schema_sha1"]]
+  [1m[36mActiveRecord::InternalMetadata Create (0.1ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES ('schema_sha1', '5afe0d3df1b39ef0669c27f47c9015d11921a21e', '2025-11-05 07:17:06.185461', '2025-11-05 07:17:06.185462') RETURNING "key"[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+[dotenv] Saved a snapshot of [32mENV[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.3ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "schema_sha1"]]
+  [1m[36mActiveRecord::SchemaMigration Load (0.3ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+[dotenv] Saved a snapshot of [32mENV[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mActiveRecord::InternalMetadata Load (1.0ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "schema_sha1"]]
+  [1m[36mActiveRecord::SchemaMigration Load (0.3ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.8ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "environment"]]
+  [1m[36mActiveRecord::SchemaMigration Load (0.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.1ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "environment"]]
+  [1m[36mActiveRecord::SchemaMigration Load (0.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.0ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "environment"]]
+  [1m[35mSQL (0.0ms)[0m  [1m[35mSET search_path TO public[0m
+  [1m[35m (36.3ms)[0m  [1m[35mDROP DATABASE IF EXISTS "tutor_insights_test"[0m
+  [1m[35m (34.7ms)[0m  [1m[35mCREATE DATABASE "tutor_insights_test" ENCODING = 'unicode'[0m
+  [1m[35mSQL (15.5ms)[0m  [1m[35mCREATE EXTENSION IF NOT EXISTS "plpgsql" SCHEMA pg_catalog[0m
+  [1m[35m (0.0ms)[0m  [1m[35mDROP TABLE IF EXISTS "alerts" CASCADE[0m
+  [1m[35m (1.5ms)[0m  [1m[35mCREATE TABLE "alerts" ("id" bigserial primary key, "tutor_id" bigint NOT NULL, "alert_type" character varying NOT NULL, "severity" character varying NOT NULL, "status" character varying DEFAULT 'open' NOT NULL, "triggered_at" timestamp(6) NOT NULL, "resolved_at" timestamp(6), "metadata" jsonb DEFAULT '{}', "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[35m (0.3ms)[0m  [1m[35mCREATE INDEX "index_alerts_on_tutor_id" ON "alerts" ("tutor_id")[0m
+  [1m[35m (0.0ms)[0m  [1m[35mDROP TABLE IF EXISTS "scores" CASCADE[0m
+  [1m[35m (0.7ms)[0m  [1m[35mCREATE TABLE "scores" ("id" bigserial primary key, "session_id" bigint, "tutor_id" bigint NOT NULL, "score_type" character varying NOT NULL, "value" decimal(10,2) NOT NULL, "components" jsonb DEFAULT '{}', "computed_at" timestamp(6) NOT NULL, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCREATE INDEX "index_scores_on_session_id" ON "scores" ("session_id")[0m
+  [1m[35m (0.3ms)[0m  [1m[35mCREATE INDEX "index_scores_on_tutor_id_and_score_type" ON "scores" ("tutor_id", "score_type")[0m
+  [1m[35m (0.6ms)[0m  [1m[35mCREATE INDEX "index_scores_on_tutor_id" ON "scores" ("tutor_id")[0m
+  [1m[35m (0.0ms)[0m  [1m[35mDROP TABLE IF EXISTS "session_transcripts" CASCADE[0m
+  [1m[35m (0.9ms)[0m  [1m[35mCREATE TABLE "session_transcripts" ("id" bigserial primary key, "session_id" bigint NOT NULL, "payload" jsonb, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[35m (0.3ms)[0m  [1m[35mCREATE INDEX "index_session_transcripts_on_session_id" ON "session_transcripts" ("session_id")[0m
+  [1m[35m (0.0ms)[0m  [1m[35mDROP TABLE IF EXISTS "sessions" CASCADE[0m
+  [1m[35m (0.7ms)[0m  [1m[35mCREATE TABLE "sessions" ("id" bigserial primary key, "tutor_id" bigint NOT NULL, "student_id" bigint NOT NULL, "scheduled_start_at" timestamp(6), "actual_start_at" timestamp(6), "scheduled_end_at" timestamp(6), "actual_end_at" timestamp(6), "status" character varying, "reschedule_initiator" character varying, "tech_issue" boolean, "first_session_for_student" boolean, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[35m (0.3ms)[0m  [1m[35mCREATE INDEX "index_sessions_on_student_id" ON "sessions" ("student_id")[0m
+  [1m[35m (0.3ms)[0m  [1m[35mCREATE INDEX "index_sessions_on_tutor_id_and_student_id" ON "sessions" ("tutor_id", "student_id")[0m
+  [1m[35m (0.3ms)[0m  [1m[35mCREATE INDEX "index_sessions_on_tutor_id" ON "sessions" ("tutor_id")[0m
+  [1m[35m (0.0ms)[0m  [1m[35mDROP TABLE IF EXISTS "students" CASCADE[0m
+  [1m[35m (0.7ms)[0m  [1m[35mCREATE TABLE "students" ("id" bigserial primary key, "name" character varying, "email" character varying, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[35m (0.1ms)[0m  [1m[35mDROP TABLE IF EXISTS "tutor_churn_scores" CASCADE[0m
+  [1m[35m (0.5ms)[0m  [1m[35mCREATE TABLE "tutor_churn_scores" ("id" bigserial primary key, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[35m (0.1ms)[0m  [1m[35mDROP TABLE IF EXISTS "tutor_daily_aggregates" CASCADE[0m
+  [1m[35m (0.6ms)[0m  [1m[35mCREATE TABLE "tutor_daily_aggregates" ("id" bigserial primary key, "tutor_id" bigint NOT NULL, "date" date NOT NULL, "sessions_completed" integer DEFAULT 0, "reschedules_tutor_initiated" integer DEFAULT 0, "no_shows" integer DEFAULT 0, "avg_lateness_min" decimal(10,2) DEFAULT 0.0, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[35m (0.3ms)[0m  [1m[35mCREATE UNIQUE INDEX "index_tutor_daily_aggregates_on_tutor_id_and_date" ON "tutor_daily_aggregates" ("tutor_id", "date")[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCREATE INDEX "index_tutor_daily_aggregates_on_tutor_id" ON "tutor_daily_aggregates" ("tutor_id")[0m
+  [1m[35m (0.0ms)[0m  [1m[35mDROP TABLE IF EXISTS "tutors" CASCADE[0m
+  [1m[35m (0.9ms)[0m  [1m[35mCREATE TABLE "tutors" ("id" bigserial primary key, "name" character varying, "email" character varying, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[35m (0.8ms)[0m  [1m[35mALTER TABLE "alerts" ADD CONSTRAINT "fk_rails_358027856a"
+FOREIGN KEY ("tutor_id")
+  REFERENCES "tutors" ("id")
+[0m
+  [1m[35m (0.4ms)[0m  [1m[35mALTER TABLE "scores" ADD CONSTRAINT "fk_rails_ec879015fd"
+FOREIGN KEY ("session_id")
+  REFERENCES "sessions" ("id")
+[0m
+  [1m[35m (0.2ms)[0m  [1m[35mALTER TABLE "scores" ADD CONSTRAINT "fk_rails_9ed4a6cf46"
+FOREIGN KEY ("tutor_id")
+  REFERENCES "tutors" ("id")
+[0m
+  [1m[35m (0.3ms)[0m  [1m[35mALTER TABLE "session_transcripts" ADD CONSTRAINT "fk_rails_23858c6baf"
+FOREIGN KEY ("session_id")
+  REFERENCES "sessions" ("id")
+[0m
+  [1m[35m (0.2ms)[0m  [1m[35mALTER TABLE "sessions" ADD CONSTRAINT "fk_rails_925087b242"
+FOREIGN KEY ("student_id")
+  REFERENCES "students" ("id")
+[0m
+  [1m[35m (0.2ms)[0m  [1m[35mALTER TABLE "sessions" ADD CONSTRAINT "fk_rails_dc91b3d7ea"
+FOREIGN KEY ("tutor_id")
+  REFERENCES "tutors" ("id")
+[0m
+  [1m[35m (0.3ms)[0m  [1m[35mALTER TABLE "tutor_daily_aggregates" ADD CONSTRAINT "fk_rails_3fb4c3577f"
+FOREIGN KEY ("tutor_id")
+  REFERENCES "tutors" ("id")
+[0m
+  [1m[35m (0.6ms)[0m  [1m[35mCREATE TABLE "schema_migrations" ("version" character varying NOT NULL PRIMARY KEY)[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.1ms)[0m  [1m[32mINSERT INTO "schema_migrations" (version) VALUES (20251105071730)[0m
+  [1m[35m (0.1ms)[0m  [1m[32mINSERT INTO "schema_migrations" (version) VALUES
+(20251105071651),
+(20251105071613),
+(20251105071523),
+(20251105071159),
+(20251105071010),
+(20251105070729),
+(20251105070618);[0m
+  [1m[35m (0.6ms)[0m  [1m[35mCREATE TABLE "ar_internal_metadata" ("key" character varying NOT NULL PRIMARY KEY, "value" character varying, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.1ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "environment"]]
+  [1m[36mActiveRecord::InternalMetadata Create (0.1ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES ('environment', 'test', '2025-11-05 07:17:37.985925', '2025-11-05 07:17:37.985925') RETURNING "key"[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.0ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "environment"]]
+  [1m[36mActiveRecord::InternalMetadata Load (0.0ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "schema_sha1"]]
+  [1m[36mActiveRecord::InternalMetadata Create (0.0ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES ('schema_sha1', '23c31ca9ab5779dbaf354113b69c5bb275fdf765', '2025-11-05 07:17:37.986369', '2025-11-05 07:17:37.986369') RETURNING "key"[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+[dotenv] Saved a snapshot of [32mENV[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.3ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "schema_sha1"]]
+  [1m[36mActiveRecord::SchemaMigration Load (0.5ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.2ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "environment"]]
+  [1m[36mActiveRecord::SchemaMigration Load (0.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.1ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "environment"]]
+  [1m[36mActiveRecord::SchemaMigration Load (0.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.1ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "environment"]]
+  [1m[35mSQL (0.0ms)[0m  [1m[35mSET search_path TO public[0m
+  [1m[35m (38.6ms)[0m  [1m[35mDROP DATABASE IF EXISTS "tutor_insights_test"[0m
+  [1m[35m (35.9ms)[0m  [1m[35mCREATE DATABASE "tutor_insights_test" ENCODING = 'unicode'[0m
+  [1m[35mSQL (13.3ms)[0m  [1m[35mCREATE EXTENSION IF NOT EXISTS "plpgsql" SCHEMA pg_catalog[0m
+  [1m[35m (0.0ms)[0m  [1m[35mDROP TABLE IF EXISTS "alerts" CASCADE[0m
+  [1m[35m (1.5ms)[0m  [1m[35mCREATE TABLE "alerts" ("id" bigserial primary key, "tutor_id" bigint NOT NULL, "alert_type" character varying NOT NULL, "severity" character varying NOT NULL, "status" character varying DEFAULT 'open' NOT NULL, "triggered_at" timestamp(6) NOT NULL, "resolved_at" timestamp(6), "metadata" jsonb DEFAULT '{}', "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[35m (0.3ms)[0m  [1m[35mCREATE INDEX "index_alerts_on_tutor_id" ON "alerts" ("tutor_id")[0m
+  [1m[35m (0.0ms)[0m  [1m[35mDROP TABLE IF EXISTS "scores" CASCADE[0m
+  [1m[35m (0.7ms)[0m  [1m[35mCREATE TABLE "scores" ("id" bigserial primary key, "session_id" bigint, "tutor_id" bigint NOT NULL, "score_type" character varying NOT NULL, "value" decimal(10,2) NOT NULL, "components" jsonb DEFAULT '{}', "computed_at" timestamp(6) NOT NULL, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[35m (0.3ms)[0m  [1m[35mCREATE INDEX "index_scores_on_session_id" ON "scores" ("session_id")[0m
+  [1m[35m (0.4ms)[0m  [1m[35mCREATE INDEX "index_scores_on_tutor_id_and_score_type" ON "scores" ("tutor_id", "score_type")[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCREATE INDEX "index_scores_on_tutor_id" ON "scores" ("tutor_id")[0m
+  [1m[35m (0.0ms)[0m  [1m[35mDROP TABLE IF EXISTS "session_transcripts" CASCADE[0m
+  [1m[35m (0.9ms)[0m  [1m[35mCREATE TABLE "session_transcripts" ("id" bigserial primary key, "session_id" bigint NOT NULL, "payload" jsonb, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[35m (0.3ms)[0m  [1m[35mCREATE INDEX "index_session_transcripts_on_session_id" ON "session_transcripts" ("session_id")[0m
+  [1m[35m (0.0ms)[0m  [1m[35mDROP TABLE IF EXISTS "sessions" CASCADE[0m
+  [1m[35m (0.8ms)[0m  [1m[35mCREATE TABLE "sessions" ("id" bigserial primary key, "tutor_id" bigint NOT NULL, "student_id" bigint NOT NULL, "scheduled_start_at" timestamp(6), "actual_start_at" timestamp(6), "scheduled_end_at" timestamp(6), "actual_end_at" timestamp(6), "status" character varying, "reschedule_initiator" character varying, "tech_issue" boolean, "first_session_for_student" boolean, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[35m (0.3ms)[0m  [1m[35mCREATE INDEX "index_sessions_on_student_id" ON "sessions" ("student_id")[0m
+  [1m[35m (0.4ms)[0m  [1m[35mCREATE INDEX "index_sessions_on_tutor_id_and_student_id" ON "sessions" ("tutor_id", "student_id")[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCREATE INDEX "index_sessions_on_tutor_id" ON "sessions" ("tutor_id")[0m
+  [1m[35m (0.0ms)[0m  [1m[35mDROP TABLE IF EXISTS "students" CASCADE[0m
+  [1m[35m (0.7ms)[0m  [1m[35mCREATE TABLE "students" ("id" bigserial primary key, "name" character varying, "email" character varying, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[35m (0.1ms)[0m  [1m[35mDROP TABLE IF EXISTS "tutor_churn_scores" CASCADE[0m
+  [1m[35m (0.9ms)[0m  [1m[35mCREATE TABLE "tutor_churn_scores" ("id" bigserial primary key, "tutor_id" bigint NOT NULL, "tcrs_value" decimal(5,2) NOT NULL, "computed_at" timestamp(6) NOT NULL, "components" jsonb DEFAULT '{}', "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[35m (0.3ms)[0m  [1m[35mCREATE INDEX "index_tutor_churn_scores_on_tutor_id" ON "tutor_churn_scores" ("tutor_id")[0m
+  [1m[35m (0.0ms)[0m  [1m[35mDROP TABLE IF EXISTS "tutor_daily_aggregates" CASCADE[0m
+  [1m[35m (0.6ms)[0m  [1m[35mCREATE TABLE "tutor_daily_aggregates" ("id" bigserial primary key, "tutor_id" bigint NOT NULL, "date" date NOT NULL, "sessions_completed" integer DEFAULT 0, "reschedules_tutor_initiated" integer DEFAULT 0, "no_shows" integer DEFAULT 0, "avg_lateness_min" decimal(10,2) DEFAULT 0.0, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[35m (0.5ms)[0m  [1m[35mCREATE UNIQUE INDEX "index_tutor_daily_aggregates_on_tutor_id_and_date" ON "tutor_daily_aggregates" ("tutor_id", "date")[0m
+  [1m[35m (0.3ms)[0m  [1m[35mCREATE INDEX "index_tutor_daily_aggregates_on_tutor_id" ON "tutor_daily_aggregates" ("tutor_id")[0m
+  [1m[35m (0.0ms)[0m  [1m[35mDROP TABLE IF EXISTS "tutors" CASCADE[0m
+  [1m[35m (0.7ms)[0m  [1m[35mCREATE TABLE "tutors" ("id" bigserial primary key, "name" character varying, "email" character varying, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[35m (0.8ms)[0m  [1m[35mALTER TABLE "alerts" ADD CONSTRAINT "fk_rails_358027856a"
+FOREIGN KEY ("tutor_id")
+  REFERENCES "tutors" ("id")
+[0m
+  [1m[35m (0.3ms)[0m  [1m[35mALTER TABLE "scores" ADD CONSTRAINT "fk_rails_ec879015fd"
+FOREIGN KEY ("session_id")
+  REFERENCES "sessions" ("id")
+[0m
+  [1m[35m (0.2ms)[0m  [1m[35mALTER TABLE "scores" ADD CONSTRAINT "fk_rails_9ed4a6cf46"
+FOREIGN KEY ("tutor_id")
+  REFERENCES "tutors" ("id")
+[0m
+  [1m[35m (0.3ms)[0m  [1m[35mALTER TABLE "session_transcripts" ADD CONSTRAINT "fk_rails_23858c6baf"
+FOREIGN KEY ("session_id")
+  REFERENCES "sessions" ("id")
+[0m
+  [1m[35m (0.2ms)[0m  [1m[35mALTER TABLE "sessions" ADD CONSTRAINT "fk_rails_925087b242"
+FOREIGN KEY ("student_id")
+  REFERENCES "students" ("id")
+[0m
+  [1m[35m (0.2ms)[0m  [1m[35mALTER TABLE "sessions" ADD CONSTRAINT "fk_rails_dc91b3d7ea"
+FOREIGN KEY ("tutor_id")
+  REFERENCES "tutors" ("id")
+[0m
+  [1m[35m (0.2ms)[0m  [1m[35mALTER TABLE "tutor_churn_scores" ADD CONSTRAINT "fk_rails_5eea4ab50b"
+FOREIGN KEY ("tutor_id")
+  REFERENCES "tutors" ("id")
+[0m
+  [1m[35m (0.3ms)[0m  [1m[35mALTER TABLE "tutor_daily_aggregates" ADD CONSTRAINT "fk_rails_3fb4c3577f"
+FOREIGN KEY ("tutor_id")
+  REFERENCES "tutors" ("id")
+[0m
+  [1m[35m (0.7ms)[0m  [1m[35mCREATE TABLE "schema_migrations" ("version" character varying NOT NULL PRIMARY KEY)[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.1ms)[0m  [1m[32mINSERT INTO "schema_migrations" (version) VALUES (20251105071730)[0m
+  [1m[35m (0.1ms)[0m  [1m[32mINSERT INTO "schema_migrations" (version) VALUES
+(20251105071651),
+(20251105071613),
+(20251105071523),
+(20251105071159),
+(20251105071010),
+(20251105070729),
+(20251105070618);[0m
+  [1m[35m (0.7ms)[0m  [1m[35mCREATE TABLE "ar_internal_metadata" ("key" character varying NOT NULL PRIMARY KEY, "value" character varying, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.2ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "environment"]]
+  [1m[36mActiveRecord::InternalMetadata Create (0.1ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES ('environment', 'test', '2025-11-05 07:17:50.811842', '2025-11-05 07:17:50.811843') RETURNING "key"[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.0ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "environment"]]
+  [1m[36mActiveRecord::InternalMetadata Load (0.0ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "schema_sha1"]]
+  [1m[36mActiveRecord::InternalMetadata Create (0.1ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES ('schema_sha1', 'f7bdea0e0962f7e1c53e034f1d6c92cbd31198a2', '2025-11-05 07:17:50.812437', '2025-11-05 07:17:50.812438') RETURNING "key"[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.3ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+[dotenv] Saved a snapshot of [32mENV[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mROLLBACK[0m

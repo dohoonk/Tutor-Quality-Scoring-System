@@ -32,11 +32,11 @@
 
 - [x] Create SessionTranscript model (TDD: write test → see fail → build model → see pass) (session_id, payload:jsonb)
 
-- [ ] Create tables (TDD: write migration tests → see fail → create migrations → see pass):
-  - [ ] scores (session_id, score_type, value, components:jsonb, computed_at)
-  - [ ] alerts (tutor_id, alert_type, severity, status, triggered_at, resolved_at, metadata:jsonb)
-  - [ ] tutor_daily_aggregates (tutor_id, date, sessions_completed, reschedules_tutor_initiated, no_shows, avg_lateness_min, etc.)
-  - [ ] tutor_churn_scores (tutor_id, tcrs_value, computed_at, components:jsonb) - optional table for caching
+- [x] Create tables (TDD: write migration tests → see fail → create migrations → see pass):
+  - [x] scores (session_id, score_type, value, components:jsonb, computed_at)
+  - [x] alerts (tutor_id, alert_type, severity, status, triggered_at, resolved_at, metadata:jsonb)
+  - [x] tutor_daily_aggregates (tutor_id, date, sessions_completed, reschedules_tutor_initiated, no_shows, avg_lateness_min, etc.)
+  - [x] tutor_churn_scores (tutor_id, tcrs_value, computed_at, components:jsonb) - optional table for caching
 
 - [ ] Create materialized views:
   - [ ] tutor_stats_7d (rolling 7-day window for THS)

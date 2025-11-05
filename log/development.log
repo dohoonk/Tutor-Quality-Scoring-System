@@ -98,3 +98,126 @@ FOREIGN KEY ("session_id")
   [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mCOMMIT /*application='TutorInsights'*/[0m
   [1m[35m (0.1ms)[0m  [1m[34mSELECT pg_advisory_unlock(5566294069690052160) /*application='TutorInsights'*/[0m
   [1m[36mActiveRecord::SchemaMigration Load (0.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='TutorInsights'*/[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT pg_try_advisory_lock(5566294069690052160) /*application='TutorInsights'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='TutorInsights'*/[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.2ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = 'environment' ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1 /*application='TutorInsights'*/[0m
+Migrating to CreateScores (20251105071523)
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mBEGIN /*application='TutorInsights'*/[0m
+  [1m[35m (3.1ms)[0m  [1m[35mCREATE TABLE "scores" ("id" bigserial primary key, "session_id" bigint, "tutor_id" bigint NOT NULL, "score_type" character varying NOT NULL, "value" decimal(10,2) NOT NULL, "components" jsonb DEFAULT '{}', "computed_at" timestamp(6) NOT NULL, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL, CONSTRAINT "fk_rails_ec879015fd"
+FOREIGN KEY ("session_id")
+  REFERENCES "sessions" ("id")
+, CONSTRAINT "fk_rails_9ed4a6cf46"
+FOREIGN KEY ("tutor_id")
+  REFERENCES "tutors" ("id")
+) /*application='TutorInsights'*/[0m
+  [1m[35m (0.3ms)[0m  [1m[35mCREATE INDEX "index_scores_on_session_id" ON "scores" ("session_id") /*application='TutorInsights'*/[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCREATE INDEX "index_scores_on_tutor_id" ON "scores" ("tutor_id") /*application='TutorInsights'*/[0m
+  [1m[35m (0.3ms)[0m  [1m[35mCREATE INDEX "index_scores_on_tutor_id_and_score_type" ON "scores" ("tutor_id", "score_type") /*application='TutorInsights'*/[0m
+  [1m[35m (0.6ms)[0m  [1m[35mCREATE INDEX "index_scores_on_session_id" ON "scores" ("session_id") /*application='TutorInsights'*/[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mROLLBACK /*application='TutorInsights'*/[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT pg_advisory_unlock(5566294069690052160) /*application='TutorInsights'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='TutorInsights'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='TutorInsights'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='TutorInsights'*/[0m
+  [1m[35m (0.0ms)[0m  [1m[34mSELECT pg_try_advisory_lock(5566294069690052160) /*application='TutorInsights'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='TutorInsights'*/[0m
+Reverting CreateSessionTranscripts (20251105071159)
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN /*application='TutorInsights'*/[0m
+  [1m[35m (1.2ms)[0m  [1m[35mDROP TABLE "session_transcripts" /*application='TutorInsights'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Destroy (0.2ms)[0m  [1m[31mDELETE FROM "schema_migrations" WHERE "schema_migrations"."version" = '20251105071159' /*application='TutorInsights'*/[0m
+  [1m[36mTRANSACTION (0.8ms)[0m  [1m[35mCOMMIT /*application='TutorInsights'*/[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT pg_advisory_unlock(5566294069690052160) /*application='TutorInsights'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='TutorInsights'*/[0m
+  [1m[35m (0.0ms)[0m  [1m[34mSELECT pg_try_advisory_lock(5566294069690052160) /*application='TutorInsights'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.3ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='TutorInsights'*/[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.2ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = 'environment' ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1 /*application='TutorInsights'*/[0m
+Migrating to CreateSessionTranscripts (20251105071159)
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mBEGIN /*application='TutorInsights'*/[0m
+  [1m[35m (2.4ms)[0m  [1m[35mCREATE TABLE "session_transcripts" ("id" bigserial primary key, "session_id" bigint NOT NULL, "payload" jsonb, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL, CONSTRAINT "fk_rails_23858c6baf"
+FOREIGN KEY ("session_id")
+  REFERENCES "sessions" ("id")
+) /*application='TutorInsights'*/[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCREATE INDEX "index_session_transcripts_on_session_id" ON "session_transcripts" ("session_id") /*application='TutorInsights'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.1ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20251105071159') RETURNING "version" /*application='TutorInsights'*/[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mCOMMIT /*application='TutorInsights'*/[0m
+Migrating to CreateScores (20251105071523)
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN /*application='TutorInsights'*/[0m
+  [1m[35m (1.2ms)[0m  [1m[35mCREATE TABLE "scores" ("id" bigserial primary key, "session_id" bigint, "tutor_id" bigint NOT NULL, "score_type" character varying NOT NULL, "value" decimal(10,2) NOT NULL, "components" jsonb DEFAULT '{}', "computed_at" timestamp(6) NOT NULL, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL, CONSTRAINT "fk_rails_ec879015fd"
+FOREIGN KEY ("session_id")
+  REFERENCES "sessions" ("id")
+, CONSTRAINT "fk_rails_9ed4a6cf46"
+FOREIGN KEY ("tutor_id")
+  REFERENCES "tutors" ("id")
+) /*application='TutorInsights'*/[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCREATE INDEX "index_scores_on_session_id" ON "scores" ("session_id") /*application='TutorInsights'*/[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCREATE INDEX "index_scores_on_tutor_id" ON "scores" ("tutor_id") /*application='TutorInsights'*/[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCREATE INDEX "index_scores_on_tutor_id_and_score_type" ON "scores" ("tutor_id", "score_type") /*application='TutorInsights'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.0ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20251105071523') RETURNING "version" /*application='TutorInsights'*/[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mCOMMIT /*application='TutorInsights'*/[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT pg_advisory_unlock(5566294069690052160) /*application='TutorInsights'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='TutorInsights'*/[0m
+  [1m[35m (0.0ms)[0m  [1m[34mSELECT pg_try_advisory_lock(5566294069690052160) /*application='TutorInsights'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='TutorInsights'*/[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.2ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = 'environment' ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1 /*application='TutorInsights'*/[0m
+Migrating to CreateAlerts (20251105071613)
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mBEGIN /*application='TutorInsights'*/[0m
+  [1m[35m (2.3ms)[0m  [1m[35mCREATE TABLE "alerts" ("id" bigserial primary key, "tutor_id" bigint NOT NULL, "alert_type" character varying NOT NULL, "severity" character varying NOT NULL, "status" character varying DEFAULT 'open' NOT NULL, "triggered_at" timestamp(6) NOT NULL, "resolved_at" timestamp(6), "metadata" jsonb DEFAULT '{}', "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL, CONSTRAINT "fk_rails_358027856a"
+FOREIGN KEY ("tutor_id")
+  REFERENCES "tutors" ("id")
+) /*application='TutorInsights'*/[0m
+  [1m[35m (0.3ms)[0m  [1m[35mCREATE INDEX "index_alerts_on_tutor_id" ON "alerts" ("tutor_id") /*application='TutorInsights'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.1ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20251105071613') RETURNING "version" /*application='TutorInsights'*/[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mCOMMIT /*application='TutorInsights'*/[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT pg_advisory_unlock(5566294069690052160) /*application='TutorInsights'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='TutorInsights'*/[0m
+  [1m[35m (0.0ms)[0m  [1m[34mSELECT pg_try_advisory_lock(5566294069690052160) /*application='TutorInsights'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.3ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='TutorInsights'*/[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.2ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = 'environment' ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1 /*application='TutorInsights'*/[0m
+Migrating to CreateTutorDailyAggregates (20251105071651)
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mBEGIN /*application='TutorInsights'*/[0m
+  [1m[35m (1.9ms)[0m  [1m[35mCREATE TABLE "tutor_daily_aggregates" ("id" bigserial primary key, "tutor_id" bigint NOT NULL, "date" date NOT NULL, "sessions_completed" integer DEFAULT 0, "reschedules_tutor_initiated" integer DEFAULT 0, "no_shows" integer DEFAULT 0, "avg_lateness_min" decimal(10,2) DEFAULT 0.0, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL, CONSTRAINT "fk_rails_3fb4c3577f"
+FOREIGN KEY ("tutor_id")
+  REFERENCES "tutors" ("id")
+) /*application='TutorInsights'*/[0m
+  [1m[35m (0.3ms)[0m  [1m[35mCREATE INDEX "index_tutor_daily_aggregates_on_tutor_id" ON "tutor_daily_aggregates" ("tutor_id") /*application='TutorInsights'*/[0m
+  [1m[35m (0.3ms)[0m  [1m[35mCREATE UNIQUE INDEX "index_tutor_daily_aggregates_on_tutor_id_and_date" ON "tutor_daily_aggregates" ("tutor_id", "date") /*application='TutorInsights'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.1ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20251105071651') RETURNING "version" /*application='TutorInsights'*/[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mCOMMIT /*application='TutorInsights'*/[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT pg_advisory_unlock(5566294069690052160) /*application='TutorInsights'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='TutorInsights'*/[0m
+  [1m[35m (0.0ms)[0m  [1m[34mSELECT pg_try_advisory_lock(5566294069690052160) /*application='TutorInsights'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='TutorInsights'*/[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.4ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = 'environment' ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1 /*application='TutorInsights'*/[0m
+Migrating to CreateTutorChurnScores (20251105071730)
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mBEGIN /*application='TutorInsights'*/[0m
+  [1m[35m (1.3ms)[0m  [1m[35mCREATE TABLE "tutor_churn_scores" ("id" bigserial primary key, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL) /*application='TutorInsights'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.1ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20251105071730') RETURNING "version" /*application='TutorInsights'*/[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mCOMMIT /*application='TutorInsights'*/[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT pg_advisory_unlock(5566294069690052160) /*application='TutorInsights'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='TutorInsights'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='TutorInsights'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='TutorInsights'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='TutorInsights'*/[0m
+  [1m[35m (0.0ms)[0m  [1m[34mSELECT pg_try_advisory_lock(5566294069690052160) /*application='TutorInsights'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='TutorInsights'*/[0m
+Reverting CreateTutorChurnScores (20251105071730)
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN /*application='TutorInsights'*/[0m
+  [1m[35m (0.9ms)[0m  [1m[35mDROP TABLE "tutor_churn_scores" /*application='TutorInsights'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Destroy (0.2ms)[0m  [1m[31mDELETE FROM "schema_migrations" WHERE "schema_migrations"."version" = '20251105071730' /*application='TutorInsights'*/[0m
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mCOMMIT /*application='TutorInsights'*/[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT pg_advisory_unlock(5566294069690052160) /*application='TutorInsights'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='TutorInsights'*/[0m
+  [1m[35m (0.0ms)[0m  [1m[34mSELECT pg_try_advisory_lock(5566294069690052160) /*application='TutorInsights'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='TutorInsights'*/[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.2ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = 'environment' ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1 /*application='TutorInsights'*/[0m
+Migrating to CreateTutorChurnScores (20251105071730)
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mBEGIN /*application='TutorInsights'*/[0m
+  [1m[35m (2.8ms)[0m  [1m[35mCREATE TABLE "tutor_churn_scores" ("id" bigserial primary key, "tutor_id" bigint NOT NULL, "tcrs_value" decimal(5,2) NOT NULL, "computed_at" timestamp(6) NOT NULL, "components" jsonb DEFAULT '{}', "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL, CONSTRAINT "fk_rails_5eea4ab50b"
+FOREIGN KEY ("tutor_id")
+  REFERENCES "tutors" ("id")
+) /*application='TutorInsights'*/[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCREATE INDEX "index_tutor_churn_scores_on_tutor_id" ON "tutor_churn_scores" ("tutor_id") /*application='TutorInsights'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.1ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20251105071730') RETURNING "version" /*application='TutorInsights'*/[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mCOMMIT /*application='TutorInsights'*/[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT pg_advisory_unlock(5566294069690052160) /*application='TutorInsights'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='TutorInsights'*/[0m
