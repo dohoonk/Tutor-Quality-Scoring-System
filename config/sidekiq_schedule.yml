@@ -13,23 +13,21 @@ alert_evaluation:
   queue: default
   description: "Evaluates tutor scores and creates/resolves alerts based on thresholds"
 
-# Future jobs (currently deferred pending materialized view implementation):
-# 
-# tutor_daily_aggregation:
-#   cron: '*/10 * * * *'  # Every 10 minutes
-#   class: TutorDailyAggregationJob
-#   queue: default
-#   description: "Aggregates daily tutor metrics for rolling windows"
-# 
-# tutor_health_score:
-#   cron: '*/10 * * * *'  # Every 10 minutes
-#   class: TutorHealthScoreJob
-#   queue: default
-#   description: "Computes THS (7-day health score) from tutor_stats_7d"
-# 
-# tutor_churn_risk_score:
-#   cron: '*/10 * * * *'  # Every 10 minutes
-#   class: TutorChurnRiskScoreJob
-#   queue: default
-#   description: "Computes TCRS (14-day churn risk) from tutor_stats_14d"
+tutor_daily_aggregation:
+  cron: '0 */6 * * *'  # Every 6 hours at the top of the hour
+  class: TutorDailyAggregationJob
+  queue: default
+  description: "Aggregates daily tutor metrics (reschedules, no-shows, lateness) for rolling window calculations"
+
+tutor_health_score:
+  cron: '15 */6 * * *'  # Every 6 hours, 15 minutes past the hour (runs after aggregation)
+  class: TutorHealthScoreJob
+  queue: default
+  description: "Computes THS (7-day Tutor Health Score) from reliability metrics"
+
+tutor_churn_risk_score:
+  cron: '30 */6 * * *'  # Every 6 hours, 30 minutes past the hour (runs after THS)
+  class: TutorChurnRiskScoreJob
+  queue: default
+  description: "Computes TCRS (14-day Tutor Churn Risk Score) from engagement patterns"
 
