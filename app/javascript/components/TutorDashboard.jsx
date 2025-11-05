@@ -505,7 +505,7 @@ const TutorDashboard = ({ tutorId }) => {
                   <div className="md:grid md:grid-cols-2 md:gap-6">
                     {/* Left: Metrics */}
                     <div className="mb-4 md:mb-0">
-                      <div className="space-y-4">
+                      <div className="flex flex-col md:flex-row gap-4">
                         {/* Total Average */}
                         {(() => {
                           const totalAvgNum = parseFloat(totalAvg)
@@ -515,7 +515,7 @@ const TutorDashboard = ({ tutorId }) => {
                           const isGreen = totalLabel.color === 'green'
                           
                           return (
-                            <div className={`rounded-lg p-4 border-l-4 ${
+                            <div className={`flex-1 rounded-lg p-4 border-l-4 ${
                               isRed ? 'bg-red-50 border-red-500' :
                               isYellow ? 'bg-yellow-50 border-yellow-500' :
                               'bg-green-50 border-green-500'
@@ -548,7 +548,7 @@ const TutorDashboard = ({ tutorId }) => {
                           const isGreen = last10Label.color === 'green'
                           
                           return (
-                            <div className={`rounded-lg p-4 border-l-4 ${
+                            <div className={`flex-1 rounded-lg p-4 border-l-4 ${
                               isRed ? 'bg-red-50 border-red-500' :
                               isYellow ? 'bg-yellow-50 border-yellow-500' :
                               'bg-green-50 border-green-500'
