@@ -1,16 +1,16 @@
 class AlertMailer < ApplicationMailer
   default from: 'noreply@tutor-insights.com'
 
-  def poor_first_session_alert(alert, admin_email)
+  def low_first_session_quality_alert(alert, admin_email)
     @alert = alert
     @tutor = alert.tutor
-    @fsrs_score = alert.metadata['score_value']
+    @fsqs_score = alert.metadata['score_value']
     @score_components = alert.metadata['score_components'] || {}
     @admin_dashboard_url = admin_dashboard_url
 
     mail(
       to: admin_email,
-      subject: '🚨 Alert: Poor First Session Detected'
+      subject: '🚨 Alert: Low First Session Quality Detected'
     )
   end
 

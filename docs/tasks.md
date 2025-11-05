@@ -279,42 +279,42 @@
 
 **Goal:** Rename FSRS (First Session Risk Score) to FSQS (First Session Quality Score) and invert scoring system from "lower is better" to "higher is better" for consistency with SQS. New scoring: 100 (perfect) - penalties = final score.
 
-### Task 11.1: Update Core Scoring Service
-- [ ] Rename `FirstSessionRiskScoreService` to `FirstSessionQualityScoreService`
-- [ ] Update score calculation to start at 100 and subtract penalties
-- [ ] Update MAX_SCORE constant from 120 to 100
-- [ ] Update component penalty values to fit 0-100 scale:
-  - [ ] Missing Goal Setting: 25 → 20
-  - [ ] Confusion Phrases: 20 → 20
-  - [ ] Word Share Imbalance: 20 → 20
-  - [ ] Missing Closing Summary: 20 → 15
-  - [ ] Missing Encouragement: 15 → 10
-  - [ ] Tech/Lateness Disruption: 10 → 10
-  - [ ] Negative Phrasing: 10 → 5
-  - [ ] **New Total: 100 points**
-- [ ] Update feedback generation to reflect quality scoring (higher is better)
-- [ ] Add comments explaining inverted scoring system
+### Task 11.1: Update Core Scoring Service ✅
+- [x] Rename `FirstSessionRiskScoreService` to `FirstSessionQualityScoreService`
+- [x] Update score calculation to start at 100 and subtract penalties
+- [x] Update MAX_SCORE constant from 120 to 100
+- [x] Update component penalty values to fit 0-100 scale:
+  - [x] Missing Goal Setting: 25 → 20
+  - [x] Confusion Phrases: 20 → 20
+  - [x] Word Share Imbalance: 20 → 20
+  - [x] Missing Closing Summary: 20 → 15
+  - [x] Missing Encouragement: 15 → 10
+  - [x] Tech/Lateness Disruption: 10 → 10
+  - [x] Negative Phrasing: 10 → 5
+  - [x] **New Total: 100 points**
+- [x] Update feedback generation to reflect quality scoring (higher is better)
+- [x] Add comments explaining inverted scoring system
 
-### Task 11.2: Update Database & Model References
-- [ ] Update Score model validation: `%w[sqs fsrs ths tcrs]` → `%w[sqs fsqs ths tcrs]`
-- [ ] Create database migration to rename score_type from 'fsrs' to 'fsqs'
-- [ ] Update all existing scores in database
-- [ ] Update job references (SessionScoringJob, etc.)
+### Task 11.2: Update Database & Model References ✅
+- [x] Update Score model validation: `%w[sqs fsrs ths tcrs]` → `%w[sqs fsqs ths tcrs]`
+- [x] Create database migration to rename score_type from 'fsrs' to 'fsqs'
+- [x] Update all existing scores in database
+- [x] Update job references (SessionScoringJob, etc.)
 
-### Task 11.3: Update Alert System
-- [ ] Update AlertService threshold: `>= 50` → `<= 50` (inverted)
-- [ ] Rename alert mailer views: `poor_first_session_alert` → `low_first_session_quality_alert`
-- [ ] Update email templates to reflect FSQS naming
-- [ ] Update email content: "Risk Score" → "Quality Score"
-- [ ] Update threshold explanations in emails (higher is better)
+### Task 11.3: Update Alert System ✅
+- [x] Update AlertService threshold: `>= 50` → `<= 50` (inverted)
+- [x] Rename alert mailer views: `poor_first_session_alert` → `low_first_session_quality_alert`
+- [x] Update email templates to reflect FSQS naming
+- [x] Update email content: "Risk Score" → "Quality Score"
+- [x] Update threshold explanations in emails (higher is better)
 
-### Task 11.4: Update API Endpoints
-- [ ] Rename API routes:
-  - [ ] `/api/tutor/:id/fsrs_latest` → `/api/tutor/:id/fsqs_latest`
-  - [ ] `/api/tutor/:id/fsrs_history` → `/api/tutor/:id/fsqs_history`
-  - [ ] `/api/admin/tutor/:id/fsrs_history` → `/api/admin/tutor/:id/fsqs_history`
-- [ ] Update controller methods and logic
-- [ ] Update admin API risk scoring algorithm (invert FSQS comparison)
+### Task 11.4: Update API Endpoints ✅
+- [x] Rename API routes:
+  - [x] `/api/tutor/:id/fsrs_latest` → `/api/tutor/:id/fsqs_latest`
+  - [x] `/api/tutor/:id/fsrs_history` → `/api/tutor/:id/fsqs_history`
+  - [x] `/api/admin/tutor/:id/fsrs_history` → `/api/admin/tutor/:id/fsqs_history`
+- [x] Update controller methods and logic
+- [x] Update admin API risk scoring algorithm (invert FSQS comparison)
 - [ ] Maintain backward compatibility (optional: support both endpoints temporarily)
 
 ### Task 11.5: Update Frontend Components

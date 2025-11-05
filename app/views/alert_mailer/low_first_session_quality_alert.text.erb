@@ -1,0 +1,35 @@
+🚨 LOW FIRST SESSION QUALITY ALERT
+
+Tutor: <%= @tutor.name %> (<%= @tutor.email %>)
+Alert Triggered: <%= @alert.triggered_at.strftime('%B %d, %Y at %I:%M %p') %>
+
+==========================================
+
+FIRST SESSION QUALITY SCORE (FSQS): <%= @fsqs_score %> / 100
+(Higher score = Better quality)
+
+Why this matters:
+This tutor's recent first session with a student showed concerning patterns that could impact student retention and experience.
+
+<% if @score_components.any? %>
+Score Breakdown:
+<% @score_components.each do |key, value| %>
+  - <%= key.to_s.humanize %>: <%= value %>
+<% end %>
+<% end %>
+
+==========================================
+
+RECOMMENDED ACTIONS:
+  • Review the session transcript for specific patterns
+  • Schedule a coaching conversation with <%= @tutor.name %>
+  • Share best practices for first sessions (goal-setting, encouragement, clear closing)
+  • Monitor next few sessions for improvement
+
+==========================================
+
+View full details in the Admin Dashboard:
+<%= @admin_dashboard_url %>
+
+This is an automated alert from the Tutor Quality Scoring System.
+

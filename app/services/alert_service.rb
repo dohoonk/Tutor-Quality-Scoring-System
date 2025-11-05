@@ -1,15 +1,15 @@
 class AlertService
   def evaluate_and_create_alerts(tutor)
     # Get latest scores for this tutor
-    latest_fsrs = Score.where(tutor: tutor, score_type: 'fsrs').order(computed_at: :desc).first
+    latest_fsqs = Score.where(tutor: tutor, score_type: 'fsqs').order(computed_at: :desc).first
     latest_ths = Score.where(tutor: tutor, score_type: 'ths').order(computed_at: :desc).first
     latest_tcrs = Score.where(tutor: tutor, score_type: 'tcrs').order(computed_at: :desc).first
 
-    # Check FSRS threshold (≥ 50)
-    if latest_fsrs && latest_fsrs.value >= 50
-      handle_alert(tutor, 'poor_first_session', 'high', latest_fsrs)
+    # Check FSQS threshold (≤ 50 indicates low quality, inverted scoring: higher is better)
+    if latest_fsqs && latest_fsqs.value <= 50
+      handle_alert(tutor, 'low_first_session_quality', 'high', latest_fsqs)
     else
-      resolve_alert_if_exists(tutor, 'poor_first_session')
+      resolve_alert_if_exists(tutor, 'low_first_session_quality')
     end
 
     # Check THS threshold (< 55)
@@ -78,8 +78,8 @@ class AlertService
     
     # Send appropriate email based on alert type
     case alert.alert_type
-    when 'poor_first_session'
-      AlertMailer.poor_first_session_alert(alert, admin_email).deliver_later
+    when 'low_first_session_quality'
+      AlertMailer.low_first_session_quality_alert(alert, admin_email).deliver_later
     when 'high_reliability_risk'
       AlertMailer.high_reliability_risk_alert(alert, admin_email).deliver_later
     when 'churn_risk'

@@ -8,7 +8,7 @@ module Api
           tutor = ::Tutor.find(params[:id])
           
           # Get latest scores
-          latest_fsrs = tutor.scores.where(score_type: 'fsrs').order(computed_at: :desc).first
+          latest_fsqs = tutor.scores.where(score_type: 'fsqs').order(computed_at: :desc).first
           latest_ths = tutor.scores.where(score_type: 'ths').order(computed_at: :desc).first
           latest_tcrs = tutor.scores.where(score_type: 'tcrs').order(computed_at: :desc).first
           
@@ -24,19 +24,19 @@ module Api
             tutor_id: tutor.id,
             name: tutor.name,
             email: tutor.email,
-            fsrs: latest_fsrs&.value&.to_f,
+            fsqs: latest_fsqs&.value&.to_f,
             ths: latest_ths&.value&.to_f,
             tcrs: latest_tcrs&.value&.to_f,
             sqs_history: sqs_history
           }
         end
 
-        def fsrs_history
+        def fsqs_history
           tutor = ::Tutor.find(params[:id])
           
-          # Get all FSRS scores for this tutor
-          fsrs_scores = tutor.scores
-            .where(score_type: 'fsrs')
+          # Get all FSQS scores for this tutor
+          fsqs_scores = tutor.scores
+            .where(score_type: 'fsqs')
             .order(computed_at: :desc)
             .limit(10)
             .map do |score|
@@ -51,7 +51,7 @@ module Api
               }
             end
           
-          render json: fsrs_scores
+          render json: fsqs_scores
         end
 
         def intervention_log

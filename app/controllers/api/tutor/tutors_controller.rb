@@ -1,34 +1,34 @@
 module Api
   module Tutor
     class TutorsController < ApplicationController
-      def fsrs_latest
+      def fsqs_latest
         tutor = ::Tutor.find_by(id: params[:id])
         return render json: { error: 'Tutor not found' }, status: :not_found unless tutor
 
-        fsrs_score = ::Score.where(tutor: tutor, score_type: 'fsrs')
+        fsqs_score = ::Score.where(tutor: tutor, score_type: 'fsqs')
                          .order(computed_at: :desc)
                          .first
 
-        return render json: { error: 'No FSRS score found' }, status: :not_found unless fsrs_score
+        return render json: { error: 'No FSQS score found' }, status: :not_found unless fsqs_score
 
         render json: {
-          score: fsrs_score.value.to_f,
-          feedback: fsrs_score.components['feedback'] || fsrs_score.components[:feedback] || {},
-          session_id: fsrs_score.session_id,
-          computed_at: fsrs_score.computed_at
+          score: fsqs_score.value.to_f,
+          feedback: fsqs_score.components['feedback'] || fsqs_score.components[:feedback] || {},
+          session_id: fsqs_score.session_id,
+          computed_at: fsqs_score.computed_at
         }
       end
 
-      def fsrs_history
+      def fsqs_history
         tutor = ::Tutor.find_by(id: params[:id])
         return render json: { error: 'Tutor not found' }, status: :not_found unless tutor
 
-        fsrs_scores = ::Score.where(tutor: tutor, score_type: 'fsrs')
+        fsqs_scores = ::Score.where(tutor: tutor, score_type: 'fsqs')
                           .includes(:session)
                           .order(computed_at: :desc)
                           .limit(5)
 
-        history = fsrs_scores.map do |score|
+        history = fsqs_scores.map do |score|
           {
             score: score.value.to_f,
             session_id: score.session_id,
@@ -64,7 +64,7 @@ module Api
 
         session_list = sessions.map do |session|
           sqs_score = session.scores.find { |s| s.score_type == 'sqs' }
-          fsrs_score = session.scores.find { |s| s.score_type == 'fsrs' }
+          fsqs_score = session.scores.find { |s| s.score_type == 'fsqs' }
 
           {
             id: session.id,
@@ -72,7 +72,7 @@ module Api
             student_name: session.student.name,
             sqs: sqs_score&.value&.to_f,
             sqs_label: sqs_score&.components&.dig('label') || sqs_score&.components&.dig(:label),
-            fsrs: fsrs_score&.value&.to_f,
+            fsqs: fsqs_score&.value&.to_f,
             first_session: session.first_session_for_student
           }
         end

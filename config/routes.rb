@@ -16,8 +16,8 @@ Rails.application.routes.draw do
   # API routes
   namespace :api do
     namespace :tutor do
-      get ":id/fsrs_latest", to: "tutors#fsrs_latest"
-      get ":id/fsrs_history", to: "tutors#fsrs_history"
+      get ":id/fsqs_latest", to: "tutors#fsqs_latest"
+      get ":id/fsqs_history", to: "tutors#fsqs_history"
       get ":id/performance_summary", to: "tutors#performance_summary"
       get ":id/session_list", to: "tutors#session_list"
     end
@@ -29,7 +29,7 @@ Rails.application.routes.draw do
       
       namespace :tutor do
         get ":id/metrics", to: "tutors#metrics"
-        get ":id/fsrs_history", to: "tutors#fsrs_history"
+        get ":id/fsqs_history", to: "tutors#fsqs_history"
         get ":id/intervention_log", to: "tutors#intervention_log"
       end
 
