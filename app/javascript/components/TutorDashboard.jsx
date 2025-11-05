@@ -501,9 +501,9 @@ const TutorDashboard = ({ tutorId }) => {
                     <Tooltip text="Session Quality Score (SQS) tracks the operational quality of your sessions, focusing on punctuality, session duration, and technical reliability. Green bars (75+) indicate smooth sessions, yellow (60-75) shows minor issues, and red (<60) suggests significant problems." />
                   </h3>
                   
-                  {/* Desktop: Side-by-side layout (Metrics 70%, Chart 30%) */}
-                  <div className="md:grid md:gap-6" style={{ gridTemplateColumns: '70% 30%' }}>
-                    {/* Left: Metrics (70%) */}
+                  {/* Desktop: Side-by-side layout (Metrics left, Chart right) */}
+                  <div className="md:grid md:grid-cols-2 md:gap-6">
+                    {/* Left: Metrics */}
                     <div className="mb-4 md:mb-0">
                       <div className="space-y-4">
                         {/* Total Average */}
@@ -574,7 +574,7 @@ const TutorDashboard = ({ tutorId }) => {
                       </div>
                     </div>
                     
-                    {/* Right: Chart (30%) */}
+                    {/* Right: Chart */}
                     <div className="flex items-end gap-1 md:gap-2 h-32">
                       {sessionList.slice(0, 10).map((session, index) => {
                         if (!session.sqs) return null
