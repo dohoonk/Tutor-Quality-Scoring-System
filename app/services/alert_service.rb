@@ -7,7 +7,7 @@ class AlertService
 
     # Check FSRS threshold (≥ 50)
     if latest_fsrs && latest_fsrs.value >= 50
-      handle_alert(tutor, 'poor_first_session', 'medium', latest_fsrs)
+      handle_alert(tutor, 'poor_first_session', 'high', latest_fsrs)
     else
       resolve_alert_if_exists(tutor, 'poor_first_session')
     end

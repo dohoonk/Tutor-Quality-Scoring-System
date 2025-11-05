@@ -5280,3 +5280,429 @@ Completed 200 OK in 1ms (Views: 0.0ms | ActiveRecord: 0.6ms (2 queries, 0 cached
   [1m[36mSession Load (0.1ms)[0m  [1m[34mSELECT "sessions".* FROM "sessions" INNER JOIN "session_transcripts" ON "session_transcripts"."session_id" = "sessions"."id" LEFT OUTER JOIN "scores" ON "scores"."session_id" = "sessions"."id" WHERE "sessions"."status" = $1 AND "sessions"."first_session_for_student" = $2 GROUP BY "sessions"."id" HAVING (COUNT(CASE WHEN scores.score_type = $3 THEN 1 END) = 0) ORDER BY "sessions"."id" ASC LIMIT $4[0m  [["status", "completed"], ["first_session_for_student", true], [nil, "fsrs"], ["LIMIT", 1000]]
   [1m[36mScore Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "scores"[0m
   [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.3ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "schema_sha1"]]
+  [1m[36mActiveRecord::SchemaMigration Load (0.3ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+[dotenv] Saved a snapshot of [32mENV[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTutor Create (0.6ms)[0m  [1m[32mINSERT INTO "tutors" ("name", "email", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", "Alice Smith"], ["email", "[FILTERED]"], ["created_at", "2025-11-05 14:41:52.134419"], ["updated_at", "2025-11-05 14:41:52.134419"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mScore Create (0.4ms)[0m  [1m[32mINSERT INTO "scores" ("session_id", "tutor_id", "score_type", "value", "components", "computed_at", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["session_id", nil], ["tutor_id", 105], ["score_type", "fsrs"], ["value", "55.0"], ["components", "{}"], ["computed_at", "2025-11-05 14:41:52.135667"], ["created_at", "2025-11-05 14:41:52.140787"], ["updated_at", "2025-11-05 14:41:52.140787"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mAlert Count (0.4ms)[0m  [1m[34mSELECT COUNT(*) FROM "alerts" WHERE "alerts"."alert_type" = $1[0m  [["alert_type", "poor_first_session"]]
+  [1m[36mTutor Load (0.2ms)[0m  [1m[34mSELECT "tutors".* FROM "tutors" ORDER BY "tutors"."id" ASC LIMIT $1[0m  [["LIMIT", 1000]]
+  [1m[36mScore Load (0.3ms)[0m  [1m[34mSELECT "scores".* FROM "scores" WHERE "scores"."tutor_id" = $1 AND "scores"."score_type" = $2 ORDER BY "scores"."computed_at" DESC LIMIT $3[0m  [["tutor_id", 105], ["score_type", "fsrs"], ["LIMIT", 1]]
+  [1m[36mScore Load (0.0ms)[0m  [1m[34mSELECT "scores".* FROM "scores" WHERE "scores"."tutor_id" = $1 AND "scores"."score_type" = $2 ORDER BY "scores"."computed_at" DESC LIMIT $3[0m  [["tutor_id", 105], ["score_type", "ths"], ["LIMIT", 1]]
+  [1m[36mScore Load (0.0ms)[0m  [1m[34mSELECT "scores".* FROM "scores" WHERE "scores"."tutor_id" = $1 AND "scores"."score_type" = $2 ORDER BY "scores"."computed_at" DESC LIMIT $3[0m  [["tutor_id", 105], ["score_type", "tcrs"], ["LIMIT", 1]]
+  [1m[36mAlert Load (0.1ms)[0m  [1m[34mSELECT "alerts".* FROM "alerts" WHERE "alerts"."tutor_id" = $1 AND "alerts"."alert_type" = $2 AND "alerts"."status" = $3 LIMIT $4[0m  [["tutor_id", 105], ["alert_type", "poor_first_session"], ["status", "open"], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mAlert Create (0.2ms)[0m  [1m[32mINSERT INTO "alerts" ("tutor_id", "alert_type", "severity", "status", "triggered_at", "resolved_at", "metadata", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING "id"[0m  [["tutor_id", 105], ["alert_type", "poor_first_session"], ["severity", "medium"], ["status", "open"], ["triggered_at", "2025-11-05 14:41:52.147815"], ["resolved_at", nil], ["metadata", "{\"score_value\":\"55.0\",\"score_computed_at\":\"2025-11-05T14:41:52.135Z\",\"score_components\":{}}"], ["created_at", "2025-11-05 14:41:52.150071"], ["updated_at", "2025-11-05 14:41:52.150071"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mAlert Load (0.1ms)[0m  [1m[34mSELECT "alerts".* FROM "alerts" WHERE "alerts"."tutor_id" = $1 AND "alerts"."alert_type" = $2 AND "alerts"."status" = $3 LIMIT $4[0m  [["tutor_id", 105], ["alert_type", "high_reliability_risk"], ["status", "open"], ["LIMIT", 1]]
+  [1m[36mAlert Load (0.0ms)[0m  [1m[34mSELECT "alerts".* FROM "alerts" WHERE "alerts"."tutor_id" = $1 AND "alerts"."alert_type" = $2 AND "alerts"."status" = $3 LIMIT $4[0m  [["tutor_id", 105], ["alert_type", "churn_risk"], ["status", "open"], ["LIMIT", 1]]
+  [1m[36mAlert Count (0.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "alerts" WHERE "alerts"."alert_type" = $1[0m  [["alert_type", "poor_first_session"]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTutor Create (0.1ms)[0m  [1m[32mINSERT INTO "tutors" ("name", "email", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", "Alice Smith"], ["email", "[FILTERED]"], ["created_at", "2025-11-05 14:41:52.155500"], ["updated_at", "2025-11-05 14:41:52.155500"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mScore Create (0.3ms)[0m  [1m[32mINSERT INTO "scores" ("session_id", "tutor_id", "score_type", "value", "components", "computed_at", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["session_id", nil], ["tutor_id", 106], ["score_type", "fsrs"], ["value", "55.0"], ["components", "{}"], ["computed_at", "2025-11-05 14:41:52.155909"], ["created_at", "2025-11-05 14:41:52.156051"], ["updated_at", "2025-11-05 14:41:52.156051"]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTutor Load (0.1ms)[0m  [1m[34mSELECT "tutors".* FROM "tutors" ORDER BY "tutors"."id" ASC LIMIT $1[0m  [["LIMIT", 1000]]
+  [1m[36mScore Load (0.2ms)[0m  [1m[34mSELECT "scores".* FROM "scores" WHERE "scores"."tutor_id" = $1 AND "scores"."score_type" = $2 ORDER BY "scores"."computed_at" DESC LIMIT $3[0m  [["tutor_id", 106], ["score_type", "fsrs"], ["LIMIT", 1]]
+  [1m[36mScore Load (0.1ms)[0m  [1m[34mSELECT "scores".* FROM "scores" WHERE "scores"."tutor_id" = $1 AND "scores"."score_type" = $2 ORDER BY "scores"."computed_at" DESC LIMIT $3[0m  [["tutor_id", 106], ["score_type", "ths"], ["LIMIT", 1]]
+  [1m[36mScore Load (0.1ms)[0m  [1m[34mSELECT "scores".* FROM "scores" WHERE "scores"."tutor_id" = $1 AND "scores"."score_type" = $2 ORDER BY "scores"."computed_at" DESC LIMIT $3[0m  [["tutor_id", 106], ["score_type", "tcrs"], ["LIMIT", 1]]
+  [1m[36mAlert Load (0.1ms)[0m  [1m[34mSELECT "alerts".* FROM "alerts" WHERE "alerts"."tutor_id" = $1 AND "alerts"."alert_type" = $2 AND "alerts"."status" = $3 LIMIT $4[0m  [["tutor_id", 106], ["alert_type", "poor_first_session"], ["status", "open"], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mAlert Create (0.3ms)[0m  [1m[32mINSERT INTO "alerts" ("tutor_id", "alert_type", "severity", "status", "triggered_at", "resolved_at", "metadata", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING "id"[0m  [["tutor_id", 106], ["alert_type", "poor_first_session"], ["severity", "medium"], ["status", "open"], ["triggered_at", "2025-11-05 14:41:52.158043"], ["resolved_at", nil], ["metadata", "{\"score_value\":\"55.0\",\"score_computed_at\":\"2025-11-05T14:41:52.155Z\",\"score_components\":{}}"], ["created_at", "2025-11-05 14:41:52.158174"], ["updated_at", "2025-11-05 14:41:52.158174"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mAlert Load (0.1ms)[0m  [1m[34mSELECT "alerts".* FROM "alerts" WHERE "alerts"."tutor_id" = $1 AND "alerts"."alert_type" = $2 AND "alerts"."status" = $3 LIMIT $4[0m  [["tutor_id", 106], ["alert_type", "high_reliability_risk"], ["status", "open"], ["LIMIT", 1]]
+  [1m[36mAlert Load (0.1ms)[0m  [1m[34mSELECT "alerts".* FROM "alerts" WHERE "alerts"."tutor_id" = $1 AND "alerts"."alert_type" = $2 AND "alerts"."status" = $3 LIMIT $4[0m  [["tutor_id", 106], ["alert_type", "churn_risk"], ["status", "open"], ["LIMIT", 1]]
+  [1m[36mAlert Load (0.1ms)[0m  [1m[34mSELECT "alerts".* FROM "alerts" WHERE "alerts"."tutor_id" = $1 AND "alerts"."alert_type" = $2 LIMIT $3[0m  [["tutor_id", 106], ["alert_type", "poor_first_session"], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTutor Create (0.2ms)[0m  [1m[32mINSERT INTO "tutors" ("name", "email", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", "Alice Smith"], ["email", "[FILTERED]"], ["created_at", "2025-11-05 14:41:52.161485"], ["updated_at", "2025-11-05 14:41:52.161485"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mScore Create (0.2ms)[0m  [1m[32mINSERT INTO "scores" ("session_id", "tutor_id", "score_type", "value", "components", "computed_at", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["session_id", nil], ["tutor_id", 107], ["score_type", "fsrs"], ["value", "55.0"], ["components", "{}"], ["computed_at", "2025-11-05 14:41:52.161918"], ["created_at", "2025-11-05 14:41:52.162046"], ["updated_at", "2025-11-05 14:41:52.162046"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTutor Load (0.1ms)[0m  [1m[34mSELECT "tutors".* FROM "tutors" ORDER BY "tutors"."id" ASC LIMIT $1[0m  [["LIMIT", 1000]]
+  [1m[36mScore Load (0.1ms)[0m  [1m[34mSELECT "scores".* FROM "scores" WHERE "scores"."tutor_id" = $1 AND "scores"."score_type" = $2 ORDER BY "scores"."computed_at" DESC LIMIT $3[0m  [["tutor_id", 107], ["score_type", "fsrs"], ["LIMIT", 1]]
+  [1m[36mScore Load (0.0ms)[0m  [1m[34mSELECT "scores".* FROM "scores" WHERE "scores"."tutor_id" = $1 AND "scores"."score_type" = $2 ORDER BY "scores"."computed_at" DESC LIMIT $3[0m  [["tutor_id", 107], ["score_type", "ths"], ["LIMIT", 1]]
+  [1m[36mScore Load (0.0ms)[0m  [1m[34mSELECT "scores".* FROM "scores" WHERE "scores"."tutor_id" = $1 AND "scores"."score_type" = $2 ORDER BY "scores"."computed_at" DESC LIMIT $3[0m  [["tutor_id", 107], ["score_type", "tcrs"], ["LIMIT", 1]]
+  [1m[36mAlert Load (0.0ms)[0m  [1m[34mSELECT "alerts".* FROM "alerts" WHERE "alerts"."tutor_id" = $1 AND "alerts"."alert_type" = $2 AND "alerts"."status" = $3 LIMIT $4[0m  [["tutor_id", 107], ["alert_type", "poor_first_session"], ["status", "open"], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mAlert Create (0.2ms)[0m  [1m[32mINSERT INTO "alerts" ("tutor_id", "alert_type", "severity", "status", "triggered_at", "resolved_at", "metadata", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING "id"[0m  [["tutor_id", 107], ["alert_type", "poor_first_session"], ["severity", "medium"], ["status", "open"], ["triggered_at", "2025-11-05 14:41:52.163440"], ["resolved_at", nil], ["metadata", "{\"score_value\":\"55.0\",\"score_computed_at\":\"2025-11-05T14:41:52.161Z\",\"score_components\":{}}"], ["created_at", "2025-11-05 14:41:52.163544"], ["updated_at", "2025-11-05 14:41:52.163544"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mAlert Load (0.0ms)[0m  [1m[34mSELECT "alerts".* FROM "alerts" WHERE "alerts"."tutor_id" = $1 AND "alerts"."alert_type" = $2 AND "alerts"."status" = $3 LIMIT $4[0m  [["tutor_id", 107], ["alert_type", "high_reliability_risk"], ["status", "open"], ["LIMIT", 1]]
+  [1m[36mAlert Load (0.1ms)[0m  [1m[34mSELECT "alerts".* FROM "alerts" WHERE "alerts"."tutor_id" = $1 AND "alerts"."alert_type" = $2 AND "alerts"."status" = $3 LIMIT $4[0m  [["tutor_id", 107], ["alert_type", "churn_risk"], ["status", "open"], ["LIMIT", 1]]
+  [1m[36mAlert Load (0.1ms)[0m  [1m[34mSELECT "alerts".* FROM "alerts" WHERE "alerts"."tutor_id" = $1 AND "alerts"."alert_type" = $2 LIMIT $3[0m  [["tutor_id", 107], ["alert_type", "poor_first_session"], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTutor Create (0.1ms)[0m  [1m[32mINSERT INTO "tutors" ("name", "email", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", "Alice Smith"], ["email", "[FILTERED]"], ["created_at", "2025-11-05 14:41:52.164810"], ["updated_at", "2025-11-05 14:41:52.164810"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mScore Create (0.2ms)[0m  [1m[32mINSERT INTO "scores" ("session_id", "tutor_id", "score_type", "value", "components", "computed_at", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["session_id", nil], ["tutor_id", 108], ["score_type", "ths"], ["value", "45.0"], ["components", "{}"], ["computed_at", "2025-11-05 14:41:52.165110"], ["created_at", "2025-11-05 14:41:52.165191"], ["updated_at", "2025-11-05 14:41:52.165191"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mAlert Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "alerts" WHERE "alerts"."alert_type" = $1[0m  [["alert_type", "high_reliability_risk"]]
+  [1m[36mTutor Load (0.1ms)[0m  [1m[34mSELECT "tutors".* FROM "tutors" ORDER BY "tutors"."id" ASC LIMIT $1[0m  [["LIMIT", 1000]]
+  [1m[36mScore Load (0.1ms)[0m  [1m[34mSELECT "scores".* FROM "scores" WHERE "scores"."tutor_id" = $1 AND "scores"."score_type" = $2 ORDER BY "scores"."computed_at" DESC LIMIT $3[0m  [["tutor_id", 108], ["score_type", "fsrs"], ["LIMIT", 1]]
+  [1m[36mScore Load (0.0ms)[0m  [1m[34mSELECT "scores".* FROM "scores" WHERE "scores"."tutor_id" = $1 AND "scores"."score_type" = $2 ORDER BY "scores"."computed_at" DESC LIMIT $3[0m  [["tutor_id", 108], ["score_type", "ths"], ["LIMIT", 1]]
+  [1m[36mScore Load (0.0ms)[0m  [1m[34mSELECT "scores".* FROM "scores" WHERE "scores"."tutor_id" = $1 AND "scores"."score_type" = $2 ORDER BY "scores"."computed_at" DESC LIMIT $3[0m  [["tutor_id", 108], ["score_type", "tcrs"], ["LIMIT", 1]]
+  [1m[36mAlert Load (0.1ms)[0m  [1m[34mSELECT "alerts".* FROM "alerts" WHERE "alerts"."tutor_id" = $1 AND "alerts"."alert_type" = $2 AND "alerts"."status" = $3 LIMIT $4[0m  [["tutor_id", 108], ["alert_type", "poor_first_session"], ["status", "open"], ["LIMIT", 1]]
+  [1m[36mAlert Load (0.0ms)[0m  [1m[34mSELECT "alerts".* FROM "alerts" WHERE "alerts"."tutor_id" = $1 AND "alerts"."alert_type" = $2 AND "alerts"."status" = $3 LIMIT $4[0m  [["tutor_id", 108], ["alert_type", "high_reliability_risk"], ["status", "open"], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mAlert Create (0.2ms)[0m  [1m[32mINSERT INTO "alerts" ("tutor_id", "alert_type", "severity", "status", "triggered_at", "resolved_at", "metadata", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING "id"[0m  [["tutor_id", 108], ["alert_type", "high_reliability_risk"], ["severity", "high"], ["status", "open"], ["triggered_at", "2025-11-05 14:41:52.166700"], ["resolved_at", nil], ["metadata", "{\"score_value\":\"45.0\",\"score_computed_at\":\"2025-11-05T14:41:52.165Z\",\"score_components\":{}}"], ["created_at", "2025-11-05 14:41:52.166779"], ["updated_at", "2025-11-05 14:41:52.166779"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mAlert Load (0.0ms)[0m  [1m[34mSELECT "alerts".* FROM "alerts" WHERE "alerts"."tutor_id" = $1 AND "alerts"."alert_type" = $2 AND "alerts"."status" = $3 LIMIT $4[0m  [["tutor_id", 108], ["alert_type", "churn_risk"], ["status", "open"], ["LIMIT", 1]]
+  [1m[36mAlert Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "alerts" WHERE "alerts"."alert_type" = $1[0m  [["alert_type", "high_reliability_risk"]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTutor Create (0.2ms)[0m  [1m[32mINSERT INTO "tutors" ("name", "email", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", "Alice Smith"], ["email", "[FILTERED]"], ["created_at", "2025-11-05 14:41:52.167889"], ["updated_at", "2025-11-05 14:41:52.167889"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mScore Create (0.1ms)[0m  [1m[32mINSERT INTO "scores" ("session_id", "tutor_id", "score_type", "value", "components", "computed_at", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["session_id", nil], ["tutor_id", 109], ["score_type", "tcrs"], ["value", "0.7"], ["components", "{}"], ["computed_at", "2025-11-05 14:41:52.168222"], ["created_at", "2025-11-05 14:41:52.168312"], ["updated_at", "2025-11-05 14:41:52.168312"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mAlert Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "alerts" WHERE "alerts"."alert_type" = $1[0m  [["alert_type", "churn_risk"]]
+  [1m[36mTutor Load (0.0ms)[0m  [1m[34mSELECT "tutors".* FROM "tutors" ORDER BY "tutors"."id" ASC LIMIT $1[0m  [["LIMIT", 1000]]
+  [1m[36mScore Load (0.0ms)[0m  [1m[34mSELECT "scores".* FROM "scores" WHERE "scores"."tutor_id" = $1 AND "scores"."score_type" = $2 ORDER BY "scores"."computed_at" DESC LIMIT $3[0m  [["tutor_id", 109], ["score_type", "fsrs"], ["LIMIT", 1]]
+  [1m[36mScore Load (0.0ms)[0m  [1m[34mSELECT "scores".* FROM "scores" WHERE "scores"."tutor_id" = $1 AND "scores"."score_type" = $2 ORDER BY "scores"."computed_at" DESC LIMIT $3[0m  [["tutor_id", 109], ["score_type", "ths"], ["LIMIT", 1]]
+  [1m[36mScore Load (0.0ms)[0m  [1m[34mSELECT "scores".* FROM "scores" WHERE "scores"."tutor_id" = $1 AND "scores"."score_type" = $2 ORDER BY "scores"."computed_at" DESC LIMIT $3[0m  [["tutor_id", 109], ["score_type", "tcrs"], ["LIMIT", 1]]
+  [1m[36mAlert Load (0.0ms)[0m  [1m[34mSELECT "alerts".* FROM "alerts" WHERE "alerts"."tutor_id" = $1 AND "alerts"."alert_type" = $2 AND "alerts"."status" = $3 LIMIT $4[0m  [["tutor_id", 109], ["alert_type", "poor_first_session"], ["status", "open"], ["LIMIT", 1]]
+  [1m[36mAlert Load (0.0ms)[0m  [1m[34mSELECT "alerts".* FROM "alerts" WHERE "alerts"."tutor_id" = $1 AND "alerts"."alert_type" = $2 AND "alerts"."status" = $3 LIMIT $4[0m  [["tutor_id", 109], ["alert_type", "high_reliability_risk"], ["status", "open"], ["LIMIT", 1]]
+  [1m[36mAlert Load (0.0ms)[0m  [1m[34mSELECT "alerts".* FROM "alerts" WHERE "alerts"."tutor_id" = $1 AND "alerts"."alert_type" = $2 AND "alerts"."status" = $3 LIMIT $4[0m  [["tutor_id", 109], ["alert_type", "churn_risk"], ["status", "open"], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mAlert Create (0.1ms)[0m  [1m[32mINSERT INTO "alerts" ("tutor_id", "alert_type", "severity", "status", "triggered_at", "resolved_at", "metadata", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING "id"[0m  [["tutor_id", 109], ["alert_type", "churn_risk"], ["severity", "high"], ["status", "open"], ["triggered_at", "2025-11-05 14:41:52.169703"], ["resolved_at", nil], ["metadata", "{\"score_value\":\"0.7\",\"score_computed_at\":\"2025-11-05T14:41:52.168Z\",\"score_components\":{}}"], ["created_at", "2025-11-05 14:41:52.169803"], ["updated_at", "2025-11-05 14:41:52.169803"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mAlert Count (0.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "alerts" WHERE "alerts"."alert_type" = $1[0m  [["alert_type", "churn_risk"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTutor Create (0.1ms)[0m  [1m[32mINSERT INTO "tutors" ("name", "email", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", "Alice Smith"], ["email", "[FILTERED]"], ["created_at", "2025-11-05 14:41:52.170786"], ["updated_at", "2025-11-05 14:41:52.170786"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mScore Create (0.1ms)[0m  [1m[32mINSERT INTO "scores" ("session_id", "tutor_id", "score_type", "value", "components", "computed_at", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["session_id", nil], ["tutor_id", 110], ["score_type", "fsrs"], ["value", "55.0"], ["components", "{}"], ["computed_at", "2025-11-05 14:41:52.171107"], ["created_at", "2025-11-05 14:41:52.171209"], ["updated_at", "2025-11-05 14:41:52.171209"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mAlert Create (0.1ms)[0m  [1m[32mINSERT INTO "alerts" ("tutor_id", "alert_type", "severity", "status", "triggered_at", "resolved_at", "metadata", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING "id"[0m  [["tutor_id", 110], ["alert_type", "poor_first_session"], ["severity", "high"], ["status", "open"], ["triggered_at", "2025-11-05 13:41:52.171523"], ["resolved_at", nil], ["metadata", "{}"], ["created_at", "2025-11-05 14:41:52.171615"], ["updated_at", "2025-11-05 14:41:52.171615"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mAlert Count (0.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "alerts" WHERE "alerts"."alert_type" = $1[0m  [["alert_type", "poor_first_session"]]
+  [1m[36mTutor Load (0.0ms)[0m  [1m[34mSELECT "tutors".* FROM "tutors" ORDER BY "tutors"."id" ASC LIMIT $1[0m  [["LIMIT", 1000]]
+  [1m[36mScore Load (0.0ms)[0m  [1m[34mSELECT "scores".* FROM "scores" WHERE "scores"."tutor_id" = $1 AND "scores"."score_type" = $2 ORDER BY "scores"."computed_at" DESC LIMIT $3[0m  [["tutor_id", 110], ["score_type", "fsrs"], ["LIMIT", 1]]
+  [1m[36mScore Load (0.0ms)[0m  [1m[34mSELECT "scores".* FROM "scores" WHERE "scores"."tutor_id" = $1 AND "scores"."score_type" = $2 ORDER BY "scores"."computed_at" DESC LIMIT $3[0m  [["tutor_id", 110], ["score_type", "ths"], ["LIMIT", 1]]
+  [1m[36mScore Load (0.0ms)[0m  [1m[34mSELECT "scores".* FROM "scores" WHERE "scores"."tutor_id" = $1 AND "scores"."score_type" = $2 ORDER BY "scores"."computed_at" DESC LIMIT $3[0m  [["tutor_id", 110], ["score_type", "tcrs"], ["LIMIT", 1]]
+  [1m[36mAlert Load (0.0ms)[0m  [1m[34mSELECT "alerts".* FROM "alerts" WHERE "alerts"."tutor_id" = $1 AND "alerts"."alert_type" = $2 AND "alerts"."status" = $3 LIMIT $4[0m  [["tutor_id", 110], ["alert_type", "poor_first_session"], ["status", "open"], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mAlert Update (0.1ms)[0m  [1m[33mUPDATE "alerts" SET "metadata" = $1, "updated_at" = $2 WHERE "alerts"."id" = $3[0m  [["metadata", "{\"last_checked_at\":\"2025-11-05T14:41:52.172Z\",\"score_value\":\"55.0\",\"score_computed_at\":\"2025-11-05T14:41:52.171Z\"}"], ["updated_at", "2025-11-05 14:41:52.172856"], ["id", 18]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mAlert Load (0.0ms)[0m  [1m[34mSELECT "alerts".* FROM "alerts" WHERE "alerts"."tutor_id" = $1 AND "alerts"."alert_type" = $2 AND "alerts"."status" = $3 LIMIT $4[0m  [["tutor_id", 110], ["alert_type", "high_reliability_risk"], ["status", "open"], ["LIMIT", 1]]
+  [1m[36mAlert Load (0.0ms)[0m  [1m[34mSELECT "alerts".* FROM "alerts" WHERE "alerts"."tutor_id" = $1 AND "alerts"."alert_type" = $2 AND "alerts"."status" = $3 LIMIT $4[0m  [["tutor_id", 110], ["alert_type", "churn_risk"], ["status", "open"], ["LIMIT", 1]]
+  [1m[36mAlert Count (0.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "alerts" WHERE "alerts"."alert_type" = $1[0m  [["alert_type", "poor_first_session"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTutor Create (0.1ms)[0m  [1m[32mINSERT INTO "tutors" ("name", "email", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", "Alice Smith"], ["email", "[FILTERED]"], ["created_at", "2025-11-05 14:41:52.173939"], ["updated_at", "2025-11-05 14:41:52.173939"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mAlert Create (0.1ms)[0m  [1m[32mINSERT INTO "alerts" ("tutor_id", "alert_type", "severity", "status", "triggered_at", "resolved_at", "metadata", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING "id"[0m  [["tutor_id", 111], ["alert_type", "poor_first_session"], ["severity", "high"], ["status", "open"], ["triggered_at", "2025-11-05 13:41:52.174168"], ["resolved_at", nil], ["metadata", "{}"], ["created_at", "2025-11-05 14:41:52.174245"], ["updated_at", "2025-11-05 14:41:52.174245"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mScore Create (0.1ms)[0m  [1m[32mINSERT INTO "scores" ("session_id", "tutor_id", "score_type", "value", "components", "computed_at", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["session_id", nil], ["tutor_id", 111], ["score_type", "fsrs"], ["value", "20.0"], ["components", "{}"], ["computed_at", "2025-11-05 14:41:52.174506"], ["created_at", "2025-11-05 14:41:52.174592"], ["updated_at", "2025-11-05 14:41:52.174592"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTutor Load (0.0ms)[0m  [1m[34mSELECT "tutors".* FROM "tutors" ORDER BY "tutors"."id" ASC LIMIT $1[0m  [["LIMIT", 1000]]
+  [1m[36mScore Load (0.0ms)[0m  [1m[34mSELECT "scores".* FROM "scores" WHERE "scores"."tutor_id" = $1 AND "scores"."score_type" = $2 ORDER BY "scores"."computed_at" DESC LIMIT $3[0m  [["tutor_id", 111], ["score_type", "fsrs"], ["LIMIT", 1]]
+  [1m[36mScore Load (0.0ms)[0m  [1m[34mSELECT "scores".* FROM "scores" WHERE "scores"."tutor_id" = $1 AND "scores"."score_type" = $2 ORDER BY "scores"."computed_at" DESC LIMIT $3[0m  [["tutor_id", 111], ["score_type", "ths"], ["LIMIT", 1]]
+  [1m[36mScore Load (0.0ms)[0m  [1m[34mSELECT "scores".* FROM "scores" WHERE "scores"."tutor_id" = $1 AND "scores"."score_type" = $2 ORDER BY "scores"."computed_at" DESC LIMIT $3[0m  [["tutor_id", 111], ["score_type", "tcrs"], ["LIMIT", 1]]
+  [1m[36mAlert Load (0.0ms)[0m  [1m[34mSELECT "alerts".* FROM "alerts" WHERE "alerts"."tutor_id" = $1 AND "alerts"."alert_type" = $2 AND "alerts"."status" = $3 LIMIT $4[0m  [["tutor_id", 111], ["alert_type", "poor_first_session"], ["status", "open"], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mAlert Update (0.1ms)[0m  [1m[33mUPDATE "alerts" SET "status" = $1, "resolved_at" = $2, "metadata" = $3, "updated_at" = $4 WHERE "alerts"."id" = $5[0m  [["status", "resolved"], ["resolved_at", "2025-11-05 14:41:52.175574"], ["metadata", "{\"resolved_at\":\"2025-11-05T14:41:52.175Z\",\"auto_resolved\":true}"], ["updated_at", "2025-11-05 14:41:52.175647"], ["id", 19]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mAlert Load (0.0ms)[0m  [1m[34mSELECT "alerts".* FROM "alerts" WHERE "alerts"."tutor_id" = $1 AND "alerts"."alert_type" = $2 AND "alerts"."status" = $3 LIMIT $4[0m  [["tutor_id", 111], ["alert_type", "high_reliability_risk"], ["status", "open"], ["LIMIT", 1]]
+  [1m[36mAlert Load (0.0ms)[0m  [1m[34mSELECT "alerts".* FROM "alerts" WHERE "alerts"."tutor_id" = $1 AND "alerts"."alert_type" = $2 AND "alerts"."status" = $3 LIMIT $4[0m  [["tutor_id", 111], ["alert_type", "churn_risk"], ["status", "open"], ["LIMIT", 1]]
+  [1m[36mAlert Load (0.1ms)[0m  [1m[34mSELECT "alerts".* FROM "alerts" WHERE "alerts"."id" = $1 LIMIT $2[0m  [["id", 19], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTutor Create (0.1ms)[0m  [1m[32mINSERT INTO "tutors" ("name", "email", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", "Alice Smith"], ["email", "[FILTERED]"], ["created_at", "2025-11-05 14:41:52.177399"], ["updated_at", "2025-11-05 14:41:52.177399"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mAlert Create (0.1ms)[0m  [1m[32mINSERT INTO "alerts" ("tutor_id", "alert_type", "severity", "status", "triggered_at", "resolved_at", "metadata", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING "id"[0m  [["tutor_id", 112], ["alert_type", "high_reliability_risk"], ["severity", "high"], ["status", "open"], ["triggered_at", "2025-11-05 13:41:52.177743"], ["resolved_at", nil], ["metadata", "{}"], ["created_at", "2025-11-05 14:41:52.177870"], ["updated_at", "2025-11-05 14:41:52.177870"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mScore Create (0.1ms)[0m  [1m[32mINSERT INTO "scores" ("session_id", "tutor_id", "score_type", "value", "components", "computed_at", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["session_id", nil], ["tutor_id", 112], ["score_type", "ths"], ["value", "60.0"], ["components", "{}"], ["computed_at", "2025-11-05 14:41:52.178170"], ["created_at", "2025-11-05 14:41:52.178283"], ["updated_at", "2025-11-05 14:41:52.178283"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTutor Load (0.0ms)[0m  [1m[34mSELECT "tutors".* FROM "tutors" ORDER BY "tutors"."id" ASC LIMIT $1[0m  [["LIMIT", 1000]]
+  [1m[36mScore Load (0.0ms)[0m  [1m[34mSELECT "scores".* FROM "scores" WHERE "scores"."tutor_id" = $1 AND "scores"."score_type" = $2 ORDER BY "scores"."computed_at" DESC LIMIT $3[0m  [["tutor_id", 112], ["score_type", "fsrs"], ["LIMIT", 1]]
+  [1m[36mScore Load (0.0ms)[0m  [1m[34mSELECT "scores".* FROM "scores" WHERE "scores"."tutor_id" = $1 AND "scores"."score_type" = $2 ORDER BY "scores"."computed_at" DESC LIMIT $3[0m  [["tutor_id", 112], ["score_type", "ths"], ["LIMIT", 1]]
+  [1m[36mScore Load (0.0ms)[0m  [1m[34mSELECT "scores".* FROM "scores" WHERE "scores"."tutor_id" = $1 AND "scores"."score_type" = $2 ORDER BY "scores"."computed_at" DESC LIMIT $3[0m  [["tutor_id", 112], ["score_type", "tcrs"], ["LIMIT", 1]]
+  [1m[36mAlert Load (0.0ms)[0m  [1m[34mSELECT "alerts".* FROM "alerts" WHERE "alerts"."tutor_id" = $1 AND "alerts"."alert_type" = $2 AND "alerts"."status" = $3 LIMIT $4[0m  [["tutor_id", 112], ["alert_type", "poor_first_session"], ["status", "open"], ["LIMIT", 1]]
+  [1m[36mAlert Load (0.0ms)[0m  [1m[34mSELECT "alerts".* FROM "alerts" WHERE "alerts"."tutor_id" = $1 AND "alerts"."alert_type" = $2 AND "alerts"."status" = $3 LIMIT $4[0m  [["tutor_id", 112], ["alert_type", "high_reliability_risk"], ["status", "open"], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mAlert Update (0.1ms)[0m  [1m[33mUPDATE "alerts" SET "status" = $1, "resolved_at" = $2, "metadata" = $3, "updated_at" = $4 WHERE "alerts"."id" = $5[0m  [["status", "resolved"], ["resolved_at", "2025-11-05 14:41:52.179507"], ["metadata", "{\"resolved_at\":\"2025-11-05T14:41:52.179Z\",\"auto_resolved\":true}"], ["updated_at", "2025-11-05 14:41:52.179590"], ["id", 20]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mAlert Load (0.0ms)[0m  [1m[34mSELECT "alerts".* FROM "alerts" WHERE "alerts"."tutor_id" = $1 AND "alerts"."alert_type" = $2 AND "alerts"."status" = $3 LIMIT $4[0m  [["tutor_id", 112], ["alert_type", "churn_risk"], ["status", "open"], ["LIMIT", 1]]
+  [1m[36mAlert Load (0.0ms)[0m  [1m[34mSELECT "alerts".* FROM "alerts" WHERE "alerts"."id" = $1 LIMIT $2[0m  [["id", 20], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTutor Create (0.1ms)[0m  [1m[32mINSERT INTO "tutors" ("name", "email", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", "Alice Smith"], ["email", "[FILTERED]"], ["created_at", "2025-11-05 14:41:52.180582"], ["updated_at", "2025-11-05 14:41:52.180582"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mAlert Create (0.1ms)[0m  [1m[32mINSERT INTO "alerts" ("tutor_id", "alert_type", "severity", "status", "triggered_at", "resolved_at", "metadata", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING "id"[0m  [["tutor_id", 113], ["alert_type", "churn_risk"], ["severity", "high"], ["status", "open"], ["triggered_at", "2025-11-05 13:41:52.180823"], ["resolved_at", nil], ["metadata", "{}"], ["created_at", "2025-11-05 14:41:52.180900"], ["updated_at", "2025-11-05 14:41:52.180900"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mScore Create (0.1ms)[0m  [1m[32mINSERT INTO "scores" ("session_id", "tutor_id", "score_type", "value", "components", "computed_at", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["session_id", nil], ["tutor_id", 113], ["score_type", "tcrs"], ["value", "0.4"], ["components", "{}"], ["computed_at", "2025-11-05 14:41:52.181183"], ["created_at", "2025-11-05 14:41:52.181260"], ["updated_at", "2025-11-05 14:41:52.181260"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTutor Load (0.0ms)[0m  [1m[34mSELECT "tutors".* FROM "tutors" ORDER BY "tutors"."id" ASC LIMIT $1[0m  [["LIMIT", 1000]]
+  [1m[36mScore Load (0.0ms)[0m  [1m[34mSELECT "scores".* FROM "scores" WHERE "scores"."tutor_id" = $1 AND "scores"."score_type" = $2 ORDER BY "scores"."computed_at" DESC LIMIT $3[0m  [["tutor_id", 113], ["score_type", "fsrs"], ["LIMIT", 1]]
+  [1m[36mScore Load (0.0ms)[0m  [1m[34mSELECT "scores".* FROM "scores" WHERE "scores"."tutor_id" = $1 AND "scores"."score_type" = $2 ORDER BY "scores"."computed_at" DESC LIMIT $3[0m  [["tutor_id", 113], ["score_type", "ths"], ["LIMIT", 1]]
+  [1m[36mScore Load (0.0ms)[0m  [1m[34mSELECT "scores".* FROM "scores" WHERE "scores"."tutor_id" = $1 AND "scores"."score_type" = $2 ORDER BY "scores"."computed_at" DESC LIMIT $3[0m  [["tutor_id", 113], ["score_type", "tcrs"], ["LIMIT", 1]]
+  [1m[36mAlert Load (0.0ms)[0m  [1m[34mSELECT "alerts".* FROM "alerts" WHERE "alerts"."tutor_id" = $1 AND "alerts"."alert_type" = $2 AND "alerts"."status" = $3 LIMIT $4[0m  [["tutor_id", 113], ["alert_type", "poor_first_session"], ["status", "open"], ["LIMIT", 1]]
+  [1m[36mAlert Load (0.0ms)[0m  [1m[34mSELECT "alerts".* FROM "alerts" WHERE "alerts"."tutor_id" = $1 AND "alerts"."alert_type" = $2 AND "alerts"."status" = $3 LIMIT $4[0m  [["tutor_id", 113], ["alert_type", "high_reliability_risk"], ["status", "open"], ["LIMIT", 1]]
+  [1m[36mAlert Load (0.0ms)[0m  [1m[34mSELECT "alerts".* FROM "alerts" WHERE "alerts"."tutor_id" = $1 AND "alerts"."alert_type" = $2 AND "alerts"."status" = $3 LIMIT $4[0m  [["tutor_id", 113], ["alert_type", "churn_risk"], ["status", "open"], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mAlert Update (0.1ms)[0m  [1m[33mUPDATE "alerts" SET "status" = $1, "resolved_at" = $2, "metadata" = $3, "updated_at" = $4 WHERE "alerts"."id" = $5[0m  [["status", "resolved"], ["resolved_at", "2025-11-05 14:41:52.182396"], ["metadata", "{\"resolved_at\":\"2025-11-05T14:41:52.182Z\",\"auto_resolved\":true}"], ["updated_at", "2025-11-05 14:41:52.182463"], ["id", 21]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mAlert Load (0.0ms)[0m  [1m[34mSELECT "alerts".* FROM "alerts" WHERE "alerts"."id" = $1 LIMIT $2[0m  [["id", 21], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTutor Create (0.1ms)[0m  [1m[32mINSERT INTO "tutors" ("name", "email", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", "Alice Smith"], ["email", "[FILTERED]"], ["created_at", "2025-11-05 14:41:52.183341"], ["updated_at", "2025-11-05 14:41:52.183341"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mScore Create (0.1ms)[0m  [1m[32mINSERT INTO "scores" ("session_id", "tutor_id", "score_type", "value", "components", "computed_at", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["session_id", nil], ["tutor_id", 114], ["score_type", "fsrs"], ["value", "20.0"], ["components", "{}"], ["computed_at", "2025-11-05 14:41:52.183576"], ["created_at", "2025-11-05 14:41:52.183652"], ["updated_at", "2025-11-05 14:41:52.183652"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mScore Create (0.1ms)[0m  [1m[32mINSERT INTO "scores" ("session_id", "tutor_id", "score_type", "value", "components", "computed_at", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["session_id", nil], ["tutor_id", 114], ["score_type", "ths"], ["value", "80.0"], ["components", "{}"], ["computed_at", "2025-11-05 14:41:52.183927"], ["created_at", "2025-11-05 14:41:52.183997"], ["updated_at", "2025-11-05 14:41:52.183997"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mScore Create (0.1ms)[0m  [1m[32mINSERT INTO "scores" ("session_id", "tutor_id", "score_type", "value", "components", "computed_at", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["session_id", nil], ["tutor_id", 114], ["score_type", "tcrs"], ["value", "0.2"], ["components", "{}"], ["computed_at", "2025-11-05 14:41:52.184327"], ["created_at", "2025-11-05 14:41:52.184425"], ["updated_at", "2025-11-05 14:41:52.184425"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mAlert Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "alerts"[0m
+  [1m[36mTutor Load (0.0ms)[0m  [1m[34mSELECT "tutors".* FROM "tutors" ORDER BY "tutors"."id" ASC LIMIT $1[0m  [["LIMIT", 1000]]
+  [1m[36mScore Load (0.0ms)[0m  [1m[34mSELECT "scores".* FROM "scores" WHERE "scores"."tutor_id" = $1 AND "scores"."score_type" = $2 ORDER BY "scores"."computed_at" DESC LIMIT $3[0m  [["tutor_id", 114], ["score_type", "fsrs"], ["LIMIT", 1]]
+  [1m[36mScore Load (0.0ms)[0m  [1m[34mSELECT "scores".* FROM "scores" WHERE "scores"."tutor_id" = $1 AND "scores"."score_type" = $2 ORDER BY "scores"."computed_at" DESC LIMIT $3[0m  [["tutor_id", 114], ["score_type", "ths"], ["LIMIT", 1]]
+  [1m[36mScore Load (0.0ms)[0m  [1m[34mSELECT "scores".* FROM "scores" WHERE "scores"."tutor_id" = $1 AND "scores"."score_type" = $2 ORDER BY "scores"."computed_at" DESC LIMIT $3[0m  [["tutor_id", 114], ["score_type", "tcrs"], ["LIMIT", 1]]
+  [1m[36mAlert Load (0.0ms)[0m  [1m[34mSELECT "alerts".* FROM "alerts" WHERE "alerts"."tutor_id" = $1 AND "alerts"."alert_type" = $2 AND "alerts"."status" = $3 LIMIT $4[0m  [["tutor_id", 114], ["alert_type", "poor_first_session"], ["status", "open"], ["LIMIT", 1]]
+  [1m[36mAlert Load (0.0ms)[0m  [1m[34mSELECT "alerts".* FROM "alerts" WHERE "alerts"."tutor_id" = $1 AND "alerts"."alert_type" = $2 AND "alerts"."status" = $3 LIMIT $4[0m  [["tutor_id", 114], ["alert_type", "high_reliability_risk"], ["status", "open"], ["LIMIT", 1]]
+  [1m[36mAlert Load (0.0ms)[0m  [1m[34mSELECT "alerts".* FROM "alerts" WHERE "alerts"."tutor_id" = $1 AND "alerts"."alert_type" = $2 AND "alerts"."status" = $3 LIMIT $4[0m  [["tutor_id", 114], ["alert_type", "churn_risk"], ["status", "open"], ["LIMIT", 1]]
+  [1m[36mAlert Count (0.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "alerts"[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.3ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "schema_sha1"]]
+  [1m[36mActiveRecord::SchemaMigration Load (0.4ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+[dotenv] Saved a snapshot of [32mENV[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTutor Create (0.3ms)[0m  [1m[32mINSERT INTO "tutors" ("name", "email", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", "Alice Smith"], ["email", "[FILTERED]"], ["created_at", "2025-11-05 14:42:25.465391"], ["updated_at", "2025-11-05 14:42:25.465391"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mScore Create (0.4ms)[0m  [1m[32mINSERT INTO "scores" ("session_id", "tutor_id", "score_type", "value", "components", "computed_at", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["session_id", nil], ["tutor_id", 115], ["score_type", "fsrs"], ["value", "55.0"], ["components", "{}"], ["computed_at", "2025-11-05 14:42:25.466504"], ["created_at", "2025-11-05 14:42:25.471180"], ["updated_at", "2025-11-05 14:42:25.471180"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mAlert Count (0.2ms)[0m  [1m[34mSELECT COUNT(*) FROM "alerts" WHERE "alerts"."alert_type" = $1[0m  [["alert_type", "poor_first_session"]]
+  [1m[36mTutor Load (0.2ms)[0m  [1m[34mSELECT "tutors".* FROM "tutors" ORDER BY "tutors"."id" ASC LIMIT $1[0m  [["LIMIT", 1000]]
+  [1m[36mScore Load (0.2ms)[0m  [1m[34mSELECT "scores".* FROM "scores" WHERE "scores"."tutor_id" = $1 AND "scores"."score_type" = $2 ORDER BY "scores"."computed_at" DESC LIMIT $3[0m  [["tutor_id", 115], ["score_type", "fsrs"], ["LIMIT", 1]]
+  [1m[36mScore Load (0.1ms)[0m  [1m[34mSELECT "scores".* FROM "scores" WHERE "scores"."tutor_id" = $1 AND "scores"."score_type" = $2 ORDER BY "scores"."computed_at" DESC LIMIT $3[0m  [["tutor_id", 115], ["score_type", "ths"], ["LIMIT", 1]]
+  [1m[36mScore Load (0.0ms)[0m  [1m[34mSELECT "scores".* FROM "scores" WHERE "scores"."tutor_id" = $1 AND "scores"."score_type" = $2 ORDER BY "scores"."computed_at" DESC LIMIT $3[0m  [["tutor_id", 115], ["score_type", "tcrs"], ["LIMIT", 1]]
+  [1m[36mAlert Load (0.1ms)[0m  [1m[34mSELECT "alerts".* FROM "alerts" WHERE "alerts"."tutor_id" = $1 AND "alerts"."alert_type" = $2 AND "alerts"."status" = $3 LIMIT $4[0m  [["tutor_id", 115], ["alert_type", "poor_first_session"], ["status", "open"], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mAlert Create (0.2ms)[0m  [1m[32mINSERT INTO "alerts" ("tutor_id", "alert_type", "severity", "status", "triggered_at", "resolved_at", "metadata", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING "id"[0m  [["tutor_id", 115], ["alert_type", "poor_first_session"], ["severity", "high"], ["status", "open"], ["triggered_at", "2025-11-05 14:42:25.477700"], ["resolved_at", nil], ["metadata", "{\"score_value\":\"55.0\",\"score_computed_at\":\"2025-11-05T14:42:25.466Z\",\"score_components\":{}}"], ["created_at", "2025-11-05 14:42:25.479780"], ["updated_at", "2025-11-05 14:42:25.479780"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mAlert Load (0.0ms)[0m  [1m[34mSELECT "alerts".* FROM "alerts" WHERE "alerts"."tutor_id" = $1 AND "alerts"."alert_type" = $2 AND "alerts"."status" = $3 LIMIT $4[0m  [["tutor_id", 115], ["alert_type", "high_reliability_risk"], ["status", "open"], ["LIMIT", 1]]
+  [1m[36mAlert Load (0.0ms)[0m  [1m[34mSELECT "alerts".* FROM "alerts" WHERE "alerts"."tutor_id" = $1 AND "alerts"."alert_type" = $2 AND "alerts"."status" = $3 LIMIT $4[0m  [["tutor_id", 115], ["alert_type", "churn_risk"], ["status", "open"], ["LIMIT", 1]]
+  [1m[36mAlert Count (0.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "alerts" WHERE "alerts"."alert_type" = $1[0m  [["alert_type", "poor_first_session"]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTutor Create (0.2ms)[0m  [1m[32mINSERT INTO "tutors" ("name", "email", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", "Alice Smith"], ["email", "[FILTERED]"], ["created_at", "2025-11-05 14:42:25.485257"], ["updated_at", "2025-11-05 14:42:25.485257"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mScore Create (0.2ms)[0m  [1m[32mINSERT INTO "scores" ("session_id", "tutor_id", "score_type", "value", "components", "computed_at", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["session_id", nil], ["tutor_id", 116], ["score_type", "fsrs"], ["value", "55.0"], ["components", "{}"], ["computed_at", "2025-11-05 14:42:25.485731"], ["created_at", "2025-11-05 14:42:25.485873"], ["updated_at", "2025-11-05 14:42:25.485873"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTutor Load (0.1ms)[0m  [1m[34mSELECT "tutors".* FROM "tutors" ORDER BY "tutors"."id" ASC LIMIT $1[0m  [["LIMIT", 1000]]
+  [1m[36mScore Load (0.1ms)[0m  [1m[34mSELECT "scores".* FROM "scores" WHERE "scores"."tutor_id" = $1 AND "scores"."score_type" = $2 ORDER BY "scores"."computed_at" DESC LIMIT $3[0m  [["tutor_id", 116], ["score_type", "fsrs"], ["LIMIT", 1]]
+  [1m[36mScore Load (0.0ms)[0m  [1m[34mSELECT "scores".* FROM "scores" WHERE "scores"."tutor_id" = $1 AND "scores"."score_type" = $2 ORDER BY "scores"."computed_at" DESC LIMIT $3[0m  [["tutor_id", 116], ["score_type", "ths"], ["LIMIT", 1]]
+  [1m[36mScore Load (0.0ms)[0m  [1m[34mSELECT "scores".* FROM "scores" WHERE "scores"."tutor_id" = $1 AND "scores"."score_type" = $2 ORDER BY "scores"."computed_at" DESC LIMIT $3[0m  [["tutor_id", 116], ["score_type", "tcrs"], ["LIMIT", 1]]
+  [1m[36mAlert Load (0.1ms)[0m  [1m[34mSELECT "alerts".* FROM "alerts" WHERE "alerts"."tutor_id" = $1 AND "alerts"."alert_type" = $2 AND "alerts"."status" = $3 LIMIT $4[0m  [["tutor_id", 116], ["alert_type", "poor_first_session"], ["status", "open"], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mAlert Create (0.1ms)[0m  [1m[32mINSERT INTO "alerts" ("tutor_id", "alert_type", "severity", "status", "triggered_at", "resolved_at", "metadata", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING "id"[0m  [["tutor_id", 116], ["alert_type", "poor_first_session"], ["severity", "high"], ["status", "open"], ["triggered_at", "2025-11-05 14:42:25.487392"], ["resolved_at", nil], ["metadata", "{\"score_value\":\"55.0\",\"score_computed_at\":\"2025-11-05T14:42:25.485Z\",\"score_components\":{}}"], ["created_at", "2025-11-05 14:42:25.487503"], ["updated_at", "2025-11-05 14:42:25.487503"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mAlert Load (0.0ms)[0m  [1m[34mSELECT "alerts".* FROM "alerts" WHERE "alerts"."tutor_id" = $1 AND "alerts"."alert_type" = $2 AND "alerts"."status" = $3 LIMIT $4[0m  [["tutor_id", 116], ["alert_type", "high_reliability_risk"], ["status", "open"], ["LIMIT", 1]]
+  [1m[36mAlert Load (0.0ms)[0m  [1m[34mSELECT "alerts".* FROM "alerts" WHERE "alerts"."tutor_id" = $1 AND "alerts"."alert_type" = $2 AND "alerts"."status" = $3 LIMIT $4[0m  [["tutor_id", 116], ["alert_type", "churn_risk"], ["status", "open"], ["LIMIT", 1]]
+  [1m[36mAlert Load (0.2ms)[0m  [1m[34mSELECT "alerts".* FROM "alerts" WHERE "alerts"."tutor_id" = $1 AND "alerts"."alert_type" = $2 LIMIT $3[0m  [["tutor_id", 116], ["alert_type", "poor_first_session"], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTutor Create (0.2ms)[0m  [1m[32mINSERT INTO "tutors" ("name", "email", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", "Alice Smith"], ["email", "[FILTERED]"], ["created_at", "2025-11-05 14:42:25.489349"], ["updated_at", "2025-11-05 14:42:25.489349"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mScore Create (0.3ms)[0m  [1m[32mINSERT INTO "scores" ("session_id", "tutor_id", "score_type", "value", "components", "computed_at", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["session_id", nil], ["tutor_id", 117], ["score_type", "fsrs"], ["value", "55.0"], ["components", "{}"], ["computed_at", "2025-11-05 14:42:25.489861"], ["created_at", "2025-11-05 14:42:25.490012"], ["updated_at", "2025-11-05 14:42:25.490012"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTutor Load (0.1ms)[0m  [1m[34mSELECT "tutors".* FROM "tutors" ORDER BY "tutors"."id" ASC LIMIT $1[0m  [["LIMIT", 1000]]
+  [1m[36mScore Load (0.1ms)[0m  [1m[34mSELECT "scores".* FROM "scores" WHERE "scores"."tutor_id" = $1 AND "scores"."score_type" = $2 ORDER BY "scores"."computed_at" DESC LIMIT $3[0m  [["tutor_id", 117], ["score_type", "fsrs"], ["LIMIT", 1]]
+  [1m[36mScore Load (0.1ms)[0m  [1m[34mSELECT "scores".* FROM "scores" WHERE "scores"."tutor_id" = $1 AND "scores"."score_type" = $2 ORDER BY "scores"."computed_at" DESC LIMIT $3[0m  [["tutor_id", 117], ["score_type", "ths"], ["LIMIT", 1]]
+  [1m[36mScore Load (0.0ms)[0m  [1m[34mSELECT "scores".* FROM "scores" WHERE "scores"."tutor_id" = $1 AND "scores"."score_type" = $2 ORDER BY "scores"."computed_at" DESC LIMIT $3[0m  [["tutor_id", 117], ["score_type", "tcrs"], ["LIMIT", 1]]
+  [1m[36mAlert Load (0.1ms)[0m  [1m[34mSELECT "alerts".* FROM "alerts" WHERE "alerts"."tutor_id" = $1 AND "alerts"."alert_type" = $2 AND "alerts"."status" = $3 LIMIT $4[0m  [["tutor_id", 117], ["alert_type", "poor_first_session"], ["status", "open"], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mAlert Create (0.2ms)[0m  [1m[32mINSERT INTO "alerts" ("tutor_id", "alert_type", "severity", "status", "triggered_at", "resolved_at", "metadata", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING "id"[0m  [["tutor_id", 117], ["alert_type", "poor_first_session"], ["severity", "high"], ["status", "open"], ["triggered_at", "2025-11-05 14:42:25.491584"], ["resolved_at", nil], ["metadata", "{\"score_value\":\"55.0\",\"score_computed_at\":\"2025-11-05T14:42:25.489Z\",\"score_components\":{}}"], ["created_at", "2025-11-05 14:42:25.491766"], ["updated_at", "2025-11-05 14:42:25.491766"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mAlert Load (0.1ms)[0m  [1m[34mSELECT "alerts".* FROM "alerts" WHERE "alerts"."tutor_id" = $1 AND "alerts"."alert_type" = $2 AND "alerts"."status" = $3 LIMIT $4[0m  [["tutor_id", 117], ["alert_type", "high_reliability_risk"], ["status", "open"], ["LIMIT", 1]]
+  [1m[36mAlert Load (0.1ms)[0m  [1m[34mSELECT "alerts".* FROM "alerts" WHERE "alerts"."tutor_id" = $1 AND "alerts"."alert_type" = $2 AND "alerts"."status" = $3 LIMIT $4[0m  [["tutor_id", 117], ["alert_type", "churn_risk"], ["status", "open"], ["LIMIT", 1]]
+  [1m[36mAlert Load (0.1ms)[0m  [1m[34mSELECT "alerts".* FROM "alerts" WHERE "alerts"."tutor_id" = $1 AND "alerts"."alert_type" = $2 LIMIT $3[0m  [["tutor_id", 117], ["alert_type", "poor_first_session"], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTutor Create (0.2ms)[0m  [1m[32mINSERT INTO "tutors" ("name", "email", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", "Alice Smith"], ["email", "[FILTERED]"], ["created_at", "2025-11-05 14:42:25.493346"], ["updated_at", "2025-11-05 14:42:25.493346"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mScore Create (0.2ms)[0m  [1m[32mINSERT INTO "scores" ("session_id", "tutor_id", "score_type", "value", "components", "computed_at", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["session_id", nil], ["tutor_id", 118], ["score_type", "ths"], ["value", "45.0"], ["components", "{}"], ["computed_at", "2025-11-05 14:42:25.493814"], ["created_at", "2025-11-05 14:42:25.493932"], ["updated_at", "2025-11-05 14:42:25.493932"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mAlert Count (0.2ms)[0m  [1m[34mSELECT COUNT(*) FROM "alerts" WHERE "alerts"."alert_type" = $1[0m  [["alert_type", "high_reliability_risk"]]
+  [1m[36mTutor Load (0.1ms)[0m  [1m[34mSELECT "tutors".* FROM "tutors" ORDER BY "tutors"."id" ASC LIMIT $1[0m  [["LIMIT", 1000]]
+  [1m[36mScore Load (0.1ms)[0m  [1m[34mSELECT "scores".* FROM "scores" WHERE "scores"."tutor_id" = $1 AND "scores"."score_type" = $2 ORDER BY "scores"."computed_at" DESC LIMIT $3[0m  [["tutor_id", 118], ["score_type", "fsrs"], ["LIMIT", 1]]
+  [1m[36mScore Load (0.1ms)[0m  [1m[34mSELECT "scores".* FROM "scores" WHERE "scores"."tutor_id" = $1 AND "scores"."score_type" = $2 ORDER BY "scores"."computed_at" DESC LIMIT $3[0m  [["tutor_id", 118], ["score_type", "ths"], ["LIMIT", 1]]
+  [1m[36mScore Load (0.1ms)[0m  [1m[34mSELECT "scores".* FROM "scores" WHERE "scores"."tutor_id" = $1 AND "scores"."score_type" = $2 ORDER BY "scores"."computed_at" DESC LIMIT $3[0m  [["tutor_id", 118], ["score_type", "tcrs"], ["LIMIT", 1]]
+  [1m[36mAlert Load (0.1ms)[0m  [1m[34mSELECT "alerts".* FROM "alerts" WHERE "alerts"."tutor_id" = $1 AND "alerts"."alert_type" = $2 AND "alerts"."status" = $3 LIMIT $4[0m  [["tutor_id", 118], ["alert_type", "poor_first_session"], ["status", "open"], ["LIMIT", 1]]
+  [1m[36mAlert Load (0.1ms)[0m  [1m[34mSELECT "alerts".* FROM "alerts" WHERE "alerts"."tutor_id" = $1 AND "alerts"."alert_type" = $2 AND "alerts"."status" = $3 LIMIT $4[0m  [["tutor_id", 118], ["alert_type", "high_reliability_risk"], ["status", "open"], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mAlert Create (0.3ms)[0m  [1m[32mINSERT INTO "alerts" ("tutor_id", "alert_type", "severity", "status", "triggered_at", "resolved_at", "metadata", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING "id"[0m  [["tutor_id", 118], ["alert_type", "high_reliability_risk"], ["severity", "high"], ["status", "open"], ["triggered_at", "2025-11-05 14:42:25.495874"], ["resolved_at", nil], ["metadata", "{\"score_value\":\"45.0\",\"score_computed_at\":\"2025-11-05T14:42:25.493Z\",\"score_components\":{}}"], ["created_at", "2025-11-05 14:42:25.496032"], ["updated_at", "2025-11-05 14:42:25.496032"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mAlert Load (0.1ms)[0m  [1m[34mSELECT "alerts".* FROM "alerts" WHERE "alerts"."tutor_id" = $1 AND "alerts"."alert_type" = $2 AND "alerts"."status" = $3 LIMIT $4[0m  [["tutor_id", 118], ["alert_type", "churn_risk"], ["status", "open"], ["LIMIT", 1]]
+  [1m[36mAlert Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "alerts" WHERE "alerts"."alert_type" = $1[0m  [["alert_type", "high_reliability_risk"]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTutor Create (0.2ms)[0m  [1m[32mINSERT INTO "tutors" ("name", "email", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", "Alice Smith"], ["email", "[FILTERED]"], ["created_at", "2025-11-05 14:42:25.497894"], ["updated_at", "2025-11-05 14:42:25.497894"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mScore Create (0.2ms)[0m  [1m[32mINSERT INTO "scores" ("session_id", "tutor_id", "score_type", "value", "components", "computed_at", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["session_id", nil], ["tutor_id", 119], ["score_type", "tcrs"], ["value", "0.7"], ["components", "{}"], ["computed_at", "2025-11-05 14:42:25.498352"], ["created_at", "2025-11-05 14:42:25.498489"], ["updated_at", "2025-11-05 14:42:25.498489"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mAlert Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "alerts" WHERE "alerts"."alert_type" = $1[0m  [["alert_type", "churn_risk"]]
+  [1m[36mTutor Load (0.1ms)[0m  [1m[34mSELECT "tutors".* FROM "tutors" ORDER BY "tutors"."id" ASC LIMIT $1[0m  [["LIMIT", 1000]]
+  [1m[36mScore Load (0.1ms)[0m  [1m[34mSELECT "scores".* FROM "scores" WHERE "scores"."tutor_id" = $1 AND "scores"."score_type" = $2 ORDER BY "scores"."computed_at" DESC LIMIT $3[0m  [["tutor_id", 119], ["score_type", "fsrs"], ["LIMIT", 1]]
+  [1m[36mScore Load (0.1ms)[0m  [1m[34mSELECT "scores".* FROM "scores" WHERE "scores"."tutor_id" = $1 AND "scores"."score_type" = $2 ORDER BY "scores"."computed_at" DESC LIMIT $3[0m  [["tutor_id", 119], ["score_type", "ths"], ["LIMIT", 1]]
+  [1m[36mScore Load (0.1ms)[0m  [1m[34mSELECT "scores".* FROM "scores" WHERE "scores"."tutor_id" = $1 AND "scores"."score_type" = $2 ORDER BY "scores"."computed_at" DESC LIMIT $3[0m  [["tutor_id", 119], ["score_type", "tcrs"], ["LIMIT", 1]]
+  [1m[36mAlert Load (0.1ms)[0m  [1m[34mSELECT "alerts".* FROM "alerts" WHERE "alerts"."tutor_id" = $1 AND "alerts"."alert_type" = $2 AND "alerts"."status" = $3 LIMIT $4[0m  [["tutor_id", 119], ["alert_type", "poor_first_session"], ["status", "open"], ["LIMIT", 1]]
+  [1m[36mAlert Load (0.0ms)[0m  [1m[34mSELECT "alerts".* FROM "alerts" WHERE "alerts"."tutor_id" = $1 AND "alerts"."alert_type" = $2 AND "alerts"."status" = $3 LIMIT $4[0m  [["tutor_id", 119], ["alert_type", "high_reliability_risk"], ["status", "open"], ["LIMIT", 1]]
+  [1m[36mAlert Load (0.1ms)[0m  [1m[34mSELECT "alerts".* FROM "alerts" WHERE "alerts"."tutor_id" = $1 AND "alerts"."alert_type" = $2 AND "alerts"."status" = $3 LIMIT $4[0m  [["tutor_id", 119], ["alert_type", "churn_risk"], ["status", "open"], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mAlert Create (0.3ms)[0m  [1m[32mINSERT INTO "alerts" ("tutor_id", "alert_type", "severity", "status", "triggered_at", "resolved_at", "metadata", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING "id"[0m  [["tutor_id", 119], ["alert_type", "churn_risk"], ["severity", "high"], ["status", "open"], ["triggered_at", "2025-11-05 14:42:25.500489"], ["resolved_at", nil], ["metadata", "{\"score_value\":\"0.7\",\"score_computed_at\":\"2025-11-05T14:42:25.498Z\",\"score_components\":{}}"], ["created_at", "2025-11-05 14:42:25.500648"], ["updated_at", "2025-11-05 14:42:25.500648"]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mAlert Count (0.2ms)[0m  [1m[34mSELECT COUNT(*) FROM "alerts" WHERE "alerts"."alert_type" = $1[0m  [["alert_type", "churn_risk"]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTutor Create (0.2ms)[0m  [1m[32mINSERT INTO "tutors" ("name", "email", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", "Alice Smith"], ["email", "[FILTERED]"], ["created_at", "2025-11-05 14:42:25.502196"], ["updated_at", "2025-11-05 14:42:25.502196"]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mScore Create (0.2ms)[0m  [1m[32mINSERT INTO "scores" ("session_id", "tutor_id", "score_type", "value", "components", "computed_at", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["session_id", nil], ["tutor_id", 120], ["score_type", "fsrs"], ["value", "55.0"], ["components", "{}"], ["computed_at", "2025-11-05 14:42:25.502623"], ["created_at", "2025-11-05 14:42:25.502718"], ["updated_at", "2025-11-05 14:42:25.502718"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mAlert Create (0.2ms)[0m  [1m[32mINSERT INTO "alerts" ("tutor_id", "alert_type", "severity", "status", "triggered_at", "resolved_at", "metadata", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING "id"[0m  [["tutor_id", 120], ["alert_type", "poor_first_session"], ["severity", "high"], ["status", "open"], ["triggered_at", "2025-11-05 13:42:25.503200"], ["resolved_at", nil], ["metadata", "{}"], ["created_at", "2025-11-05 14:42:25.503291"], ["updated_at", "2025-11-05 14:42:25.503291"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mAlert Count (0.2ms)[0m  [1m[34mSELECT COUNT(*) FROM "alerts" WHERE "alerts"."alert_type" = $1[0m  [["alert_type", "poor_first_session"]]
+  [1m[36mTutor Load (0.1ms)[0m  [1m[34mSELECT "tutors".* FROM "tutors" ORDER BY "tutors"."id" ASC LIMIT $1[0m  [["LIMIT", 1000]]
+  [1m[36mScore Load (0.1ms)[0m  [1m[34mSELECT "scores".* FROM "scores" WHERE "scores"."tutor_id" = $1 AND "scores"."score_type" = $2 ORDER BY "scores"."computed_at" DESC LIMIT $3[0m  [["tutor_id", 120], ["score_type", "fsrs"], ["LIMIT", 1]]
+  [1m[36mScore Load (0.1ms)[0m  [1m[34mSELECT "scores".* FROM "scores" WHERE "scores"."tutor_id" = $1 AND "scores"."score_type" = $2 ORDER BY "scores"."computed_at" DESC LIMIT $3[0m  [["tutor_id", 120], ["score_type", "ths"], ["LIMIT", 1]]
+  [1m[36mScore Load (0.1ms)[0m  [1m[34mSELECT "scores".* FROM "scores" WHERE "scores"."tutor_id" = $1 AND "scores"."score_type" = $2 ORDER BY "scores"."computed_at" DESC LIMIT $3[0m  [["tutor_id", 120], ["score_type", "tcrs"], ["LIMIT", 1]]
+  [1m[36mAlert Load (0.1ms)[0m  [1m[34mSELECT "alerts".* FROM "alerts" WHERE "alerts"."tutor_id" = $1 AND "alerts"."alert_type" = $2 AND "alerts"."status" = $3 LIMIT $4[0m  [["tutor_id", 120], ["alert_type", "poor_first_session"], ["status", "open"], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mAlert Update (0.3ms)[0m  [1m[33mUPDATE "alerts" SET "metadata" = $1, "updated_at" = $2 WHERE "alerts"."id" = $3[0m  [["metadata", "{\"last_checked_at\":\"2025-11-05T14:42:25.505Z\",\"score_value\":\"55.0\",\"score_computed_at\":\"2025-11-05T14:42:25.502Z\"}"], ["updated_at", "2025-11-05 14:42:25.505139"], ["id", 27]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mAlert Load (0.1ms)[0m  [1m[34mSELECT "alerts".* FROM "alerts" WHERE "alerts"."tutor_id" = $1 AND "alerts"."alert_type" = $2 AND "alerts"."status" = $3 LIMIT $4[0m  [["tutor_id", 120], ["alert_type", "high_reliability_risk"], ["status", "open"], ["LIMIT", 1]]
+  [1m[36mAlert Load (0.1ms)[0m  [1m[34mSELECT "alerts".* FROM "alerts" WHERE "alerts"."tutor_id" = $1 AND "alerts"."alert_type" = $2 AND "alerts"."status" = $3 LIMIT $4[0m  [["tutor_id", 120], ["alert_type", "churn_risk"], ["status", "open"], ["LIMIT", 1]]
+  [1m[36mAlert Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "alerts" WHERE "alerts"."alert_type" = $1[0m  [["alert_type", "poor_first_session"]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTutor Create (0.2ms)[0m  [1m[32mINSERT INTO "tutors" ("name", "email", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", "Alice Smith"], ["email", "[FILTERED]"], ["created_at", "2025-11-05 14:42:25.507077"], ["updated_at", "2025-11-05 14:42:25.507077"]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mAlert Create (0.3ms)[0m  [1m[32mINSERT INTO "alerts" ("tutor_id", "alert_type", "severity", "status", "triggered_at", "resolved_at", "metadata", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING "id"[0m  [["tutor_id", 121], ["alert_type", "poor_first_session"], ["severity", "high"], ["status", "open"], ["triggered_at", "2025-11-05 13:42:25.507668"], ["resolved_at", nil], ["metadata", "{}"], ["created_at", "2025-11-05 14:42:25.507906"], ["updated_at", "2025-11-05 14:42:25.507906"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mScore Create (0.2ms)[0m  [1m[32mINSERT INTO "scores" ("session_id", "tutor_id", "score_type", "value", "components", "computed_at", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["session_id", nil], ["tutor_id", 121], ["score_type", "fsrs"], ["value", "20.0"], ["components", "{}"], ["computed_at", "2025-11-05 14:42:25.508503"], ["created_at", "2025-11-05 14:42:25.508636"], ["updated_at", "2025-11-05 14:42:25.508636"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTutor Load (0.1ms)[0m  [1m[34mSELECT "tutors".* FROM "tutors" ORDER BY "tutors"."id" ASC LIMIT $1[0m  [["LIMIT", 1000]]
+  [1m[36mScore Load (0.1ms)[0m  [1m[34mSELECT "scores".* FROM "scores" WHERE "scores"."tutor_id" = $1 AND "scores"."score_type" = $2 ORDER BY "scores"."computed_at" DESC LIMIT $3[0m  [["tutor_id", 121], ["score_type", "fsrs"], ["LIMIT", 1]]
+  [1m[36mScore Load (0.0ms)[0m  [1m[34mSELECT "scores".* FROM "scores" WHERE "scores"."tutor_id" = $1 AND "scores"."score_type" = $2 ORDER BY "scores"."computed_at" DESC LIMIT $3[0m  [["tutor_id", 121], ["score_type", "ths"], ["LIMIT", 1]]
+  [1m[36mScore Load (0.0ms)[0m  [1m[34mSELECT "scores".* FROM "scores" WHERE "scores"."tutor_id" = $1 AND "scores"."score_type" = $2 ORDER BY "scores"."computed_at" DESC LIMIT $3[0m  [["tutor_id", 121], ["score_type", "tcrs"], ["LIMIT", 1]]
+  [1m[36mAlert Load (0.1ms)[0m  [1m[34mSELECT "alerts".* FROM "alerts" WHERE "alerts"."tutor_id" = $1 AND "alerts"."alert_type" = $2 AND "alerts"."status" = $3 LIMIT $4[0m  [["tutor_id", 121], ["alert_type", "poor_first_session"], ["status", "open"], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mAlert Update (0.2ms)[0m  [1m[33mUPDATE "alerts" SET "status" = $1, "resolved_at" = $2, "metadata" = $3, "updated_at" = $4 WHERE "alerts"."id" = $5[0m  [["status", "resolved"], ["resolved_at", "2025-11-05 14:42:25.510026"], ["metadata", "{\"resolved_at\":\"2025-11-05T14:42:25.510Z\",\"auto_resolved\":true}"], ["updated_at", "2025-11-05 14:42:25.510111"], ["id", 28]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mAlert Load (0.1ms)[0m  [1m[34mSELECT "alerts".* FROM "alerts" WHERE "alerts"."tutor_id" = $1 AND "alerts"."alert_type" = $2 AND "alerts"."status" = $3 LIMIT $4[0m  [["tutor_id", 121], ["alert_type", "high_reliability_risk"], ["status", "open"], ["LIMIT", 1]]
+  [1m[36mAlert Load (0.1ms)[0m  [1m[34mSELECT "alerts".* FROM "alerts" WHERE "alerts"."tutor_id" = $1 AND "alerts"."alert_type" = $2 AND "alerts"."status" = $3 LIMIT $4[0m  [["tutor_id", 121], ["alert_type", "churn_risk"], ["status", "open"], ["LIMIT", 1]]
+  [1m[36mAlert Load (0.2ms)[0m  [1m[34mSELECT "alerts".* FROM "alerts" WHERE "alerts"."id" = $1 LIMIT $2[0m  [["id", 28], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTutor Create (0.2ms)[0m  [1m[32mINSERT INTO "tutors" ("name", "email", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", "Alice Smith"], ["email", "[FILTERED]"], ["created_at", "2025-11-05 14:42:25.512120"], ["updated_at", "2025-11-05 14:42:25.512120"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mAlert Create (0.2ms)[0m  [1m[32mINSERT INTO "alerts" ("tutor_id", "alert_type", "severity", "status", "triggered_at", "resolved_at", "metadata", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING "id"[0m  [["tutor_id", 122], ["alert_type", "high_reliability_risk"], ["severity", "high"], ["status", "open"], ["triggered_at", "2025-11-05 13:42:25.512578"], ["resolved_at", nil], ["metadata", "{}"], ["created_at", "2025-11-05 14:42:25.512676"], ["updated_at", "2025-11-05 14:42:25.512676"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mScore Create (0.2ms)[0m  [1m[32mINSERT INTO "scores" ("session_id", "tutor_id", "score_type", "value", "components", "computed_at", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["session_id", nil], ["tutor_id", 122], ["score_type", "ths"], ["value", "60.0"], ["components", "{}"], ["computed_at", "2025-11-05 14:42:25.513063"], ["created_at", "2025-11-05 14:42:25.513151"], ["updated_at", "2025-11-05 14:42:25.513151"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTutor Load (0.0ms)[0m  [1m[34mSELECT "tutors".* FROM "tutors" ORDER BY "tutors"."id" ASC LIMIT $1[0m  [["LIMIT", 1000]]
+  [1m[36mScore Load (0.1ms)[0m  [1m[34mSELECT "scores".* FROM "scores" WHERE "scores"."tutor_id" = $1 AND "scores"."score_type" = $2 ORDER BY "scores"."computed_at" DESC LIMIT $3[0m  [["tutor_id", 122], ["score_type", "fsrs"], ["LIMIT", 1]]
+  [1m[36mScore Load (0.1ms)[0m  [1m[34mSELECT "scores".* FROM "scores" WHERE "scores"."tutor_id" = $1 AND "scores"."score_type" = $2 ORDER BY "scores"."computed_at" DESC LIMIT $3[0m  [["tutor_id", 122], ["score_type", "ths"], ["LIMIT", 1]]
+  [1m[36mScore Load (0.1ms)[0m  [1m[34mSELECT "scores".* FROM "scores" WHERE "scores"."tutor_id" = $1 AND "scores"."score_type" = $2 ORDER BY "scores"."computed_at" DESC LIMIT $3[0m  [["tutor_id", 122], ["score_type", "tcrs"], ["LIMIT", 1]]
+  [1m[36mAlert Load (0.1ms)[0m  [1m[34mSELECT "alerts".* FROM "alerts" WHERE "alerts"."tutor_id" = $1 AND "alerts"."alert_type" = $2 AND "alerts"."status" = $3 LIMIT $4[0m  [["tutor_id", 122], ["alert_type", "poor_first_session"], ["status", "open"], ["LIMIT", 1]]
+  [1m[36mAlert Load (0.0ms)[0m  [1m[34mSELECT "alerts".* FROM "alerts" WHERE "alerts"."tutor_id" = $1 AND "alerts"."alert_type" = $2 AND "alerts"."status" = $3 LIMIT $4[0m  [["tutor_id", 122], ["alert_type", "high_reliability_risk"], ["status", "open"], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mAlert Update (0.2ms)[0m  [1m[33mUPDATE "alerts" SET "status" = $1, "resolved_at" = $2, "metadata" = $3, "updated_at" = $4 WHERE "alerts"."id" = $5[0m  [["status", "resolved"], ["resolved_at", "2025-11-05 14:42:25.514627"], ["metadata", "{\"resolved_at\":\"2025-11-05T14:42:25.514Z\",\"auto_resolved\":true}"], ["updated_at", "2025-11-05 14:42:25.514718"], ["id", 29]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mAlert Load (0.0ms)[0m  [1m[34mSELECT "alerts".* FROM "alerts" WHERE "alerts"."tutor_id" = $1 AND "alerts"."alert_type" = $2 AND "alerts"."status" = $3 LIMIT $4[0m  [["tutor_id", 122], ["alert_type", "churn_risk"], ["status", "open"], ["LIMIT", 1]]
+  [1m[36mAlert Load (0.1ms)[0m  [1m[34mSELECT "alerts".* FROM "alerts" WHERE "alerts"."id" = $1 LIMIT $2[0m  [["id", 29], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTutor Create (0.2ms)[0m  [1m[32mINSERT INTO "tutors" ("name", "email", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", "Alice Smith"], ["email", "[FILTERED]"], ["created_at", "2025-11-05 14:42:25.516194"], ["updated_at", "2025-11-05 14:42:25.516194"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mAlert Create (0.2ms)[0m  [1m[32mINSERT INTO "alerts" ("tutor_id", "alert_type", "severity", "status", "triggered_at", "resolved_at", "metadata", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING "id"[0m  [["tutor_id", 123], ["alert_type", "churn_risk"], ["severity", "high"], ["status", "open"], ["triggered_at", "2025-11-05 13:42:25.516558"], ["resolved_at", nil], ["metadata", "{}"], ["created_at", "2025-11-05 14:42:25.516655"], ["updated_at", "2025-11-05 14:42:25.516655"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mScore Create (0.2ms)[0m  [1m[32mINSERT INTO "scores" ("session_id", "tutor_id", "score_type", "value", "components", "computed_at", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["session_id", nil], ["tutor_id", 123], ["score_type", "tcrs"], ["value", "0.4"], ["components", "{}"], ["computed_at", "2025-11-05 14:42:25.517091"], ["created_at", "2025-11-05 14:42:25.517178"], ["updated_at", "2025-11-05 14:42:25.517178"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTutor Load (0.1ms)[0m  [1m[34mSELECT "tutors".* FROM "tutors" ORDER BY "tutors"."id" ASC LIMIT $1[0m  [["LIMIT", 1000]]
+  [1m[36mScore Load (0.1ms)[0m  [1m[34mSELECT "scores".* FROM "scores" WHERE "scores"."tutor_id" = $1 AND "scores"."score_type" = $2 ORDER BY "scores"."computed_at" DESC LIMIT $3[0m  [["tutor_id", 123], ["score_type", "fsrs"], ["LIMIT", 1]]
+  [1m[36mScore Load (0.1ms)[0m  [1m[34mSELECT "scores".* FROM "scores" WHERE "scores"."tutor_id" = $1 AND "scores"."score_type" = $2 ORDER BY "scores"."computed_at" DESC LIMIT $3[0m  [["tutor_id", 123], ["score_type", "ths"], ["LIMIT", 1]]
+  [1m[36mScore Load (0.1ms)[0m  [1m[34mSELECT "scores".* FROM "scores" WHERE "scores"."tutor_id" = $1 AND "scores"."score_type" = $2 ORDER BY "scores"."computed_at" DESC LIMIT $3[0m  [["tutor_id", 123], ["score_type", "tcrs"], ["LIMIT", 1]]
+  [1m[36mAlert Load (0.1ms)[0m  [1m[34mSELECT "alerts".* FROM "alerts" WHERE "alerts"."tutor_id" = $1 AND "alerts"."alert_type" = $2 AND "alerts"."status" = $3 LIMIT $4[0m  [["tutor_id", 123], ["alert_type", "poor_first_session"], ["status", "open"], ["LIMIT", 1]]
+  [1m[36mAlert Load (0.0ms)[0m  [1m[34mSELECT "alerts".* FROM "alerts" WHERE "alerts"."tutor_id" = $1 AND "alerts"."alert_type" = $2 AND "alerts"."status" = $3 LIMIT $4[0m  [["tutor_id", 123], ["alert_type", "high_reliability_risk"], ["status", "open"], ["LIMIT", 1]]
+  [1m[36mAlert Load (0.1ms)[0m  [1m[34mSELECT "alerts".* FROM "alerts" WHERE "alerts"."tutor_id" = $1 AND "alerts"."alert_type" = $2 AND "alerts"."status" = $3 LIMIT $4[0m  [["tutor_id", 123], ["alert_type", "churn_risk"], ["status", "open"], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mAlert Update (0.2ms)[0m  [1m[33mUPDATE "alerts" SET "status" = $1, "resolved_at" = $2, "metadata" = $3, "updated_at" = $4 WHERE "alerts"."id" = $5[0m  [["status", "resolved"], ["resolved_at", "2025-11-05 14:42:25.518709"], ["metadata", "{\"resolved_at\":\"2025-11-05T14:42:25.518Z\",\"auto_resolved\":true}"], ["updated_at", "2025-11-05 14:42:25.518790"], ["id", 30]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mAlert Load (0.1ms)[0m  [1m[34mSELECT "alerts".* FROM "alerts" WHERE "alerts"."id" = $1 LIMIT $2[0m  [["id", 30], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTutor Create (0.2ms)[0m  [1m[32mINSERT INTO "tutors" ("name", "email", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", "Alice Smith"], ["email", "[FILTERED]"], ["created_at", "2025-11-05 14:42:25.519925"], ["updated_at", "2025-11-05 14:42:25.519925"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mScore Create (0.2ms)[0m  [1m[32mINSERT INTO "scores" ("session_id", "tutor_id", "score_type", "value", "components", "computed_at", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["session_id", nil], ["tutor_id", 124], ["score_type", "fsrs"], ["value", "20.0"], ["components", "{}"], ["computed_at", "2025-11-05 14:42:25.520278"], ["created_at", "2025-11-05 14:42:25.520355"], ["updated_at", "2025-11-05 14:42:25.520355"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mScore Create (0.2ms)[0m  [1m[32mINSERT INTO "scores" ("session_id", "tutor_id", "score_type", "value", "components", "computed_at", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["session_id", nil], ["tutor_id", 124], ["score_type", "ths"], ["value", "80.0"], ["components", "{}"], ["computed_at", "2025-11-05 14:42:25.520752"], ["created_at", "2025-11-05 14:42:25.520827"], ["updated_at", "2025-11-05 14:42:25.520827"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mScore Create (0.2ms)[0m  [1m[32mINSERT INTO "scores" ("session_id", "tutor_id", "score_type", "value", "components", "computed_at", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["session_id", nil], ["tutor_id", 124], ["score_type", "tcrs"], ["value", "0.2"], ["components", "{}"], ["computed_at", "2025-11-05 14:42:25.521182"], ["created_at", "2025-11-05 14:42:25.521252"], ["updated_at", "2025-11-05 14:42:25.521252"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mAlert Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "alerts"[0m
+  [1m[36mTutor Load (0.1ms)[0m  [1m[34mSELECT "tutors".* FROM "tutors" ORDER BY "tutors"."id" ASC LIMIT $1[0m  [["LIMIT", 1000]]
+  [1m[36mScore Load (0.1ms)[0m  [1m[34mSELECT "scores".* FROM "scores" WHERE "scores"."tutor_id" = $1 AND "scores"."score_type" = $2 ORDER BY "scores"."computed_at" DESC LIMIT $3[0m  [["tutor_id", 124], ["score_type", "fsrs"], ["LIMIT", 1]]
+  [1m[36mScore Load (0.1ms)[0m  [1m[34mSELECT "scores".* FROM "scores" WHERE "scores"."tutor_id" = $1 AND "scores"."score_type" = $2 ORDER BY "scores"."computed_at" DESC LIMIT $3[0m  [["tutor_id", 124], ["score_type", "ths"], ["LIMIT", 1]]
+  [1m[36mScore Load (0.1ms)[0m  [1m[34mSELECT "scores".* FROM "scores" WHERE "scores"."tutor_id" = $1 AND "scores"."score_type" = $2 ORDER BY "scores"."computed_at" DESC LIMIT $3[0m  [["tutor_id", 124], ["score_type", "tcrs"], ["LIMIT", 1]]
+  [1m[36mAlert Load (0.1ms)[0m  [1m[34mSELECT "alerts".* FROM "alerts" WHERE "alerts"."tutor_id" = $1 AND "alerts"."alert_type" = $2 AND "alerts"."status" = $3 LIMIT $4[0m  [["tutor_id", 124], ["alert_type", "poor_first_session"], ["status", "open"], ["LIMIT", 1]]
+  [1m[36mAlert Load (0.1ms)[0m  [1m[34mSELECT "alerts".* FROM "alerts" WHERE "alerts"."tutor_id" = $1 AND "alerts"."alert_type" = $2 AND "alerts"."status" = $3 LIMIT $4[0m  [["tutor_id", 124], ["alert_type", "high_reliability_risk"], ["status", "open"], ["LIMIT", 1]]
+  [1m[36mAlert Load (0.1ms)[0m  [1m[34mSELECT "alerts".* FROM "alerts" WHERE "alerts"."tutor_id" = $1 AND "alerts"."alert_type" = $2 AND "alerts"."status" = $3 LIMIT $4[0m  [["tutor_id", 124], ["alert_type", "churn_risk"], ["status", "open"], ["LIMIT", 1]]
+  [1m[36mAlert Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "alerts"[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mROLLBACK[0m
