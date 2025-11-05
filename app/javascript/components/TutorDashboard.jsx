@@ -470,18 +470,70 @@ const TutorDashboard = ({ tutorId }) => {
                     <div className="mb-4 md:mb-0">
                       <div className="space-y-4">
                         {/* Total Average */}
-                        <div className="bg-blue-50 rounded-lg p-4 border-l-4 border-blue-500">
-                          <div className="text-sm text-blue-700 font-medium mb-1">Total Average</div>
-                          <div className="text-3xl font-bold text-blue-900">{totalAvg}</div>
-                          <div className="text-xs text-blue-600 mt-1">{sessionsWithSqs.length} sessions</div>
-                        </div>
+                        {(() => {
+                          const totalAvgNum = parseFloat(totalAvg)
+                          const totalLabel = getScoreLabel(totalAvgNum, 'sqs')
+                          const isRed = totalLabel.color === 'red'
+                          const isYellow = totalLabel.color === 'yellow'
+                          const isGreen = totalLabel.color === 'green'
+                          
+                          return (
+                            <div className={`rounded-lg p-4 border-l-4 ${
+                              isRed ? 'bg-red-50 border-red-500' :
+                              isYellow ? 'bg-yellow-50 border-yellow-500' :
+                              'bg-green-50 border-green-500'
+                            }`}>
+                              <div className={`text-sm font-medium mb-1 ${
+                                isRed ? 'text-red-700' :
+                                isYellow ? 'text-yellow-700' :
+                                'text-green-700'
+                              }`}>Total Average</div>
+                              <div className={`text-3xl font-bold ${
+                                isRed ? 'text-red-900' :
+                                isYellow ? 'text-yellow-900' :
+                                'text-green-900'
+                              }`}>{totalAvg}</div>
+                              <div className={`text-xs mt-1 ${
+                                isRed ? 'text-red-600' :
+                                isYellow ? 'text-yellow-600' :
+                                'text-green-600'
+                              }`}>{sessionsWithSqs.length} sessions</div>
+                            </div>
+                          )
+                        })()}
                         
                         {/* Last 10 Average */}
-                        <div className="bg-green-50 rounded-lg p-4 border-l-4 border-green-500">
-                          <div className="text-sm text-green-700 font-medium mb-1">Last 10 Average</div>
-                          <div className="text-3xl font-bold text-green-900">{last10Avg}</div>
-                          <div className="text-xs text-green-600 mt-1">Last {last10Sessions.length} sessions</div>
-                        </div>
+                        {(() => {
+                          const last10AvgNum = parseFloat(last10Avg)
+                          const last10Label = getScoreLabel(last10AvgNum, 'sqs')
+                          const isRed = last10Label.color === 'red'
+                          const isYellow = last10Label.color === 'yellow'
+                          const isGreen = last10Label.color === 'green'
+                          
+                          return (
+                            <div className={`rounded-lg p-4 border-l-4 ${
+                              isRed ? 'bg-red-50 border-red-500' :
+                              isYellow ? 'bg-yellow-50 border-yellow-500' :
+                              'bg-green-50 border-green-500'
+                            }`}>
+                              <div className={`text-sm font-medium mb-1 ${
+                                isRed ? 'text-red-700' :
+                                isYellow ? 'text-yellow-700' :
+                                'text-green-700'
+                              }`}>Last 10 Average</div>
+                              <div className={`text-3xl font-bold ${
+                                isRed ? 'text-red-900' :
+                                isYellow ? 'text-yellow-900' :
+                                'text-green-900'
+                              }`}>{last10Avg}</div>
+                              <div className={`text-xs mt-1 ${
+                                isRed ? 'text-red-600' :
+                                isYellow ? 'text-yellow-600' :
+                                'text-green-600'
+                              }`}>Last {last10Sessions.length} sessions</div>
+                            </div>
+                          )
+                        })()}
                       </div>
                     </div>
                     
