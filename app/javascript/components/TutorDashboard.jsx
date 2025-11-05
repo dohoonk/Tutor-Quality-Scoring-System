@@ -1,7 +1,15 @@
 import React, { useState, useEffect } from 'react'
+import { 
+  LoadingSpinner, 
+  SkeletonDashboard, 
+  EmptySessionState, 
+  EmptyFSQSState, 
+  ErrorState,
+  AccessibleButton
+} from './ui'
 
-// Simple Tooltip Component
-const Tooltip = ({ text, children }) => {
+// Tooltip Component with improved accessibility
+const Tooltip = ({ text }) => {
   const [show, setShow] = useState(false)
   
   return (
@@ -12,7 +20,7 @@ const Tooltip = ({ text, children }) => {
         onMouseLeave={() => setShow(false)}
         onFocus={() => setShow(true)}
         onBlur={() => setShow(false)}
-        className="ml-1 text-gray-400 hover:text-gray-600 cursor-help"
+        className="ml-1 text-gray-400 hover:text-gray-600 cursor-help transition-colors focus-ring"
         aria-label="More information"
       >
         <svg className="w-4 h-4 inline-block" fill="currentColor" viewBox="0 0 20 20">
@@ -20,7 +28,7 @@ const Tooltip = ({ text, children }) => {
         </svg>
       </button>
       {show && (
-        <div className="absolute z-50 w-72 p-3 bg-gray-900 text-white text-sm rounded-lg shadow-lg -top-2 left-6 transform -translate-y-full">
+        <div className="absolute z-50 w-72 p-3 bg-gray-900 text-white text-sm rounded-lg shadow-lg -top-2 left-6 transform -translate-y-full animate-fade-in">
           <div className="absolute -bottom-2 left-2 w-0 h-0 border-l-8 border-r-8 border-t-8 border-transparent border-t-gray-900"></div>
           {text}
         </div>
@@ -35,6 +43,7 @@ const TutorDashboard = ({ tutorId }) => {
   const [performanceSummary, setPerformanceSummary] = useState(null)
   const [sessionList, setSessionList] = useState([])
   const [loading, setLoading] = useState(true)
+  const [error, setError] = useState(null)
   const [showPastSessions, setShowPastSessions] = useState(false)
 
   useEffect(() => {
@@ -42,6 +51,8 @@ const TutorDashboard = ({ tutorId }) => {
 
     const fetchData = async () => {
       setLoading(true)
+      setError(null)
+      
       try {
         // Fetch all data in parallel
         const [fsqsLatestRes, fsqsHistoryRes, performanceSummaryRes, sessionListRes] = await Promise.all([
@@ -70,8 +81,9 @@ const TutorDashboard = ({ tutorId }) => {
           const data = await sessionListRes.json()
           setSessionList(data)
         }
-      } catch (error) {
-        console.error('Error fetching data:', error)
+      } catch (err) {
+        console.error('Error fetching data:', err)
+        setError(err.message)
       } finally {
         setLoading(false)
       }
@@ -82,7 +94,6 @@ const TutorDashboard = ({ tutorId }) => {
 
   const getScoreLabel = (score, scoreType) => {
     if (scoreType === 'fsqs') {
-      // FSQS: Higher is better (0-100 scale)
       if (score <= 50) return { label: 'Low Quality', color: 'red' }
       if (score <= 70) return { label: 'Fair', color: 'yellow' }
       return { label: 'Good', color: 'green' }
@@ -117,10 +128,20 @@ const TutorDashboard = ({ tutorId }) => {
     return date.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })
   }
 
+  // Loading State
   if (loading) {
     return (
-      <div className="p-6">
-        <div className="text-center">Loading...</div>
+      <div className="p-4 md:p-6 max-w-7xl mx-auto">
+        <SkeletonDashboard />
+      </div>
+    )
+  }
+
+  // Error State
+  if (error) {
+    return (
+      <div className="p-4 md:p-6 max-w-7xl mx-auto">
+        <ErrorState onRetry={() => window.location.reload()} />
       </div>
     )
   }
@@ -130,25 +151,28 @@ const TutorDashboard = ({ tutorId }) => {
   const fsqsLabel = fsqsLatest ? getScoreLabel(fsqsLatest.score, 'fsqs') : null
 
   return (
-    <div className="p-6 max-w-7xl mx-auto">
-      <h1 className="text-3xl font-bold mb-6">Tutor Dashboard</h1>
+    <div className="p-4 md:p-6 max-w-7xl mx-auto animate-fade-in">
+      <header className="mb-6 md:mb-8">
+        <h1 className="text-2xl md:text-3xl font-bold text-gray-900">Tutor Dashboard</h1>
+        <p className="text-gray-600 mt-1">Track your session quality and student engagement</p>
+      </header>
 
       {/* FSQS Feedback Section */}
-      {fsqsLatest && (
-        <div className="mb-8">
-          <h2 className="text-2xl font-semibold mb-4">First Session Quality Feedback</h2>
+      {fsqsLatest ? (
+        <section className="mb-6 md:mb-8 animate-slide-in-up">
+          <h2 className="text-xl md:text-2xl font-semibold mb-4">First Session Quality Feedback</h2>
           
-          <div className="bg-white rounded-lg shadow-md p-6 mb-4">
-            <div className="grid grid-cols-2 gap-4 mb-6">
+          <div className="bg-white rounded-lg shadow-md p-4 md:p-6 mb-4 hover-lift">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6 mb-6">
               {/* FSQS Indicator */}
-              <div className="border-r pr-4">
+              <div className="md:border-r md:pr-4">
                 <div className="text-sm text-gray-600 mb-1">
                   FSQS Score
                   <Tooltip text="First Session Quality Score measures the quality of your initial sessions with new students. A higher score (70-100) indicates strong rapport-building, clear goal-setting, and encouraging communication. Scores below 50 suggest areas to improve such as reducing confusion, using positive language, or providing better session structure." />
                 </div>
                 <div className="flex items-center gap-2">
-                  <span className="text-3xl font-bold">{fsqsLatest.score}</span>
-                  <span className={`px-3 py-1 rounded-full text-sm font-medium ${
+                  <span className="text-3xl md:text-4xl font-bold">{fsqsLatest.score}</span>
+                  <span className={`px-3 py-1 rounded-full text-sm font-medium transition-colors ${
                     fsqsLabel?.color === 'red' ? 'bg-red-100 text-red-800' :
                     fsqsLabel?.color === 'yellow' ? 'bg-yellow-100 text-yellow-800' :
                     'bg-green-100 text-green-800'
@@ -162,14 +186,14 @@ const TutorDashboard = ({ tutorId }) => {
               <div>
                 <div className="text-sm text-gray-600 mb-1">
                   Average FSQS (Last 5)
-                  <Tooltip text="This shows your average First Session Quality Score across your last 5 first sessions with new students. The trend indicator (↑ or ↓) compares your recent performance to earlier sessions. An upward trend (↑) is positive and means your first sessions are improving over time, while a downward trend (↓) suggests declining quality." />
+                  <Tooltip text="This shows your average First Session Quality Score across your last 5 first sessions with new students. The trend indicator (↑ or ↓) compares your recent performance to earlier sessions." />
                 </div>
                 <div className="flex items-center gap-3">
-                  <span className="text-3xl font-bold">{avgFsqs}</span>
+                  <span className="text-3xl md:text-4xl font-bold">{avgFsqs}</span>
                   
                   {/* Sparkline */}
                   {fsqsHistory.length > 0 && (
-                    <svg width="80" height="30" className="flex-shrink-0">
+                    <svg width="80" height="30" className="flex-shrink-0" aria-label="FSQS trend">
                       <polyline
                         fill="none"
                         stroke={improvement > 0 ? '#10B981' : '#DC2626'}
@@ -199,9 +223,9 @@ const TutorDashboard = ({ tutorId }) => {
                   )}
                   
                   {improvement && (
-                    <span className={`text-sm font-medium ${
+                    <span className={`text-sm font-medium transition-colors ${
                       improvement > 0 ? 'text-green-600' : 'text-red-600'
-                    }`}>
+                    }`} aria-label={`${improvement > 0 ? 'Improving' : 'Declining'} by ${Math.abs(improvement)} percent`}>
                       {improvement > 0 ? '↑' : '↓'} {Math.abs(improvement)}%
                     </span>
                   )}
@@ -211,46 +235,53 @@ const TutorDashboard = ({ tutorId }) => {
 
             {/* What Went Well */}
             {fsqsLatest.feedback?.what_went_well && (
-              <div className="mb-4">
-                <h3 className="text-lg font-semibold text-green-700 mb-2">✓ What Went Well</h3>
+              <div className="mb-4 p-4 bg-green-50 rounded-lg border-l-4 border-green-500">
+                <h3 className="text-lg font-semibold text-green-700 mb-2 flex items-center gap-2">
+                  <span>✓</span> What Went Well
+                </h3>
                 <p className="text-gray-700">{fsqsLatest.feedback.what_went_well}</p>
               </div>
             )}
 
             {/* One Improvement Idea */}
             {fsqsLatest.feedback?.improvement_idea && (
-              <div>
-                <h3 className="text-lg font-semibold text-blue-700 mb-2">💡 One Improvement Idea</h3>
+              <div className="p-4 bg-blue-50 rounded-lg border-l-4 border-blue-500">
+                <h3 className="text-lg font-semibold text-blue-700 mb-2 flex items-center gap-2">
+                  <span>💡</span> One Improvement Idea
+                </h3>
                 <p className="text-gray-700">{fsqsLatest.feedback.improvement_idea}</p>
               </div>
             )}
           </div>
 
-          {/* FSQS Trend Sparkline */}
+          {/* FSQS Trend Visualization */}
           {fsqsHistory.length > 0 && (
-            <div className="bg-white rounded-lg shadow-md p-6 mb-4">
-              <div className="flex justify-between items-center mb-4">
+            <div className="bg-white rounded-lg shadow-md p-4 md:p-6 mb-4 hover-lift">
+              <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-4 gap-2">
                 <h3 className="text-lg font-semibold">FSQS Trend</h3>
-                <button
+                <AccessibleButton
                   onClick={() => setShowPastSessions(!showPastSessions)}
-                  className="text-blue-600 hover:text-blue-800 text-sm font-medium"
+                  variant="link"
+                  size="sm"
+                  ariaLabel="View past first sessions"
                 >
                   View Past First Sessions →
-                </button>
+                </AccessibleButton>
               </div>
               
-              {/* Simple Sparkline (using bars) */}
-              <div className="flex items-end gap-2 h-24 mb-4">
+              {/* Bar Chart */}
+              <div className="flex items-end gap-1 md:gap-2 h-24 mb-4">
                 {fsqsHistory.map((item, index) => {
                   const maxScore = Math.max(...fsqsHistory.map(h => h.score || 0), 100)
                   const height = ((item.score || 0) / maxScore) * 100
                   const color = item.score <= 50 ? 'bg-red-500' : item.score <= 70 ? 'bg-yellow-500' : 'bg-green-500'
                   return (
-                    <div key={index} className="flex-1 flex flex-col items-center">
+                    <div key={index} className="flex-1 flex flex-col items-center group">
                       <div
-                        className={`w-full ${color} rounded-t`}
+                        className={`w-full ${color} rounded-t transition-all hover:opacity-80`}
                         style={{ height: `${height}%` }}
                         title={`Score: ${item.score}`}
+                        aria-label={`Session ${index + 1}: Score ${item.score}`}
                       />
                     </div>
                   )
@@ -258,9 +289,9 @@ const TutorDashboard = ({ tutorId }) => {
               </div>
 
               <div className="text-sm text-gray-600">
-                Average: {avgFsqs} | {improvement && (
-                  <span className={improvement > 0 ? 'text-green-600' : 'text-red-600'}>
-                    {improvement > 0 ? 'Improving' : 'Declining'} by {Math.abs(improvement)}% vs previous period
+                Average: <span className="font-semibold">{avgFsqs}</span> {improvement && (
+                  <span className={improvement > 0 ? 'text-green-600 font-medium' : 'text-red-600 font-medium'}>
+                    • {improvement > 0 ? 'Improving' : 'Declining'} by {Math.abs(improvement)}% vs previous period
                   </span>
                 )}
               </div>
@@ -269,67 +300,88 @@ const TutorDashboard = ({ tutorId }) => {
 
           {/* Past First Sessions Side Panel */}
           {showPastSessions && (
-            <div className="fixed inset-y-0 right-0 w-96 bg-white shadow-xl z-50 overflow-y-auto">
-              <div className="p-6">
-                <div className="flex justify-between items-center mb-4">
-                  <h3 className="text-xl font-semibold">Past First Sessions</h3>
-                  <button
-                    onClick={() => setShowPastSessions(false)}
-                    className="text-gray-500 hover:text-gray-700"
-                  >
-                    ✕
-                  </button>
-                </div>
-                <div className="space-y-4">
-                  {fsqsHistory.map((item, index) => (
-                    <div key={index} className="border rounded-lg p-4">
-                      <div className="flex justify-between items-center mb-2">
-                        <span className="font-medium">{item.student_name || 'Unknown Student'}</span>
-                        <span className={`px-2 py-1 rounded text-sm ${
-                          item.score <= 50 ? 'bg-red-100 text-red-800' :
-                          item.score <= 70 ? 'bg-yellow-100 text-yellow-800' :
-                          'bg-green-100 text-green-800'
-                        }`}>
-                          {item.score}
-                        </span>
-                      </div>
-                      <div className="text-sm text-gray-600 mb-2">
-                        {formatDate(item.date)}
-                      </div>
-                      {item.feedback && (
-                        <div className="text-sm">
-                          <div className="text-green-700 mb-1">
-                            <strong>What went well:</strong> {item.feedback.what_went_well || 'N/A'}
-                          </div>
-                          <div className="text-blue-700">
-                            <strong>Improvement:</strong> {item.feedback.improvement_idea || 'N/A'}
-                          </div>
+            <>
+              {/* Overlay */}
+              <div 
+                className="fixed inset-0 bg-black bg-opacity-50 z-40 animate-fade-in"
+                onClick={() => setShowPastSessions(false)}
+                aria-hidden="true"
+              />
+              
+              {/* Side Panel */}
+              <aside 
+                className="fixed inset-y-0 right-0 w-full sm:w-96 bg-white shadow-2xl z-50 overflow-y-auto animate-slide-in-right"
+                role="dialog"
+                aria-label="Past first sessions"
+              >
+                <div className="p-6">
+                  <div className="flex justify-between items-center mb-4">
+                    <h3 className="text-xl font-semibold">Past First Sessions</h3>
+                    <AccessibleButton
+                      onClick={() => setShowPastSessions(false)}
+                      variant="ghost"
+                      size="sm"
+                      ariaLabel="Close panel"
+                      className="text-gray-500 hover:text-gray-700"
+                    >
+                      ✕
+                    </AccessibleButton>
+                  </div>
+                  <div className="space-y-4">
+                    {fsqsHistory.map((item, index) => (
+                      <div key={index} className="border rounded-lg p-4 hover-lift transition-all">
+                        <div className="flex justify-between items-center mb-2">
+                          <span className="font-medium">{item.student_name || 'Unknown Student'}</span>
+                          <span className={`px-2 py-1 rounded text-sm font-medium ${
+                            item.score <= 50 ? 'bg-red-100 text-red-800' :
+                            item.score <= 70 ? 'bg-yellow-100 text-yellow-800' :
+                            'bg-green-100 text-green-800'
+                          }`}>
+                            {item.score}
+                          </span>
                         </div>
-                      )}
-                    </div>
-                  ))}
+                        <div className="text-sm text-gray-600 mb-2">
+                          {formatDate(item.date)}
+                        </div>
+                        {item.feedback && (
+                          <div className="text-sm space-y-1">
+                            <div className="text-green-700">
+                              <strong>What went well:</strong> {item.feedback.what_went_well || 'N/A'}
+                            </div>
+                            <div className="text-blue-700">
+                              <strong>Improvement:</strong> {item.feedback.improvement_idea || 'N/A'}
+                            </div>
+                          </div>
+                        )}
+                      </div>
+                    ))}
+                  </div>
                 </div>
-              </div>
-            </div>
+              </aside>
+            </>
           )}
+        </section>
+      ) : (
+        <div className="mb-6 md:mb-8">
+          <EmptyFSQSState />
         </div>
       )}
 
       {/* Performance Summary Section */}
       {performanceSummary && (
-        <div className="mb-8">
-          <h2 className="text-2xl font-semibold mb-4">Performance Summary</h2>
-          <div className="bg-white rounded-lg shadow-md p-6">
-            <p className="text-gray-700 mb-4">{performanceSummary.summary}</p>
+        <section className="mb-6 md:mb-8 animate-slide-in-up" style={{ animationDelay: '0.1s' }}>
+          <h2 className="text-xl md:text-2xl font-semibold mb-4">Performance Summary</h2>
+          <div className="bg-white rounded-lg shadow-md p-4 md:p-6 hover-lift">
+            <p className="text-gray-700 mb-4 leading-relaxed">{performanceSummary.summary}</p>
             
             {/* SQS Trend Visualization */}
             {sessionList.length > 0 && (
               <div className="mt-4">
                 <h3 className="text-lg font-semibold mb-2">
                   SQS Trend
-                  <Tooltip text="Session Quality Score (SQS) tracks the operational quality of your sessions, focusing on punctuality, session duration, and technical reliability. Each bar represents one session (0-100 scale). Green bars (75+) indicate smooth sessions, yellow (60-75) shows minor issues, and red (<60) suggests significant problems like lateness, shortened sessions, or technical difficulties. Consistent green bars demonstrate strong reliability." />
+                  <Tooltip text="Session Quality Score (SQS) tracks the operational quality of your sessions, focusing on punctuality, session duration, and technical reliability. Green bars (75+) indicate smooth sessions, yellow (60-75) shows minor issues, and red (<60) suggests significant problems." />
                 </h3>
-                <div className="flex items-end gap-2 h-32">
+                <div className="flex items-end gap-1 md:gap-2 h-32">
                   {sessionList.slice(0, 10).map((session, index) => {
                     if (!session.sqs) return null
                     const maxSqs = Math.max(...sessionList.map(s => s.sqs || 0), 100)
@@ -338,11 +390,12 @@ const TutorDashboard = ({ tutorId }) => {
                     const color = sqsLabel.color === 'red' ? 'bg-red-500' : 
                                  sqsLabel.color === 'yellow' ? 'bg-yellow-500' : 'bg-green-500'
                     return (
-                      <div key={index} className="flex-1 flex flex-col items-center">
+                      <div key={index} className="flex-1 flex flex-col items-center group">
                         <div
-                          className={`w-full ${color} rounded-t`}
+                          className={`w-full ${color} rounded-t transition-all hover:opacity-80`}
                           style={{ height: `${height}%` }}
                           title={`SQS: ${session.sqs}`}
+                          aria-label={`Session ${index + 1}: SQS ${session.sqs}`}
                         />
                       </div>
                     )
@@ -351,88 +404,94 @@ const TutorDashboard = ({ tutorId }) => {
               </div>
             )}
           </div>
-        </div>
+        </section>
       )}
 
       {/* Recent Sessions Table */}
-      <div className="mb-8">
-        <h2 className="text-2xl font-semibold mb-4">Recent Sessions</h2>
+      <section className="mb-6 md:mb-8 animate-slide-in-up" style={{ animationDelay: '0.2s' }}>
+        <h2 className="text-xl md:text-2xl font-semibold mb-4">Recent Sessions</h2>
         <div className="bg-white rounded-lg shadow-md overflow-hidden">
-          <table className="min-w-full divide-y divide-gray-200">
-            <thead className="bg-gray-50">
-              <tr>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                  Date
-                </th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                  Student
-                </th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                  SQS
-                </th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                  FSQS Tag
-                </th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                  Notes
-                </th>
-              </tr>
-            </thead>
-            <tbody className="bg-white divide-y divide-gray-200">
-              {sessionList.length === 0 ? (
+          <div className="overflow-x-auto">
+            <table className="min-w-full divide-y divide-gray-200">
+              <thead className="bg-gray-50">
                 <tr>
-                  <td colSpan="5" className="px-6 py-4 text-center text-gray-500">
-                    No sessions found
-                  </td>
+                  <th scope="col" className="px-4 md:px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                    Date
+                  </th>
+                  <th scope="col" className="px-4 md:px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                    Student
+                  </th>
+                  <th scope="col" className="px-4 md:px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                    SQS
+                  </th>
+                  <th scope="col" className="px-4 md:px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                    FSQS Tag
+                  </th>
+                  <th scope="col" className="px-4 md:px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                    Notes
+                  </th>
                 </tr>
-              ) : (
-                sessionList.map((session) => {
-                  const sqsLabel = session.sqs ? getScoreLabel(session.sqs, 'sqs') : null
-                  return (
-                    <tr key={session.id}>
-                      <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
-                        {formatDate(session.date)}
-                      </td>
-                      <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
-                        {session.student_name}
-                      </td>
-                      <td className="px-6 py-4 whitespace-nowrap text-sm">
-                        {session.sqs ? (
-                          <span className={`px-2 py-1 rounded text-sm ${
-                            sqsLabel?.color === 'red' ? 'bg-red-100 text-red-800' :
-                            sqsLabel?.color === 'yellow' ? 'bg-yellow-100 text-yellow-800' :
-                            'bg-green-100 text-green-800'
-                          }`}>
-                            {session.sqs} ({sqsLabel?.label})
-                          </span>
-                        ) : (
-                          <span className="text-gray-400">N/A</span>
-                        )}
-                      </td>
-                      <td className="px-6 py-4 whitespace-nowrap text-sm">
-                        {session.first_session && session.fsqs ? (
-                          <span className={`px-2 py-1 rounded text-sm ${
-                            session.fsqs <= 50 ? 'bg-red-100 text-red-800' :
-                            session.fsqs <= 70 ? 'bg-yellow-100 text-yellow-800' :
-                            'bg-green-100 text-green-800'
-                          }`}>
-                            FSQS: {session.fsqs}
-                          </span>
-                        ) : (
-                          <span className="text-gray-400">—</span>
-                        )}
-                      </td>
-                      <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                        {session.first_session ? 'First Session' : '—'}
-                      </td>
-                    </tr>
-                  )
-                })
-              )}
-            </tbody>
-          </table>
+              </thead>
+              <tbody className="bg-white divide-y divide-gray-200">
+                {sessionList.length === 0 ? (
+                  <tr>
+                    <td colSpan="5" className="px-6 py-8">
+                      <EmptySessionState />
+                    </td>
+                  </tr>
+                ) : (
+                  sessionList.map((session) => {
+                    const sqsLabel = session.sqs ? getScoreLabel(session.sqs, 'sqs') : null
+                    return (
+                      <tr key={session.id} className="hover:bg-gray-50 transition-colors">
+                        <td className="px-4 md:px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                          {formatDate(session.date)}
+                        </td>
+                        <td className="px-4 md:px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                          {session.student_name}
+                        </td>
+                        <td className="px-4 md:px-6 py-4 whitespace-nowrap text-sm">
+                          {session.sqs ? (
+                            <span className={`px-2 py-1 rounded text-sm font-medium transition-colors ${
+                              sqsLabel?.color === 'red' ? 'bg-red-100 text-red-800' :
+                              sqsLabel?.color === 'yellow' ? 'bg-yellow-100 text-yellow-800' :
+                              'bg-green-100 text-green-800'
+                            }`}>
+                              {session.sqs} ({sqsLabel?.label})
+                            </span>
+                          ) : (
+                            <span className="text-gray-400">N/A</span>
+                          )}
+                        </td>
+                        <td className="px-4 md:px-6 py-4 whitespace-nowrap text-sm">
+                          {session.first_session && session.fsqs ? (
+                            <span className={`px-2 py-1 rounded text-sm font-medium transition-colors ${
+                              session.fsqs <= 50 ? 'bg-red-100 text-red-800' :
+                              session.fsqs <= 70 ? 'bg-yellow-100 text-yellow-800' :
+                              'bg-green-100 text-green-800'
+                            }`}>
+                              FSQS: {session.fsqs}
+                            </span>
+                          ) : (
+                            <span className="text-gray-400">—</span>
+                          )}
+                        </td>
+                        <td className="px-4 md:px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                          {session.first_session ? (
+                            <span className="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-purple-100 text-purple-800">
+                              First Session
+                            </span>
+                          ) : '—'}
+                        </td>
+                      </tr>
+                    )
+                  })
+                )}
+              </tbody>
+            </table>
+          </div>
         </div>
-      </div>
+      </section>
     </div>
   )
 }
