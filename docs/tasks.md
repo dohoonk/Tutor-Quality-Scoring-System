@@ -249,3 +249,22 @@
   - [ ] Churn-risk tutor (high TCRS, low engagement)
 - [ ] Prepare demo walk-through steps
 - [ ] Document demo scenarios
+
+---
+
+## EPIC 10 — Email Notifications (Post-MVP)
+- [ ] Configure ActionMailer for email delivery
+- [ ] Set up SMTP settings (development and production)
+- [ ] Create AlertMailer with email templates:
+  - [ ] Poor first session alert email
+  - [ ] High reliability risk alert email
+  - [ ] Churn risk alert email
+- [ ] Update AlertService to send emails when alerts are created:
+  - [ ] Send email to admin/coach when alert is triggered
+  - [ ] Include alert details and tutor information
+  - [ ] Add link to admin dashboard for alert management
+- [ ] Add email preferences/configuration:
+  - [ ] Allow admins to configure email recipients
+  - [ ] Support email frequency settings (immediate, daily digest, etc.)
+- [ ] Test email delivery in development and staging
+- [ ] Document email notification system
