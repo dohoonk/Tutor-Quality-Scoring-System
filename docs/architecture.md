@@ -18,7 +18,7 @@ The system processes session data, computes scoring metrics, stores rolling aggr
   - CRUD for sessions, transcripts, tutor summaries
   - Endpoints for dashboards (see Request/Response Paths below)
 - **Sidekiq Jobs**
-  - SessionScoringJob: Compute SQS + FSRS on recent sessions (every 5 min)
+  - SessionScoringJob: Compute SQS + FSQS on recent sessions (every 5 min)
   - TutorDailyAggregationJob: Aggregate daily metrics (every 10 min)
   - TutorHealthScoreJob: Compute THS from 7d rolling window (every 10 min)
   - TutorChurnRiskScoreJob: Compute TCRS from 14d rolling window (every 10 min)
@@ -29,12 +29,12 @@ The system processes session data, computes scoring metrics, stores rolling aggr
   - `tutor_daily_aggregates` - Daily aggregated metrics per tutor
   - `tutor_stats_7d` (materialized view) - Rolling 7-day window for THS
   - `tutor_stats_14d` (materialized view) - Rolling 14-day window for TCRS
-  - `scores` - All computed scores (SQS, FSRS, THS, TCRS) with components
+  - `scores` - All computed scores (SQS, FSQS, THS, TCRS) with components
   - `alerts` - Risk alerts and intervention tracking
   - `tutor_churn_scores` (optional) - Cached TCRS values
 - **Scoring Services**
   - SessionQualityScoreService: Computes SQS per session
-  - FirstSessionRiskScoreService: Computes FSRS for first sessions
+  - FirstSessionQualityScoreService: Computes FSQS for first sessions
   - TutorHealthScoreService: Computes THS from 7d metrics
   - TutorChurnRiskScoreService: Computes TCRS from 14d metrics
   - AlertService: Evaluates triggers and generates alerts
@@ -81,15 +81,15 @@ D --> N
 ## Request/Response Paths
 
 ### Tutor Dashboard (`/tutor/:id`)
-- `GET /api/tutor/:id/fsrs_latest` - Most recent FSRS with feedback payload
-- `GET /api/tutor/:id/fsrs_history` - Last 5 first-sessions with FSRS scores
+- `GET /api/tutor/:id/fsqs_latest` - Most recent FSQS with feedback payload
+- `GET /api/tutor/:id/fsqs_history` - Last 5 first-sessions with FSQS scores
 - `GET /api/tutor/:id/performance_summary` - AI-generated performance summary
 - `GET /api/tutor/:id/session_list` - Recent sessions with SQS values
 
 ### Admin Dashboard (`/admin/:id`)
 - `GET /api/admin/tutors/risk_list` - Sorted list of tutors with risk metrics
 - `GET /api/admin/tutor/:id/metrics` - Full metrics breakdown for tutor
-- `GET /api/admin/tutor/:id/fsrs_history` - FSRS history for tutor
+- `GET /api/admin/tutor/:id/fsqs_history` - FSQS history for tutor
 - `GET /api/admin/tutor/:id/intervention_log` - Past interventions and notes
 - `POST /api/admin/alerts/:id/update_status` - Update alert status and log interventions
 
@@ -97,7 +97,7 @@ D --> N
 
 | Job | Frequency | Purpose | Dependencies |
 |-----|-----------|---------|--------------|
-| SessionScoringJob | every 5 min | Compute SQS + FSRS on recent sessions | None |
+| SessionScoringJob | every 5 min | Compute SQS + FSQS on recent sessions | None |
 | TutorDailyAggregationJob | every 10 min | Update `tutor_daily_aggregates` | None |
 | TutorHealthScoreJob | every 10 min | Compute THS from `tutor_stats_7d` | After aggregation |
 | TutorChurnRiskScoreJob | every 10 min | Compute TCRS from `tutor_stats_14d` | After aggregation |
@@ -122,7 +122,7 @@ D --> N
 
 ### Alerts Table
 - `tutor_id`: foreign key
-- `alert_type`: 'poor_first_session', 'high_reliability_risk', 'churn_risk'
+- `alert_type`: 'low_first_session_quality', 'high_reliability_risk', 'churn_risk'
 - `severity`: 'high', 'medium', 'low'
 - `status`: 'open', 'resolved', 'acknowledged'
 - `triggered_at`, `resolved_at`: timestamps
@@ -142,7 +142,7 @@ D --> N
 - Applied to: All completed sessions
 - Labels: risk (<60), warn (60-75), ok (>75)
 
-### FSRS (First Session Risk Score)
+### FSQS (First Session Quality Score)
 - Formula: Sum of risk points (max 100+)
 - Components:
   - No goal-setting question early: +25
@@ -154,7 +154,7 @@ D --> N
   - Tech/lateness disruption: +10
 - Applied to: Only `first_session_for_student = true`
 - Requires: Speaker diarization in transcript
-- Threshold: FSRS ≥ 50 triggers alert
+- Threshold: FSQS ≥ 50 triggers alert
 
 ### THS (Tutor Health Score)
 - Formula: 0-100 scale based on 7-day reliability metrics
@@ -181,7 +181,7 @@ D --> N
 
 | Trigger | Condition | Alert Type | Severity |
 |---------|-----------|------------|----------|
-| Poor first session | FSRS ≥ 50 | poor_first_session | medium |
+| Low first session quality | FSQS ≥ 50 | low_first_session_quality | medium |
 | High reliability risk | THS < 55 | high_reliability_risk | high |
 | Churn risk | TCRS ≥ 0.6 | churn_risk | high |
 
@@ -191,7 +191,7 @@ Alerts auto-resolve when conditions improve.
 
 - Service: `PerformanceSummaryService`
 - Approach: Template-based for MVP (rule-based text generation)
-- Inputs: Recent SQS trends, FSRS history, session patterns
+- Inputs: Recent SQS trends, FSQS history, session patterns
 - Outputs: Encouraging, supportive text with:
   - "What went well" highlights
   - "One improvement suggestion"
@@ -199,8 +199,8 @@ Alerts auto-resolve when conditions improve.
 
 ## Notes for Implementation
 - Start with DB polling; event bus may be added post-MVP.
-- FSRS requires diarized transcript; skip FSRS if absent.
-- Tech issues + lateness affect session experience scores (SQS/FSRS), **not** tutor reliability scores (THS).
+- FSQS requires diarized transcript; skip FSQS if absent.
+- Tech issues + lateness affect session experience scores (SQS/FSQS), **not** tutor reliability scores (THS).
 - Churn detection uses explicit deactivation as ground truth for now.
 - Use sidekiq-scheduler for recurring job definitions.
 - Materialized views refresh after aggregation jobs complete.
@@ -208,7 +208,7 @@ Alerts auto-resolve when conditions improve.
 
 ## Next Steps
 - Implement migrations with materialized views
-- Implement scoring services (SQS, FSRS, THS, TCRS)
+- Implement scoring services (SQS, FSQS, THS, TCRS)
 - Build alert generation system
 - Configure job scheduling
 - Build React Tutor dashboard

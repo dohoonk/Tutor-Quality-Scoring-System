@@ -12,7 +12,7 @@ A fully automated system that transforms 3,000 daily tutoring sessions into acti
 
 1. **Automated Scoring Engine**
    - **SQS (Session Quality Score):** Objective metrics (lateness, duration, tech issues)
-   - **FSRS (First-Session Risk Score):** AI-powered transcript analysis for first sessions
+   - **FSQS (First-Session Risk Score):** AI-powered transcript analysis for first sessions
    - **THS (Tutor Health Score):** 7-day reliability and behavior trends
    - **TCRS (Tutor Churn Risk Score):** 14-day disengagement prediction
    - All scores computed automatically every 5 minutes via Sidekiq jobs
@@ -25,9 +25,9 @@ A fully automated system that transforms 3,000 daily tutoring sessions into acti
    - Runs every 10 minutes
 
 3. **Tutor Dashboard** (React SPA)
-   - Real-time FSRS feedback with detailed breakdown
+   - Real-time FSQS feedback with detailed breakdown
    - Performance summary with trend analysis
-   - FSRS history with visual sparkline
+   - FSQS history with visual sparkline
    - Recent sessions table
    - Supportive, actionable feedback
 
@@ -76,7 +76,7 @@ A fully automated system that transforms 3,000 daily tutoring sessions into acti
 
 **Key Models:**
 - `Tutor`, `Student`, `Session`, `SessionTranscript`
-- `Score` (polymorphic: SQS, FSRS, THS, TCRS)
+- `Score` (polymorphic: SQS, FSQS, THS, TCRS)
 - `Alert` (status: open/resolved)
 
 **Key Services:**
@@ -84,7 +84,7 @@ A fully automated system that transforms 3,000 daily tutoring sessions into acti
 - `AlertService` - Alert creation, resolution, email triggering
 
 **Background Jobs:**
-- `SessionScoringJob` (every 5 min) - Computes SQS + FSRS
+- `SessionScoringJob` (every 5 min) - Computes SQS + FSQS
 - `AlertJob` (every 10 min) - Evaluates thresholds, creates/resolves alerts
 
 ### Frontend (React + Tailwind)
@@ -125,7 +125,7 @@ bundle exec rspec
 - **Sessions Processed:** 3,000 per day
 - **Processing Time:** < 1 hour total
 - **SQS Calculation:** ~5 min per batch (every 5 min)
-- **FSRS Calculation:** ~5 min per batch (first sessions only)
+- **FSQS Calculation:** ~5 min per batch (first sessions only)
 - **Alert Evaluation:** ~10 min per cycle (every 10 min)
 - **Email Delivery:** Async (non-blocking)
 
@@ -163,8 +163,8 @@ Never punitive or demoralizing
 
 | Method | Endpoint | Purpose |
 |--------|----------|---------|
-| GET | `/api/tutor/:id/fsrs_latest` | Latest FSRS score with breakdown |
-| GET | `/api/tutor/:id/fsrs_history` | Historical FSRS scores |
+| GET | `/api/tutor/:id/fsqs_latest` | Latest FSQS score with breakdown |
+| GET | `/api/tutor/:id/fsqs_history` | Historical FSQS scores |
 | GET | `/api/tutor/:id/performance_summary` | AI-generated summary |
 | GET | `/api/tutor/:id/session_list` | Recent sessions with scores |
 
@@ -174,7 +174,7 @@ Never punitive or demoralizing
 |--------|----------|---------|
 | GET | `/api/admin/tutors/risk_list` | All tutors sorted by risk |
 | GET | `/api/admin/tutor/:id/metrics` | Detailed tutor metrics |
-| GET | `/api/admin/tutor/:id/fsrs_history` | FSRS history for admin view |
+| GET | `/api/admin/tutor/:id/fsqs_history` | FSQS history for admin view |
 | GET | `/api/admin/tutor/:id/intervention_log` | Past resolved alerts |
 | POST | `/api/admin/alerts/:id/update_status` | Update alert status |
 
@@ -248,7 +248,7 @@ AlertJob.new.perform
 # Test email (opens in browser)
 tutor = Tutor.first
 alert = Alert.where(status: 'open').first
-AlertMailer.poor_first_session_alert(alert, 'test@example.com').deliver_now
+AlertMailer.low_first_session_quality_alert(alert, 'test@example.com').deliver_now
 ```
 
 ## Production Deployment
@@ -330,7 +330,7 @@ WEB_CONCURRENCY=2
    - Predictive modeling (ML-based churn prediction)
    - A/B testing for coaching interventions
 
-2. **Enhanced FSRS**
+2. **Enhanced FSQS**
    - Speaker identification in transcripts
    - Word share balance analysis
    - Sentiment analysis
@@ -360,7 +360,7 @@ WEB_CONCURRENCY=2
 - ❌ Generic coaching feedback
 - ❌ Manual session review (100+ hours/week)
 - ❌ Tutors leave without warning
-- ❌ Poor first sessions go unnoticed
+- ❌ Low first session qualitys go unnoticed
 
 ### After System
 

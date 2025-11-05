@@ -83,11 +83,11 @@ sessions.each do |session|
   service.save_score(result)
 end
 
-# Calculate and save FSRS scores for first sessions
+# Calculate and save FSQS scores for first sessions
 first_sessions = tutor.sessions.where(status: 'completed', first_session_for_student: true).limit(5)
 first_sessions.each do |session|
   next unless session.session_transcript
-  service = FirstSessionRiskScoreService.new(session)
+  service = FirstSessionQualityScoreService.new(session)
   result = service.calculate
   service.save_score(result) if result
 end
@@ -134,8 +134,8 @@ sqs_service = SessionQualityScoreService.new(session)
 sqs_result = sqs_service.calculate
 sqs_service.save_score(sqs_result)
 
-# Calculate FSRS
-fsrs_service = FirstSessionRiskScoreService.new(session)
+# Calculate FSQS
+fsrs_service = FirstSessionQualityScoreService.new(session)
 fsrs_result = fsrs_service.calculate
 fsrs_service.save_score(fsrs_result) if fsrs_result
 
@@ -164,7 +164,7 @@ fsrs_service.save_score(fsrs_result) if fsrs_result
     }
   )
   
-  fsrs_service = FirstSessionRiskScoreService.new(session)
+  fsrs_service = FirstSessionQualityScoreService.new(session)
   fsrs_result = fsrs_service.calculate
   fsrs_service.save_score(fsrs_result) if fsrs_result
   
@@ -190,17 +190,17 @@ end
 
 ## Step 5: What to Test
 
-### ✅ FSRS Feedback Section (Top)
-- [ ] Most recent FSRS score is displayed
-- [ ] FSRS indicator shows correct color (red/yellow/green)
-- [ ] Average FSRS for last 5 sessions is shown
+### ✅ FSQS Feedback Section (Top)
+- [ ] Most recent FSQS score is displayed
+- [ ] FSQS indicator shows correct color (red/yellow/green)
+- [ ] Average FSQS for last 5 sessions is shown
 - [ ] Improvement direction percentage is displayed
 - [ ] "What went well" section shows feedback
 - [ ] "One improvement idea" section shows feedback
-- [ ] FSRS trend sparkline chart is visible (bar chart)
+- [ ] FSQS trend sparkline chart is visible (bar chart)
 - [ ] "View Past First Sessions" button works
 - [ ] Side panel opens when clicking "View Past First Sessions"
-- [ ] Side panel shows list of past FSRS entries
+- [ ] Side panel shows list of past FSQS entries
 - [ ] Each entry shows student name, date, score, and feedback
 - [ ] Side panel can be closed
 
@@ -214,7 +214,7 @@ end
 - [ ] Date column shows formatted dates
 - [ ] Student name column is populated
 - [ ] SQS column shows score with color-coded label
-- [ ] FSRS Tag column shows FSRS for first sessions
+- [ ] FSQS Tag column shows FSQS for first sessions
 - [ ] Notes column shows "First Session" for first sessions
 - [ ] Empty state shows "No sessions found" when no data
 
@@ -223,13 +223,13 @@ end
 Open browser DevTools (F12) and test API endpoints:
 
 ```javascript
-// Test FSRS Latest
-fetch('/api/tutor/1/fsrs_latest')
+// Test FSQS Latest
+fetch('/api/tutor/1/fsqs_latest')
   .then(r => r.json())
   .then(console.log)
 
-// Test FSRS History
-fetch('/api/tutor/1/fsrs_history')
+// Test FSQS History
+fetch('/api/tutor/1/fsqs_history')
   .then(r => r.json())
   .then(console.log)
 
@@ -246,8 +246,8 @@ fetch('/api/tutor/1/session_list')
 
 ## Step 6: Test Edge Cases
 
-### No FSRS Data
-1. Use a tutor ID that has no FSRS scores
+### No FSQS Data
+1. Use a tutor ID that has no FSQS scores
 2. Verify the dashboard handles missing data gracefully
 3. Check that sections don't break
 
@@ -331,7 +331,7 @@ tutor = Tutor.first || Tutor.create!(name: 'Test Tutor', email: 'test@example.co
   end
   
   unless Score.exists?(session: session, score_type: 'fsrs')
-    fsrs_service = FirstSessionRiskScoreService.new(session)
+    fsrs_service = FirstSessionQualityScoreService.new(session)
     fsrs_result = fsrs_service.calculate
     fsrs_service.save_score(fsrs_result) if fsrs_result
   end
@@ -346,8 +346,8 @@ puts "Visit: http://localhost:3000/tutor/#{tutor.id}"
 When everything is working, you should see:
 
 1. **Dashboard loads** without errors in console
-2. **FSRS Feedback card** at the top with score and feedback
-3. **FSRS Trend chart** showing bar visualization
+2. **FSQS Feedback card** at the top with score and feedback
+3. **FSQS Trend chart** showing bar visualization
 4. **Performance Summary** with text and SQS trend
 5. **Recent Sessions Table** with data rows
 6. **All sections** are styled with Tailwind CSS

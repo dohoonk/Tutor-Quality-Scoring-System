@@ -38,14 +38,14 @@ http://localhost:3000/admin/1
 ### Step 2: Verify Risk Overview Table
 
 The table should display:
-- **Columns:** Tutor Name, Status, FSRS, THS, TCRS, Alerts, Actions
+- **Columns:** Tutor Name, Status, FSQS, THS, TCRS, Alerts, Actions
 - **Multiple tutors** from the seed data
 - **Color-coded status badges:**
   - Red badges = High risk
   - Yellow badges = Warning/Monitor
   - Green badges = Stable
 - **Risk scores:**
-  - FSRS values (0-100, lower is better)
+  - FSQS values (0-100, lower is better)
   - THS values (0-100, higher is better)
   - TCRS values (0-1, lower is better)
 - **Alert counts** (if any alerts exist)
@@ -66,7 +66,7 @@ Click the "View Details" button on any tutor in the table.
 - A new section appears below the table
 - Shows "Tutor Details: [Tutor Name]"
 - Displays three score cards:
-  1. **First Session Risk Score (FSRS)**
+  1. **First Session Quality Score (FSQS)**
      - Shows numeric score
      - Color-coded indicator (⚠️ High Risk / Warning / ✓ Good)
   2. **Tutor Health Score (THS) - 7d**
@@ -195,10 +195,10 @@ curl http://localhost:3000/api/admin/tutor/1/metrics | jq
 - [ ] Includes latest scores
 - [ ] SQS history array present (if tutor has sessions)
 
-### Test 3: Get FSRS History
+### Test 3: Get FSQS History
 
 ```bash
-curl http://localhost:3000/api/admin/tutor/1/fsrs_history | jq
+curl http://localhost:3000/api/admin/tutor/1/fsqs_history | jq
 ```
 
 **Expected Response:**
@@ -217,7 +217,7 @@ curl http://localhost:3000/api/admin/tutor/1/fsrs_history | jq
 ```
 
 **What to check:**
-- [ ] Returns array of FSRS scores
+- [ ] Returns array of FSQS scores
 - [ ] Each has score, dates, and components
 - [ ] Sorted by most recent first
 
@@ -232,7 +232,7 @@ curl http://localhost:3000/api/admin/tutor/1/intervention_log | jq
 [
   {
     "id": 1,
-    "alert_type": "poor_first_session",
+    "alert_type": "low_first_session_quality",
     "severity": "high",
     "triggered_at": "2025-11-01T...",
     "resolved_at": "2025-11-02T...",

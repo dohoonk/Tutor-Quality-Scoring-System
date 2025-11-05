@@ -107,7 +107,7 @@ This document summarizes all POST-MVP features implemented for the Tutor Quality
 **Implementation**:
 - All 5 jobs configured in `config/sidekiq_schedule.yml`:
   1. **SessionScoringJob**: Every 5 minutes
-     - Computes SQS and FSRS for completed sessions
+     - Computes SQS and FSQS for completed sessions
   2. **AlertJob**: Every 10 minutes
      - Evaluates tutor scores and creates/resolves alerts
   3. **TutorDailyAggregationJob**: Every 6 hours at :00
@@ -219,7 +219,7 @@ Every → SessionScoringJob (every 5 min) scores new sessions
 | Dashboard Load Time (cached) | ~50ms | ~5ms | 10x faster |
 | THS/TCRS Availability | Manual/N/A | Every 6 hours | Automated |
 | Database Query Load | High (per request) | Low (cached) | 80% reduction |
-| Alert Accuracy | Good (SQS/FSRS only) | Excellent (+ THS/TCRS) | +50% coverage |
+| Alert Accuracy | Good (SQS/FSQS only) | Excellent (+ THS/TCRS) | +50% coverage |
 
 ### Scalability
 
@@ -284,7 +284,7 @@ All POST-MVP features (EPIC 11-15) are now complete and production-ready:
 - ✅ Zero regressions in existing functionality
 
 The system now provides comprehensive tutor quality scoring with:
-- **Session-level metrics** (SQS, FSRS)
+- **Session-level metrics** (SQS, FSQS)
 - **Weekly reliability tracking** (THS)
 - **Bi-weekly churn prediction** (TCRS)
 - **Automated alerting** (poor first sessions, reliability risk, churn risk)

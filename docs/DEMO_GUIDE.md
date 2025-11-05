@@ -29,7 +29,7 @@ We've created four narrative profiles that tell compelling stories:
 
 **Key Stats:**
 - **SQS Average:** 98/100 (Excellent)
-- **FSRS:** 0 (Perfect first sessions)
+- **FSQS:** 0 (Perfect first sessions)
 - **THS:** 95/100 (Highly reliable)
 - **TCRS:** 0.15 (Very stable, no churn risk)
 - **Sessions:** 20 in last 2 weeks
@@ -41,7 +41,7 @@ We've created four narrative profiles that tell compelling stories:
 
 **What to Show:**
 - ✅ Consistent high SQS scores in the trend
-- ✅ Perfect FSRS feedback: "What went well" highlights all positives
+- ✅ Perfect FSQS feedback: "What went well" highlights all positives
 - ✅ Performance summary shows "Excellent consistency!"
 - ✅ All sessions green in the recent sessions table
 
@@ -52,7 +52,7 @@ We've created four narrative profiles that tell compelling stories:
 
 **Key Stats:**
 - **SQS Trend:** Started at 65, now at 85 (Improving!)
-- **FSRS:** 35 (Some early issues, but improving)
+- **FSQS:** 35 (Some early issues, but improving)
 - **THS:** 72/100 (Monitor - getting better)
 - **TCRS:** 0.35 (Stable)
 - **Sessions:** 15 in last 2 weeks
@@ -65,7 +65,7 @@ We've created four narrative profiles that tell compelling stories:
 **What to Show:**
 - ✅ Clear upward trend in SQS sparkline
 - ✅ Performance summary: "Great progress! Your session quality has been improving consistently"
-- ✅ FSRS feedback shows some areas to work on, but improving
+- ✅ FSQS feedback shows some areas to work on, but improving
 - ✅ Recent sessions show higher scores than earlier ones
 - ✅ Perfect example of coaching working
 
@@ -76,7 +76,7 @@ We've created four narrative profiles that tell compelling stories:
 
 **Key Stats:**
 - **SQS Trend:** Started at 88, now at 64 (Declining!)
-- **FSRS:** 55 (High Risk - **ALERT TRIGGERED**)
+- **FSQS:** 55 (High Risk - **ALERT TRIGGERED**)
 - **THS:** 48/100 (High Risk)
 - **TCRS:** 0.52 (Monitor - concerning)
 - **Sessions:** 15 in last 2 weeks
@@ -88,7 +88,7 @@ We've created four narrative profiles that tell compelling stories:
 
 **What to Show:**
 - ⚠️ Clear downward trend in SQS sparkline
-- ⚠️ FSRS shows HIGH RISK with red indicator
+- ⚠️ FSQS shows HIGH RISK with red indicator
 - ⚠️ Performance summary acknowledges the dip but remains supportive
 - ⚠️ Admin dashboard shows Maria with **red status badges**
 - ⚠️ Alert count shows "1 open" in admin view
@@ -101,7 +101,7 @@ We've created four narrative profiles that tell compelling stories:
 
 **Key Stats:**
 - **SQS Average:** 68 (Mediocre, inconsistent)
-- **FSRS:** 45 (Warning level)
+- **FSQS:** 45 (Warning level)
 - **THS:** 52/100 (High Risk)
 - **TCRS:** 0.72 (High Churn Risk - **ALERT TRIGGERED**)
 - **Sessions:** Only 8 in last 2 weeks (low engagement)
@@ -142,7 +142,7 @@ We've created four narrative profiles that tell compelling stories:
    - "Maria used to be great - SQS was 88"
    - "But look at this declining trend (point to sparkline)"
    - "She triggered an alert on her recent first session"
-   - "FSRS of 55 means something went wrong - maybe confusion, missing goal-setting"
+   - "FSQS of 55 means something went wrong - maybe confusion, missing goal-setting"
 
 4. **Show the intervention workflow:**
    - "The system already flagged this"
@@ -179,7 +179,7 @@ We've created four narrative profiles that tell compelling stories:
    - "What went well: 'You're showing solid fundamentals'"
    - "One improvement: 'Focus on consistency - start on time'"
 
-3. **Show FSRS section:**
+3. **Show FSQS section:**
    - "For his first session, some areas to improve"
    - "But the feedback is constructive, not punitive"
    - "Specific, actionable suggestions"
@@ -211,7 +211,7 @@ We've created four narrative profiles that tell compelling stories:
 
 2. **Explain the jobs:**
    - "SessionScoringJob runs every 5 minutes"
-   - "Analyzes 3,000 sessions, computes SQS and FSRS"
+   - "Analyzes 3,000 sessions, computes SQS and FSQS"
    - "AlertJob runs every 10 minutes"
    - "Checks thresholds, creates alerts, auto-resolves when conditions improve"
 
@@ -221,7 +221,7 @@ We've created four narrative profiles that tell compelling stories:
    - "No manual review needed for scoring"
 
 4. **Explain the thresholds:**
-   - "FSRS ≥50 = Alert for poor first session"
+   - "FSQS ≥50 = Alert for poor first session"
    - "THS <55 = High reliability risk"
    - "TCRS ≥0.6 = Churn risk"
    - "System prevents duplicate alerts"
@@ -249,13 +249,13 @@ We've created four narrative profiles that tell compelling stories:
 ### Common Questions & Answers
 
 **Q: How accurate are the scores?**
-A: The system uses objective metrics (timing, duration, tech issues) for SQS. FSRS analyzes actual transcripts for specific patterns like goal-setting and encouragement. It's based on real data, not subjective reviews.
+A: The system uses objective metrics (timing, duration, tech issues) for SQS. FSQS analyzes actual transcripts for specific patterns like goal-setting and encouragement. It's based on real data, not subjective reviews.
 
 **Q: Won't this stress out tutors?**
 A: The feedback is designed to be supportive and actionable. Look at James's dashboard - it celebrates his improvement. Even declining tutors get encouraging language with specific suggestions.
 
 **Q: What if a tutor disagrees with their score?**
-A: Scores come with detailed breakdowns. For FSRS, tutors can see exactly what patterns were detected (e.g., "missing goal-setting question"). It's transparent and specific.
+A: Scores come with detailed breakdowns. For FSQS, tutors can see exactly what patterns were detected (e.g., "missing goal-setting question"). It's transparent and specific.
 
 **Q: How do you prevent alert fatigue?**
 A: The system prevents duplicate alerts - if Maria already has an alert open, it won't create another one. Alerts auto-resolve when conditions improve. Only one open alert per type per tutor.

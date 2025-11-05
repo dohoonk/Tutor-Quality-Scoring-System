@@ -66,8 +66,8 @@
 - [x] Apply label thresholds (risk <60, warn 60-75, ok >75)
 - [x] Write score to `scores` table with components breakdown
 
-### FSRS (First Session Risk Score)
-- [x] Write FSRS service tests (TDD: write test → see fail → build service → see pass)
+### FSQS (First Session Quality Score)
+- [x] Write FSQS service tests (TDD: write test → see fail → build service → see pass)
 - [x] Detect confusion phrases (>=3 instances in student turns) → +20
 - [x] Compute tutor vs student word share (tutor >75% of words) → +20
 - [x] Detect missing goal-setting question early in session → +25
@@ -75,18 +75,18 @@
 - [x] Detect negative phrasing streak → +10
 - [x] Detect missing closing summary or next steps → +20
 - [x] Apply tech/lateness disruption penalty → +10 if present
-- [x] Calculate final FSRS (sum of risk points)
+- [x] Calculate final FSQS (sum of risk points)
 - [x] Generate structured feedback payload:
   - [x] "What went well" (positive signals)
   - [x] "One improvement idea" (highest-impact issue)
   - [x] Breakdown by component
-- [x] Write FSRS to `scores` table (only for first_session_for_student = true)
-- [x] Skip FSRS if transcript lacks speaker diarization
+- [x] Write FSQS to `scores` table (only for first_session_for_student = true)
+- [x] Skip FSQS if transcript lacks speaker diarization
 
 ### Alert Generation
 - [x] Write AlertService tests (TDD: write test → see fail → build service → see pass)
 - [x] Create AlertService to evaluate triggers:
-  - [x] FSRS ≥ 50 → "Poor first session" alert
+  - [x] FSQS ≥ 50 → "Low first session quality" alert
   - [x] THS < 55 → "High reliability risk" alert
   - [x] TCRS ≥ 0.6 → "Churn risk" alert
 - [x] Write AlertJob tests (TDD: write test → see fail → build job → see pass)
@@ -100,28 +100,28 @@
 - [x] Create React route `/tutor/:id`
 
 ### API Endpoints (TDD: write request specs → see fail → build endpoints → see pass)
-- [x] Write API endpoint tests (TDD: write test → see fail → build endpoint → see pass) for `GET /api/tutor/:id/fsrs_latest`
-- [x] `GET /api/tutor/:id/fsrs_latest` - Most recent FSRS with feedback
-- [x] Write API endpoint tests (TDD: write test → see fail → build endpoint → see pass) for `GET /api/tutor/:id/fsrs_history`
-- [x] `GET /api/tutor/:id/fsrs_history` - Last 5 first-sessions with FSRS
+- [x] Write API endpoint tests (TDD: write test → see fail → build endpoint → see pass) for `GET /api/tutor/:id/fsqs_latest`
+- [x] `GET /api/tutor/:id/fsqs_latest` - Most recent FSQS with feedback
+- [x] Write API endpoint tests (TDD: write test → see fail → build endpoint → see pass) for `GET /api/tutor/:id/fsqs_history`
+- [x] `GET /api/tutor/:id/fsqs_history` - Last 5 first-sessions with FSQS
 - [x] Write API endpoint tests (TDD: write test → see fail → build endpoint → see pass) for `GET /api/tutor/:id/performance_summary`
 - [x] `GET /api/tutor/:id/performance_summary` - AI-generated summary (template-based for MVP)
 - [x] Write API endpoint tests (TDD: write test → see fail → build endpoint → see pass) for `GET /api/tutor/:id/session_list`
 - [x] `GET /api/tutor/:id/session_list` - Recent sessions with SQS values
 
-### FSRS Feedback Section (top)
-- [x] Fetch most recent FSRS via `/api/tutor/:id/fsrs_latest`
+### FSQS Feedback Section (top)
+- [x] Fetch most recent FSQS via `/api/tutor/:id/fsqs_latest`
 - [x] Display "First Session Quality Feedback" card:
-  - [x] SQS + FSRS indicators (visually separated)
+  - [x] SQS + FSQS indicators (visually separated)
   - [x] "What went well" section
   - [x] "One improvement idea" section
-- [x] FSRS Trend component:
-  - [x] Fetch FSRS history via `/api/tutor/:id/fsrs_history`
+- [x] FSQS Trend component:
+  - [x] Fetch FSQS history via `/api/tutor/:id/fsqs_history`
   - [x] Display sparkline chart (last 5 first-sessions)
-  - [x] Show average FSRS score
+  - [x] Show average FSQS score
   - [x] Highlight improvement direction (e.g., +12% vs previous period)
 - [x] "View Past First Sessions" link → side panel:
-  - [x] List of previous FSRS summary entries
+  - [x] List of previous FSQS summary entries
   - [x] Each entry expandable with transcript-based explanation snippets
 
 ### Performance Summary Section (second)
@@ -131,7 +131,7 @@
 
 ### Recent Sessions Table
 - [x] Fetch sessions via `/api/tutor/:id/session_list`
-- [x] Display table with: Date, Student, SQS, FSRS Tag, Notes
+- [x] Display table with: Date, Student, SQS, FSQS Tag, Notes
 
 ---
 
@@ -140,21 +140,21 @@
 
 ### API Endpoints (TDD: write request specs → see fail → build endpoints → see pass)
 - [x] Write API endpoint tests (TDD: write test → see fail → build endpoint → see pass) for `GET /api/admin/tutors/risk_list`
-- [x] `GET /api/admin/tutors/risk_list` - Sorted list with FSRS + THS + TCRS
+- [x] `GET /api/admin/tutors/risk_list` - Sorted list with FSQS + THS + TCRS
 - [x] `GET /api/admin/tutor/:id/metrics` - Full metrics breakdown
-- [x] `GET /api/admin/tutor/:id/fsrs_history` - FSRS history for tutor
+- [x] `GET /api/admin/tutor/:id/fsqs_history` - FSQS history for tutor
 - [x] `GET /api/admin/tutor/:id/intervention_log` - Past interventions
 - [x] `POST /api/admin/alerts/:id/update_status` - Update alert status
 
 ### Risk Overview Table
 - [x] Fetch tutors via `/api/admin/tutors/risk_list`
 - [x] Sort by risk (Reschedule, No-Show, Churn)
-- [x] Display: Tutor Name, Status Badges, FSRS, THS, TCRS, Alert Status
+- [x] Display: Tutor Name, Status Badges, FSQS, THS, TCRS, Alert Status
 
 ### Tutor Detail Panel
 - [x] Header: Tutor Name + Status Badges (Risk / Reliability / Churn)
 - [x] SQS Trend: Sparkline of last N sessions
-- [x] FSRS Overview: Last first-session score displayed
+- [x] FSQS Overview: Last first-session score displayed
 - [x] THS value with label
 - [x] TCRS value with label
 - [x] Intervention Log: Past resolved alerts with details
@@ -203,14 +203,14 @@
 - [x] Create SessionScoringJob
 - [x] Poll for new/updated sessions (DB polling every 5 min)
 - [x] Compute SQS for all completed sessions
-- [x] Compute FSRS for first_session_for_student = true (if transcript available)
+- [x] Compute FSQS for first_session_for_student = true (if transcript available)
 - [x] Write scores to scores table
 - [x] Schedule: every 5 minutes
 
 ### Alert Job
 - [x] Write AlertJob tests (TDD: write test → see fail → build job → see pass)
 - [x] Create AlertJob (uses AlertService)
-- [x] Evaluate FSRS thresholds (≥50 = poor first session alert)
+- [x] Evaluate FSQS thresholds (≥50 = poor first session alert)
 - [x] Evaluate THS thresholds (<55 = high reliability risk alert)
 - [x] Evaluate TCRS thresholds (≥0.6 = churn risk alert)
 - [x] Prevent duplicate alerts (keeps existing alerts open)
@@ -243,7 +243,7 @@
 
 ## EPIC 9 — Demo Polish
 - [x] Create narrative data profiles:
-  - [x] Strong tutor (high SQS, low FSRS, stable THS/TCRS) - Sarah Excellence
+  - [x] Strong tutor (high SQS, low FSQS, stable THS/TCRS) - Sarah Excellence
   - [x] Improving tutor (positive trend) - James Improving
   - [x] Slipping tutor (declining metrics) - Maria Declining
   - [x] Churn-risk tutor (high TCRS, low engagement) - Alex ChurnRisk
@@ -256,7 +256,7 @@
 - [x] Configure ActionMailer for email delivery (development: letter_opener, production: SMTP)
 - [x] Set up SMTP settings (development and production)
 - [x] Create AlertMailer with email templates:
-  - [x] Poor first session alert email (HTML + plain text)
+  - [x] Low first session quality alert email (HTML + plain text)
   - [x] High reliability risk alert email (HTML + plain text)
   - [x] Churn risk alert email (HTML + plain text)
 - [x] Update AlertService to send emails when alerts are created:
@@ -275,12 +275,12 @@
 
 ---
 
-## EPIC 11 — Refactor FSRS to FSQS (First Session Quality Score)
+## EPIC 11 — Refactor FSQS to FSQS (First Session Quality Score)
 
-**Goal:** Rename FSRS (First Session Risk Score) to FSQS (First Session Quality Score) and invert scoring system from "lower is better" to "higher is better" for consistency with SQS. New scoring: 100 (perfect) - penalties = final score.
+**Goal:** Rename FSQS (First Session Quality Score) to FSQS (First Session Quality Score) and invert scoring system from "lower is better" to "higher is better" for consistency with SQS. New scoring: 100 (perfect) - penalties = final score.
 
 ### Task 11.1: Update Core Scoring Service ✅
-- [x] Rename `FirstSessionRiskScoreService` to `FirstSessionQualityScoreService`
+- [x] Rename `FirstSessionQualityScoreService` to `FirstSessionQualityScoreService`
 - [x] Update score calculation to start at 100 and subtract penalties
 - [x] Update MAX_SCORE constant from 120 to 100
 - [x] Update component penalty values to fit 0-100 scale:
@@ -303,16 +303,16 @@
 
 ### Task 11.3: Update Alert System ✅
 - [x] Update AlertService threshold: `>= 50` → `<= 50` (inverted)
-- [x] Rename alert mailer views: `poor_first_session_alert` → `low_first_session_quality_alert`
+- [x] Rename alert mailer views: `low_first_session_quality_alert` → `low_first_session_quality_alert`
 - [x] Update email templates to reflect FSQS naming
 - [x] Update email content: "Risk Score" → "Quality Score"
 - [x] Update threshold explanations in emails (higher is better)
 
 ### Task 11.4: Update API Endpoints ✅
 - [x] Rename API routes:
-  - [x] `/api/tutor/:id/fsrs_latest` → `/api/tutor/:id/fsqs_latest`
-  - [x] `/api/tutor/:id/fsrs_history` → `/api/tutor/:id/fsqs_history`
-  - [x] `/api/admin/tutor/:id/fsrs_history` → `/api/admin/tutor/:id/fsqs_history`
+  - [x] `/api/tutor/:id/fsqs_latest` → `/api/tutor/:id/fsqs_latest`
+  - [x] `/api/tutor/:id/fsqs_history` → `/api/tutor/:id/fsqs_history`
+  - [x] `/api/admin/tutor/:id/fsqs_history` → `/api/admin/tutor/:id/fsqs_history`
 - [x] Update controller methods and logic
 - [x] Update admin API risk scoring algorithm (invert FSQS comparison)
 - [ ] Maintain backward compatibility (optional: support both endpoints temporarily)
@@ -324,17 +324,17 @@
   - [x] Invert threshold logic: `>= 50` → `<= 50`, `>= 30` → `<= 70`
   - [x] Update tooltips: "Risk Score" → "Quality Score", explain higher is better
   - [x] Update trend indicators: ↑ = improvement, ↓ = decline
-  - [x] Update labels: "FSRS" → "FSQS"
+  - [x] Update labels: "FSQS" → "FSQS"
 - [x] Update AdminDashboard.jsx:
   - [x] Rename all `fsrs` variables to `fsqs`
   - [x] Update getRiskBadge logic (invert thresholds)
-  - [x] Update metric cards: "First Session Risk Score" → "First Session Quality Score"
+  - [x] Update metric cards: "First Session Quality Score" → "First Session Quality Score"
   - [x] Invert color coding logic
 - [x] Update session table displays (both dashboards)
 
 ### Task 11.6: Update All Tests
 - [ ] Update service specs:
-  - [ ] Rename `first_session_risk_score_service_spec.rb` → `first_session_quality_score_service_spec.rb`
+  - [ ] Rename `first_session_quality_score_service_spec.rb` → `first_session_quality_score_service_spec.rb`
   - [ ] Update all score expectations (invert values)
   - [ ] Update test descriptions and assertions
 - [ ] Update job specs:
@@ -350,7 +350,7 @@
 
 ### Task 11.7: Update Documentation
 - [ ] Update `docs/prd.md`:
-  - [ ] Replace all FSRS references with FSQS
+  - [ ] Replace all FSQS references with FSQS
   - [ ] Update scoring explanation (100 = perfect, 0 = worst)
   - [ ] Update threshold descriptions
 - [ ] Update `docs/architecture.md`:
@@ -371,13 +371,13 @@
 - [ ] Update `docs/EMAIL_NOTIFICATIONS.md`:
   - [ ] Update threshold explanations
   - [ ] Update alert type descriptions
-- [ ] Update README.md if it contains FSRS references
+- [ ] Update README.md if it contains FSQS references
 
 ### Task 11.8: Clean Up Legacy Code ✅
 - [x] Remove or update legacy `compute_fsrs` method in SessionScoringJob (replaced with service call)
 - [x] Update any remaining comments referencing "risk" to "quality"
-- [x] Remove old service file (first_session_risk_score_service.rb)
-- [x] Remove old email templates (poor_first_session_alert.*)
+- [x] Remove old service file (first_session_quality_score_service.rb)
+- [x] Remove old email templates (low_first_session_quality_alert.*)
 
 ### Task 11.9: Testing & Verification
 - [ ] Run full test suite and ensure all tests pass

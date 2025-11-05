@@ -14,7 +14,7 @@ Alerts are evaluated every 10 minutes by the `AlertJob`:
 
 | Alert Type | Trigger Condition | Severity |
 |-----------|------------------|----------|
-| Poor First Session | FSRS ≥ 50 | High |
+| Poor First Session | FSQS ≥ 50 | High |
 | High Reliability Risk | THS < 55 | High |
 | Churn Risk | TCRS ≥ 0.6 | High |
 
@@ -28,9 +28,9 @@ Alerts are evaluated every 10 minutes by the `AlertJob`:
 
 Each alert type has its own professionally designed email template:
 
-- **Poor First Session Alert** (`poor_first_session_alert`)
+- **Poor First Session Alert** (`low_first_session_quality_alert`)
   - Subject: "🚨 Alert: Poor First Session Detected"
-  - Includes: FSRS score, score breakdown, recommended actions
+  - Includes: FSQS score, score breakdown, recommended actions
   
 - **High Reliability Risk Alert** (`high_reliability_risk_alert`)
   - Subject: "⚠️ Alert: High Reliability Risk Detected"
@@ -68,7 +68,7 @@ rails console
 tutor = Tutor.first
 alert = Alert.create!(
   tutor: tutor,
-  alert_type: 'poor_first_session',
+  alert_type: 'low_first_session_quality',
   severity: 'high',
   status: 'open',
   triggered_at: Time.current,
@@ -76,7 +76,7 @@ alert = Alert.create!(
 )
 
 # Manually send email (normally automatic)
-AlertMailer.poor_first_session_alert(alert, 'test@example.com').deliver_now
+AlertMailer.low_first_session_quality_alert(alert, 'test@example.com').deliver_now
 ```
 
 The email will open in your browser via `letter_opener`.
@@ -156,7 +156,7 @@ Currently, all alerts are sent to a single `ADMIN_EMAIL`. Future enhancements co
    ```ruby
    # Only send churn risk alerts
    CHURN_ALERT_EMAILS=manager@example.com
-   FSRS_ALERT_EMAILS=coach@example.com
+   FSQS_ALERT_EMAILS=coach@example.com
    ```
 
 3. **Frequency Settings:**
@@ -236,7 +236,7 @@ Alert.create! (new alert)
   ↓
 AlertService.send_alert_email(alert)
   ↓
-AlertMailer.poor_first_session_alert(alert, admin_email).deliver_later
+AlertMailer.low_first_session_quality_alert(alert, admin_email).deliver_later
   ↓
 Sidekiq (async processing)
   ↓
@@ -279,8 +279,8 @@ AlertService.new.evaluate_and_create_alerts(tutor)
 ### Updating Email Templates
 
 Templates are located in:
-- `app/views/alert_mailer/poor_first_session_alert.html.erb` (HTML)
-- `app/views/alert_mailer/poor_first_session_alert.text.erb` (Plain text)
+- `app/views/alert_mailer/low_first_session_quality_alert.html.erb` (HTML)
+- `app/views/alert_mailer/low_first_session_quality_alert.text.erb` (Plain text)
 - `app/views/alert_mailer/high_reliability_risk_alert.html.erb`
 - `app/views/alert_mailer/high_reliability_risk_alert.text.erb`
 - `app/views/alert_mailer/churn_risk_alert.html.erb`
