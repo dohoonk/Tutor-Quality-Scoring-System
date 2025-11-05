@@ -12,3 +12,8 @@ const AdminDashboard = ({ adminId }) => {
 
 export default AdminDashboard
 
+// Fast Refresh preamble placeholder
+if (import.meta.hot) {
+  import.meta.hot.accept()
+}
+
