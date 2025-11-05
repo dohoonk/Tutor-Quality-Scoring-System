@@ -19,7 +19,7 @@
 - [x] Set up RSpec for testing
 - [x] Create Tutor model (TDD: write test → see fail → build model → see pass)
 - [x] Create Student model (TDD: write test → see fail → build model → see pass)
-- [ ] Create Session model with fields:
+- [ ] Create Session model (TDD: write test → see fail → build model → see pass) with fields:
   - [ ] scheduled_start_at
   - [ ] actual_start_at
   - [ ] scheduled_end_at
@@ -30,9 +30,9 @@
   - [ ] first_session_for_student
 - [ ] Add indexes for tutor_id + student_id
 
-- [ ] Create SessionTranscript model (session_id, payload:jsonb)
+- [ ] Create SessionTranscript model (TDD: write test → see fail → build model → see pass) (session_id, payload:jsonb)
 
-- [ ] Create tables:
+- [ ] Create tables (TDD: write migration tests → see fail → create migrations → see pass):
   - [ ] scores (session_id, score_type, value, components:jsonb, computed_at)
   - [ ] alerts (tutor_id, alert_type, severity, status, triggered_at, resolved_at, metadata:jsonb)
   - [ ] tutor_daily_aggregates (tutor_id, date, sessions_completed, reschedules_tutor_initiated, no_shows, avg_lateness_min, etc.)
@@ -56,8 +56,9 @@
 
 ---
 
-## EPIC 4 — Scoring Services
+## EPIC 4 — Scoring Services (TDD Approach)
 ### SQS (Session Quality Score)
+- [ ] Write SQS service tests (TDD: write test → see fail → build service → see pass)
 - [ ] Compute lateness penalty: `min(20, 2 * lateness_min)`
 - [ ] Compute duration shortfall penalty: `min(10, 1 * end_shortfall_min)`
 - [ ] Compute tech disruption penalty: `10 if tech_issue else 0`
@@ -66,6 +67,7 @@
 - [ ] Write score to `scores` table with components breakdown
 
 ### FSRS (First Session Risk Score)
+- [ ] Write FSRS service tests (TDD: write test → see fail → build service → see pass)
 - [ ] Detect confusion phrases (>=3 instances in student turns) → +20
 - [ ] Compute tutor vs student word share (tutor >75% of words) → +20
 - [ ] Detect missing goal-setting question early in session → +25
@@ -82,20 +84,22 @@
 - [ ] Skip FSRS if transcript lacks speaker diarization
 
 ### Alert Generation
+- [ ] Write AlertService tests (TDD: write test → see fail → build service → see pass)
 - [ ] Create AlertService to evaluate triggers:
   - [ ] FSRS ≥ 50 → "Poor first session" alert
   - [ ] THS < 55 → "High reliability risk" alert
   - [ ] TCRS ≥ 0.6 → "Churn risk" alert
+- [ ] Write AlertJob tests (TDD: write test → see fail → build job → see pass)
 - [ ] Create AlertJob to run every 10 min
 - [ ] Generate alerts in `alerts` table
 - [ ] Auto-resolve alerts when conditions improve
 
 ---
 
-## EPIC 5 — Tutor Dashboard (`/tutor/:id`)
-- [ ] Create React route `/tutor/:id`
+## EPIC 5 — Tutor Dashboard (`/tutor/:id`) (TDD Approach)
+- [x] Create React route `/tutor/:id`
 
-### API Endpoints
+### API Endpoints (TDD: write request specs → see fail → build endpoints → see pass)
 - [ ] `GET /api/tutor/:id/fsrs_latest` - Most recent FSRS with feedback
 - [ ] `GET /api/tutor/:id/fsrs_history` - Last 5 first-sessions with FSRS
 - [ ] `GET /api/tutor/:id/performance_summary` - AI-generated summary (template-based for MVP)
@@ -127,10 +131,10 @@
 
 ---
 
-## EPIC 6 — Admin Dashboard (`/admin/:id`)
-- [ ] Create React route `/admin/:id`
+## EPIC 6 — Admin Dashboard (`/admin/:id`) (TDD Approach)
+- [x] Create React route `/admin/:id`
 
-### API Endpoints
+### API Endpoints (TDD: write request specs → see fail → build endpoints → see pass)
 - [ ] `GET /api/admin/tutors/risk_list` - Sorted list with FSRS + THS + TCRS
 - [ ] `GET /api/admin/tutor/:id/metrics` - Full metrics breakdown
 - [ ] `GET /api/admin/tutor/:id/fsrs_history` - FSRS history for tutor
@@ -167,8 +171,9 @@
 
 ---
 
-## EPIC 7 — Reliability & Churn Jobs
+## EPIC 7 — Reliability & Churn Jobs (TDD Approach)
 ### Daily Aggregation Job
+- [ ] Write TutorDailyAggregationJob tests (TDD: write test → see fail → build job → see pass)
 - [ ] Create TutorDailyAggregationJob
 - [ ] Compute tutor_daily_aggregates for completed sessions
 - [ ] Calculate: sessions_completed, reschedules_tutor_initiated, no_shows, avg_lateness_min
@@ -176,6 +181,7 @@
 - [ ] Refresh tutor_stats_7d materialized view after aggregation
 
 ### THS (Tutor Health Score) Job
+- [ ] Write TutorHealthScoreJob tests (TDD: write test → see fail → build job → see pass)
 - [ ] Create TutorHealthScoreJob
 - [ ] Compute from tutor_stats_7d:
   - [ ] Tutor-initiated reschedule rate (7d)
@@ -188,6 +194,7 @@
 - [ ] Schedule: every 10 minutes (after aggregation)
 
 ### TCRS (Tutor Churn Risk Score) Job
+- [ ] Write TutorChurnRiskScoreJob tests (TDD: write test → see fail → build job → see pass)
 - [ ] Create TutorChurnRiskScoreJob
 - [ ] Compute from tutor_stats_14d:
   - [ ] Availability drop vs previous 14d period
@@ -202,6 +209,7 @@
 - [ ] Schedule: every 10 minutes (after aggregation)
 
 ### Scoring Job
+- [ ] Write SessionScoringJob tests (TDD: write test → see fail → build job → see pass)
 - [ ] Create SessionScoringJob
 - [ ] Poll for new/updated sessions (DB polling every 5 min)
 - [ ] Compute SQS for all completed sessions
@@ -220,7 +228,8 @@
 
 ---
 
-## EPIC 8 — Performance Summary Generation
+## EPIC 8 — Performance Summary Generation (TDD Approach)
+- [ ] Write PerformanceSummaryService tests (TDD: write test → see fail → build service → see pass)
 - [ ] Create PerformanceSummaryService
 - [ ] Template-based approach for MVP:
   - [ ] Analyze recent SQS trends
