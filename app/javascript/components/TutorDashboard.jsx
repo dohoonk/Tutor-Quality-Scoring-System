@@ -447,34 +447,69 @@ const TutorDashboard = ({ tutorId }) => {
             <p className="text-gray-700 mb-4 leading-relaxed">{performanceSummary.summary}</p>
             
             {/* SQS Trend Visualization */}
-            {sessionList.length > 0 && (
-              <div className="mt-4">
-                <h3 className="text-lg font-semibold mb-2">
-                  SQS Trend
-                  <Tooltip text="Session Quality Score (SQS) tracks the operational quality of your sessions, focusing on punctuality, session duration, and technical reliability. Green bars (75+) indicate smooth sessions, yellow (60-75) shows minor issues, and red (<60) suggests significant problems." />
-                </h3>
-                <div className="flex items-end gap-1 md:gap-2 h-32">
-                  {sessionList.slice(0, 10).map((session, index) => {
-                    if (!session.sqs) return null
-                    const maxSqs = Math.max(...sessionList.map(s => s.sqs || 0), 100)
-                    const height = (session.sqs / maxSqs) * 100
-                    const sqsLabel = getScoreLabel(session.sqs, 'sqs')
-                    const color = sqsLabel.color === 'red' ? 'bg-red-500' : 
-                                 sqsLabel.color === 'yellow' ? 'bg-yellow-500' : 'bg-green-500'
-                    return (
-                      <div key={index} className="flex-1 flex flex-col items-center group">
-                        <div
-                          className={`w-full ${color} rounded-t transition-all hover:opacity-80`}
-                          style={{ height: `${height}%` }}
-                          title={`SQS: ${session.sqs}`}
-                          aria-label={`Session ${index + 1}: SQS ${session.sqs}`}
-                        />
+            {sessionList.length > 0 && (() => {
+              const sessionsWithSqs = sessionList.filter(s => s.sqs !== null && s.sqs !== undefined)
+              const totalAvg = sessionsWithSqs.length > 0 
+                ? (sessionsWithSqs.reduce((sum, s) => sum + (s.sqs || 0), 0) / sessionsWithSqs.length).toFixed(1)
+                : '0.0'
+              const last10Sessions = sessionsWithSqs.slice(0, 10)
+              const last10Avg = last10Sessions.length > 0
+                ? (last10Sessions.reduce((sum, s) => sum + (s.sqs || 0), 0) / last10Sessions.length).toFixed(1)
+                : '0.0'
+              
+              return (
+                <div className="mt-4">
+                  <h3 className="text-lg font-semibold mb-4">
+                    SQS Trend
+                    <Tooltip text="Session Quality Score (SQS) tracks the operational quality of your sessions, focusing on punctuality, session duration, and technical reliability. Green bars (75+) indicate smooth sessions, yellow (60-75) shows minor issues, and red (<60) suggests significant problems." />
+                  </h3>
+                  
+                  {/* Desktop: Side-by-side layout (Metrics left, Chart right) */}
+                  <div className="md:grid md:grid-cols-2 md:gap-6">
+                    {/* Left: Metrics */}
+                    <div className="mb-4 md:mb-0">
+                      <div className="space-y-4">
+                        {/* Total Average */}
+                        <div className="bg-blue-50 rounded-lg p-4 border-l-4 border-blue-500">
+                          <div className="text-sm text-blue-700 font-medium mb-1">Total Average</div>
+                          <div className="text-3xl font-bold text-blue-900">{totalAvg}</div>
+                          <div className="text-xs text-blue-600 mt-1">{sessionsWithSqs.length} sessions</div>
+                        </div>
+                        
+                        {/* Last 10 Average */}
+                        <div className="bg-green-50 rounded-lg p-4 border-l-4 border-green-500">
+                          <div className="text-sm text-green-700 font-medium mb-1">Last 10 Average</div>
+                          <div className="text-3xl font-bold text-green-900">{last10Avg}</div>
+                          <div className="text-xs text-green-600 mt-1">Last {last10Sessions.length} sessions</div>
+                        </div>
                       </div>
-                    )
-                  })}
+                    </div>
+                    
+                    {/* Right: Chart */}
+                    <div className="flex items-end gap-1 md:gap-2 h-32">
+                      {sessionList.slice(0, 10).map((session, index) => {
+                        if (!session.sqs) return null
+                        const maxSqs = Math.max(...sessionList.map(s => s.sqs || 0), 100)
+                        const height = (session.sqs / maxSqs) * 100
+                        const sqsLabel = getScoreLabel(session.sqs, 'sqs')
+                        const color = sqsLabel.color === 'red' ? 'bg-red-500' : 
+                                     sqsLabel.color === 'yellow' ? 'bg-yellow-500' : 'bg-green-500'
+                        return (
+                          <div key={index} className="flex-1 flex flex-col items-center group">
+                            <div
+                              className={`w-full ${color} rounded-t transition-all hover:opacity-80`}
+                              style={{ height: `${height}%` }}
+                              title={`SQS: ${session.sqs}`}
+                              aria-label={`Session ${index + 1}: SQS ${session.sqs}`}
+                            />
+                          </div>
+                        )
+                      })}
+                    </div>
+                  </div>
                 </div>
-              </div>
-            )}
+              )
+            })()}
           </div>
         </section>
       )}
