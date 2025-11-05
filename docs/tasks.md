@@ -19,16 +19,16 @@
 - [x] Set up RSpec for testing
 - [x] Create Tutor model (TDD: write test → see fail → build model → see pass)
 - [x] Create Student model (TDD: write test → see fail → build model → see pass)
-- [ ] Create Session model (TDD: write test → see fail → build model → see pass) with fields:
-  - [ ] scheduled_start_at
-  - [ ] actual_start_at
-  - [ ] scheduled_end_at
-  - [ ] actual_end_at
-  - [ ] status
-  - [ ] reschedule_initiator
-  - [ ] tech_issue
-  - [ ] first_session_for_student
-- [ ] Add indexes for tutor_id + student_id
+- [x] Create Session model (TDD: write test → see fail → build model → see pass) with fields:
+  - [x] scheduled_start_at
+  - [x] actual_start_at
+  - [x] scheduled_end_at
+  - [x] actual_end_at
+  - [x] status
+  - [x] reschedule_initiator
+  - [x] tech_issue
+  - [x] first_session_for_student
+- [x] Add indexes for tutor_id + student_id
 
 - [ ] Create SessionTranscript model (TDD: write test → see fail → build model → see pass) (session_id, payload:jsonb)
 
