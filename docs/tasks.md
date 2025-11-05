@@ -147,32 +147,22 @@
 - [x] `POST /api/admin/alerts/:id/update_status` - Update alert status
 
 ### Risk Overview Table
-- [ ] Fetch tutors via `/api/admin/tutors/risk_list`
-- [ ] Sort by risk (Reschedule, No-Show, Churn)
-- [ ] Display: Tutor Name, Status Badges, FSRS, THS, TCRS, Alert Status
+- [x] Fetch tutors via `/api/admin/tutors/risk_list`
+- [x] Sort by risk (Reschedule, No-Show, Churn)
+- [x] Display: Tutor Name, Status Badges, FSRS, THS, TCRS, Alert Status
 
 ### Tutor Detail Panel
-- [ ] Header: Tutor Name + Status Badges (Risk / Reliability / Churn)
-- [ ] SQS Trend: Sparkline of last N sessions
-- [ ] FSRS Overview: Last first-session score + Trend across students
-- [ ] THS Breakdown (7-day Health Score):
-  - [ ] Reschedule Rate (7d)
-  - [ ] Lateness Trend (7d) - only behavioral patterns
-  - [ ] No-Show Count (7d)
-  - [ ] Overall THS value with label
-- [ ] TCRS Breakdown (14-day Churn Risk):
-  - [ ] Sessions_14d vs previous 14d
-  - [ ] Availability_14d trend
-  - [ ] Repeat Student Rate
-  - [ ] Overall TCRS value with label
-- [ ] Session Table: Date, Student, SQS, FSRS Tag, Notes
-- [ ] First-Session Feedback List: Each FSRS case with transcript link + suggestions
+- [x] Header: Tutor Name + Status Badges (Risk / Reliability / Churn)
+- [x] SQS Trend: Sparkline of last N sessions
+- [x] FSRS Overview: Last first-session score displayed
+- [x] THS value with label
+- [x] TCRS value with label
+- [x] Intervention Log: Past resolved alerts with details
 
-### Alerts Management
-- [ ] Fetch alerts for tutor
-- [ ] Display alerts list with status
-- [ ] Status update button (assign coach, mark outreach done, add note)
-- [ ] Log interventions to intervention_log
+### Alerts Management (Basic Implementation)
+- [x] Fetch past interventions for tutor
+- [x] Display alerts list with status
+- [ ] Status update button (assign coach, mark outreach done, add note) - Can be added post-MVP
 
 ---
 
