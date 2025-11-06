@@ -13,21 +13,66 @@ const Tooltip = ({ text }) => {
   const [show, setShow] = useState(false)
   const [position, setPosition] = useState({ top: 0, left: 0 })
   const buttonRef = useRef(null)
+  const tooltipRef = useRef(null)
   
   const updatePosition = () => {
     if (buttonRef.current) {
-      const rect = buttonRef.current.getBoundingClientRect()
-      setPosition({
-        top: rect.top - 8, // Position above the button
-        left: rect.left + rect.width / 2 // Center horizontally
+      // Use requestAnimationFrame to ensure DOM is ready
+      requestAnimationFrame(() => {
+        const rect = buttonRef.current.getBoundingClientRect()
+        
+        // For fixed positioning, use viewport coordinates directly (no scroll offset needed)
+        // Position tooltip above the button, centered horizontally
+        setPosition({
+          top: rect.top, // Viewport top position
+          left: rect.left + (rect.width / 2) // Center of button horizontally
+        })
       })
     }
   }
   
   const handleMouseEnter = () => {
-    updatePosition()
     setShow(true)
+    // Update position immediately and then again after render
+    updatePosition()
   }
+  
+  // Update position when tooltip is shown and on scroll/resize
+  useEffect(() => {
+    if (show && buttonRef.current) {
+      // Wait for next frame to ensure DOM is ready
+      requestAnimationFrame(() => {
+        updatePosition()
+        
+        // Also update after a short delay to catch any layout changes
+        setTimeout(updatePosition, 100)
+      })
+      
+      const handleScroll = () => {
+        if (buttonRef.current) {
+          updatePosition()
+        }
+      }
+      const handleResize = () => {
+        if (buttonRef.current) {
+          updatePosition()
+        }
+      }
+      
+      // Listen to scroll on all scrollable containers
+      window.addEventListener('scroll', handleScroll, true) // true = capture phase
+      window.addEventListener('resize', handleResize)
+      
+      // Also listen to scroll on the document
+      document.addEventListener('scroll', handleScroll, true)
+      
+      return () => {
+        window.removeEventListener('scroll', handleScroll, true)
+        window.removeEventListener('resize', handleResize)
+        document.removeEventListener('scroll', handleScroll, true)
+      }
+    }
+  }, [show])
   
   return (
     <>
@@ -49,6 +94,7 @@ const Tooltip = ({ text }) => {
       </div>
       {show && (
         <div 
+          ref={tooltipRef}
           className="fixed w-64 p-3 bg-gray-900 text-white text-xs rounded-lg shadow-lg z-[9999] pointer-events-none"
           style={{
             top: `${position.top}px`,
@@ -73,10 +119,24 @@ const AdminDashboard = ({ adminId }) => {
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(null)
   const [detailLoading, setDetailLoading] = useState(false)
+  const tutorDetailsRef = useRef(null)
 
   useEffect(() => {
     fetchTutorList()
   }, [])
+
+  // Auto-scroll to tutor details when a tutor is selected and data is loaded
+  useEffect(() => {
+    if (selectedTutor && !detailLoading && tutorMetrics && tutorDetailsRef.current) {
+      // Use setTimeout to ensure DOM is fully updated and animations have started
+      setTimeout(() => {
+        tutorDetailsRef.current?.scrollIntoView({ 
+          behavior: 'smooth', 
+          block: 'start' 
+        })
+      }, 150)
+    }
+  }, [selectedTutor, detailLoading, tutorMetrics])
 
   const fetchTutorList = async () => {
     setLoading(true)
@@ -363,7 +423,11 @@ const AdminDashboard = ({ adminId }) => {
 
       {/* Tutor Detail Panel */}
       {selectedTutor && (
-        <section className="mb-6 md:mb-8 animate-slide-in-up" style={{ animationDelay: '0.1s' }}>
+        <section 
+          ref={tutorDetailsRef}
+          className="mb-6 md:mb-8 animate-slide-in-up" 
+          style={{ animationDelay: '0.1s' }}
+        >
           <div className="bg-gray-50 p-4 md:p-6 rounded-lg border-2 border-blue-200">
             <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-4 gap-2">
               <h2 className="text-xl md:text-2xl font-semibold">
@@ -449,6 +513,39 @@ const AdminDashboard = ({ adminId }) => {
                       {tutorMetrics.tcrs >= 0.6 ? '⚠️ High Risk' :
                        tutorMetrics.tcrs >= 0.3 ? '⚠️ Monitor' :
                        '✓ Stable'}
+                    </div>
+                  </div>
+                </div>
+
+                {/* 30-Day Session Metrics */}
+                <div className="bg-white rounded-lg shadow-md p-4 md:p-6 mb-6 hover-lift">
+                  <h3 className="text-lg font-semibold mb-4">30-Day Session Metrics</h3>
+                  <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6">
+                    {/* Reschedules */}
+                    <div className="border-l-4 border-yellow-500 bg-yellow-50 rounded-lg p-4">
+                      <div className="text-sm font-medium text-yellow-700 mb-1">Reschedules</div>
+                      <div className="text-3xl font-bold text-yellow-900">
+                        {tutorMetrics.reschedules_count !== undefined ? tutorMetrics.reschedules_count : 0}
+                      </div>
+                      <div className="text-xs text-yellow-600 mt-1">Tutor-initiated (last 30 days)</div>
+                    </div>
+
+                    {/* No Shows */}
+                    <div className="border-l-4 border-red-500 bg-red-50 rounded-lg p-4">
+                      <div className="text-sm font-medium text-red-700 mb-1">No Shows</div>
+                      <div className="text-3xl font-bold text-red-900">
+                        {tutorMetrics.no_shows_count !== undefined ? tutorMetrics.no_shows_count : 0}
+                      </div>
+                      <div className="text-xs text-red-600 mt-1">Last 30 days</div>
+                    </div>
+
+                    {/* Late Joins */}
+                    <div className="border-l-4 border-orange-500 bg-orange-50 rounded-lg p-4">
+                      <div className="text-sm font-medium text-orange-700 mb-1">Late Joins</div>
+                      <div className="text-3xl font-bold text-orange-900">
+                        {tutorMetrics.late_joins_count !== undefined ? tutorMetrics.late_joins_count : 0}
+                      </div>
+                      <div className="text-xs text-orange-600 mt-1">Completed sessions (last 30 days)</div>
                     </div>
                   </div>
                 </div>

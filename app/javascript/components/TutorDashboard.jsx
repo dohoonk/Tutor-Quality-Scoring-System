@@ -222,6 +222,16 @@ const TutorDashboard = ({ tutorId }) => {
         <p className="text-gray-600 mt-1">Track your session quality and student engagement</p>
       </header>
 
+      {/* Active Alert Card - Hidden for now */}
+      {/* {activeAlerts && activeAlerts.length > 0 && (
+        <section className="mb-6 md:mb-8">
+          <div className="bg-red-50 border-l-4 border-red-500 rounded-lg p-4 md:p-6">
+            <h2 className="text-lg font-semibold text-red-900 mb-2">Active Alerts</h2>
+            ...
+          </div>
+        </section>
+      )} */}
+
       {/* FSQS Feedback Section */}
       {fsqsLatest ? (
         <section className="mb-6 md:mb-8 animate-slide-in-up">
@@ -724,10 +734,12 @@ const TutorDashboard = ({ tutorId }) => {
             data={sessionList}
             keyExtractor={(session) => session.id}
             emptyState={<EmptySessionState />}
+            defaultSort={{ column: 'date', direction: 'desc' }}
             columns={[
               {
                 key: 'date',
                 label: 'Date',
+                sortable: true,
                 render: (session) => (
                   <span className="whitespace-nowrap">{formatDate(session.date)}</span>
                 )
@@ -735,11 +747,13 @@ const TutorDashboard = ({ tutorId }) => {
               {
                 key: 'student_name',
                 label: 'Student',
+                sortable: true,
                 render: (session) => session.student_name
               },
               {
                 key: 'sqs',
                 label: 'SQS',
+                sortable: true,
                 render: (session) => {
                   if (!session.sqs) return <span className="text-gray-400">N/A</span>
                   const sqsLabel = getScoreLabel(session.sqs, 'sqs')
@@ -757,6 +771,7 @@ const TutorDashboard = ({ tutorId }) => {
               {
                 key: 'fsqs',
                 label: 'FSQS Tag',
+                sortable: true,
                 render: (session) => {
                   if (session.first_session && session.fsqs) {
                     return (
@@ -773,8 +788,9 @@ const TutorDashboard = ({ tutorId }) => {
                 }
               },
               {
-                key: 'notes',
+                key: 'first_session',
                 label: 'Notes',
+                sortable: true,
                 render: (session) => {
                   if (session.first_session) {
                     return (
