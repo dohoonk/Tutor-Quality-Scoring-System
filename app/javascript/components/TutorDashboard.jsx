@@ -687,6 +687,42 @@ const TutorDashboard = ({ tutorId }) => {
                                           </span>
                                         )}
                                       </div>
+                                      
+                                      {/* Transcript Quotes */}
+                                      {moment.transcript_quotes && moment.transcript_quotes.length > 0 && (
+                                        <div className="mb-3 bg-gray-50 rounded p-3 border border-gray-200">
+                                          <p className="text-xs font-medium text-gray-700 mb-2">📝 Exact Transcript:</p>
+                                          <div className="space-y-2">
+                                            {moment.transcript_quotes.map((quote, qIdx) => (
+                                              <div 
+                                                key={qIdx} 
+                                                className={`text-sm ${
+                                                  quote.is_context 
+                                                    ? 'opacity-75 italic' 
+                                                    : ''
+                                                } ${
+                                                  quote.speaker?.toLowerCase() === 'tutor' 
+                                                    ? 'text-blue-700' 
+                                                    : 'text-green-700'
+                                                }`}
+                                              >
+                                                <span className="font-medium">
+                                                  {quote.speaker?.charAt(0).toUpperCase() + quote.speaker?.slice(1) || 'Speaker'}
+                                                  {quote.timestamp && ` [${quote.timestamp}]`}
+                                                  {quote.verified === false && (
+                                                    <span className="text-xs text-yellow-600 ml-1">(AI-generated)</span>
+                                                  )}
+                                                  {quote.is_context && (
+                                                    <span className="text-xs text-gray-500 ml-1">(context)</span>
+                                                  )}
+                                                </span>
+                                                <span className="ml-2">"{quote.text}"</span>
+                                              </div>
+                                            ))}
+                                          </div>
+                                        </div>
+                                      )}
+                                      
                                       <p className="text-sm text-gray-700 mb-2">
                                         <span className="font-medium">Context:</span> {moment.context}
                                       </p>

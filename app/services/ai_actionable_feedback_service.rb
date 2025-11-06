@@ -32,7 +32,10 @@ class AiActionableFeedbackService
     # Call LLM
     begin
       response = call_openai(prompt)
-      feedback = parse_response(response)
+      feedback = parse_response(response, transcript_data)
+      
+      # Enrich with verified transcript quotes
+      feedback = enrich_with_transcript_quotes(feedback, transcript_data)
       
       # Cache the result
       cache_feedback(feedback)
@@ -73,6 +76,7 @@ class AiActionableFeedbackService
     sessions.map do |session|
       transcript = session.session_transcript.payload
       {
+        session_id: session.id,
         student_name: session.student.name,
         session_date: session.scheduled_start_at.strftime('%Y-%m-%d'),
         session_time: session.scheduled_start_at.strftime('%I:%M %p'),
@@ -100,7 +104,8 @@ class AiActionableFeedbackService
       2. For each moment, provide:
          - Student name
          - Session date/time
-         - What the student did/said (or what was happening)
+         - Exact transcript quotes: Include the ACTUAL quoted text from the transcript that shows the moment (student's words, tutor's words, or both)
+         - What was happening (context)
          - Specific phrase or action that would have been appropriate
          - Why this would help the student
       3. Format your response as valid JSON with this structure:
@@ -110,6 +115,18 @@ class AiActionableFeedbackService
             "student_name": "Student Name",
             "session_date": "YYYY-MM-DD",
             "session_time": "HH:MM AM/PM",
+            "transcript_quotes": [
+              {
+                "speaker": "student",
+                "text": "Exact quoted text from transcript",
+                "timestamp": "00:05:23"
+              },
+              {
+                "speaker": "tutor",
+                "text": "Exact quoted text from transcript",
+                "timestamp": "00:05:30"
+              }
+            ],
             "context": "What was happening at this moment",
             "suggestion": "Specific phrase or action",
             "reason": "Why this would help"
@@ -117,7 +134,13 @@ class AiActionableFeedbackService
         ]
       }
 
-      Be specific and reference actual content from the transcripts. Focus on moments where the tutor could have improved based on the actionable item.
+      IMPORTANT: 
+      - Include EXACT quotes from the transcript in transcript_quotes array
+      - Copy the text verbatim as it appears in the transcript
+      - Include 2-4 relevant speaker turns (the student's statement and the tutor's response, or surrounding context)
+      - Use the exact timestamps from the transcript
+      - Be specific and reference actual content from the transcripts
+      - Focus on moments where the tutor could have improved based on the actionable item
     PROMPT
 
     prompt
@@ -200,7 +223,7 @@ class AiActionableFeedbackService
           }
         ],
         temperature: 0.7,
-        max_tokens: 1000
+        max_tokens: 2000  # Increased to accommodate transcript quotes
       }
     )
 
@@ -210,7 +233,7 @@ class AiActionableFeedbackService
     raise
   end
 
-  def parse_response(response_text)
+  def parse_response(response_text, transcript_data = nil)
     # Try to extract JSON from response
     json_match = response_text.match(/\{[\s\S]*\}/)
     if json_match
@@ -227,6 +250,184 @@ class AiActionableFeedbackService
   rescue JSON::ParserError => e
     Rails.logger.error("Failed to parse OpenAI response: #{e.message}")
     get_fallback_feedback
+  end
+
+  def enrich_with_transcript_quotes(feedback, transcript_data)
+    return feedback if feedback[:error] || feedback[:fallback]
+
+    # Create a lookup map: student_name + date -> transcript data
+    transcript_map = transcript_data.each_with_object({}) do |data, map|
+      key = "#{data[:student_name]}|#{data[:session_date]}"
+      map[key] = data
+    end
+
+    enriched_moments = feedback[:moments].map do |moment|
+      # Find matching transcript
+      key = "#{moment['student_name']}|#{moment['session_date']}"
+      transcript_info = transcript_map[key]
+
+      if transcript_info
+        # If AI provided quotes, verify them; otherwise extract based on context/suggestion
+        if moment['transcript_quotes'] && moment['transcript_quotes'].any?
+          verified_quotes = verify_and_enrich_quotes(
+            moment['transcript_quotes'],
+            transcript_info[:speakers]
+          )
+        else
+          # Try to find relevant quotes based on context or suggestion keywords
+          verified_quotes = extract_relevant_quotes(moment, transcript_info[:speakers])
+        end
+        
+        moment.merge(
+          'transcript_quotes' => verified_quotes,
+          'session_id' => transcript_info[:session_id]
+        )
+      else
+        moment
+      end
+    end
+
+    feedback.merge(moments: enriched_moments)
+  end
+
+  def verify_and_enrich_quotes(quotes_from_ai, actual_speakers)
+    # If AI provided quotes, try to match them to actual transcript
+    # If exact match found, use it; otherwise use AI's version but mark it
+    return [] unless quotes_from_ai.is_a?(Array)
+
+    verified_quotes = []
+    
+    quotes_from_ai.each do |quote|
+      speaker = quote['speaker']&.downcase
+      text = quote['text']
+      timestamp = quote['timestamp']
+
+      # Try to find exact match in transcript
+      matched_speaker = actual_speakers.find do |s|
+        s['speaker']&.downcase == speaker &&
+        s['text']&.strip == text&.strip &&
+        (timestamp.nil? || s['timestamp'] == timestamp)
+      end
+
+      if matched_speaker
+        # Use exact match from transcript
+        verified_quotes << {
+          'speaker' => matched_speaker['speaker'],
+          'text' => matched_speaker['text'],
+          'timestamp' => matched_speaker['timestamp'],
+          'verified' => true
+        }
+      else
+        # Try fuzzy match (partial text match)
+        fuzzy_match = actual_speakers.find do |s|
+          s['speaker']&.downcase == speaker &&
+          (s['text']&.include?(text&.strip) || text&.strip&.include?(s['text']&.strip))
+        end
+        
+        if fuzzy_match
+          verified_quotes << {
+            'speaker' => fuzzy_match['speaker'],
+            'text' => fuzzy_match['text'],
+            'timestamp' => fuzzy_match['timestamp'],
+            'verified' => true
+          }
+        else
+          # Use AI's version but mark as unverified
+          verified_quotes << {
+            'speaker' => quote['speaker'],
+            'text' => quote['text'],
+            'timestamp' => quote['timestamp'],
+            'verified' => false
+          }
+        end
+      end
+    end
+    
+    # Add surrounding context (2-3 quotes before and after)
+    add_surrounding_context(verified_quotes, actual_speakers)
+  end
+
+  def extract_relevant_quotes(moment, speakers)
+    # Try to find quotes based on context keywords or suggestion
+    return [] if speakers.empty?
+    
+    # Look for keywords in context or suggestion
+    keywords = extract_keywords(moment['context'].to_s + ' ' + moment['suggestion'].to_s)
+    return [] if keywords.empty?
+    
+    # Find speakers that contain these keywords
+    relevant_indices = []
+    speakers.each_with_index do |speaker, idx|
+      text = speaker['text']&.downcase || ''
+      if keywords.any? { |keyword| text.include?(keyword.downcase) }
+        relevant_indices << idx
+      end
+    end
+    
+    return [] if relevant_indices.empty?
+    
+    # Get quotes around the relevant moments (2 before, 3 after)
+    quotes = []
+    relevant_indices.first(3).each do |idx|
+      start_idx = [0, idx - 2].max
+      end_idx = [speakers.length - 1, idx + 3].min
+      
+      (start_idx..end_idx).each do |i|
+        quotes << {
+          'speaker' => speakers[i]['speaker'],
+          'text' => speakers[i]['text'],
+          'timestamp' => speakers[i]['timestamp'],
+          'verified' => true
+        }
+      end
+    end
+    
+    # Remove duplicates and return
+    quotes.uniq { |q| [q['timestamp'], q['text']] }
+  end
+
+  def extract_keywords(text)
+    # Extract meaningful keywords (2+ words, excluding common words)
+    stop_words = %w[the a an and or but in on at to for of with by from]
+    words = text.downcase.split(/\W+/).reject { |w| w.length < 3 || stop_words.include?(w) }
+    words.uniq.first(5) # Top 5 unique keywords
+  end
+
+  def add_surrounding_context(verified_quotes, actual_speakers)
+    return verified_quotes if verified_quotes.empty? || actual_speakers.empty?
+    
+    # Find indices of verified quotes in the transcript
+    verified_indices = verified_quotes.map do |quote|
+      actual_speakers.find_index do |s|
+        s['speaker']&.downcase == quote['speaker']&.downcase &&
+        s['text']&.strip == quote['text']&.strip &&
+        s['timestamp'] == quote['timestamp']
+      end
+    end.compact
+    
+    return verified_quotes if verified_indices.empty?
+    
+    # Get surrounding quotes (2 before first, 2 after last)
+    first_idx = verified_indices.min
+    last_idx = verified_indices.max
+    
+    start_idx = [0, first_idx - 2].max
+    end_idx = [actual_speakers.length - 1, last_idx + 2].min
+    
+    all_quotes = []
+    (start_idx..end_idx).each do |idx|
+      speaker = actual_speakers[idx]
+      all_quotes << {
+        'speaker' => speaker['speaker'],
+        'text' => speaker['text'],
+        'timestamp' => speaker['timestamp'],
+        'verified' => true,
+        'is_context' => !verified_indices.include?(idx)
+      }
+    end
+    
+    # Remove duplicates and return
+    all_quotes.uniq { |q| [q['timestamp'], q['text']] }
   end
 
   def get_fallback_feedback
